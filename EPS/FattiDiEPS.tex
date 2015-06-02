@@ -1,0 +1,26 @@
+\IfFileExists{stdmdoc.cls}
+	{} %Do nothing
+	{\immediate\write18{wget https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls}} %else download file
+\documentclass[a4paper, NoNotes]{stdmdoc}
+
+\newcommand{\E}[1]{\mathbb{E}[{#1}]}
+\newcommand{\Var}[1]{\mbox{Var }[{#1}]}
+
+\begin{document}
+	\title{Fatti di EPS}
+	\autodate
+
+	\section*{Tabella delle Distribuzioni di Probabilità Discrete}
+	\begin{tabular}{lccccl}
+	{\bf Nome} & {\bf $f(k)$} & {\bf $G(t)$ generatrice} & {\bf $\E{X}$} & {\bf $\Var{X}$} & {\bf Condizioni} \\
+	Geometrica & $(1-p)^{k-1}p$ & & $\frac{1}{p}$ & $\frac{1-p}{p^2}$ & $p \in (0,1)$, $k \in \NN$ \\
+	
+	\end{tabular} \vskip 1em
+
+	\section*{Tabella delle Distribuzioni di Probabilità Continue}
+	\begin{tabular}{lccccl}
+	{\bf Nome} & {\bf $f(x)$ densità} & {\bf $F(x)$ cumulativa} & {\bf $\E{X}$} & {\bf $\Var{X}$} & {\bf Condizioni} \\
+	Esponenziale & $\lambda e^{-\lambda x}$ & $1 - e^{-\lambda x}$ & $\frac{1}{\lambda}$ & $\frac{1}{\lambda^2}$ & $\lambda > 0$, $x \in \RR^{+}$ \\
+	
+	\end{tabular} \vskip 1em
+\end{document}

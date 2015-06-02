@@ -1,0 +1,375 @@
+\documentclass[a4paper,NoNotes]{stdmdoc}
+
+\usepackage{color}
+\newcommand{\tc}{\mbox{ t.c. }}
+\newcommand{\Ker}{\mbox{Ker } }
+\newcommand{\Deg}{\mbox{deg }}
+\newcommand{\Det}{\mbox{det }}
+\newcommand{\Dim}{\mbox{dim }}
+\newcommand{\End}{\mbox{End }}
+\newcommand{\Rad}{\mbox{Rad }}
+\newcommand{\Ann}{\mbox{Ann }}
+\newcommand{\Rk}{\mbox{rk }}
+\newcommand{\GL}{\mbox{GL}}
+\newcommand{\Isom}{\mbox{Isom}}
+\newcommand{\Fix}{\mbox{Fix }}
+\newcommand{\Giac}{\mbox{Giac }}
+\newcommand{\Ort}{\mbox{O}}
+\newcommand{\Aff}{\mbox{Aff }}
+\newcommand{\Supp}{\mbox{Supp }}
+\newcommand{\Span}{\mbox{Span }}
+\newcommand{\Symm}{\mbox{Sym }}
+\newcommand{\Img}{\mbox{Im }}
+\newcommand{\Id}{\mbox{id}}
+\newcommand{\PS}{\mbox{PS }}
+\newcommand{\Mtr}{\mathfrak{m}}
+\newcommand{\Norm}[1]{\mid\mid #1 \mid\mid}
+\newcommand{\scal}[2]{\langle #1 \mid #2 \rangle}
+
+\newcommand{\Help}{{\color{green} AIUTO! DA SCRIVERE}}
+
+\newcommand{\sse}{\Leftrightarrow}
+\newcommand{\fucknullset}{\{0\}}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+\begin{document}
+	\title{Fatti Utili di GAAL}
+	\autodate
+
+	\section*{Notazione}
+	\begin{itemize}
+		\item $V$ spazio vettoriale di dimensione $n$ su un campo $\KK$
+		\item $f$ endomorfismo di $V$
+		\item $\lambda$ autovalore di $f$
+		\item $\chi_f(t)$ è il polinomio caratteristico di $f$
+		\item $m_f(t)$ è il polinomio minimo di $f$
+		\item $J_f$ la forma di Jordan di $f$
+		\item $M_\lambda$ la sottomatrice di $J_f$ relativa all'autospazio generalizzato $V_\lambda'$
+		\item $\varphi$ prodotto scalare su $V$
+		\item $q$ forma quadratica su $V$
+		\item $\sigma(\varphi) = (i_{+}, i_{-}, i_0)$ la segnatura di $\varphi$ (il campo deve essere $\RR$)
+		\item $\omega(\varphi)$ l'indice di Witt di $\varphi$
+		\item $\Psi^{V} : V \rightarrow V^{**}$ è l'isomorfismo canonico tra uno spazio vettoriale ed il suo biduale
+		\item $H$, $L$ sottospazi affini, $W_H$, $W_L$ le loro giaciture
+		\item Dato $\phi$ prodotto scalare, definiamo $\phi_y: V \rightarrow \KK \tc x \mapsto \phi_y(x) = \phi(x,y)$ e $F_\phi: V \rightarrow V^{*} \tc y \mapsto \phi_y$
+	\end{itemize}
+	
+	\section*{Sistemi Lineari}
+	\Altro{Cosa si conserva nella riduzione di Gauss}
+	Sia $Ax = b$ un sistema lineare e $Sx = c$ la sua ridotta a scala
+	\begin{itemize}
+		\item L'insieme delle soluzioni di $Ax = b$ è uguale a quello delle soluzioni di $Sx = c$
+		\item $\Ker A = \Ker S$
+		\item $\Rk A = \Rk S$ (ma in generale $\Img A \neq \Img S$)
+		\item Siano $S^{j_1}, \ldots, S^{j_r}$, dove $r = \Rk S$, le colonne corrispondenti ai pivot di $S$; allora $\{A^{j_1}, \ldots, A^{j_r}\}$ è una base di $\Img A$
+	\end{itemize}
+	
+	\section*{Diagonalizzabilità e Forma di Jordan}
+	\begin{itemize}
+		\item $m_f(t) \mid \chi_f(t)$. Inoltre tutti i fattori del polinomio caratteristico sono contenuti nel polinomio minimo (hanno un esponente più basso ma mai nullo)
+		\item Se $q(t) \in I_f$ allora $m_f(t) \mid q(t)$. Quindi gli autovalori di $f$ devono essere radici del polinomio $q(t)$
+		\item $f$ è triangolabile $\sse \chi_f(t)$ è completamente fattorizzabile in $\KK$
+		\item $f$ è diagonalizzabile $\sse \chi_f(t)$ è completamente fattorizzabile e, per ogni $\lambda$ autovalore, $\mu_a(\lambda) = \mu_g(\lambda) \sse m_f(t)$ è square-free (ovvero non ha radici doppie)
+		\item Esiste una base ciclica per $f \sse m_f(t) = \pm \chi_f(t)$
+		\item $f$ è nilpotente $\sse \chi_f(t) = \pm t^n$
+		\item $M_\lambda$ ha dimensione $\mu_a(\lambda)\times\mu_a(\lambda)$.
+		\item La massima taglia dei blocchetti di Jordan in $M_\lambda$ è uguale all'esponente del fattore $(t-\lambda)$ nel polinomio minimo di $f$
+		\item $M_\lambda$ contiene un numero di blocchetti di Jordan pari a $\mu_g(\lambda)$. Più precisamente 
+$$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
+ è il numero di blocchetti di Jordan di taglia {\it almeno} $k$
+		\item Se $W$ è $f$-invariante, allora $\chi_{f\mid_W}(t) \mid \chi_f(t)$. Inoltre $I_f \subseteq I_{f\mid_W}$ da cui $m_{f\mid_W}(t) \mid m_f(t)$. \\ In particolare, per decomposizione primaria, se $\chi_{f\mid_W}(t) = (\lambda_1-t)^{\alpha_1}\ldots(\lambda_h-t)^{\alpha_h}$ possiamo scrivere $W$ come $$W = \Ker (f\mid_W-\lambda_1\ \Id)^{\alpha_1} \oplus \ldots \oplus \Ker (f\mid_W-\lambda_h\ \Id)^{\alpha_h}$$ Ovvero $W$ si scrive come $W$ = $W\cap V_{\lambda_1}' \oplus \ldots \oplus W\cap V_{\lambda_h}'$ \\
+		Supponiamo ora di sapere che $m_f(t) = \pm \chi_f(t)$, ovvero che, jordanizzando $f$, si ottiene un solo blocco di Jordan per ogni autovalore. Dimostriamo allora che esistono un numero finito di sottospazi $W$, $f$-invarianti e di dimensione fissata. \\
+		Indichiamo con $m = \Dim W$. Siano $v_1, \ldots, v_k, v_{k+1}, \ldots, v_{r}$ iv ettori della base di Jordan di $W \cap V_{\lambda}'$. Restringendoci ora ad un solo $W \cap V_{\lambda}'$: se $a_kv_k+\ldots+a_1v_1 \in W$ allora (applicando $f$ e togliendo $\lambda$ volte il vettore originario) anche $a_kv_{k-1}+\ldots+a_2v_1 \in W$. Applicando lo stesso ragionamento un po' di volte si ottiene che $v_1 \in W$ da cui, procedendo a ritroso, anche $v_2, v_3, \ldots, v_k \in W$. Ovvero se $W$ contiene una combinazione di vettori della base di Jordan, allora contiene anche tutti quelli precedenti (siamo nell'assunzione che per ogni autovalore esista un solo blocco di Jordan). Per dimensioni si finisce.
+	\end{itemize}
+
+	\section*{Prodotti Scalari e Forme Bilineari}
+	\Achtung Per questa sezione assumiamo che $\KK$ sia un campo a caratteristica diversa da $2$
+	\begin{itemize}
+		\item $\varphi(u,v) = \frac{q(u+v)-q(u)-q(v)}{2}$ (Formula di Polarizzazione). In particolare se tutti i vettori sono isotropi $\varphi \equiv 0$
+		\item $\Rad\varphi$ e $\Rad\varphi\mid_W$ non hanno alcuna relazione sensata tra loro
+		\item $\varphi$ definito (o semidefinito) $\implies \varphi\mid_W$ definito (o semidefinito)
+		\item Il rango di $\varphi$ è invariante per congruenza così come, su $\RR$, il segno del determinante. Al contrario, il determinante in generale cambia (cioè non serve a un cazzo).
+		\item $V = U \oplus \Rad\varphi \implies \varphi\mid_U$ è non degenere
+		\item Se $\KK = \RR$ allora $\varphi$ anisotropo $\sse \varphi$ è definito \\ Se $\KK = \CC$ allora $\varphi$ anisotropo $\sse \Dim(V) = 1$ e $\varphi$ non degenere
+	\end{itemize}
+	\Altro{Fatti da conoscere}
+	\begin{itemize}
+		\item Se $\varphi$ è non degenere, allora $\omega(\varphi) \le \frac{\Dim V}{2}$
+		\item Sia $(V, \varphi)$, $\varphi$ non degenere, $n = \Dim V$ \\ Se $\KK = \CC$, $\omega(\varphi) = \floor{\frac{n}{2}}$ \\ Se $\KK = \RR$, $\omega(\varphi) = \min\{i_{+}, i_{-}\}$
+		\item $F_\phi$ è un isomofismo (canonico) $\sse \phi$ è non degenere. Ogni $g \in V^{*}$ è quindi $\phi$-rappresentabile in modo unico (Teorema di Riesz)
+	\end{itemize}
+
+	\section*{Proprietà di Ortogonale, Annullatore, $\phi$-Rappresentabilità e Aggiunto}
+	\Altro{Ortogonale} Siano $S, T \subseteq V$ (non necessariamente sottospazi)
+	\begin{itemize}
+		\item $S^\bot$ è un sottospazio di $V$
+		\item $S \subseteq T \implies T^\bot \subseteq S^\bot$ (rovescia le inclusioni)
+		\item $S^\bot = {\Span(S)}^\bot$
+		\item $S \subseteq {S^\bot}^\bot$ (in generale non sono uguali)
+		\item $(U + W)^\bot = U^\bot \cap W^\bot$
+		\item $U^\bot + W^\bot \subseteq (U \cap W)^\bot$
+		\item $\Dim(W^\bot) = \Dim(V) - \Dim(W) + \Dim(W \cap \Rad\varphi)$ \\ (Se $\varphi$ è non degenere, allora vale $W \cap \Rad \varphi = \fucknullset$ ma non è detto che $W \oplus W^\bot = V$ né che $W \cap W^\bot = \fucknullset$)
+		\item $\Dim(W^\bot) + \Dim(W) \ge \Dim(V)$
+		\item $\varphi\mid_W$ è non degenere $\sse V = W \oplus W^\bot$
+	\end{itemize}
+
+	\newpage
+	\Altro{Annullatore} Sia $S \subseteq V$.
+	\begin{itemize}
+		\item $\Ann S$ è sottospazio vettoriale di $V^{*}$
+		\item $S \subseteq T \implies \Ann T \subseteq \Ann S$ (ovvero rovescia le inclusioni)
+		\item $U$ sottospazio vettoriale di $V$, $\Dim U = k \implies \Dim \Ann U = n - k$
+		\item $\Ann S = \Ann (\Span S)$
+		\item $f \in V^{*}$, $\Ann f = \Psi^{V}(\Ker f)$
+		\item $U$ sottospazio vettoriale di $V$, $\Ann \Ann U = \Psi^{V} (U)$
+	\end{itemize}
+
+	\Altro{Morfismo di Rappresentazione}
+	\begin{itemize}
+		\item $F_{\phi}$ è lineare
+		\item $\Ker F_{\phi} = \Rad \phi$
+		\item $\Img F_{\phi} = \Ann \Rad \phi$
+		\item $U$ sottospazio di $V$. Se $\phi$ è non degenere, allora $F_{\phi}(U^\bot) = \Ann U$
+	\end{itemize}
+
+	\Altro{Aggiunto}
+	\begin{itemize}
+		\item $f^{*}$ è lineare
+		\item $f^{**} = f$ (è un'involuzione)
+		\item $\Ker f^{*} = (\Img f)^\bot$
+		\item $\Img f^{*} = (\Ker f)^\bot$
+		\item Se $\mathcal{B}$ è base di $V$, $A = \Mtr_{\mathcal{B}}(f), A^{*} = \Mtr_{\mathcal{B}}(f^{*}), M = \Mtr_{\mathcal{B}}(\phi)$, allora $A^{*} = M^{-1}{}^tAM$
+	\end{itemize}
+
+	\section*{Spazi Euclidei}
+	Nel seguito avremo $(V, \varphi)$ spazio euclideo, ovvero con $\varphi$ definito positivo.
+	\begin{itemize}
+		\item In uno spazio euclideo non esistono vettori isotropi non nulli ($\varphi$ è definito positivo) ed esistono basi ortonormali
+		\item $\{v_1, \ldots, v_n\}$ base di $V$. Allora esiste una base ortonormale $\{w_1, \ldots, w_n\}$ di $V$ tale che $\Span(w_1, \ldots, w_j) = \Span(v_1, \ldots, v_j) \quad \forall j$ (Ortonormalizzazione di Gram-Schmidt)
+		\item $f \in \End(V)$ e triangolabile, allora esiste $\mathcal{B}$ base di $V$ ortonormale ed a bandiera per $f$
+		\item $f \in \End(V) \tc \varphi(f(x), f(y)) = \varphi(x, y) \forall x, y \in V$, allora $f$ è un isomorfismo (ovvero è iniettivo e surgettivo)
+		\item $\mathcal{B}$ base ortonormale di $(V, \varphi)$, $f \in End(V)$, $A = \Mtr_{\mathcal{B}}(f)$. Allora $f \in \Ort(V, \varphi) \sse {}^tA A = I$
+		\item $(V, \varphi)$ euclideo, $\mathcal{B} = \{v_1, \ldots, v_n\}$ base ortonormale di $V$, $\mathcal{B'} = \{w_1, \ldots, w_n\}$ base di $V$, $M = \Mtr_{\mathcal{B'}, \mathcal{B}}(\Id)$. Allora $\mathcal{B'}$ è ortonormale $\sse M$ è ortogonale
+		\item $A \in \mathcal{M}(n,\RR)$ triangolabile. Allora $\exists M \in \Ort(n) \tc M^{-1}AM = T$ triangolare. Ovvero, se una matrice è triangolabile, allora si può triangolare anche con una matrice ortogonale.
+		\item $f$ è ortogonalmente diagonalizzabile $\sse f$ è autoaggiunto (Teorema Spettrale Reale)
+		\item $V$ spazio vettoriale reale, $\varphi, \psi \in \PS(V)$, con $\varphi$ definito positivo. Allora $\exists \mathcal{B}$ base di $V$ ortonormale per $\varphi$ ed ortogonale per $\psi$ (Ortogonalizzazione Simultanea)
+		\item $A \in \Symm(n, \RR)$ matrice simmetrica {\it ad entrate reali}. Allora $\exists P \in \Ort(n) \tc P^{-1}AP = {}^tPAP = D$ diagonale.
+		\item Una matrice simmetrica {\it ad entrate reali} è definita positiva $\sse$ ha tutti gli autovalori positivi
+		\item Se $f = f^{*}$, $\lambda \neq \mu$ autovalori per $f$, allora $V_\lambda \bot V_\mu$
+		\item $A \in \mathcal{M}(n, \RR)$. Allora $A$ è simmetrica $\sse A {}^tA = {}^tAA$ e $A$ è triangolabile
+		\item $A$ matrice simmetrica {\it ad entrate reali}. Allora $A$ è definita positiva $\sse \exists ! S$ simmetrica definita positiva $\tc A = S^2$
+		\item $A \in \GL(n, \RR)$. Allora $\exists ! S \in \Symm(n, \RR)$ definita positiva e $P \in \Ort(n) \tc A = SP$ (decomposizione polare)
+		\item $f, g$ endomorfismi autoaggiunti $\tc f \circ g = g \circ f$. Allora esiste una base ortonormale di $V$ fatta da autovettori sia per $f$ che per $g$
+	\end{itemize}
+
+	\Altro{Isometrie di uno spazio Euclideo}
+	In questa sezione $f: V \rightarrow V$ è una generica applicazione (NON per forza lineare) \\
+	Sono fatti equivalenti:
+	\begin{itemize}
+		\item $f \in \Ort(V, \varphi)$
+		\item $f \in \End(V)$ e $\Norm{f(v)} = \Norm{v} \forall v \in V$
+		\item $f(0)=0$ e $d(f(x), f(y)) = d(x, y) \forall x, y \in V$
+		\item $f \in \End(V)$ e $\forall \{v_1, \ldots, v_n\}$ base ortonormale di $V$, $\{f(v_1), \ldots, f(v_n)\}$ è base ortonormale di $V$
+		\item $f \in \End(V)$ e $\exists \{v_1, \ldots, v_n\}$ base ortonormale di $V \tc \{f(v_1), \ldots, f(v_n)\}$ è base ortonormale di $V$
+		\item $f \in \End(V)$ e $f^{*} \circ f = \Id$
+	\end{itemize}
+
+	\section*{Spazi Affini e Affinità}
+	\begin{itemize}
+		\item $f: A \rightarrow B$ è affine $\sse \exists \varphi: V \rightarrow W$ lineare tale che $\forall P_0 \in A$ valga $f(P) = f(P_0) + \varphi(\overrightarrow{P_0P})$
+		\item Grassmann Affine: $\Dim(H+L) = \Dim(H) + \Dim(L) + 1 - \Dim(W_H \cap W_L)$
+		\item Un'affinità in $\KK^n$ si scrive come $f(X) = MX+N$, con $M \in \GL(n, \KK)$ e $N \in \KK^n$
+		\item Il gruppo delle affinità in $\KK^n$ si può vedere come sottogruppo di $\GL(n+1, \KK)$ attraverso l'omomorfismo $(X \mapsto MX + N) \mapsto \left( \begin{array}{c|c} M & N \\ \hline 0 & 1 \end{array} \right)$
+		\item Due qualunque $(k+1)$-uple di punti di $\KK^n$ affinemente indipendenti $F_1=\{P_0, \ldots, P_k\}$ e $F_2 = \{Q_0, \ldots, Q_k\}$ sono affinemente equivalenti, ovvero esiste (ed è unica) $g \in \Aff(\KK^n) \tc g(P_i) = Q_i \quad \forall i$
+	\end{itemize}
+
+	\section*{Elementi di Geometria Affine Euclidea in $\RR^n$, $\scal{\cdot}{\cdot}$}
+	Nel seguito $S$ e $S'$ sono sottospazi affini di $\RR^n$
+	\Altro{Relazione di Ortogonalità}
+	\begin{itemize}
+		\item {\bf Ortogonalità tra sottospazi affini} $S$, $S'$ sottospazi affini di $\RR^n$. Si dice che $S$ e $S'$ sono ortogonali ($S \bot S' \sse W_s \subseteq W_{S'}^\bot \sse W_{S'} \subseteq W_{S}^\bot$)
+		\item Se $H$ è l'iperpiano di equazione $B\cdot X + d = 0$, allora $B$ è $\bot$ ad $H$		
+		\item {\bf Retta $\bm\bot$ Retta} $r$, $r'$ rette di equazioni parametriche rispettivamente $X=At+C$, $X=A't+C'$ ($t \in \RR$). Allora $r \bot r' \sse A\cdot A' = 0$
+		\item {\bf Retta $\bm\bot$ Iperpiano} $r$ retta di equazione $X=At+C$ ($t \in \RR$), $H$ iperpiano di equazione $B \cdot X + d = 0$. Allora $r \bot H \sse A \parallel B$
+		\item Se $S' \bot S$ con $\Dim S = k$ allora $\Dim S' \le n-k$
+		\item $\forall d \in \{0, \ldots, n-k\} \exists S'$ sottospazio affine di $\RR^n \tc S' \bot S$ e $\Dim S' = d$
+		\item Tutti i sottospazi affini $S'$ di $\RR^n \tc S' \bot S$ e $\Dim S' = n-k$ sono paralleli fra loro e ciascuno di essi interseca $S$ in uno ed un solo punto
+		\item $\forall P \in \RR^n \quad \exists ! S'$ sottospazio affine $\tc S' \bot S$ e $\Dim S' = n-k$ e $P \in S'$
+		\item {\bf Iperpiano ortogonale ad una retta e passante per un punto} $r$ retta, $P \in \RR^n$, Allora $\exists ! H$ iperpiano passante per $P$ ed ortogonale ad $r$. Tale piano interseca $r$ in uno ed un solo punto $P_0$. Se $r$ ha equazione parametrica $X = At+C$ allora $H$ ha equazione cartesiana $A\cdot X = A \cdot P$
+		\item {\bf Iperpiano $\bm\bot$ Iperpiano} $H$, $H'$ iperpiani di equazioni rispettivamente $B \cdot X + d = 0$, $B' \cdot X + d' = 0$. Allora $H \bot H' \sse B \cdot B' = 0$
+	\end{itemize}
+
+	\Altro{Distanza tra Sottospazi Affini}
+	\begin{itemize}
+		\item {\bf Definizione} $P \in \RR^n$. $d(P, S) = \inf \{d(P,X) \mid X \in S \}$
+		\item {\bf Distanza Punto - Iperpiano} $H$ iperpiano di equazione $B \cdot X + d = 0$, $P \in \RR^n$. Allora $d(P, H) = \frac{\mid B \cdot P + d \mid}{\Norm{B}}$
+		\item {\bf Distanza tra due Rette} \\ Se $r_1 \cap r_2 \neq \emptyset$ allora $d(r_1, r_2) = 0$ \\ Se $r_1 \parallel r_2$ allora $d(r_1, r_2) = d(P, r_2) \quad \forall P \in r_1$ \\ Se le due rette sono sghembe $r_1 = \{X \mid X = A_1t+C_1, t \in \RR\}$, $r_2 = \{X \mid X = A_2t+C_2, t \in \RR\}$. Voglio trovare una retta $l$ perpendicolare sia ad $r_1$ che ad $r_2$ e tale che le intersechi entrambe. Voglio quindi due punti $t_0$ e $\theta_0$ che risolvano $$\left( \begin{array}{cc} A_1\cdot A_1 & -A_2\cdot A_1 \\ A_1\cdot A_2 & -A_2\cdot A_2 \end{array} \right)\left(\begin{array}{c} t_0 \\ \theta_0 \end{array}\right) = \left( \begin{array}{c} C_2\cdot A_2 -C_1\cdot A_1 \\ C_2 \cdot A_2 - C_1 \cdot A_2 \end{array}\right)$$ Questo sistema ha sempre soluzione, poichè se le rette $r_1$ e $r_2$ sono sghembe la matrice è invertibile.
+	\end{itemize}
+
+	%% Aggiungere quante riflessioni esattamente servono, a seconda del luogo dei punti fissi
+	\section*{Isometrie}
+	Nel seguito supponiamo che $f$ sia un'isometria di $V$. Diamo le definizioni dei vari tipi di isometrie fondamentali
+	\begin{itemize}
+		\item Chiamiamo Isometrie le funzioni in $\Isom(V,d) = \{f: V \rightarrow V \mid d(P,Q) = d(f(P),f(Q)) \forall P, Q \in V \}$
+		\item $f$ è una Simmetria se $f^2 = \Id$
+		\item $f$ è una Riflessione se $f^2 = \Id$ e $\Fix(f)$ è un iperpiano affine, ovvero $\Dim \Giac \Fix (f) = n-1$
+		\item $f$ è una Rotazione se $\Dim \Giac \Fix (f) = n-2$
+		\item $f$ è una Glissoriflessione (o Glide) se è composizione di una riflessione $\rho$ e di una traslazione parallela a $\Fix(\rho)$
+		\item $f$ è una Riflessione Rotatoria se è composizione di una riflessione $\rho$ e di una rotazione attorno ad una retta ortogonale a $\Fix(\rho)$
+		\item $f$ è un'Avvitamento (o Twist) se è composizione di una rotazione $R$ e di una traslazione (non banale) parallela a $\Fix(R)$
+	\end{itemize}
+	Ora qualche teorema sulle Isometrie:
+	\begin{itemize}
+		\item Ogni $f$ isometria si scrive $f(X) = AX + B$, con $A \in \Ort(n, \RR)$, $B \in \RR^n$
+		\item Ogni $f \in \Isom(\RR^n)$ è composizione di al più $n+1$ riflessioni
+		\item $f(X) = AX+B$ è diretta se è composizione di un numero pari di riflessioni $\sse \Det(A) = 1$. Si dice inversa se è composizione di un numero dispari di riflessioni $\sse \Det(A) = -1$.
+	\end{itemize}
+
+	\newpage
+	\section*{Classificazione delle Isometrie in $\RR^2$ e $\RR^3$}
+	\Altro{Isometrie in $\RR^2$}
+	Ogni isometria di $\RR^2$ è una Traslazione, una Rotazione, una Riflessione oppure una Glissoriflessione \vskip 1em
+
+	\noindent\begin{tabular}{cccl}
+	{\bf Nome} & {\bf Punti Fissi} & {\bf Tipo} & {\bf Composta da} \\
+	Traslazione & $\emptyset$ & Diretta & Traslazione\\
+	Rotazione & $\{ P \}$ & Diretta & 2 Riflessioni\\
+	Riflessione & Retta & Inversa & Riflessione\\
+	Glissoriflessione & $\emptyset$ & Inversa & Riflessione $\rho$ +\\ 
+	(o Glide)	&		&	&traslazione $\parallel$ a Fix($\rho$)\\
+	\end{tabular} \vskip 1em
+
+
+	\Altro{Isometrie in $\RR^3$}
+	Ogni isometria di $\RR^3$ è una Traslazione, una Rotazione, una Riflessione, una Glissoriflessione, un Avvitamento o una Riflessione Rotatoria\vskip 1em
+
+	\noindent\begin{tabular}{cccl}
+	{\bf Nome} & {\bf Punti Fissi} & {\bf Tipo} & {\bf Composta da} \\
+	Traslazione & $\emptyset$ & Diretta & Traslazione\\
+	Rotazione & Retta & Diretta & 2 Riflessioni\\
+	Riflessione & Piano & Inversa & Riflessione\\
+	Glissoriflessione & $\emptyset$ & Inversa & Riflessione $\rho$ +\\
+	(o Glide)	&		&	&traslazione $\parallel$ a Fix($\rho$)\\
+	Avvitamento & $\emptyset$ & Diretta & Rotazione $R$\\
+	(o Twist)	&		&	&traslazione $\parallel$ a Fix($R$)\\
+	Riflessione & $\{ P\}=\Fix(R)\cap\Fix(\rho)$ & Inversa & Riflessione $\rho$ + Rotazione $R$ \\ 
+	Rotatoria & 					& 	&  $\tc \Fix(\rho)\bot\Fix(R)$\\
+	\end{tabular} \vskip 1em
+
+	\section*{Coniche e Quadriche}
+	\begin{itemize}
+		\item Una Quadrica $\mathcal{Q}$ di equazione ${}^tXAX +2({}^tBX) +c = 0$ in $\KK^n$ si può immergere in $\KK^{n+1}$ attraverso la matrice $\widetilde{Q} = \left( \begin{array}{c|c} A & B \\ \hline {}^tB & c \end{array} \right) $
+		\item $\mathcal{Q} = [f]$, $\widetilde{X} = \left(\begin{array}{c} X\\ \hline 1 \end{array} \right)$; $f(X)= 0 \ \sse \ {}^t\widetilde{X}\widetilde{Q}\widetilde{X}=0$
+		\item Sia $g \in \Aff(\KK^n)$ $g(X) = MX + N$; questa può essere vista come applicazione lineare in $\KK^{n+1}$ la cui matrice associata è $\widetilde{M}_N = \left(\begin	{array}	{c|c} M & N\\ \hline 0 & 1\end{array} \right)$.
+		Inoltre, detta $\widetilde{H}$ la matrice di immersione in $\KK^{n+1}$ di $\mathcal{H} = [f \circ g]$, si ha che $\widetilde{H} = {}^t\widetilde{M}_N\widetilde{Q}\widetilde{M}_N$
+		\item $\widetilde{H} = {}^t\widetilde{M}_N\widetilde{Q}\widetilde{M}_N = \left( \begin{array}{c|c} {}^tMAM & {}^tM(AN + B)\\ \hline {}^t({}^tM(AN + B)) & {}^tNAN + 2({}^tNB) + c \end{array} \right)$
+		\item Una quadrica $\mathcal{C}$ è a centro $\sse$ il sistema $AT+B=0$ è risolubile (ovvero $\exists T \in \KK^n$ che lo risolve)
+	\end{itemize}
+
+	\section*{Classificazione delle Coniche in $\RR^2$ e $\CC^2$}
+	\Altro{Coniche in $\RR^2$} \vskip .5em
+	\noindent \begin{tabular}{cllc}
+	{\bf Conica} & {\bf Equazione} & {\bf Nome} & {\bf $(\Rk A, \Rk Q, \omega(A), \omega(Q))$} \\
+	1 & $x^2-y=0$ & Parabola & $(1, 3, 1, 1)$ \\
+	2 & $x^2+y^2+1=0$ & Ellisse Immaginaria & $(2, 3, 0, 0)$ \\
+	3 & $x^2+y^2-1=0$ & Ellisse Reale & $(2, 3, 0, 1)$ \\
+	4 & $x^2-y^2+1=0$ & Iperbole & $(2, 3, 1, 1)$ \\
+	5 & $x^2+y^2=0$ & Rette Complesse Incidenti & $(2, 2, 0, 1)$ \\
+	6 & $x^2-y^2=0$ & Rette Incidenti & $(2, 2, 1, 2)$ \\
+	7 & $x^2+1=0$ & Rette Complesse Parallele & $(1, 2, 1, 1)$ \\
+	8 & $x^2-1=0$ & Rette Parallele & $(1, 2, 1, 2)$ \\
+	9 & $x^2=0$ & Retta Doppia & $(1, 1, 1, 2)$ \\
+	\end{tabular} \vskip 1em
+
+	\Altro{Coniche in $\CC^2$} \vskip .5em
+	\noindent \begin{tabular}{cllc}
+	{\bf Conica} & {\bf Equazione} & {\bf Nome} & {\bf $(\Rk A, \Rk Q)$} \\
+	1 & $x^2-y=0$ & Parabola & $(1, 3)$ \\
+	2 & $x^2+y^2+1=0$ & Ellisse & $(2, 3)$ \\
+	3 & $x^2+y^2=0$ & Rette Incidenti & $(2, 2)$ \\
+	4 & $x^2+1=0$ & Rette Parallele & $(1, 2)$ \\
+	5 & $x^2=0$ & Retta Doppia & $(1, 1)$ \\
+	\end{tabular} \vskip 1em
+
+	\newpage
+	\section*{Classificazione delle Quadriche in $\RR^3$}
+	\Altro{Quadriche in $\RR^3$} \vskip .5em
+	\noindent \begin{tabular}{cllc}
+	{\bf Quadrica} & {\bf Equazione} & {\bf Nome} & {\bf $(\Rk A, \Rk Q, \omega(A), \omega(Q))$} \\
+	1 & $x^2+y^2+z^2+1=0$ & Ellissoide Immaginario & $(3, 4, 0, 0)$ \\
+	2 & $x^2+y^2+z^2-1=0$ & Ellissoide & $(3, 4, 0, 1)$ \\
+	3 & $x^2+y^2-z^2-1=0$ & Iperboloide a una falda & $(3, 4, 1, 2)$ \\
+	4 & $x^2+y^2-z^2+1=0$ & Iperboloide a due falde & $(3, 4, 1, 1)$ \\
+	5 & $x^2+y^2+z^2=0$ & Cono Immaginario & $(3, 3, 0, 1)$ \\
+	6 & $x^2+y^2-z^2=0$ & Cono Reale & $(3, 3, 1, 2)$ \\
+	7 & $x^2+y^2=0$ & Piani Complessi Incidenti & $(2, 2, 1, 2)$ \\
+	8 & $x^2-y^2=0$ & Piani Incidenti & $(2, 2, 2, 3)$ \\
+	9 & $x^2=0$ & Piano Doppio & $(1, 1, 2, 3)$ \\
+	10 & $x^2+y^2+1=0$ & Cilindro Immaginario & $(2, 3, 1, 1)$ \\
+	11 & $x^2-y^2+1=0$ & Cilindro Iperbolico & $(2, 3, 2, 2)$ \\
+	12 & $x^2+y^2-1=0$ & Cilindro Ellittico & $(2, 3, 1, 2)$ \\
+	13 & $x^2-1=0$ & Piani Paralleli & $(1, 2, 2, 3)$ \\
+	14 & $x^2+1=0$ & Piani Complessi Paralleli & $(1, 2, 2, 2)$ \\
+	15 & $x^2+y^2-z=0$ & Paraboloide Ellittico & $(2, 4, 1, 1)$ \\
+	16 & $x^2-y^2-z=0$ & Paraboloide Iperbolico (Sella) & $(2, 4, 2, 2)$ \\
+	17 & $x^2-z=0$ & Cilindro Parabolico & $(1, 3, 2, 2)$ \\
+	\end{tabular} \vskip 1em
+
+	\section*{Classificazione delle Quadriche in $\RR^n$ e $\CC^n$}
+	\Altro{Quadriche in $\RR^n$}
+	$p = i_{+}(A)$, $r = \Rk A$ \vskip .5em
+	\noindent \begin{tabular}{lll}
+	{\bf Equazione} & {\bf Nome} & {\bf Note} \\
+	$x_1^2+\ldots+x_p^2-x_{p+1}^2-\ldots-x_r^2+d=0$, con $d=0,1$ & A centro & $\Rk Q = d + \Rk A$ \\
+	$x_1^2+\ldots+x_p^2-x_{p+1}^2-\ldots-x_r^2-x_n=0$ & Paraboloide & $\Rk Q = 2 + \Rk A$ \\
+	\end{tabular} \vskip 1em
+
+	\Altro{Quadriche in $\CC^n$} \vskip .5em
+	\noindent \begin{tabular}{lll}
+	{\bf Equazione} & {\bf Nome} & {\bf Note} \\
+	$x_1^2+\ldots+x_r^2+d=0$, con $d=0,1$ & A centro & $r = \Rk A$, $\Rk Q = d + \Rk A$ \\
+	$x_1^2+\ldots+x_r^2-x_n=0$ & Paraboloidi & $r = \Rk A$, $\Rk Q = 2 + \Rk A$ \\
+	\end{tabular} \vskip 1em
+
+	\newpage
+	\section*{Forme Canoniche di Matrici Speciali}
+	\Altro{Forma canonica delle Matrici Ortogonali in $(\RR^n, \langle \cdot \mid \cdot \rangle)$}
+	Ogni matrice ortogonale $R \in O(V, \langle \cdot \mid \cdot \rangle)$ è tale che ${}^tRR = I$ e per ogni $\lambda$ autovettore si ha $\Norm{\lambda} = 1$. Inoltre, una matrice $M$ è ortogonale $\sse$ le righe (e le colonne) di $M$ formano una base ortonormale di $\RR^n$. $\Det M = \pm 1$ \\
+	La forma canonica è $R = \left( \begin{array}{ccccccccc} 1 & & & & & & & & \\ & \ddots & & & & & & & \\ & & 1 & & & & & & \\ & & & -1 & & & & & \\ & & & & \ddots & & & & \\ & & & & & -1 & & & \\ & & & & & & R_{\theta_1} & & \\ & & & & & & & \ddots & \\ & & & & & & & & R_{\theta_k} \\ \end{array} \right)$, dove gli $R_\theta$ sono matrici $2 \times 2$ che si scrivono come $R_{\theta_i} = \left( \begin{array}{cc} \cos \theta_i & \sin \theta_i \\ - \sin \theta_i & \cos \theta_i \\ \end{array} \right)$
+
+	\section*{Come trasformano le Cose?}
+	\Altro{Matrici che rappresentano applicazioni lineari}
+	Sia $f: V \rightarrow W$ un'applicazione lineare, $F_{\mathcal{B}} = \Mtr_{\mathcal{B}}(f)$. Se cambio base alla matrice dell'applicazione da $\mathcal{B}$ a $\mathcal{S}$, ovvero se voglio scrivere $F_{\mathcal{S}} = \Mtr_{\mathcal{S}}(f)$ rispetto a $F_{\mathcal{B}}$, devo costruire una matrice $M$ che mangia coordinate pensate in base $\mathcal{S}$ e le sputa pensate in base $\mathcal{B}$. \\
+	Voglio cioè $M = \left( \begin{array}{c|c|c}  & & \\ {[s_1]}_{\mathcal{B}} & \cdots & {[s_n]}_{\mathcal{B}} \\  &  &  \\ \end{array} \right) = \Mtr_{\mathcal{S}, \mathcal{B}}(\Id)$ \\
+	Allora si ha $F_{\mathcal{S}} = M^{-1}F_{\mathcal{B}}M$
+
+	\Altro{Matrici che rappresentano prodotti scalari}
+	Sia $\varphi: V \times V \rightarrow \KK$ un prodotto scalare, $\Phi_{\mathcal{B}} = \Mtr_{\mathcal{B}}(\varphi)$. Se cambio base alla matrice del prodotto scalare da $\mathcal{B}$ a $\mathcal{S}$, ovvero se voglio scrivere $\Phi_{\mathcal{S}} = \Mtr_{\mathcal{S}}(\varphi)$ rispetto a $\Phi_{\mathcal{B}}$, devo costruire una matrice $M$ che mangia coordinate pensate in base $\mathcal{S}$ e le sputa pensate in base $\mathcal{B}$. \\
+	Voglio cioè $M = \left( \begin{array}{c|c|c} & & \\ {[s_1]}_{\mathcal{B}} & \cdots & {[s_n]}_{\mathcal{B}} \\ & & \\ \end{array} \right) = \Mtr_{\mathcal{S}, \mathcal{B}}(\Id)$ \\
+	Allora si ha $\Phi_{\mathcal{S}} = {}^tM\Phi_{\mathcal{B}}M$
+	
+	\Altro{Coniche attraverso Affinità}
+	Sia $\Psi(X) = MX+N$ un'affinità. Se scrivo $\Psi(\mathcal{Q}) = \mathcal{C}$ sto intendendo che "il supporto di $\mathcal{Q}$" va a finire in $\mathcal{C}$ se gli applico l'affinità, mentre le equazioni trasformano con l'inversa dell'affinità. Quindi se $\mathcal{Q} = \{(x,y) \mid g(x,y) = 0\}$ allora $\mathcal{C} = \{(x,y) \mid g(\Psi^{-1}(x,y)) = 0\}$
+
+	\newpage
+	\section*{Identità e Fatti Utili}
+	\begin{itemize}
+		\item $E_{ij}^{\alpha\beta} := \delta_{\alpha i} \delta_{\beta j}$ e sono una base dello spazio vettoriale $\mathcal{M}(n,\KK)$
+		\item $E^{\alpha\beta} + E^{\beta\alpha}$ sono una base delle matrici simmetriche
+		\item $E^{\alpha\beta} - E^{\beta\alpha}$ sono una base delle matrici antisimmetriche
+		\item Le $(I + E^{\alpha\beta})$ con $\alpha \neq \beta$ sono matrici invertibili molto semplici (le matrici invertibili non sono un sottospazio, quindi non ha senso parlare di base). $(I - E^{\alpha\beta})$ è l'inversa
+		\item $E^{\alpha\beta}E^{\rho\sigma} = \delta_{\beta\rho} E^{\alpha\sigma}$
+		\item $[E^{\alpha\beta}A]_{ij} = \delta_{i\alpha}A_{\beta j}$ (porta la $\beta$-esima riga di $A$ nella $\alpha$-esima riga della matrice prodotto)
+		\item $[AE^{\alpha\beta}]_{ij} = \delta_{j\beta}A_{i\alpha}$ (porta la $\alpha$-esima colonna di $A$ nella $\beta$-esima colonna della matrice prodotto)
+		\item $[E^{\alpha\beta}AE^{\rho\sigma}]_{ij} = \delta_{i\alpha}\delta_{\sigma j}A_{\beta\rho} = cE^{\alpha\sigma}$ dove $c = [A]_{\beta\rho}$ (quindi esce una matrice che ha l'elemento $A_{\beta\rho}$ come unico elemento non nullo nel posto $\alpha\sigma$)
+		\item $A = \left( \begin{array}{cc} a & b \\ c & d \end{array} \right)$ (matrice $2\times 2$) allora si ha $A^{-1} = \frac{1}{bc-ad} \left( \begin{array}{cc} -d & b \\ c & -a \end{array} \right)$
+		\item Ogni matrice $A$ (a coefficienti in $\RR$ o in $\CC$) è simile alla sua trasposta ${}^tA$ (hanno le stesse dimensioni dei $\Ker$ negli invarianti di similitudine)
+		\item $A \in \mathcal{M}(n, \KK) \tc AX = XA \quad \forall X \in \mathcal{M}(n, \KK)$ sono del tipo $A = \lambda I$ (si dimostra mettendo al posto di $X$ tutte le $E^{\alpha\beta}$)
+		\item $A \in \mathcal{M}(n, \KK) \tc AD = DA$, {\bf con $\bm D$ matrice diagonale fissata} soddisfano $A_{ij}(\lambda_i - \lambda_j) = 0 \quad \forall i,j$ dove $D_{ij} = \delta_{ij}\lambda_i$. Cioè se chiamiamo $\mu_1, \ldots, \mu_k$ gli autovalori di $D$ (senza molteplicità), e riordiniamo la base di D in modo che siano in ordine crescente, abbiamo $$D = \left(\begin{array}{c|c|c} M_{\mu_1} & 0 & 0 \\ \hline 0 & \ddots & 0 \\ \hline 0 & 0 & M_{\mu_k} \end{array}\right) \ \ \ \ \ \ A = \left(\begin{array}{c|c|c} \star & 0 & 0 \\ \hline 0 & \ddots & 0 \\ \hline 0 & 0 & \star \end{array}\right) $$ con $M_{\mu_i} = \left(\begin{array}{ccc} \mu_i & 0 & 0 \\ 0 & \ddots & 0 \\ 0 & 0 & \mu_i \end{array}\right)$
+		\item $A \in \mathcal{M}(n, \KK) \tc AS = SA \quad \forall S \in \mathcal{M}(n, \KK)$, {\bf con $\bm S$ simmetrica} sono $A = \lambda I$
+		\item $A \in \mathcal{M}(n, \KK) \tc AH = HA \quad \forall H \in \mathcal{M}(n, \KK)$, {\bf con $\bm H$ antisimmetrica} sono $A = \lambda I$
+		\item Le matrici di un certo rango fissato $r > 0$ (qualunque) generano come spazio vettoriale tutte le matrici $n\times n$ (Le $E^{\alpha\beta}$ vengono generate tutte piuttosto in fretta)
+		\item $\Dim \mbox{ Simmetriche } = \frac{n(n+1)}{2}$, $\Dim \mbox{ Antisimmetriche } = \frac{n(n-1)}{2}$
+	\end{itemize}
+	
+\end{document}
