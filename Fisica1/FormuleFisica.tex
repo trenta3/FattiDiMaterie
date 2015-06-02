@@ -1,0 +1,157 @@
+\documentclass[a4paper,11pt]{article}
+
+\title{Formulario di Fisica}
+\author{}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xfrac}
+\usepackage[italian]{babel}
+\usepackage{xifthen}
+\usepackage{xparse}
+\usepackage{color}
+\usepackage{forloop}
+\usepackage{braket}
+\renewcommand*\rmdefault{ppl}
+\newcommand{\qqquad}[0]{\qquad \qquad}
+\newcommand{\norm}[1]{\mid #1 \mid}
+\newcommand{\ang}[1]{\langle #1 \rangle}
+\newcommand{\de}[0]{\mbox{d}}
+\newcommand{\vers}[1]{\hat{#1}}
+
+\begin{document}
+\maketitle
+
+\section*{Meccanica}
+\subsection*{Dinamica}
+\begin{itemize}
+\item Accelerazione tangenziale date l'accelerazione e la velocit\`a: $\vec{a_T} = \vec{a} \cdot \vec{v}$
+\item Accelerazione centripeta: $\vec{a_C} = \vec{a} - \vec{a_T}$
+\item Raggio istantaneo di curvatura: $\rho = \frac{v^2}{a_C}$
+\item Angolo tra due vettori: $\cos \theta_{AB} = \frac{\vec{A} \cdot \vec{B}}{\norm{\vec{A}}\norm{\vec{B}}}$
+\end{itemize}
+
+\subsection*{Attriti}
+\begin{itemize}
+\item Attrito Radente (Statico / Dinamico): $F_A = \mu N$
+\item Attrito Volvente: $F_A = \mu_V \frac{N}{r}$
+\item Attrito Viscoso su una sfera (Legge di Stokes): $F_V = 6\pi \eta r v$
+\end{itemize}
+Con $r$ raggio della sfera, $v$ velocit\`a dell'oggetto, $\mu$ coefficiente d'attrito, $\eta$ coefficiente di elasticit\`a, $N$ forza normale alla superficie.
+
+\subsection*{Moto Armonico}
+\subsubsection*{Semplice}
+$F = -kx \implies x(t) = \frac{v_0}{\omega}\sin(\omega t) \quad \mbox{ con } \omega = \frac{k}{m}$
+
+\subsubsection*{Smorzato}
+Quando ho una forza $F = -kx-b\dot{x}$ cio\`e che si oppone alla velocit\`a. $2\gamma = \frac{b}{m}$, $\omega^2 = \frac{k}{m}$, $\Omega^2 = \gamma^2 - \omega^2$. La soluzione della equazione \`e: $x(t) = e^{-\gamma t} \left(Ae^{\Omega t} + Be^{-\Omega t} \right)$. \\
+\\
+{\it{Underdumping $\Omega^2 < 0$}} \\
+$\bar{\omega} = \mathfrak{Im}(\Omega) \implies x(t) = e^{-\gamma t} C \sin(\bar\omega t + \varphi)$ \\
+\\
+{\it{Overdumping $\Omega^2 > 0$}} \\
+$x(t) = Ae^{-(\gamma - \Omega)t}+Be^{-(\gamma + \Omega)t}$ \\
+\\
+{\it{Critical Dumping $\Omega^2 = 0$}} \\
+$x(t) = e^{-\gamma t} (A + Bt)$ \\
+
+\subsubsection*{Guidato}
+Quando ho una forza $F = -kx-b\dot{x}+F_d\cos(\omega_d t)$ \\
+Per l'equazione guardare il Morin (pagine 110-112).
+
+\subsection*{Coordinate Polari}
+\begin{itemize}
+\item $\vec{r} = r \vers{r}$
+\item $\dot\vec{r} = \dot{r}\vers{r} + r\dot{\theta}\vers{\theta}$
+\item $\ddot\vec{r} = (\ddot{r} - r{\dot\theta}^2)\vers{r} + (2\dot{r}\dot\theta + r\ddot\theta)\vers\theta$
+\end{itemize}
+
+\subsection*{Macchine di Atwood}
+\begin{enumerate}
+\item Scrivi $F = ma$ per tutte le masse (con le loro tensioni).
+\item Lega le accelerazioni delle varie masse notando che la lunghezza della corda non cambia.
+\end{enumerate}
+
+\subsection*{Problema di Keplero}
+Nel seguito si intendono $b$ parametro d'impatto, $e$ eccentricit\`a della conica, $E$ energia del satellite, $L$ momento angolare del satellite, $a$ semiasse maggiore, $M$ massa dell'oggetto enorme, $m$ massa del satellite, $r$ distanza, $\varphi$ angolo, $T$ periodo dell'orbita. \\
+$$ r = \frac{p}{1+e\cos\varphi} \qquad \mbox{ con } p = \frac{L^2}{GMm^2} \qquad e = \sqrt{1+\frac{2EL^2}{G^2M^2m^3}} = \sqrt{1 + \frac{p^2}{b^2}}$$
+$$ E = - \frac{GMm}{2a} \qqquad \frac{T^2}{a^3} = \frac{4\pi^2}{GM} \mbox{ se } M >> m$$
+Si ha la distanza minima ponendo $\varphi = 0$. Il satellite si allontana per $r \rightarrow +\infty$, ovvero $\cos\varphi = -\frac{1}{e}$. \\ Nel moto parabolico si arriva all'infinito con velocit\`a nulla.
+Eccentricit\`a per vari tipi di coniche: Circonferenza $e=0$, Ellisse $0<e<1$, Parabola $e=1$, Iperbole $e>1$.
+
+\subsection*{Casi in cui NON si conserva l'energia}
+\begin{itemize}
+\item Urti anelatici
+\item Attriti
+\item Forze esterne che compiono lavoro
+\item Reazioni vincolari strane (spigoli retti e non arrotondati)
+\end{itemize}
+
+\subsection*{Leggi di conservazione standard}
+\begin{itemize}
+\item Energia
+\item Momento angolare (soprattutto per gravit\`a)
+\item Quantit\`a di moto (soprattutto per urti)
+\end{itemize}
+
+\subsection*{Formule ??}
+\begin{itemize}
+\item Energia potenziale elastica: $E = \frac{1}{2}k(\Delta x)^2$, con $\Delta x$ = spostamento dalla posizione di riposo.
+\item Energia potenziale gravitazionale: $E = -G\frac{Mm}{r}$
+\item Energia cinetica: $E = \frac{1}{2}mv^2$
+\item Energia cinetica rotazionale: $E = \frac{1}{2}I\omega^2$
+\item Momento angolare: $\vec{L_0} = \vec{r}\prod\vec{p}$
+\item Momento torcente: $\vec{\tau_0} = \vec{r}\prod\vec{F}$
+\item Quantit\`a di moto: $\vec{p} = m\vec{v}$
+\end{itemize}
+
+\subsection*{Centro di Massa}
+\begin{itemize}
+\item Tutto (Energia e Momento angolare) si spezza rispetto a quella del centro di massa pi\`u quella calcolata rispetto al centro di massa.
+\end{itemize}
+
+\section*{Termodinamica}
+\subsection*{Formule a caso}
+\begin{itemize}
+\item Entropia per i Gas Perfetti: $S = nc_v \log T + nR \log \frac{V}{n}$
+\item Relazione di Meyer: $C_P - C_V = R$
+\item Legge dei gas perfetti: $pV = nRT$, $pV = NK_BT$, dove $N = nN_A = \mbox{ numero di molecole }$, $K_B$ costante di Boltzmann
+\item Legge dei gas di Van der Waals: $(p+a\frac{n^2}{V^2})(\frac{V}{n}-b) = RT$
+\item Calore assorbito (per i non-gas): $\mbox{d}Q = c m \mbox{d}T$, con $c$ calore specifico del corpo.
+\item Entropia: $T \mbox{d}S = \mbox{d}U + p \mbox{d}V$, $\mbox{d}S = \left(\frac{\mbox{d}Q}{T}\right)_{\mbox{reversibile}}$
+\item Calore assorbito (per i gas): $\mbox{d}Q = n c_v \mbox{d}T$
+\item Primo principio della Termodinamica: $\mbox{d}U = \mbox{d}Q - \mbox{d}L$
+\item Energia libera (o potenziale di Helmholz): $F = U - TS$
+\item Entalpia: $H = U + PV$, $\Delta H < 0$ per trasformazioni spontanee.
+\item Energia libera di Gibbs: $G = H - TS$
+\end{itemize}
+
+\subsection*{Altre formule a caso}
+\begin{itemize}
+\item Legge di Dalton: "In una miscela di gas la pressione totale \`e uguale alla somma delle pressioni parziali dei suoi gas componenti". $$P_{TOT} = \frac{RT}{V}\left( \sum_{i} n_i \right)$$
+\item Forza media che {\bf una} molecola esercita sul contenitore cubico di lato $L$: $\norm{\vec{F}} = \frac{mv^2}{L}$
+\item Forza totale esercitata dal gas: $\norm{\vec{F}} = \frac{1}{3}N \left(\frac{m \ang{v^2}}{L} \right)$, con $\ang{v^2}$ valor medio del quadrato della velocit\`a. $v_{qm} := (\ang{v^2})^{\frac{1}{2}}$ \`e la velocit\`a quadratica media.
+\item $P = \frac{\norm{\vec{F_{TOT}}}}{L^2} = \frac{2}{3} N \left(\frac{1}{2}m {v_{qm}^{2}} \right) \frac{1}{V} = \frac{2}{3} N \ang{E_{cin}}$, $\ang{E_{cin}} = \frac{l}{2}K_BT = \frac{1}{2}m{v_{qm}^\frac{1}{2}}$, $l$ gradi di libert\`a.
+\item Energia interna $U = \frac{l}{2}nRT$
+\end{itemize}
+
+\subsection*{Scambi di calore}
+\begin{itemize}
+\item Capacit\`a Termica di un corpo: $C = \frac{\Delta Q}{\Delta T}$
+\item Conduzione: $\frac{Q}{\Delta t} = \frac{k A \Delta T}{d}$; $k$ conducibilit\`a termica, $A$ Area, $d$ spessore parete.
+\item Irraggiamento: $\frac{\de E}{\de t} = \varepsilon \sigma A (\Delta T^4)$, $\varepsilon$ emissivit\`a, $\sigma$ costante di Stefan-Boltzmann.
+\end{itemize}
+
+\subsection*{Gradi di libert\`a}
+\begin{itemize}
+\item Gas Monoatomici: $l=3$.
+\item Gas Biatomici: $l=5$.
+\end{itemize}
+
+\subsection*{Formule per le trasformazioni}
+\begin{itemize}
+\item Rendimento di un ciclo: $\eta = \frac{L}{Q_{ass}}$
+\item Coefficiente di effetto frigogeno: $\mbox{COP} = \frac{Q_{\mbox{tolto al frigo}}}{L}$
+\end{itemize}
+
+\end{document}
