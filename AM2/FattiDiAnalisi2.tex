@@ -1,5 +1,7 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 
+\newcommand{\de}{\mbox{  d}}
+
 \begin{document}
 	\title{Fatti di Analisi 2}
 	\author{}
@@ -26,8 +28,17 @@
 	\section*{Problemi di Cauchy}
 	Nel seguito parliamo di un problema del seguente tipo:
 	\system{y' = f(x,y)}{y(x_0) = y_0}\par
+	Adottiamo la seguente convenzione: $\varphi: I \rightarrow \RR^n$ di classe $\mathcal{C}^1$ con $x_0 \in I$, tale che $\forall x \in I \quad (x, \varphi(x)) \in U$ e $\varphi'(x) = f(x, \varphi(x))$ e che $\varphi(x_0) = y_0$
 	\begin{itemize}
-		\item ({\bf Esistenza ed Unicità Locali}) 
-		\item ({\bf Teorema di Peano, Esistenza Locale}) 
+		\item ({\bf Cauchy-Lipschitz, Esistenza ed Unicità Locali}) Se $f$ è continua e localmente lipschitziana in $y$ uniformemente rispetto a $x$, allora $\exists! \varphi$ soluzione {\bf locale} di classe $\mathcal{C}^1$
+		\item ({\bf Teorema di Peano, Esistenza Locale}) Per garantire l'esistenza locale (ma non l'unicità!) basta che $f$ sia continua
+		\item Si assuma che l'equazione $y' = f(x,y)$ abbia esistenza ed unicità locale in ogni punto di $U$. Allora si ha \\ {\bf Unicità Globale} (ovvero se due soluzioni coincidono in un punto allora coincidono in tutto l'intervallo); \\ {\bf Dominio Aperto delle soluzioni massimali} (una soluzione massimale ha come dominio un intervallo aperto); \\ {\bf Fuga dai compatti delle soluzioni massimali} (ovvero una soluzione massimale esce definitivamente da ogni sottoinsieme compatto di $U$)
+		\item ({\bf Esistenza e Unicità Globale}) Supponendo che la funzione $f$ sia continua e localmente lipschitziana rispetto a $y$ (ovvero ipotesi di Cauchy-Lipschitz) e se si ha che per ogni intervallo compatto $K$: $\exist A_K, B_K > 0 \qquad \Norm{f(x,y)} \ge A_K \Norm{y} + B_K \quad \forall (x,y) \in K \times \RR^n$
+	\end{itemize}
+
+	\section*{Soluzione di Equazioni Differenziali Comuni}
+	\begin{itemize}
+		\item ({\bf Lineari del prim'ordine}) Data l'equazione $y' = a(x)y(x) + b(x)$ (detta $A(x) = \int_{x_0}^{x} a(t) \de t$ una primitiva di $a(x)$) si ottiene, moltiplicando entrambi i membri per $e^{A(x)}$, la soluzione generale $y(x) = e^{A(x)} \int_{x_0}^{x} e^{-A(t)}b(t) \de t + c$
+		\item ({\bf A variabili separabili})
 	\end{itemize}
 \end{document}
