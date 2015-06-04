@@ -11,6 +11,8 @@
 \RequirePackage{amssymb}
 \RequirePackage{xifthen}
 \RequirePackage{xparse}
+\RequirePackage{etoolbox}% http://ctan.org/pkg/etoolbox
+
 
 % https://it.sharelatex.com/blog/2011/03/27/how-to-write-a-latex-class-file-and-design-your-own-cv.html
 
@@ -30,7 +32,7 @@
 	\setlength\marginparsep{0pt}
 	\setlength\marginparwidth{0pt}
 	}
-\ProcessOptions
+
 
 \setlength\hoffset{-20pt} %Margine sinistro quasi nullo (1in)
 \setlength\voffset{-30pt} %Margine superiore quasi nullo (1in)
@@ -159,6 +161,48 @@
 	{\mathbb{H}}
 	{\mathbb{H}_{#1}}}
 
+%nuovi comandi per svariate cose
+\DeclareOption{GeneralMath}
+{
+	\newcommand{\sse}{\Leftrightarrow}
+	\newcommand{\tc}{\mbox{ t.c. }}
+
+	\newcommand{\Norm}[1]{\mid\mid #1 \mid\mid}
+	\newcommand{\abs}[1]{\mid #1 \mid}
+	\newcommand{\scal}[2]{\langle #1 \mid #2 \rangle}
+	\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+	\newcommand{\Ker}{\mbox{Ker } }
+	\newcommand{\Deg}{\mbox{deg }}
+	\newcommand{\Det}{\mbox{det }}
+	\newcommand{\Dim}{\mbox{dim }}
+	\newcommand{\End}{\mbox{End }}
+	\newcommand{\Rad}{\mbox{Rad }}
+	\newcommand{\Ann}{\mbox{Ann }}
+	\newcommand{\Rk}{\mbox{rk }}
+	\newcommand{\GL}{\mbox{GL}}
+	\newcommand{\Isom}{\mbox{Isom}}
+	\newcommand{\Fix}{\mbox{Fix }}
+	\newcommand{\Giac}{\mbox{Giac }}
+	\newcommand{\Ort}{\mbox{O}}
+	\newcommand{\Aff}{\mbox{Aff }}
+	\newcommand{\Supp}{\mbox{Supp }}
+	\newcommand{\Span}{\mbox{Span }}
+	\newcommand{\Symm}{\mbox{Sym }}
+	\newcommand{\Img}{\mbox{Im }}
+	\newcommand{\Id}{\mbox{id}}
+	\newcommand{\PS}{\mbox{PS }}
+	\newcommand{\Mtr}{\mathfrak{m}}
+	\newcommand{\fucknullset}{\{0\}}
+
+	\makeatletter
+	% Permette di fare sistemi di equazioni
+		\newcommand{\system}[1][]{$\left\{ \begin{array}{c}  \gobblenext }
+		\newcommand{\gobblenext}[1]{#1\@ifnextchar\bgroup{\\ \gobblenext}{ \end{array} \right.$ }}% Gobble next "argument"
+	\makeatother
+}
+
+\ProcessOptions
 %---Comandi Strani---
 \newcommand{\TODO}{{\LARGE\bf TO DO}}
 

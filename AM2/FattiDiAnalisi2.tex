@@ -1,4 +1,4 @@
-\documentclass[a4paper,NoNotes]{stdmdoc}
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 
 \begin{document}
 	\title{Fatti di Analisi 2}
@@ -6,14 +6,28 @@
 
 	\section*{Convergenze Varie}
 	\begin{itemize}
-		\item[Puntuale] 
-		\item[Uniforme]
-		\item[Normale]
-		\item[Assoluta]
+		\item ({\bf Puntuale}) Una successione di funzioni $f_n(x)$ converge puntualmente a $f(x)$ se $\forall x \quad \forall \varepsilon > 0 \quad \exists n_0 \tc \forall n \ge n_0 \qquad \abs{f_n(x) - f(x)} \le \varepsilon$
+		\item ({\bf Uniforme}) Una successione di funzioni $f_n(x)$ converge uniformemente a $f(x)$ se $\forall \varepsilon > 0 \quad \exists n_0 \tc \forall n \ge n_0 \quad \forall x \qquad \abs{f_n(x) - f(x)} \le \varepsilon$
+		\item ({\bf Assoluta}) Una serie di funzioni $\Sigma_{n=0}^{+\infty} f_n(x)$ converge assolutamente se le serie $\Sigma_{n=0}^{+\infty} \abs{f_n(x)}$ converge puntualmente
+		\item ({\bf Totale / Normale}) Una serie di funzioni $\Sigma_{n=0}^{+\infty} f_n(x)$ converge totalmente (al suo limite) in $A$ se vale che $\Sigma_{n=0}^{+\infty} \sup_{x\in A} \abs{f_n(x)} < +\infty$
+		\item Assoluta $\implies$ Puntuale
+		\item Uniforme $\implies$ Puntuale
+		\item Totale $\implies$ Uniforme, Assoluta
+	\end{itemize}
+
+	\section*{Passaggio al Limite}
+	Nel seguito si usa $f_n(x)$ per indicare una generica successione di funzioni, $f(x)$ il suo limite (dove esiste)
+	\begin{itemize}
+		\item ({\bf Continuità del Limite}) Se le $f_n(x)$ definitivamente sono continue, e la convergenza è uniforme, allora $f(x)$ è continua.
+		\item ({\bf Derivabilità}) 
+		\item ({\bf Integrabilità}) 
 	\end{itemize}
 
 	\section*{Problemi di Cauchy}
+	Nel seguito parliamo di un problema del seguente tipo:
+	\system{y' = f(x,y)}{y(x_0) = y_0}\par
 	\begin{itemize}
-		\item ({\it\bf Esistenza ed Unicità Locali})
+		\item ({\bf Esistenza ed Unicità Locali}) 
+		\item ({\bf Teorema di Peano, Esistenza Locale}) 
 	\end{itemize}
 \end{document}

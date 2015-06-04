@@ -19,7 +19,7 @@ pdf: download
 
 # Dovremmo controllare che sia la versione più recente
 download:
-	wget -N https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls -O stdmdoc.cls
+	wget https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls -O stdmdoc.cls
 
 clean:
 	rm -f *.aux *.log *.out
