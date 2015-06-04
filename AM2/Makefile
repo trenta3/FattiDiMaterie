@@ -1,8 +1,11 @@
 # Makefile per la compilazione del progetto LaTeX
 # Creato date
 
-.PHONY: pdf dvi ps compile clean download
-compile: pdf dvi ps
+.PHONY: pdf dvi ps compile clean download all
+compile: pdf
+	make clean
+
+all: pdf dvi ps
 	make clean
 
 ps: dvi

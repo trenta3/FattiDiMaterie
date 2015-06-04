@@ -1,21 +1,25 @@
 # Makefile per la compilazione del progetto LaTeX
 # Creato date
 
-.PHONY: pdf dvi ps compile clean
-compile: pdf dvi ps
+.PHONY: pdf dvi ps compile clean download all
+compile: pdf
+	make clean
+
+all: pdf dvi ps
 	make clean
 
 ps: dvi
 	dvips FattiGeneraliAnalisi1.dvi
 
-dvi: stdmdoc.cls
+dvi: download
 	latex --shell-escape FattiGeneraliAnalisi1.tex
 
-pdf: stdmdoc.cls
+pdf: download
 	pdflatex --shell-escape FattiGeneraliAnalisi1.tex
 
-stdmdoc.cls:
-	wget https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls
+# Dovremmo controllare che sia la versione più recente
+download:
+	wget -N https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls -O stdmdoc.cls
 
 clean:
 	rm -f *.aux *.log *.out
