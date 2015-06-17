@@ -5,6 +5,7 @@
 \newcommand{\va}{\mbox{ v.a. }}
 \newcommand{\iid}{\mbox{ i.i.d. }}
 \newcommand{\qo}{\mbox{ q.o. }}
+\newcommand{\Chi}{\chi}
 
 \begin{document}
 	\title{Fatti di EPS}
@@ -51,7 +52,12 @@
 	Uniforme & {\system{\frac{1}{b-a} \qquad \text{per } a<x<b}{0 \qquad \text{altrimenti}}} & $\frac{a+b}{2}$ & $\frac{(b-a)^2}{12}$ & $a < b$ \\
 	Esponenziale & {\system{\lambda e^{-\lambda x} \qquad x>0}{0 \qquad x \le 0}} & $\frac{1}{\lambda}$ & $\frac{1}{\lambda^2}$ & $\lambda > 0$ \\
 	Gamma & {\system{\frac{1}{\Gamma(r)}\lambda^r x^{r-1} e^{-\lambda x} \qquad x > 0}{0 \qquad x \le 0}} & $\frac{r}{\lambda}$ & $ $ & $r > 0$, $\lambda > 0$ \\
-	
+	Gaussiana & $\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-m)^2}{2\sigma^2}}$ & $m$ & $\sigma^2$ & $\sigma > 0$, $m\in\bbR$ \\
+	\end{tabular} \vskip 1em
+	\begin{tabular}{ll}
+	{\bf Nome} & {\bf Com'è definita} \\
+	Chi-Quadro & $\Chi^2(n) \sim \Gamma(\frac{n}{2}, \frac{1}{2})$ (Se $(X_1, \ldots, X_n)$ sono gaussiane indipendenti $N(0,1)$, allora $X_1^2 + \ldots + X_n^2$ ha legge $\Chi^2(n)$) \\
+	Student & $X \sim N(0,1)$, $Y \sim \Chi^2(n)$ indipendenti, allora $T(n)$ ha legge $\frac{\sqrt{n}X}{\sqrt{Y}}$ \\
 	\end{tabular} \vskip 1em
 	
 	\Altro{Somma di variabili aleatorie}
@@ -60,6 +66,8 @@
 		\item $X \sim \Gamma(r_1, \lambda)$, $Y \sim \Gamma(r_2, \lambda) \implies X+Y \sim \Gamma(r_1 + r_2, \lambda)$
 		\item $X \sim \Gamma(r, \lambda) \implies tX \sim \Gamma(r, \frac{\lambda}{t})$
 		\item $X \sim \Gamma(r, \lambda) \implies \E{X^\beta} = \frac{\Gamma(r+\beta)}{\Gamma(r)\lambda^\beta}$
+		\item $X \sim N(m_1, \sigma_1^2)$, $Y \sim N(m_2, \sigma_2^2) \implies X+Y \sim N(m_1+m_2, \sigma_1^2+\sigma_2^2)$
+		\item $X \sim N(0,1) \implies X^2 \sim \Gamma(\frac{1}{2}, \frac{1}{2})$
 	\end{itemize}
 
 	\section*{Definizioni e Lemmi}
