@@ -1,21 +1,20 @@
-\IfFileExists{stdmdoc.cls}
-	{} %Do nothing
-	{\immediate\write18{wget https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls}} %else download file
 \documentclass[a4paper, NoNotes, GeneralMath]{stdmdoc}
 
 \newcommand{\E}[1]{\mathbb{E}[{#1}]}
 \newcommand{\Var}[1]{\mbox{Var }[{#1}]}
 \newcommand{\va}{\mbox{ v.a. }}
 \newcommand{\iid}{\mbox{ i.i.d. }}
+\newcommand{\qo}{\mbox{ q.o. }}
 
 \begin{document}
 	\title{Fatti di EPS}
 	\autodate
 
-	\section*{Cose}
+	\section*{Cose in Generale}
 	\begin{itemize}
 		\item Se vari eventi $A_1, \ldots, A_n$ sono indipendenti, allora anche i loro complementari $A_1^C, \ldots, A_n^C$ sono indipendenti
 		\item {\bf Legge dei grandi numeri}: $X_1, \ldots$ successione di $\va \iid$, $S_n := X_1 + \ldots + X_n$. Allora vale $\forall \varepsilon > 0 \qquad \lim_{n\rar +\infty} P\left\{ \left| \frac{S_n}{n} - p \right| > \varepsilon \right\} = 0$
+		\item $\Var{X} = 0 \sse X $ è costante
 	\end{itemize}
 
 	\section*{Funzioni Generatrici}
@@ -25,6 +24,13 @@
 		\item Se $X$ e $Y$ sono indipendenti, allora $G_{X+Y}(t) = G_X(t)\cdot G_Y(t)$
 		\item $\E{X} = \lim_{t\rar 1^{-}} G_X'(t)$
 		\item $\E{X(X-1)} = \lim_{t\rar 1^{-}} G_X''(t)$
+		\item $\Var[X] = \E{X^2} - \E{X}^2 = \lim_{t\rar 1^{-}} (G_X''(t) + G_X'(t) - (G_X'(t))^2)$
+	\end{itemize}
+
+	\section*{Probabilità generale}
+	\begin{itemize}
+		\item Sia $X$ una $\va$ reale. Sono equivalenti le due seguenti affermazioni: \\ 1) $X$ ha densità $f$ \\ 2) $\forall \varphi$ reale, boreliana e limitata, vale la formula $$ \E{\varphi(X)} = \int_{\bbR} \varphi(x) f(x) \de{x} $$
+		\item Siano $X_n$ e $X \va$, $F_n$ ed $F$ le relative funzioni di ripartizione; supponiamo inoltre che $F$ sia continua (cioè la legge di $X$ sia diffusa). Allora sono equivalenti le seguenti affermazioni: \\ 1) la successione ${(X_n)}_{n\ge 1}$ converge a $X$ in legge \\ 2) $\forall x \in \bbR$, si ha $\lim_{n\rar +\infty} F_n(x) = F(x)$
 	\end{itemize}
 	
 
@@ -33,16 +39,34 @@
 		{\bf Nome} & {\bf $p(k) = P\{X = k\}$} & {\bf $G(t)$ generatrice} & {\bf $\E{X}$} & {\bf $\Var{X}$} & {\bf Condizioni} \\
 		Geometrica & $(1-p)^{k-1}p$ & $\frac{tp}{1-t(1-p)}$ & $\frac{1}{p}$ & $\frac{1-p}{p^2}$ & $p \in (0,1)$, $k \in \bbN$ \\
 		Binomiale & ${n \choose k}p^k(1-p)^{n-k}$ & $[1+p(t-1)]^n$ & $np$ & $np(1-p+np)$ & $p \in (0,1)$, $k \in \{0, \ldots, n\}$ \\
-		Poisson & $e^{-\lambda}\frac{\lambda^n}{n!}$ & $e^{\lambda (t-1)}$ & $\lambda$ & $\lambda(\lambda +1)$ & $\lambda > 0$, $n \in \bbN$ \\
+		Poisson & $e^{-\lambda}\frac{\lambda^n}{n!}$ & $e^{\lambda (t-1)}$ & $\lambda$ & $\lambda$ & $\lambda > 0$, $n \in \bbN$ \\
 		Binomiale negativa & & & & & \\
 		Ipergeometrica & & & & & \\	
 	\end{tabular} \vskip 1em 
 	La binomiale negativa : si ripete in condizioni di indipendenza un esperimento che ha probabilità p di successo fino a che questo si realizza k volte. La variabile conta il numero di tentativi che è stato necessario effetuare. \\ L'ipergeometrica: Consideriamo un'urna contentente r sfere rosse e b sfere bianche , ed in essa compiamo n estrazioni senza reimussolamento. Consideriamo la v.a. che conta il numero di sfere rosse che sono state estratte. \\
 
 	\section*{Tabella delle Distribuzioni di Probabilità Continue}
-	\begin{tabular}{lccccl}
-	{\bf Nome} & {\bf $f(x)$ densità} & {\bf $F(x)$ cumulativa} & {\bf $\E{X}$} & {\bf $\Var{X}$} & {\bf Condizioni} \\
-	Esponenziale & $\lambda e^{-\lambda x}$ & $1 - e^{-\lambda x}$ & $\frac{1}{\lambda}$ & $\frac{1}{\lambda^2}$ & $\lambda > 0$, $x \in \bbR^{+}$ \\
+	\begin{tabular}{lcccl}
+	{\bf Nome} & {\bf $f(x)$ densità} & {\bf $\E{X}$} & {\bf $\Var{X}$} & {\bf Condizioni} \\
+	Uniforme & {\system{\frac{1}{b-a} \qquad \text{per } a<x<b}{0 \qquad \text{altrimenti}}} & $\frac{a+b}{2}$ & $\frac{(b-a)^2}{12}$ & $a < b$ \\
+	Esponenziale & {\system{\lambda e^{-\lambda x} \qquad x>0}{0 \qquad x \le 0}} & $\frac{1}{\lambda}$ & $\frac{1}{\lambda^2}$ & $\lambda > 0$ \\
+	Gamma & {\system{\frac{1}{\Gamma(r)}\lambda^r x^{r-1} e^{-\lambda x} \qquad x > 0}{0 \qquad x \le 0}} & $\frac{r}{\lambda}$ & $ $ & $r > 0$, $\lambda > 0$ \\
 	
 	\end{tabular} \vskip 1em
+	
+	\Altro{Somma di variabili aleatorie}
+	In questa sezione si presuppone che le variabili siano indipendenti.
+	\begin{itemize}
+		\item $X \sim \Gamma(r_1, \lambda)$, $Y \sim \Gamma(r_2, \lambda) \implies X+Y \sim \Gamma(r_1 + r_2, \lambda)$
+		\item $X \sim \Gamma(r, \lambda) \implies tX \sim \Gamma(r, \frac{\lambda}{t})$
+		\item $X \sim \Gamma(r, \lambda) \implies \E{X^\beta} = \frac{\Gamma(r+\beta)}{\Gamma(r)\lambda^\beta}$
+	\end{itemize}
+
+	\section*{Definizioni e Lemmi}
+	\begin{itemize}
+		\item {\bf Disuguaglianza di Schwartz}: $f,g$ quadrato sommabili. Allora il prodotto $fg$ è sommabile e vale $\left| \int fg \de{\bm{m}} \right| \le \sqrt{\int f^2 \de{\bm{m}}} \sqrt{\int g^2 \de{\bm{m}}}$. \\ Inoltre, se sopra vale l'uguaglianza, allora $f$ e $g$ coincidono a meno di una costante moltiplicativa (ovvero $\exists \lambda \in \bbR \tc f = \lambda g \qo$)
+		\item {\bf Disuguaglianza di Markov}: $X \va$ a valori positivi, $t$ costante positiva. Allora vale $t \blP\{X \ge t\} \le \E{X}$
+		\item {\bf Disuguaglianza di Chebishev}: $X \va$ dotata di momento secondo. Allora vale $t^2 \blP\{\left| X - \E{X} \right| \ge t \} \le \Var{X}$
+		
+	\end{itemize}
 \end{document}
