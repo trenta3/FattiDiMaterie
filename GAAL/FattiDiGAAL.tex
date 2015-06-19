@@ -134,16 +134,31 @@
 		\item ({\bf Decomposizione degli $f$-invarianti}) Se $W$ è $f$-invariante, allora $\chi_{f\mid_W}(t) \mid \chi_f(t)$. Inoltre $I_f \subseteq I_{f\mid_W}$ da cui $m_{f\mid_W}(t) \mid m_f(t)$. \\ In particolare, per decomposizione primaria, se $\chi_{f\mid_W}(t) = (\lambda_1-t)^{\alpha_1}\ldots(\lambda_h-t)^{\alpha_h}$ possiamo scrivere $W$ come $$W = \Ker (f\mid_W-\lambda_1\ \Id)^{\alpha_1} \oplus \ldots \oplus \Ker (f\mid_W-\lambda_h\ \Id)^{\alpha_h}$$ Ovvero $W$ si scrive come $W$ = $W\cap V_{\lambda_1}' \oplus \ldots \oplus W\cap V_{\lambda_h}'$ \\
 		Supponiamo ora di sapere che $m_f(t) = \pm \chi_f(t)$, ovvero che, jordanizzando $f$, si ottiene un solo blocco di Jordan per ogni autovalore. Dimostriamo allora che esistono un numero finito di sottospazi $W$, $f$-invarianti e di dimensione fissata. \\
 		Indichiamo con $m = \Dim W$. Siano $v_1, \ldots, v_k, v_{k+1}, \ldots, v_{r}$ i vettori della base di Jordan di $W \cap V_{\lambda}'$. Restringendoci ora ad un solo $W \cap V_{\lambda}'$: se $a_kv_k+\ldots+a_1v_1 \in W$ allora (applicando $f$ e togliendo $\lambda$ volte il vettore originario) anche $a_kv_{k-1}+\ldots+a_2v_1 \in W$. Applicando lo stesso ragionamento un po' di volte si ottiene che $v_1 \in W$ da cui, procedendo a ritroso, anche $v_2, v_3, \ldots, v_k \in W$. Ovvero se $W$ contiene una combinazione di vettori della base di Jordan, allora contiene anche tutti quelli precedenti (siamo nell'assunzione che per ogni autovalore esista un solo blocco di Jordan). Per dimensioni si finisce.
+		\item $f \in \End(V)$, $g(t) \in \bbK[t]$. Allora $W = \Ker(g(f))$ è $f$-invariante
+		\item $p(t) \in \bbK[t]$, $f = h\circ g\circ h^{-1} \implies p(f) = h\circ p(g)\circ h^{-1}$
+		\item $\varphi \in \End(V) \implies \Ker(\varphi^j) \subseteq \Ker(\varphi^{j+1}) \quad \forall j \in \bbN$
+		\item $\varphi \in \End(V), \exists m \in \bbN \tc \Ker (\varphi^m) = \Ker (\varphi^{m+1}) \implies \Ker(\varphi^m) = \Ker (\varphi^{m+t}) \quad \forall t \ge 1$
 	\end{itemize}
+
+	\Altro{Decomposizione Primaria} \\ Per quanto possa a prima vista passare inosservato, decomposizione primaria è un lemma molto potente. \\ $f \in \End(V)$, $q(t) \in I(f)$. Sia $q(t) = q_1(t)q_2(t)$, con $q_1(t), q_2(t) \in \bbK[t]$ e $\text{MCD }(q_1, q_2) = 1$. Allora si ha:
+	\begin{enumerate}
+		\item $V = \Ker (q_1(f)) \oplus \Ker (q_2(f))$
+		\item Gli addendi $\Ker (q_1(f))$ e $\Ker(q_2(f))$ sono $f$-invarianti
+	\end{enumerate}
 
 	\section*{Prodotti Scalari e Forme Bilineari}
 	\Achtung \\ Per questa sezione assumiamo che $\bbK$ sia un campo a caratteristica diversa da $2$
 	\begin{itemize}
 		\item ({\bf Formula di Polarizzazione}) $\varphi(u,v) = \frac{q(u+v)-q(u)-q(v)}{2}$. In particolare se tutti i vettori sono isotropi $\varphi \equiv 0$
 		\item $\Rad\varphi$ e $\Rad\varphi\mid_W$ non hanno alcuna relazione sensata tra loro
+		\item ({\bf Calcolo del Radicale}) $Sia X = \mtrvec{v}{\cB}, A = \kM_{\cB}(\phi)$. Allora $v\in \Rad(\phi) \sse AX = 0$
 		\item $\varphi$ definito (o semidefinito) $\implies \varphi\mid_W$ definito (o semidefinito)
 		\item Il rango di $\varphi$ è invariante per congruenza così come, su $\bbR$, il segno del determinante. Al contrario, il determinante in generale cambia (cioè non serve a un cazzo).
 		\item $V = U \oplus \Rad\varphi \implies \varphi\mid_U$ è non degenere
+		\item ({\bf Sylvester Complesso}) $V \bbC$-spazio vettoriale. Allora $(V, \phi)$ e $(V, \psi)$ sono isometrici $\sse \Rk(\phi) = \Rk(\psi)$
+		\item ({\bf Sylvester Reale}) $V \bbR$-spazio vettoriale, $\Dim(V) = n$, $\phi \in \PS(V)$. Sia $\cB$ una base ortogonale di $V$ tale che $\kM_\cB(\phi) = \left( \begin{array}{ccc} I_p & & \\ & -I_q & \\ & & 0 \end{array} \right)$. Allora $p = i_{+}(\phi)$ e $q = i_{-}(\phi)$
+		\item ({\bf Criterio dei Minori Principali}) $A \in \Symm(n,\bbR)$. $A$ è definita positiva $\sse \Det(M_i(A)) > 0 \quad \forall i$, dove $M_i(A)$ indica l'$i$-esimo minore principale di $A$
+		\item ({\bf Criterio di Jacobi}) $A \in \Symm(n,\bbR)$, $\Rk(A) = r$. Supponiamo che $D_i = \Det(M_i(A)) \neq 0 \quad \forall i \le r$. Allora $\exists T$ triangolare superiore, $\Det(T) = 1$, tale che ${}^tTAT = \left( \begin{array}{ccccccc} D_1 & & & & & & \\ & \frac{D_2}{D_1} & & & & & \\ & & \ddots & & & & \\ & & & \frac{D_r}{D_{r-1}} & & & \\ & & & & 0 & & \\ & & & & & \ddots & \\ & & & & & & 0 \\ \end{array} \right)$
 		\item ({\bf Anisotropia}) Se $\bbK = \bbR$ allora $\varphi$ anisotropo $\sse \varphi$ è definito \\ Se $\bbK = \bbC$ allora $\varphi$ anisotropo $\sse \Dim(V) = 1$ e $\varphi$ non degenere
 	\end{itemize}
 	\Altro{Fatti da conoscere}
@@ -193,6 +208,9 @@
 		\item $\Img f^{*} = (\Ker f)^\bot$
 		\item Se $\mathcal{B}$ è base di $V$, $A = \Mtr_{\mathcal{B}}(f), A^{*} = \Mtr_{\mathcal{B}}(f^{*}), M = \Mtr_{\mathcal{B}}(\phi)$, allora $A^{*} = M^{-1}{}^tAM$
 	\end{itemize}
+
+	\section*{Isometrie Generali} (p.110 mezzedimi)
+	\Help
 
 	\section*{Spazi Euclidei}
 	Nel seguito avremo $(V, \varphi)$ spazio euclideo, ovvero con $\varphi$ definito positivo.
@@ -419,5 +437,8 @@
 		\item Le matrici di un certo rango fissato $r > 0$ (qualunque) generano come spazio vettoriale tutte le matrici $n\times n$ (Le $E^{\alpha\beta}$ vengono generate tutte piuttosto in fretta)
 		\item $\Dim \mbox{ Simmetriche } = \frac{n(n+1)}{2}$, $\Dim \mbox{ Antisimmetriche } = \frac{n(n-1)}{2}$
 	\end{itemize}
+
+	\section*{Controesempi che non avresti mai creduto}
+	\Help
 	
 \end{document}
