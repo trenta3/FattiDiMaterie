@@ -1,35 +1,12 @@
-\documentclass[a4paper,NoNotes]{stdmdoc}
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 
-\newcommand{\tc}{\mbox{ t.c. }}
-\newcommand{\Ker}{\mbox{Ker } }
-\newcommand{\Deg}{\mbox{deg }}
-\newcommand{\Det}{\mbox{det }}
-\newcommand{\Dim}{\mbox{dim }}
-\newcommand{\End}{\mbox{End }}
-\newcommand{\Rad}{\mbox{Rad }}
-\newcommand{\Ann}{\mbox{Ann }}
-\newcommand{\Rk}{\mbox{rk }}
-\newcommand{\GL}{\mbox{GL}}
-\newcommand{\Isom}{\mbox{Isom}}
-\newcommand{\Fix}{\mbox{Fix }}
-\newcommand{\Giac}{\mbox{Giac }}
-\newcommand{\Ort}{\mbox{O}}
-\newcommand{\Aff}{\mbox{Aff }}
-\newcommand{\Supp}{\mbox{Supp }}
-\newcommand{\Span}{\mbox{Span }}
-\newcommand{\Symm}{\mbox{Sym }}
-\newcommand{\Img}{\mbox{Im }}
-\newcommand{\Id}{\mbox{id}}
-\newcommand{\PS}{\mbox{PS }}
-\newcommand{\Mtr}{\mathfrak{m}}
-\newcommand{\Norm}[1]{\mid\mid #1 \mid\mid}
-\newcommand{\scal}[2]{\langle #1 \mid #2 \rangle}
+\newcommand{\mtrvec}[2]{\left[ {#1} \right]_{#2}}
+\newcommand{\virg}{\operatornamewithlimits{,}}
+\newcommand{\mtrapp}[3]{\underset{ {{#2} \rar {#3}} }{ \left[ {#1} \right]}}
+\newcommand{\revmtrapp}[3]{\underset{ {{#3} \leftarrow {#2}} }{ \left[ {#1} \right]}}
 
 \newcommand{\Help}{{\color{green} AIUTO! DA SCRIVERE}}
 
-\newcommand{\sse}{\Leftrightarrow}
-\newcommand{\fucknullset}{\{0\}}
-\newcommand{\floor}[1]{\lfloor #1 \rfloor}
 
 \begin{document}
 	\title{Fatti Utili di GAAL}
@@ -54,14 +31,54 @@
 	\end{itemize}
 	
 	\section*{Sistemi Lineari}
-	\Altro{Cosa si conserva nella riduzione di Gauss}
+	\Altro{Cosa si conserva nella riduzione di Gauss} \\
 	Sia $Ax = b$ un sistema lineare e $Sx = c$ la sua ridotta a scala
 	\begin{itemize}
 		\item L'insieme delle soluzioni di $Ax = b$ è uguale a quello delle soluzioni di $Sx = c$
 		\item $\Ker A = \Ker S$
-		\item $\Rk A = \Rk S$ (ma in generale $\Img A \neq \Img S$)
+		\item $\Rk A = \Rk S$ (ma in generale $\Img A \neq \Img S$, solo le loro dimensioni sono uguali)
 		\item Siano $S^{j_1}, \ldots, S^{j_r}$, dove $r = \Rk S$, le colonne corrispondenti ai pivot di $S$; allora $\{A^{j_1}, \ldots, A^{j_r}\}$ è una base di $\Img A$
 	\end{itemize}
+	\Altro{Risolubilità} \\
+	Attraverso considerazioni piuttosto stupide si nota che un sistema $Ax = b$ è risolubile $\sse$ $Sx = c$ è risolubile $\sse$ considerando la matrice $S' = \left( S \mid c \right)$ tutti i suoi pivot stanno nelle colonne di $S$ (ovvero $c$ non contiene alcun pivot)
+
+	\section*{Rappresentazione Cartesiana e Parametrica}
+	\Altro{Passaggio da Parametrica a Cartesiana} \\
+	Abbiamo il sottospazio nella forma $\Img B$ con $B$ matrice. Allora consideriamo $B' = \left( B \mid X \right)$ con $X$ colonna "formale" delle coordinate $\left( \begin{array}{c} x_1 \\ \vdots \\ x_n \end{array} \right)$. A questo punto riduciamo a scalini la matrice $B'$, facendo tutti i passaggi anche sulla colonna "formale". Sappiamo ora che le righe in fondo alla matrice $S'$ (la ridotta a scala di $B'$) sono nulle su tutta $S$ (la ridotta a scala di $B$), quindi anche gli ultimi termini in $X_{S'}$ (ultima colonna di $S'$) devono essere nulli (altrimenti il sistema non è risolubile). Abbiamo così trovato le equazioni cartesiane che definiscono il nostro sottospazio.
+
+	\Altro{Passaggio da Cartesiana a Parametrica} \\
+	Siccome abbiamo il sottospazio nella forma $\Ker A$ con $A$ matrice, l'unica cosa da fare è risolvere il sistema lineare associato, prendere una base del sottospazio trovato e mettere i vettori in questione (che stanno nello spazio delle coordinate, per cui è lecita l'identificazione tra vettori e matrici colonna) come colonne nella nuova matrice della forma parametrica.
+
+	\section*{Applicazioni Lineari}
+	\begin{itemize}
+		\item $f$ lineare è iniettiva $\sse \Ker f = \fucknullset$
+		\item Se $f: V \rar W$ è lineare e $\{v_1, \ldots, v_n\}$ sono linearmente indipendenti, allora anche $\{f(v_1), \ldots, f(v_n)\}$ sono linearmente indipendenti
+		\item ({\bf Formula delle Dimensioni}) $f: V \rar W$ lineare $\implies \Dim V = \Dim \Img f + \Dim \Ker f$
+		\item $f: V \rar V$ lineare è iniettiva $\sse$ è surgettiva
+	\end{itemize}
+
+	\section*{Rappresentazione in Base}
+	\begin{itemize}
+		\item Data una base $\cB$ = $\{b_1, \ldots, b_n\}$, ad ogni vettore $v$ è naturalmente associata la $n$-upla delle sue componenti (sotto forma di matrice $n\times 1$). L'isomorfismo di passaggio in coordinate induce una corrispondenza tra $V$ e $\bbK^n$ che sono e restano però due spazi diversi. \\ \hsystem{\mtrvec{v}{\cB}: V \rar \kM(n, 1, \bbK)}{v = \sum_{i} a_i b_i \quad \mapsto \quad \left( \begin{array}{c} a_1 \\ \vdots \\ a_n \end{array} \right)_{\cB}}
+		\item Introduciamo inoltre la rappresentazione in base di un'applicazione lineare $f: V \rar W$, usando $\cB$ base di $V$ e $\cT$ base di $W$: rappresentiamo $f$ con la matrice $\mtrapp{f}{\cB}{\cT}$ che ha come colonna $i$-esima la rappresentazione del vettore $f(b_i)$ come matrice colonna $\mtrvec{f(b_i)}{\cT}$
+		\item Applicazione di una funzione ad un vettore: $\mtrvec{f(v)}{\cS} = \revmtrapp{f}{\cB}{\cS} \mtrvec{v}{\cB}$
+		\item Composizione di funzioni: $\revmtrapp{g\circ f}{\cB}{\cD} = \revmtrapp{g}{\cR}{\cD} \revmtrapp{f}{\cB}{\cR}$
+		\item Cambio di base: $\revmtrapp{f}{\cB}{\cB} = \revmtrapp{\Id}{\cD}{\cB} \revmtrapp{f}{\cD}{\cD} \revmtrapp{\Id}{\cB}{\cD}$
+		\item Le matrici del cambio di base sono una l'inversa dell'altra: $\revmtrapp{\Id}{\cB}{\cR} = \left(\revmtrapp{\Id}{\cR}{\cB}\right) ^ {-1}$
+		\item Inoltre le applicazioni lineari $f: \bbK^m \rar \bbK^n$ sono in corrispondenza biunivoca con le $\kM(n, m, \bbK)$ attraverso l'isomorfismo di passaggio in coordinate (ovvero ogni matrice induce naturalmente un'applicazione lineare $\bbK^m \rar \bbK^n :: v \mapsto L_M v$ attraverso la moltiplicazione tra matrici e l'identificazione dei numeri risultati con lo spazio delle coordinate)
+	\end{itemize}
+	\Achtung Non confondete i vettori (elementi dello spazio vettoriale $V$) con la $n$-upla di numeri che viene usata per rappresentarli. Molto spesso si confondono le cose perché le matrici $n\times 1$ usate per rappresentare i vettori dello spazio vettoriale delle coordinate $\bbK^n$ (visto come spazio vettoriale su $\bbK$, i cui vettori si possono scrivere come $(a_1, \ldots, a_n)$) hanno come numeri nelle celle gli stessi $a_1, \ldots, a_n$ perché vengono solitamenti scritti usando le coordinate dei vettori rispetto alla base standard di $\bbK$.
+
+	\section*{Rango}
+	\begin{itemize}
+		\item ?
+	\end{itemize}
+
+	\section*{Determinante}
+
+
+	\section*{SD-equivalenza}
+	
 	
 	\section*{Diagonalizzabilità e Forma di Jordan}
 	\begin{itemize}
@@ -82,7 +99,7 @@ $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
 	\end{itemize}
 
 	\section*{Prodotti Scalari e Forme Bilineari}
-	\Achtung Per questa sezione assumiamo che $\bbK$ sia un campo a caratteristica diversa da $2$
+	\Achtung \\ Per questa sezione assumiamo che $\bbK$ sia un campo a caratteristica diversa da $2$
 	\begin{itemize}
 		\item $\varphi(u,v) = \frac{q(u+v)-q(u)-q(v)}{2}$ (Formula di Polarizzazione). In particolare se tutti i vettori sono isotropi $\varphi \equiv 0$
 		\item $\Rad\varphi$ e $\Rad\varphi\mid_W$ non hanno alcuna relazione sensata tra loro
@@ -99,7 +116,7 @@ $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
 	\end{itemize}
 
 	\section*{Proprietà di Ortogonale, Annullatore, $\phi$-Rappresentabilità e Aggiunto}
-	\Altro{Ortogonale} Siano $S, T \subseteq V$ (non necessariamente sottospazi)
+	\Altro{Ortogonale} \\ Siano $S, T \subseteq V$ (non necessariamente sottospazi)
 	\begin{itemize}
 		\item $S^\bot$ è un sottospazio di $V$
 		\item $S \subseteq T \implies T^\bot \subseteq S^\bot$ (rovescia le inclusioni)
@@ -112,8 +129,7 @@ $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
 		\item $\varphi\mid_W$ è non degenere $\sse V = W \oplus W^\bot$
 	\end{itemize}
 
-	\newpage
-	\Altro{Annullatore} Sia $S \subseteq V$.
+	\Altro{Annullatore} \\ Sia $S \subseteq V$.
 	\begin{itemize}
 		\item $\Ann S$ è sottospazio vettoriale di $V^{*}$
 		\item $S \subseteq T \implies \Ann T \subseteq \Ann S$ (ovvero rovescia le inclusioni)
@@ -166,7 +182,7 @@ $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
 	Sono fatti equivalenti:
 	\begin{itemize}
 		\item $f \in \Ort(V, \varphi)$
-		\item $f \in \End(V)$ e $\Norm{f(v)} = \Norm{v} \forall v \in V$
+		\item $f \in \End(V)$ e $\norma{f(v)} = \norma{v} \forall v \in V$
 		\item $f(0)=0$ e $d(f(x), f(y)) = d(x, y) \forall x, y \in V$
 		\item $f \in \End(V)$ e $\forall \{v_1, \ldots, v_n\}$ base ortonormale di $V$, $\{f(v_1), \ldots, f(v_n)\}$ è base ortonormale di $V$
 		\item $f \in \End(V)$ e $\exists \{v_1, \ldots, v_n\}$ base ortonormale di $V \tc \{f(v_1), \ldots, f(v_n)\}$ è base ortonormale di $V$
@@ -201,7 +217,7 @@ $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
 	\Altro{Distanza tra Sottospazi Affini}
 	\begin{itemize}
 		\item {\bf Definizione} $P \in \bbR^n$. $d(P, S) = \inf \{d(P,X) \mid X \in S \}$
-		\item {\bf Distanza Punto - Iperpiano} $H$ iperpiano di equazione $B \cdot X + d = 0$, $P \in \bbR^n$. Allora $d(P, H) = \frac{\mid B \cdot P + d \mid}{\Norm{B}}$
+		\item {\bf Distanza Punto - Iperpiano} $H$ iperpiano di equazione $B \cdot X + d = 0$, $P \in \bbR^n$. Allora $d(P, H) = \frac{\mid B \cdot P + d \mid}{\norma{B}}$
 		\item {\bf Distanza tra due Rette} \\ Se $r_1 \cap r_2 \neq \emptyset$ allora $d(r_1, r_2) = 0$ \\ Se $r_1 \parallel r_2$ allora $d(r_1, r_2) = d(P, r_2) \quad \forall P \in r_1$ \\ Se le due rette sono sghembe $r_1 = \{X \mid X = A_1t+C_1, t \in \bbR\}$, $r_2 = \{X \mid X = A_2t+C_2, t \in \bbR\}$. Voglio trovare una retta $l$ perpendicolare sia ad $r_1$ che ad $r_2$ e tale che le intersechi entrambe. Voglio quindi due punti $t_0$ e $\theta_0$ che risolvano $$\left( \begin{array}{cc} A_1\cdot A_1 & -A_2\cdot A_1 \\ A_1\cdot A_2 & -A_2\cdot A_2 \end{array} \right)\left(\begin{array}{c} t_0 \\ \theta_0 \end{array}\right) = \left( \begin{array}{c} C_2\cdot A_2 -C_1\cdot A_1 \\ C_2 \cdot A_2 - C_1 \cdot A_2 \end{array}\right)$$ Questo sistema ha sempre soluzione, poichè se le rette $r_1$ e $r_2$ sono sghembe la matrice è invertibile.
 	\end{itemize}
 
@@ -224,9 +240,8 @@ $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
 		\item $f(X) = AX+B$ è diretta se è composizione di un numero pari di riflessioni $\sse \Det(A) = 1$. Si dice inversa se è composizione di un numero dispari di riflessioni $\sse \Det(A) = -1$.
 	\end{itemize}
 
-	\newpage
 	\section*{Classificazione delle Isometrie in $\bbR^2$ e $\bbR^3$}
-	\Altro{Isometrie in $\bbR^2$}
+	\Altro{Isometrie in $\bbR^2$} \\
 	Ogni isometria di $\bbR^2$ è una Traslazione, una Rotazione, una Riflessione oppure una Glissoriflessione \vskip 1em
 
 	\noindent\begin{tabular}{cccl}
@@ -239,7 +254,7 @@ $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
 	\end{tabular} \vskip 1em
 
 
-	\Altro{Isometrie in $\bbR^3$}
+	\Altro{Isometrie in $\bbR^3$} \\
 	Ogni isometria di $\bbR^3$ è una Traslazione, una Rotazione, una Riflessione, una Glissoriflessione, un Avvitamento o una Riflessione Rotatoria\vskip 1em
 
 	\noindent\begin{tabular}{cccl}
@@ -290,7 +305,6 @@ $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
 	5 & $x^2=0$ & Retta Doppia & $(1, 1)$ \\
 	\end{tabular} \vskip 1em
 
-	\newpage
 	\section*{Classificazione delle Quadriche in $\bbR^3$}
 	\Altro{Quadriche in $\bbR^3$} \vskip .5em
 	\noindent \begin{tabular}{cllc}
@@ -315,7 +329,7 @@ $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
 	\end{tabular} \vskip 1em
 
 	\section*{Classificazione delle Quadriche in $\bbR^n$ e $\bbC^n$}
-	\Altro{Quadriche in $\bbR^n$}
+	\Altro{Quadriche in $\bbR^n$} \\
 	$p = i_{+}(A)$, $r = \Rk A$ \vskip .5em
 	\noindent \begin{tabular}{lll}
 	{\bf Equazione} & {\bf Nome} & {\bf Note} \\
@@ -330,27 +344,25 @@ $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$
 	$x_1^2+\ldots+x_r^2-x_n=0$ & Paraboloidi & $r = \Rk A$, $\Rk Q = 2 + \Rk A$ \\
 	\end{tabular} \vskip 1em
 
-	\newpage
 	\section*{Forme Canoniche di Matrici Speciali}
-	\Altro{Forma canonica delle Matrici Ortogonali in $(\bbR^n, \langle \cdot \mid \cdot \rangle)$}
-	Ogni matrice ortogonale $R \in O(V, \langle \cdot \mid \cdot \rangle)$ è tale che ${}^tRR = I$ e per ogni $\lambda$ autovettore si ha $\Norm{\lambda} = 1$. Inoltre, una matrice $M$ è ortogonale $\sse$ le righe (e le colonne) di $M$ formano una base ortonormale di $\bbR^n$. $\Det M = \pm 1$ \\
+	\Altro{Forma canonica delle Matrici Ortogonali in $(\bbR^n, \langle \cdot \mid \cdot \rangle)$} \\
+	Ogni matrice ortogonale $R \in O(V, \langle \cdot \mid \cdot \rangle)$ è tale che ${}^tRR = I$ e per ogni $\lambda$ autovettore si ha $\norma{\lambda} = 1$. Inoltre, una matrice $M$ è ortogonale $\sse$ le righe (e le colonne) di $M$ formano una base ortonormale di $\bbR^n$. $\Det M = \pm 1$ \\
 	La forma canonica è $R = \left( \begin{array}{ccccccccc} 1 & & & & & & & & \\ & \ddots & & & & & & & \\ & & 1 & & & & & & \\ & & & -1 & & & & & \\ & & & & \ddots & & & & \\ & & & & & -1 & & & \\ & & & & & & R_{\theta_1} & & \\ & & & & & & & \ddots & \\ & & & & & & & & R_{\theta_k} \\ \end{array} \right)$, dove gli $R_\theta$ sono matrici $2 \times 2$ che si scrivono come $R_{\theta_i} = \left( \begin{array}{cc} \cos \theta_i & \sin \theta_i \\ - \sin \theta_i & \cos \theta_i \\ \end{array} \right)$
 
 	\section*{Come trasformano le Cose?}
-	\Altro{Matrici che rappresentano applicazioni lineari}
+	\Altro{Matrici che rappresentano applicazioni lineari} \\
 	Sia $f: V \rightarrow W$ un'applicazione lineare, $F_{\mathcal{B}} = \Mtr_{\mathcal{B}}(f)$. Se cambio base alla matrice dell'applicazione da $\mathcal{B}$ a $\mathcal{S}$, ovvero se voglio scrivere $F_{\mathcal{S}} = \Mtr_{\mathcal{S}}(f)$ rispetto a $F_{\mathcal{B}}$, devo costruire una matrice $M$ che mangia coordinate pensate in base $\mathcal{S}$ e le sputa pensate in base $\mathcal{B}$. \\
 	Voglio cioè $M = \left( \begin{array}{c|c|c}  & & \\ {[s_1]}_{\mathcal{B}} & \cdots & {[s_n]}_{\mathcal{B}} \\  &  &  \\ \end{array} \right) = \Mtr_{\mathcal{S}, \mathcal{B}}(\Id)$ \\
 	Allora si ha $F_{\mathcal{S}} = M^{-1}F_{\mathcal{B}}M$
 
-	\Altro{Matrici che rappresentano prodotti scalari}
+	\Altro{Matrici che rappresentano prodotti scalari} \\
 	Sia $\varphi: V \times V \rightarrow \bbK$ un prodotto scalare, $\Phi_{\mathcal{B}} = \Mtr_{\mathcal{B}}(\varphi)$. Se cambio base alla matrice del prodotto scalare da $\mathcal{B}$ a $\mathcal{S}$, ovvero se voglio scrivere $\Phi_{\mathcal{S}} = \Mtr_{\mathcal{S}}(\varphi)$ rispetto a $\Phi_{\mathcal{B}}$, devo costruire una matrice $M$ che mangia coordinate pensate in base $\mathcal{S}$ e le sputa pensate in base $\mathcal{B}$. \\
 	Voglio cioè $M = \left( \begin{array}{c|c|c} & & \\ {[s_1]}_{\mathcal{B}} & \cdots & {[s_n]}_{\mathcal{B}} \\ & & \\ \end{array} \right) = \Mtr_{\mathcal{S}, \mathcal{B}}(\Id)$ \\
 	Allora si ha $\Phi_{\mathcal{S}} = {}^tM\Phi_{\mathcal{B}}M$
 	
-	\Altro{Coniche attraverso Affinità}
+	\Altro{Coniche attraverso Affinità} \\
 	Sia $\Psi(X) = MX+N$ un'affinità. Se scrivo $\Psi(\mathcal{Q}) = \mathcal{C}$ sto intendendo che "il supporto di $\mathcal{Q}$" va a finire in $\mathcal{C}$ se gli applico l'affinità, mentre le equazioni trasformano con l'inversa dell'affinità. Quindi se $\mathcal{Q} = \{(x,y) \mid g(x,y) = 0\}$ allora $\mathcal{C} = \{(x,y) \mid g(\Psi^{-1}(x,y)) = 0\}$
 
-	\newpage
 	\section*{Identità e Fatti Utili}
 	\begin{itemize}
 		\item $E_{ij}^{\alpha\beta} := \delta_{\alpha i} \delta_{\beta j}$ e sono una base dello spazio vettoriale $\mathcal{M}(n,\bbK)$

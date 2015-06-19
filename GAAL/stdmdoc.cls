@@ -155,13 +155,13 @@
 
 %mathbb mathcal mathfrak e mathbm per le lettere dell'alfabeto e anche mathbb per quelle greche
 \def\mydeflett#1{\expandafter\def\csname bb#1\endcsname{\mathbb{#1}}
-		\expandafter\def\csname mc#1\endcsname{\mathcal{#1}}
-		\expandafter\def\csname mk#1\endcsname{\mathfrak{#1}}
+		\expandafter\def\csname c#1\endcsname{\mathcal{#1}}
+		\expandafter\def\csname k#1\endcsname{\mathfrak{#1}}
 		\expandafter\def\csname bl#1\endcsname{\mathbf{#1}}}
 \def\mydefalllett#1{\ifx#1\mydefalllett\else\mydeflett#1\expandafter\mydefalllett\fi}
 \mydefalllett ABCDEFGHIJKLMNOPQRSTUVWXYZ\mydefalllett
 
-\def\mydefgreek#1{\expandafter\def\csname b#1\endcsname{\text{\boldmath$\mathbf{\csname #1\endcsname}$}}}
+\def\mydefgreek#1{\expandafter\def\csname bl#1\endcsname{\text{\boldmath$\mathbf{\csname #1\endcsname}$}}}
 \def\mydefallgreek#1{\ifx\mydefallgreek#1\else\mydefgreek{#1}%
    \lowercase{\mydefgreek{#1}}\expandafter\mydefallgreek\fi}
 \mydefallgreek {Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{Upsilon}{Phi}{Varphi}{Psi}{Omega}{alpha}{beta}{gamma}{delta}{epsilon}{varepsilon}{zeta}{eta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{varphi}{chi}{psi}{omega}\mydefallgreek
@@ -178,8 +178,8 @@
 
 \NewDocumentCommand{\de}{gg}{
 	\IfNoValueTF{#1}
-		{\mbox{d}}
-		{\IfNoValueTF{#2}	{\mbox{d}#1}
+		{\mbox{ d}}
+		{\IfNoValueTF{#2}	{\mbox{ d}#1}
 			{\frac{\mbox{d}#1}{\mbox{d}#2}}
 	}
 }
@@ -197,7 +197,8 @@
 \DeclareOption{GeneralMath}
 {
 	\newcommand{\sse}{\Leftrightarrow}
-	\newcommand{\rar}{\Rightarrow}
+	\newcommand{\Rar}{\Rightarrow}
+	\newcommand{\rar}{\rightarrow}
 	\newcommand{\ol}[1]{\overline{#1}}
 	\newcommand{\ot}[1]{\widetilde{#1}}
 	\newcommand{\oc}[1]{\widehat{#1}}
@@ -233,6 +234,7 @@
 
 	\makeatletter
 	% Permette di fare sistemi di equazioni
+		\newcommand{\hsystem}[1][]{$\left. \begin{array}{c} \gobblenext }%
 		\newcommand{\system}[1][]{$\left\{ \begin{array}{c}  \gobblenext }
 		\newcommand{\gobblenext}[1]{#1\@ifnextchar\bgroup{\\ \gobblenext}{ \end{array} \right.$ }}% Gobble next "argument"
 	\makeatother
