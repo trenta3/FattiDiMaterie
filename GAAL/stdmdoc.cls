@@ -4,7 +4,7 @@
 \RequirePackage{titlesec} % Per modificare i titoli delle sezioni
 \RequirePackage{fancyhdr} % Per modificare l'intestazione ed il piè di pagina
 \RequirePackage{bm}
-
+%\RequirePackage{mbboard}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[italian]{babel}
 \RequirePackage{amsmath}
@@ -188,7 +188,7 @@
 	\IfNoValueTF{#1}
 		{\partial}
 		{\IfNoValueTF{#2}	{\partial_{#1}}
-			{\frac{\partial #1}{\partial #2}}
+			{\frac{\partial {#1}}{\partial {#2}}}
 	}
 }
 

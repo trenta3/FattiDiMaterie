@@ -114,6 +114,8 @@
 	\begin{itemize}
 		\item $\lambda$ è autovalore per $A \sse \Det(A-\lambda I) = 0$
 		\item Se $A = \left( \begin{array}{c|c} M & N \\ \hline 0 & P \\ \end{array} \right)$ allora $\Det A = \Det M \cdot \Det P$, ovvero $\chi_A(t) = \chi_M(t) \cdot \chi_P(t)$
+		\item Se $F = \left( \begin{array}{cc} A & * \\ 0 & B \end{array} \right)$, con $A$ e $B$ quadrate, allora $p(F) = \left( \begin{array}{cc} p(A) & * \\ 0 & p(B) \end{array} \right)$
+		\item Se $F = \left( \begin{array}{c c} A & C \\ 0 & B \end{array} \right)$, con $A$ e $B$ quadrate, allora $\text{mcm }(m_A, m_B) \mid m_F$, mentre se $C = 0$ si ha $\text{mcm }(m_A, m_B) = m_F$
 		\item Il determinante è il prodotto degli autovalori
 		\item La traccia è la somma degli autovalori
 		\item $\lambda \in \Sp(f)$. Allora $1 \le \mu_g(\lambda) \le \mu_a(\lambda) \le \Dim V$
@@ -122,7 +124,9 @@
 	\section*{Diagonalizzabilità e Forma di Jordan}
 	\begin{itemize}
 		\item ({\bf Diagonalizzabilità}) $f$ è diagonalizzabile $\sse \chi_f(t)$ è completamente fattorizzabile e, per ogni $\lambda$ autovalore, $\mu_a(\lambda) = \mu_g(\lambda) \sse m_f(t)$ è square-free (ovvero non ha radici doppie)
+		\item ({\bf Simultanea Diagonalizzabilità}) $f,g\in\End(V), f\circ g = g \circ f$. Allora se $f$ e $g$ sono diagonalizzabili, lo sono simultaneamente
 		\item ({\bf Triangolabilità}) $f$ è triangolabile $\sse \chi_f(t)$ è completamente fattorizzabile in $\bbK$
+		\item ({\bf Simultanea Triangolabilità}) $f,g\in\End(V)$ triangolabili tali che $f\circ g=g\circ f$. Allora $f$ e $g$ sono simultaneamente triangolabili
 		\item ({\bf Hamilton-Cayley}) $m_f(t) \mid \chi_f(t)$. Inoltre tutti i fattori del polinomio caratteristico sono contenuti nel polinomio minimo (hanno un esponente più basso ma mai nullo)
 		\item Se $q(t) \in I_f$ allora $m_f(t) \mid q(t)$. Quindi gli autovalori di $f$ devono essere radici del polinomio $q(t)$	
 		\item ({\bf Nilpotenza}) $f$ è nilpotente $\sse \chi_f(t) = \pm t^n$
@@ -131,6 +135,7 @@
 		\item ({\bf Numero di blocchetti di Jordan}) $M_\lambda$ contiene un numero di blocchetti di Jordan pari a $\mu_g(\lambda)$. Più precisamente $$\Dim\Ker (f-\lambda\ \Id)^k-\Dim\Ker (f-\lambda\ \Id)^{k-1}$$ è il numero di blocchetti di Jordan di taglia {\it almeno} $k$
 		\item ({\bf $A \sim {}^tA$}) Ogni matrice $A$ è simile alla sua trasposta ${}^tA$ (hanno le stesse dimensioni dei $\Ker$ negli invarianti di similitudine, ovvero $\Ker (A-\lambda I)^k = \Ker ({}^tA-\lambda I)^k$)
 		\item ({\bf Base Ciclica}) Esiste una base ciclica per $f \sse m_f(t) = \pm \chi_f(t)$
+		\item Due matrici {\it ad entrate reali} sono simili su $\bbR^n$ se e solo se sono simili su $\bbC^n$
 		\item ({\bf Decomposizione degli $f$-invarianti}) Se $W$ è $f$-invariante, allora $\chi_{f\mid_W}(t) \mid \chi_f(t)$. Inoltre $I_f \subseteq I_{f\mid_W}$ da cui $m_{f\mid_W}(t) \mid m_f(t)$. \\ In particolare, per decomposizione primaria, se $\chi_{f\mid_W}(t) = (\lambda_1-t)^{\alpha_1}\ldots(\lambda_h-t)^{\alpha_h}$ possiamo scrivere $W$ come $$W = \Ker (f\mid_W-\lambda_1\ \Id)^{\alpha_1} \oplus \ldots \oplus \Ker (f\mid_W-\lambda_h\ \Id)^{\alpha_h}$$ Ovvero $W$ si scrive come $W$ = $W\cap V_{\lambda_1}' \oplus \ldots \oplus W\cap V_{\lambda_h}'$ \\
 		Supponiamo ora di sapere che $m_f(t) = \pm \chi_f(t)$, ovvero che, jordanizzando $f$, si ottiene un solo blocco di Jordan per ogni autovalore. Dimostriamo allora che esistono un numero finito di sottospazi $W$, $f$-invarianti e di dimensione fissata. \\
 		Indichiamo con $m = \Dim W$. Siano $v_1, \ldots, v_k, v_{k+1}, \ldots, v_{r}$ i vettori della base di Jordan di $W \cap V_{\lambda}'$. Restringendoci ora ad un solo $W \cap V_{\lambda}'$: se $a_kv_k+\ldots+a_1v_1 \in W$ allora (applicando $f$ e togliendo $\lambda$ volte il vettore originario) anche $a_kv_{k-1}+\ldots+a_2v_1 \in W$. Applicando lo stesso ragionamento un po' di volte si ottiene che $v_1 \in W$ da cui, procedendo a ritroso, anche $v_2, v_3, \ldots, v_k \in W$. Ovvero se $W$ contiene una combinazione di vettori della base di Jordan, allora contiene anche tutti quelli precedenti (siamo nell'assunzione che per ogni autovalore esista un solo blocco di Jordan). Per dimensioni si finisce.
@@ -209,8 +214,13 @@
 		\item Se $\mathcal{B}$ è base di $V$, $A = \Mtr_{\mathcal{B}}(f), A^{*} = \Mtr_{\mathcal{B}}(f^{*}), M = \Mtr_{\mathcal{B}}(\phi)$, allora $A^{*} = M^{-1}{}^tAM$
 	\end{itemize}
 
-	\section*{Isometrie Generali} (p.110 mezzedimi)
-	\Help
+	\section*{Isometrie Generali}
+	\begin{itemize}
+		\item ({\bf $f$-invarianza dell'ortogonale}) $\varphi\in\PS(V), f\in\Ort(V,\varphi)$, $W$ sottospazio di $V$ tale che $f(W)\subseteq W$. Allora $f(W^\bot)\subseteq W^\bot$
+		\item $\varphi\in\PS(V)$ non degenere, $v\in V$ non isotropo. Allora $V=\Span(v)\oplus\Span(v)^\bot$
+		\item ({\bf Decomposizione in Riflessioni}) $\varphi\in\PS(V)$ non degenere. Allora $\Ort(V,\varphi)$ è generato dalle riflessioni parallele ad alcuni vettori
+		\item $(V,\varphi)$ anisotropo, $\Dim V = n$. Allora ogni $f\in\Ort(V,\varphi)$ è composizione di $n-k$ riflessioni, dove $k = \Dim(\Fix(f))$.
+	\end{itemize}
 
 	\section*{Spazi Euclidei}
 	Nel seguito avremo $(V, \varphi)$ spazio euclideo, ovvero con $\varphi$ definito positivo.
@@ -222,9 +232,11 @@
 		\item ({\bf Applicazioni Ortogonali}) $\cB$ base ortonormale di $(V, \varphi)$, $f \in End(V)$, $A = \mtrapp{f}{\cB}{\cB}$. Allora $f \in \Ort(V, \varphi) \sse {}^tA A = I$
 		\item $(V, \varphi)$ euclideo, $\mathcal{B} = \{v_1, \ldots, v_n\}$ base ortonormale di $V$, $\mathcal{B'} = \{w_1, \ldots, w_n\}$ base di $V$, $M = \Mtr_{\mathcal{B'}, \mathcal{B}}(\Id)$. Allora $\mathcal{B'}$ è ortonormale $\sse M$ è ortogonale
 		\item $A \in \mathcal{M}(n,\bbR)$ triangolabile. Allora $\exists M \in \Ort(n) \tc M^{-1}AM = T$ triangolare. Ovvero, se una matrice è triangolabile, allora si può triangolare anche con una matrice ortogonale.
+		\item ({\bf $f$-invarianza dell'ortogonale}) $f\in\End(V)$ autoaggiunto, $W$ sottospazio di $V$. Allora $f(W)\subseteq W \implies f(W^\bot)\subseteq W^\bot$
 		\item ({\bf Teorema Spettrale Reale}) $f$ è ortogonalmente diagonalizzabile $\sse f$ è autoaggiunto
 		\item ({\bf Ortogonalizzazione Simultanea}) $V$ spazio vettoriale reale, $\varphi, \psi \in \PS(V)$, con $\varphi$ definito positivo. Allora $\exists \mathcal{B}$ base di $V$ ortonormale per $\varphi$ ed ortogonale per $\psi$
 		\item ({\bf Simmetrica $\implies$ Ortogonalmente Diagonalizzabile}) $A \in \Symm(n, \bbR)$ matrice simmetrica {\it ad entrate reali}. Allora $\exists P \in \Ort(n) \tc P^{-1}AP = {}^tPAP = D$ diagonale.
+		\item Una matrice simmetrica {\it ad entrate reali} ha tutti gli autovalori reali (ovvero polinomio caratteristico completamente fattorizzabile in $\bbR$)
 		\item Una matrice simmetrica {\it ad entrate reali} è definita positiva $\sse$ ha tutti gli autovalori positivi
 		\item ({\bf Ortogonalità degli Autospazi per applicazioni Autoaggiunte}) Se $f = f^{*}$, $\lambda \neq \mu$ autovalori per $f$, allora $V_\lambda \bot V_\mu$
 		\item $A \in \mathcal{M}(n, \bbR)$. Allora $A$ è simmetrica $\sse A {}^tA = {}^tAA$ e $A$ è triangolabile
@@ -351,7 +363,6 @@
 	9 & $x^2=0$ & Retta Doppia & $(1, 1, 1, 2)$ \\
 	\end{tabular} \vskip 1em
 
-	\newpage
 	\Altro{Coniche in $\bbC^2$} \vskip .5em
 	\noindent \begin{tabular}{cllc}
 	{\bf Conica} & {\bf Equazione} & {\bf Nome} & {\bf $(\Rk A, \Rk Q)$} \\
@@ -439,6 +450,9 @@
 	\end{itemize}
 
 	\section*{Controesempi che non avresti mai creduto}
-	\Help
+	\Altro{$\varphi$ non degenere. Allora $W\oplus W^\bot$} \\
+	Benché abbiano le stesse dimensioni, è falso. Si prenda $\kM_{\cB}(\varphi) = \left( \begin{array}{cc} 0 & 1 \\ 1 & 0 \end{array} \right)$ come matrice del prodotto scalare e $W = \Span(b_1)$. Allora $W^\bot = \Span(b_1)$. \\ L'affermazione vale invece se $\varphi\mid_W$ è non degenere.
+
+	\Altro{}
 	
 \end{document}
