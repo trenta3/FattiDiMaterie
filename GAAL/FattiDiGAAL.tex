@@ -62,7 +62,7 @@
 
 	\section*{Rappresentazione in Base}
 	\begin{itemize}
-		\item Data una base $\cB$ = $\{b_1, \ldots, b_n\}$, ad ogni vettore $v$ è naturalmente associata la $n$-upla delle sue componenti (sotto forma di matrice $n\times 1$). L'isomorfismo di passaggio in coordinate induce una corrispondenza tra $V$ e $\bbK^n$ che sono e restano però due spazi diversi. \\ \hsystem{\mtrvec{v}{\cB}: V \rar \kM(n, 1, \bbK)}{v = \sum_{i} a_i b_i \quad \mapsto \quad \left( \begin{array}{c} a_1 \\ \vdots \\ a_n \end{array} \right)_{\cB}}
+		\item Data una base $\cB$ = $\{b_1, \ldots, b_n\}$, ad ogni vettore $v$ è naturalmente associata la $n$-upla delle sue componenti (sotto forma di matrice $n\times 1$). L'isomorfismo di passaggio in coordinate induce una corrispondenza tra $V$ e $\bbK^n$ che sono e restano però due spazi diversi. \\ $$ \begin{array}{ccc} \mtrvec{v}{\cB}: V & \rar & \kM(n, 1, \bbK) \\ v = \sum_{i} a_i b_i & \mapsto & \left( \begin{array}{c} a_1 \\ \vdots \\ a_n \end{array} \right)_{\cB} \end{array} $$
 		\item Introduciamo inoltre la rappresentazione in base di un'applicazione lineare $f: V \rar W$, usando $\cB$ base di $V$ e $\cT$ base di $W$: rappresentiamo $f$ con la matrice $\mtrapp{f}{\cB}{\cT}$ che ha come colonna $i$-esima la rappresentazione del vettore $f(b_i)$ come matrice colonna $\mtrvec{f(b_i)}{\cT}$
 		\item Valutazione: $\mtrvec{f(v)}{\cS} = \revmtrapp{f}{\cB}{\cS} \mtrvec{v}{\cB}$
 		\item Composizione di funzioni: $\revmtrapp{g\circ f}{\cB}{\cD} = \revmtrapp{g}{\cR}{\cD} \revmtrapp{f}{\cB}{\cR}$
