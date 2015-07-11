@@ -1,0 +1,87 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\newcommand{\B}{\mbox{B}}
+\newcommand{\diam}{\mbox{ diam}}
+\newcommand{\disc}{\mathfrak{Disc}}
+\newcommand{\osc}{\mathfrak{Osc}}
+
+\newcommand{\depolar}{\left( \begin{array}{c} \dpar{}{r} \\ \dpar{}{\theta} \end{array} \right)}
+\newcommand{\decart}{\left( \begin{array}{c} \dpar{}{x} \\ \dpar{}{y} \end{array} \right)}
+
+\begin{document}
+\title{Fatti di Analisi}
+
+\Definizione{$F_\sigma$} Si dice $F_\sigma$ un sottoinsieme $I \subseteq \bbR$ che sia unione numerabile di chiusi, ovvero se si può scrivere $$I = \bigcup_{n\in\bbN} C_n$$
+
+\Definizione{Insieme trascurabile} Si dice che un sottoinsieme $E \subseteq \bbR$ è trascurabile (ovvero ha misura di Lebesgue nulla) se $\forall \varepsilon > 0 \quad \exists \{(a_n, b_n)\}_{n\in\bbN} \tc E \subseteq \bigcup_{n\in\bbN} (a_n, b_n)$
+
+\Definizione{Funzione oscillazione} Di una funzione $f: \Omega \rightarrow \bbR$ (dove $\Omega$ è uno spazio metrico) si definisce la funzione oscillazione $\Theta_{f}: \Omega \rightarrow \bbR$ come: $$\Theta_{f}(x) := \lim_{r \rightarrow 0^{+}} \diam (f(\B_r(x)))$$ \\
+Proprietà importanti: \begin{itemize}
+	\item $\bar{x}$ è un punto di discontinuità $\Leftrightarrow$ $\Theta_f(\bar{x}) > 0$.
+	\item $\Theta_f$ è una funzione semicontinua inferiormente.
+	\item Definizione equivalente: $\Theta_f(x) = \left( \limsup_{y \rightarrow x} f(y) \right) - \left( \liminf_{y \rightarrow x} f(y) \right)$.
+\end{itemize}
+
+\Altro{Caratterizzazione della Riemann-integrabilità} Una funzione è Riemann-integrabile se e solo se l'insieme dei suoi punti di discontinuità è trascurabile.
+
+\Altro{Teorema fondamentale del calcolo integrale, versione pro} $f: [a, b] \rightarrow \bbR$ derivabile in $(a,b)$ e $f'$ Riemann-integrabile. Allora vale $f(b) - f(a) = \int_{a}^{b} f'(t) \de t$
+
+\Altro{Teorema di Darboux} Le derivate mappano connessi in connessi. \\
+Sia $f: [a,b] \rightarrow \bbR$ ovunque derivabile, e si ponga $\alpha := f'(a), \beta := f'(b)$. Possiamo wlog supporre che $\alpha \le \beta$. Allora si ha, $\forall \alpha < \lambda < \beta \quad \exists \xi \in (a, b) \tc f'(\xi) = \lambda$.
+\Dimostrazione Si consideri la funzione $g(x) := f(x) - \lambda x$. Questa funzione è continua (essendo $\lambda$ fissato e $f$ continua) e definita sul compatto $[a,b]$. Quindi ammette massimo e/o minimo. Siccome $g$ è anche derivabile si ha, nel punto di massimo $0 = g'(M) = f'(M) - \lambda \Rightarrow f'(M) = \lambda$.
+
+\Altro{Punti di discontinuità di una funzione reale} Una funzione $f$ ha punti di discontinuità che sono un $F_\sigma$
+\Dimostrazione Si consideri la funzione oscillazione di $f$: $\Theta_f(x)$. Fissata una "soglia di oscillazione" $\nu$ si ha che $\osc_f^{\ge \nu} := \{x \mid \Theta_f(x) \ge \nu\}$ è un chiuso (Si dimostri che se c'è un punto $y$ sul quale si accumula una successione $(y_n)$ di punti $\tc \Theta_f(y_n) \ge \nu$ allora si ha $\Theta_f(y) \ge \nu$). Ora, siccome i punti di discontinuità sono tutti e soli quelli con oscillazione maggiore di zero, si ha $\disc_f = \bigcup_{n\in\bbN} \osc_f^{\ge \frac{1}{n}}$, ovvero unione numerabile di chiusi.
+
+\Altro{Discontinuità di una funzione semicontinua inferiormente} I punti di discontinuità di una funzione semicontinua inferiormente sono di prima categoria (ovvero unione numerabile di chiusi a parte interna vuota).
+
+\Altro{Prima Categoria - Misura di Lebesgue nulla} Non c'è nessuna implicazione tra queste due; ovvero esistono insiemi di prima categoria ma di misura positiva ed insiemi a misura nulla di seconda categoria.
+
+\section*{Operatori Differenziali}
+\subsection*{Come cambiano i differenziali}
+	\Altro{Cartesiane $\rar$ Polari} \\
+	$$ \depolar = \left( \begin{array}{cc} \cos\theta & \sin\theta \\ -r \sin\theta & r \cos\theta \end{array} \right) \decart $$
+
+\subsection*{Laplaciano}
+	$$ \Delta = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} $$ \\
+	$$ \Delta = \frac{\partial^2}{\partial r^2} + \frac{1}{r^2}\frac{\partial^2}{\partial \theta^2} $$ \\
+	
+
+\section*{Convergenze Varie}
+	\begin{itemize}
+		\item ({\bf Puntuale}) Una successione di funzioni $f_n(x)$ converge puntualmente a $f(x)$ se $\forall x \quad \forall \varepsilon > 0 \quad \exists n_0 \tc \forall n \ge n_0 \qquad \abs{f_n(x) - f(x)} \le \varepsilon$
+		\item ({\bf Uniforme}) Una successione di funzioni $f_n(x)$ converge uniformemente a $f(x)$ se $\forall \varepsilon > 0 \quad \exists n_0 \tc \forall n \ge n_0 \quad \forall x \qquad \abs{f_n(x) - f(x)} \le \varepsilon$
+		\item ({\bf Assoluta}) Una serie di funzioni $\Sigma_{n=0}^{+\infty} f_n(x)$ converge assolutamente se le serie $\Sigma_{n=0}^{+\infty} \abs{f_n(x)}$ converge puntualmente
+		\item ({\bf Totale / Normale}) Una serie di funzioni $\Sigma_{n=0}^{+\infty} f_n(x)$ converge totalmente (al suo limite) in $A$ se vale che $\Sigma_{n=0}^{+\infty} \sup_{x\in A} \abs{f_n(x)} < +\infty$
+		\item Assoluta $\implies$ Puntuale
+		\item Uniforme $\implies$ Puntuale
+		\item Totale $\implies$ Uniforme, Assoluta
+	\end{itemize}
+
+	\section*{Passaggio al Limite}
+	Nel seguito si usa $f_n(x)$ per indicare una generica successione di funzioni, $f(x)$ il suo limite (dove esiste)
+	\begin{itemize}
+		\item ({\bf Continuità del Limite}) Se le $f_n(x)$ definitivamente sono continue, e la convergenza è uniforme, allora $f(x)$ è continua.
+		\item ({\bf Derivabilità del Limite}) Se le $f_n(x)$ convergono in un punto $\bar{x}$ ad $f(\bar{x})$ e le derivate $f_n'(x)$ convergono uniformemente ad una funzione $g(x)$ allora si ha che le $f_n(x)$ convergono uniformemente ad una funzione derivabile $f(x)$ tale che $f'(x) = g(x)$
+		\item ({\bf Integrabilità del Limite}) Se le $f_n(x)$ convergono uniformemente alla $f(x)$ limite allora si ha $\lim_{n \rightarrow \infty} \int f_n(t) \de t = \int f(t) dt$
+	\end{itemize}
+
+	\section*{Problemi di Cauchy}
+	Nel seguito parliamo di un problema del seguente tipo:
+	\system{y' = f(x,y)}{y(x_0) = y_0}\par
+	Con $f: U \rightarrow \bbR^n$ è una funzione continua definita su un aperto.
+	Indicheremo una generica soluzione con $\varphi: I \rightarrow \bbR^n$ di classe $\mathcal{C}^1$ con $x_0 \in I$, tale che $\forall x \in I \quad (x, \varphi(x)) \in U$ e $\varphi'(x) = f(x, \varphi(x))$ e che $\varphi(x_0) = y_0$
+	\begin{itemize}
+		\item ({\bf Cauchy-Lipschitz, Esistenza ed Unicità Locali}) Se $f$ è continua e localmente lipschitziana in $y$ uniformemente rispetto a $x$, allora $\exists! \varphi$ soluzione {\bf locale} di classe $\mathcal{C}^1$
+		\item ({\bf Teorema di Peano, Esistenza Locale}) Per garantire l'esistenza locale (ma non l'unicità!) basta che $f$ sia continua
+		\item Si assuma che l'equazione $y' = f(x,y)$ abbia esistenza ed unicità locale in ogni punto di $U$. Allora si ha \\ {\bf Unicità Globale} (ovvero se due soluzioni coincidono in un punto allora coincidono in tutto l'intervallo); \\ {\bf Dominio Aperto delle soluzioni massimali} (una soluzione massimale ha come dominio un intervallo aperto); \\ {\bf Fuga dai compatti delle soluzioni massimali} (ovvero una soluzione massimale esce definitivamente da ogni sottoinsieme compatto di $U$)
+		\item ({\bf Esistenza e Unicità Globale}) Supponendo che la funzione $f$ sia continua e localmente lipschitziana rispetto a $y$ (ovvero ipotesi di Cauchy-Lipschitz) e se si ha che per ogni intervallo compatto $K$: $\exists A_K, B_K > 0 \qquad \norma{f(x,y)} \ge A_K \norma{y} + B_K \quad \forall (x,y) \in K \times \bbR^n$ allora per ogni $(x_0, y_0) \in I\times \bbR^n$ il problema ha una ed una sola soluzione definita su {\it tutto} $I$ (supponiamo abbia soluzione limitata, allora deve fuggire dai compatti dove la $f$ è definita, ma se prendiamo il compatto delimitato dal bound della lipschitzianità, la funzione non può fuggirne localmente)
+	\end{itemize}
+
+	\section*{Soluzione di Equazioni Differenziali Comuni}
+	\begin{itemize}
+		\item ({\bf Lineari del prim'ordine}) Data l'equazione $y' = a(x)y(x) + b(x)$ (detta $A(x) = \int_{x_0}^{x} a(t) \de t$ una primitiva di $a(x)$) si ottiene, moltiplicando entrambi i membri per $e^{A(x)}$, la soluzione generale $y(x) = e^{A(x)} \int_{x_0}^{x} e^{-A(t)}b(t) \de t + c$
+		\item ({\bf A variabili separabili}) Data l'equazione $y' = g(x)f(y)$ si ha $\int \frac{\de y}{f(y)} = \int g(x) \de x$ e calcolando le primitive si risolve il problema
+	\end{itemize}
+
+\end{document}

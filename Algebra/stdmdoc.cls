@@ -4,7 +4,7 @@
 \RequirePackage{titlesec} % Per modificare i titoli delle sezioni
 \RequirePackage{fancyhdr} % Per modificare l'intestazione ed il piè di pagina
 \RequirePackage{bm}
-
+%\RequirePackage{mbboard}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[italian]{babel}
 \RequirePackage{amsmath}
@@ -228,6 +228,7 @@
 	\newcommand{\Supp}{\mbox{Supp }}
 	\newcommand{\Span}{\mbox{Span }}
 	\newcommand{\Symm}{\mbox{Sym }}
+	\newcommand{\Asymm}{\mbox{Asym }}
 	\newcommand{\Img}{\mbox{Im }}
 	\newcommand{\Id}{\mbox{id}}
 	\newcommand{\PS}{\mbox{PS }}

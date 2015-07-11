@@ -9,13 +9,13 @@ all: pdf dvi ps
 	make clean
 
 ps: dvi
-	dvips FattiDiAnalisi2.dvi
+	dvips FattiDiAnalisi.dvi
 
 dvi: download
-	latex --shell-escape FattiDiAnalisi2.tex
+	latex --shell-escape FattiDiAnalisi.tex
 
 pdf: download
-	pdflatex --shell-escape FattiDiAnalisi2.tex
+	pdflatex --shell-escape FattiDiAnalisi.tex
 
 # Dovremmo controllare che sia la versione più recente
 download:

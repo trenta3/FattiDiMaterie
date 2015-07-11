@@ -9,13 +9,16 @@ all: pdf dvi ps
 	make clean
 
 ps: dvi
-	dvips FattiGeneraliAnalisi1.dvi
+	dvips EserciziRaccoltiAlgebra.dvi
+	dvips FattiDiAlgebra.dvi
 
 dvi: download
-	latex --shell-escape FattiGeneraliAnalisi1.tex
+	latex --shell-escape EserciziRaccoltiAlgebra.tex
+	latex --shell-escape FattiDiAlgebra.tex
 
 pdf: download
-	pdflatex --shell-escape FattiGeneraliAnalisi1.tex
+	pdflatex --shell-escape EserciziRaccoltiAlgebra.tex
+	pdflatex --shell-escape FattiDiAlgebra.tex
 
 # Dovremmo controllare che sia la versione più recente
 download:
