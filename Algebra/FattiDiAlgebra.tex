@@ -1,8 +1,63 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 
+\newcommand{\Ord}{\text{ord }}
+\newcommand{\sgr}{\le}
+\newcommand{\nrm}{\lhd}
+\newcommand{\Int}{\text{Int }}
+
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
 \begin{document}
 	\title{Fatti di Algebra}
 
 	\section*{Teoria dei Gruppi}
-	
+	Nel seguito $G$ indica un qualsiasi gruppo, viene indicata con $e$ l'unità del gruppo. La notazione usata è quella moltiplicativa. $H \sgr G$ indica che $H$ è sottogruppo di $G$ (eventualmente coincidente). $H \nrm G$ indica che $H$ è un sottogruppo normale di $G$.
+	\begin{itemize}
+		\item Due qualsiasi laterali destri di $H \sgr G$ in $G$ ($Ha$ e $Hb$) sono in corrispondenza biunivoca attraverso la funzione $ah \mapsto bh$
+		\item Esiste inoltre una corrispondenza biunivoca tra l'insieme dei laterali destri e quello dei laterali sinistri di uno stesso sottogruppo $H$
+		\item ({\bf Teorema di Lagrange}) $G$ finito e $H \sgr G$, allora $\Ord H \mid \Ord G$
+		\item $G$ finito, $a \in G$ allora $\Ord a \mid \Ord G$ e $a^{\Ord G} = e$
+		\item ({\bf Ciclicità degli ordini primi}) $G$ finito con ordine primo ($\Ord G = p \in \bbP$), allora $G$ è ciclico
+		\item ({\bf Sottogruppo prodotto}) $H, K \sgr G$. Allora $HK \sgr G \sse HK = KH$
+		\item ({\bf Ordine del prodotto}) $H, K \sgr G$ con $H$ e $K$ sottogruppi finiti. Supponiamo che $HK \sgr G$. Allora $\Ord(HK) = \frac{\Ord(H)\Ord(K)}{\Ord(H\cap K)}$
+		\item ({\bf Gruppo quoziente}) Se $N \nrm G$, allora anche $G/N$ è un gruppo. Inoltre se $G$ è finito, vale $\Ord(G/N) = \frac{\Ord(G)}{\Ord(N)}$
+		\item ({\bf Proiezione al quoziente}) $N \nrm G$. $\Phi: G \mapsto G/N$ definita da $\Phi(g) = Ng$ è un omomorfismo surgettivo.
+		\item ({\bf Normalità del Ker}) $\Phi: G \mapsto H$ omomorfismo surgettivo. $K = \Ker \Phi \implies K \nrm G$
+		\item ({\bf Immagini inverse}) $\Phi: G \mapsto H$ omomorfismo. $\Ker \Phi = K \implies \Phi^{-1}\Phi(x) = Kx$
+		\item ({\bf Primo teorema di Omomorfismo}) $\Phi: G \mapsto H$ omomorfismo surgettivo con $K = \Ker \Phi$. Allora $G/K \cong H$.
+		\item ({\bf Teorema di Cauchy}) Sia $p \in \bbP \tc p \mid \Ord G$. Esiste allora $a \neq e \tc a^p = e$
+		\item ({\bf Teorema di Sylow}) Sia $p \in \bbP \tc p^\alpha \mid \Ord G, p^{\alpha + 1} \nmid \Ord G$. Allora $G$ ha un sottogruppo di ordine $p^\alpha$. Inoltre se $G$ è abeliano tale sottogruppo è unico.
+		\item ({\bf Corrispondenza tra gruppi normali}) Sia $\Phi: G \mapsto G'$ omomorfismo surgettivo. $K = \Ker \Phi$. Dato $H' \sgr G'$ si definisca $H = \{x\in G \mid \Phi(x) \in H'\}$. \\ Si ha che $H \sgr G \tc K \subseteq H$. Inoltre se $H' \nrm G'$ allora $H \nrm G$. L'associare $H'$ ad $H$ stabilisce una corrispondenza biunivoca dell'insieme di tutti i sottogruppi di $G'$ sull'insieme di tutti i sottogruppi di $G$ che contengono $K$
+		\item ({\bf Secondo teorema di Omomorfismo}) $\Phi: G \mapsto G'$ omomorfismo surgettivo, $K = \Ker \Phi$. Si prenda ora $N' \nrm G'$ e sia $N = \{x \in G \mid \Phi(x) \in N'\}$. Allora $G/N \cong G'/N'$ oppure, in modo equivalente, $G/N \cong (G/K)/(N/K)$.
+		\item ({\bf Caratterizzazione degli automorfismi interni}) $\Int G \cong G/Z$ con $Z = C(G)$ centro di $G$
+	\end{itemize}
+
+	\section*{Caratteristiche di $S_n$}
+	\begin{itemize}
+		\item $S_n$ NON è abeliano per $n \ge 3$. Infatti $(1 2)$ e $(1 3)$ non commutano
+		\item Il centro di $S_n$ è banale per $n \ge 3$. Per questo motivo $S_n$ NON è nilpotente per $n \ge 3$
+		\item $S_n$ per $n\neq 2,6$ è un gruppo completo poiché non ha centro ed ogni automorfismo è interno
+	\end{itemize}
+
+	\section*{Layout completo di $S_4$}
+	$S_4$ è il gruppo delle permutazioni di quattro elementi. $A_4$ è il gruppo delle permutazioni pari. $V_4$ è il gruppo dei prodotti di 2-cicli disgiunti ($V_4 = \{(), (12)(34), (13)(24), (14)(23)\}$). $D_8$ è il gruppo diedrale di ordine otto.
+
+	$S_4$ contiene le seguenti permutazioni:
+	\begin{itemize}
+		\item $1$ identità: $()$
+		\item $6$ 2-cicli: $(12), (13), (14), (23), (24), (34)$
+		\item $3$ prodotti di 2-cicli: $(12)(34), (13)(24), (14)(23)$
+		\item $8$ 3-cicli: $(123), (124), (132), (134), (142), (143), (234), (243)$
+		\item $6$ 4-cicli: $(1234), (1243), (1324), (1342), (1423), (1432)$
+	\end{itemize}
+
+	Altre caratteristiche di $S_4$:
+	\begin{itemize}
+		\item Abbiamo che $S_4$ è risolubile considerando la catena $(e) \subseteq V_4 \subseteq A_4 \subseteq S_4$
+		\item $A_4 \nrm S_4$ (Poiché ha indice $2$)
+		\item $V_4 \nrm S_4$ (conti)
+		\item $D_8 \sgr S_4$ (prendendo $D_8 = \{(), (1234), (13)(24), (1432), (12)(34), (14)(23), (13)(24)\}$)
+	\end{itemize}
 \end{document}

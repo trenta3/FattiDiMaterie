@@ -1,13 +1,48 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 
+\newcommand{\Ord}{\text{ord }}
+\newcommand{\sgr}{\le}
+\newcommand{\nrm}{\lhd}
+\newcommand{\cycl}{\odot}
+\newcommand{\ctrl}{{\color{blue} Ancora da controllare }}
+\newcommand{\Ind}{\text{i}}
+\newcommand{\mcm}{\text{m.c.m. }}
+
+\newcommand{\Star}{ $ \star $ }
+
+\newcommand\nnrm{\mathrel{\ooalign{\hss$\diagup$\hss\cr$\lhd$}}}
+\newcommand\nsgr{\mathrel{\ooalign{\hss$\diagup$\hss\cr$\ge$}}}
+
 \begin{document}
 	\title{Esercizi Raccolti Di Algebra}
-	
+	Ho voluto raccogliere gli esercizi teorici più carini / difficili che ho trovato in vari libri
+
 	\section*{Teoria dei Gruppi}
-	
+	Nel seguito $G$ indica un qualsiasi gruppo, viene indicata con $e$ l'unità del gruppo. La notazione usata è quella moltiplicativa. $H \sgr G$ indica che $H$ è sottogruppo di $G$ (eventualmente coincidente). $H \nrm G$ indica che $H$ è un sottogruppo normale di $G$.
+	\begin{enumerate}
+		\item \ctrl Se $G$ è un gruppo nel quale $\forall a,b \in G \quad (ab)^i = a^i b^i$ per tre interi $i$ consecutivi. Allora $G$ è abeliano. \\ Trovare inoltre un controesempio all'abelianità di $G$ nel caso in cui la relazione sussista solo per due interi consecutivi.
+		\item Se $G$ è un gruppo tale che $\forall a \in G \quad a^2 = e$, allora $G$ è abeliano.
+		\item Sia $G$ finito di ordine pari. Allora $\exists a \in G, a \neq e \tc a^2 = e$.
+		\item \ctrl Sia $G$ tale che l'intersezione di tutti i sottogruppi diversi da $(e)$ è un sottogruppo diverso da $(e)$. Dimostrare che ogni elemento di $G$ ha ordine finito e con un esempio mostrare che $G$ non è necessariamente finito.
+		\item \ctrl Se $H \sgr G \implies H = (e)$ dimostrare che $G$ è finito ed ha ordine primo.
+		\item \ctrl Sia $H \sgr G \tc Ha \neq Hb \implies aH \neq bH$. Dimostrare che $\forall g\in G \quad gHg^{-1} \subseteq H$.
+		\item \ctrl $H, K \sgr G$ entrambi di indice finito ($\Ind_G H = a, \Ind_G K = b$). Dimostrare che $H\cap G$ ha indice finito e vale $\Ind_G (H\cap K) \le \Ind_G(H) \Ind_G(K)$. Trovare inoltre un esempio in cui vale l'uguaglianza.
+		\item $H \sgr G$, $\Ind_G H$ finito. Dimostrare che esistono solo un numero finito di sottogruppi della forma $aHa^{-1}$ per $a \in G$.
+		\item \Star Sia $G$ finito tale che $3 \nmid \Ord G$ e supponiamo che valga $\forall a,b \in G \quad (ab)^3 = a^3 b^3$. Dimostrare che $G$ è abeliano.
+		\item \ctrl Sia $G$ abeliano e supponiamo che $\exists x,y \in G \tc \Ord x = m, \Ord y = n$. Dimostrare che $\exists z \in G \tc \Ord z = \mcm(m,n)$.
+		\item Supponiamo $\exists a,b \in G, a \neq e, b \neq e \tc a^5 = e, aba^-1 = b^2$. Trovare $\Ord b$.
+		\item \Star \ctrl Sia $G$ abeliano e finito tale che il numero delle soluzioni dell'equazione $x^n = e$ è al più $n$ per ogni intero positivo $n$. Dimostrare che $G$ è ciclico e produrre un controesempio alla tesi nel caso in cui non si supponga $G$ finito.
+		\item Sia $G$ finito e $A \sgr G \tc \forall x \quad \Ord(AxA) = k$. Dimostrare che $\forall g\in G \quad gAg^{-1} = A$.
+		\item Sia $H \sgr G$ tale che $\Ind_G H = 2$. Dimostrare che $H \nrm G$
+		\item Supponiamo $N, M \nrm G$, $N \cap M = (e)$. Dimostrare allora che $\forall n\in N, m\in M \quad nm = mn$
+		\item Trovare un gruppo non abeliano nel quale tutti i sottogruppi siano normali. 
+		\item Dare un esempio di gruppo $G$, $H \sgr G$ ed $a \in G$ tali che $aHa^{-1} \subsetneq H$.
+		\item Dare un esempio di tre sottogruppi $E \subseteq F \subseteq G$ con $E \nrm F, F \nrm G$ ma $E \nnrm G$.
+		\item \ctrl Sia $G$ tale che $\Ord G = p^2$ con $p \in \bbP$. Mostrare che allora $G$ è abeliano.
+	\end{enumerate}
 
 	\section*{Da dove ho preso gli esercizi}
 	\begin{itemize}
-		\item Herstein
+		\item {\it Algebra}, I. N. Herstein
 	\end{itemize}
 \end{document}
