@@ -22,7 +22,8 @@
 	$\begin{array}{cc} \vec{r} = r\hat{r} & \vec{\omega} = \dot\varphi \hat{z} + \dot\theta \hat\varphi = \dot{\varphi} \left(\cos\theta \hat{r} - \sin\theta \hat{\theta}\right) + \dot{\theta} \hat{\varphi} \end{array}$
 
 	\section*{Campo Centrale}
-	$\begin{array}{ccc} \vec{F} = f\left(\mid \vec{r} \mid\right) \hat{r} & \vec{L_0} = \vec{\cost} & V = - \int_{z_0}^{z} f\left(\mid \vec{r} \mid\right) \de{\vec{r}} \\ \nabla V = \left(\dpar{V}{x}, \dpar{V}{y}, \dpar{V}{z}\right) = \dpar{V}{r} \left(\dpar{r}{x}, \dpar{r}{y}, \dpar{r}{z}\right) = - f\left(\mid \vec{r} \mid\right) \left(\frac{x}{r}, \frac{y}{r}, \frac{z}{r}\right) = - f\left(\mid \vec{r} \mid \right) \hat{r} \end{array}$
+	$\begin{array}{ccc} \vec{F} = f\left(\mid \vec{r} \mid\right) \hat{r} & \vec{L_0} = \vec{\cost} & V = - \int_{z_0}^{z} f\left(\mid \vec{r} \mid\right) \de{\vec{r}} \end{array}$ \\ 
+	$\nabla V = \left(\dpar{V}{x}, \dpar{V}{y}, \dpar{V}{z}\right) = \dpar{V}{r} \left(\dpar{r}{x}, \dpar{r}{y}, \dpar{r}{z}\right) = - f\left(\mid \vec{r} \mid\right) \left(\frac{x}{r}, \frac{y}{r}, \frac{z}{r}\right) = - f\left(\mid \vec{r} \mid \right) \hat{r}$
 
 	\section*{Potenziale Efficace}
 	$\begin{array}{cc} \text{Sapendo che } \vec{L} = mr^2 \dot{\theta} \hat{z} & E = \frac{1}{2} m\left({\dot{r}}^2 + r^2 {\dot{\theta}}^2\right) + V\left(r\right) = \frac{1}{2} m {\dot{r}}^2 + \left(\frac{L_z^2}{2mr^2} + V\left(r\right)\right) \end{array}$
@@ -40,7 +41,8 @@
 	$\begin{array}{cc} \cL = \sum_i \frac{1}{2} m_i {\dot{q}}_i^2 - V\left(q_i\right) & \de{}{t}\left(\dpar{\cL}{\dot{q}_i}\right) = \dpar{\cL}{q_i} \implies \de{}{t}\left(m_i {\dot{q}_i}\right) = - \dpar{V}{q_i} \implies m_i {\ddot{q}_i} = F_i \end{array}$
 
 	\subsection*{Invarianza nel tempo}
-	$\begin{array}{ccc} \cL\left(q, \dot{q}_i\right) & \dpar{\cL}{t} = 0 & E = \dpar{\cL}{\dot{q}} \dot{q} - \cL \end{array}$ \\ $\de{E}{t} = \de{}{t}\left(\dpar{\cL}{\dot{q}}\right) \ddot{q} + \dpar{\cL}{\dot{q}} \ddot{q} - \de{\cL}{t} = \de{}{t}\left(\dpar{\cL}{\dot{q}}\right) \ddot{q} + \dpar{\cL}{\dot{q}} \ddot{q} - \dpar{\cL}{q} \dot{q} - \dpar{\cL}{\dot{q}} \ddot{q} = \dot{q} \left(\de{}{t} \left(\dpar{\cL}{\dot{q}}\right) - \dpar{\cL}{q}\right) = 0$
+	$\begin{array}{ccc} \cL\left(q, \dot{q}_i\right) & \dpar{\cL}{t} = 0 & E = \dpar{\cL}{\dot{q}} \dot{q} - \cL \end{array}$ \\
+	$\de{E}{t} = \de{}{t}\left(\dpar{\cL}{\dot{q}}\right) \dot{q} + \dpar{\cL}{\dot{q}} \ddot{q} - \de{\cL}{t} = \de{}{t}\left(\dpar{\cL}{\dot{q}}\right) \dot{q} + \cancel{\dpar{\cL}{\dot{q}} \ddot{q}} - \dpar{\cL}{q} \dot{q} - \cancel{\dpar{\cL}{\dot{q}} \ddot{q}} = \dot{q} \left(\de{}{t} \left(\dpar{\cL}{\dot{q}}\right) - \dpar{\cL}{q}\right) = 0$
 
 	\subsection*{Invarianza per traslazioni}
 	$r_i \mapsto r_i + \varepsilon \delta_i$ \\ $\cL \left(r_i + \varepsilon \delta_i, \dot{r}_i, t\right) - \cL \left(r_i, \dot{r}_i, t\right) = \dpar{\cL}{r_i} \varepsilon \delta_i = 0 \implies 0 = \dpar{\cL}{r_i} = \de{}{t} \left(\dpar{\cL}{\dot{r}_i}\right) = \de{}{t} \left(m_i \dot{r}_i \right)$
@@ -74,15 +76,15 @@
 		\item La $\vec{p}$ si conserva sempre (non ci sono forze esterne)
 		\item Per definizione, se l'urto è elastico, l'energia si conserva
 	\end{enumerate}
-	$E = \frac{1}{2} m_1 v_1^2 + \frac{1}{2} m_2 v_2^2$ \\
-	$m_1, \quad \vec{v}_1, \quad m_2, \quad \vec{v}_2$ masse e velocità relative al sistema del laboratorio. \\
-	$\vec{v} := \vec{v}_1 - \vec{v}_2 \qquad \vec{R} := \frac{m_1\vec{r}_1 + m_2\vec{r}_2}{m_1 + m_2} \quad \vec{V} = \dot{\vec{R}}$ \\
-	$m_1, \quad \vec{v}_{10} = \vec{v}_1 - \vec{V} = \frac{m_2}{m_1 + m_2} \vec{v}, \quad m_2, \quad \vec{v}_{20} = \vec{v}_2 - \vec{V} = -\frac{m_1}{m_1 + m_2} \vec{v}$ sono le masse e le velocità relative al sistema del centro di massa. \\
-	$\mu = \frac{m_1m_2}{m_1+m_2}$ \\
-	$\vec{p}_{10} = m_1 \vec{v}_{10} = \frac{m_2m_1}{m_1 + m_2} \vec{v} = \mu \vec{v}, \qquad \vec{p}_{20} = m_2 \vec{v}_{20} = -\frac{m_1m_2}{m_1 + m_2} \vec{v} = - \mu \vec{v}$\\
-	$\vec{v}'_{10} = \frac{m_2}{m_1 + m_2} v \hat{n_0}, \qquad \vec{v}'_{20} = - \frac{m_1}{m_1 + m_2} v \hat{n_0}$ \\
-	$\vec{v}'_1 = \vec{v}'_{10} + \vec{V} = \frac{m_2}{m_1 + m_2} v \hat{n_0} + \frac{m_1\vec{v}_1 + m_2 \vec{v}_2}{m_1 + m_2}, \qquad \vec{v}'_2 = \vec{v}'_{20} + \vec{V} = - \frac{m_1}{m_1 + m_2} v \hat{n_0} + \frac{m_1\vec{v}_1 + m_2\vec{v}_2}{m_1 + m_2}$ \\
-	$\vec{p}'_1 = m_1\vec{v}'_1 = \mu v \hat{n_0} + \frac{m_1}{m_1 + m_2} \vec{P} = \mu v \hat{n_0} + m_1 \vec{V}, \qquad \vec{p}'_2 = m_2 \vec{v}'_2 = - \mu v \hat{n_0} + \frac{m_2}{m_1+m_2} \vec{P} = - \mu v \hat{n_0} + m_2 \vec{V}$
+	\begin{itemize}
+		\item $m_1, \quad \vec{v}_1, \quad m_2, \quad \vec{v}_2$ \\ masse e velocità relative al sistema del laboratorio.
+		\item $\vec{v} := \vec{v}_1 - \vec{v}_2, \qquad \vec{R} := \frac{m_1\vec{r}_1 + m_2\vec{r}_2}{m_1 + m_2}, \qquad \vec{V} = \dot{\vec{R}}, \qquad \mu := \frac{m_1m_2}{m_1+m_2}$
+		\item $m_1, \quad \vec{v}_{10} = \vec{v}_1 - \vec{V} = \frac{m_2}{m_1 + m_2} \vec{v}, \quad m_2, \quad \vec{v}_{20} = \vec{v}_2 - \vec{V} = -\frac{m_1}{m_1 + m_2} \vec{v}$ \\ masse e velocità relative al sistema del centro di massa.
+		\item $\vec{p}_{10} = m_1 \vec{v}_{10} = \frac{m_2m_1}{m_1 + m_2} \vec{v} = \mu \vec{v}, \qquad \vec{p}_{20} = m_2 \vec{v}_{20} = -\frac{m_1m_2}{m_1 + m_2} \vec{v} = - \mu \vec{v}$
+		\item $\vec{v}'_{10} = \frac{m_2}{m_1 + m_2} v \hat{n_0}, \qquad \vec{v}'_{20} = - \frac{m_1}{m_1 + m_2} v \hat{n_0}$
+		\item $\vec{v}'_1 = \vec{v}'_{10} + \vec{V} = \frac{m_2}{m_1 + m_2} v \hat{n_0} + \frac{m_1\vec{v}_1 + m_2 \vec{v}_2}{m_1 + m_2}, \qquad \vec{v}'_2 = \vec{v}'_{20} + \vec{V} = - \frac{m_1}{m_1 + m_2} v \hat{n_0} + \frac{m_1\vec{v}_1 + m_2\vec{v}_2}{m_1 + m_2}$
+		\item $\vec{p}'_1 = m_1\vec{v}'_1 = \mu v \hat{n_0} + \frac{m_1}{m_1 + m_2} \vec{P} = \mu v \hat{n_0} + m_1 \vec{V}, \qquad \vec{p}'_2 = m_2 \vec{v}'_2 = - \mu v \hat{n_0} + \frac{m_2}{m_1+m_2} \vec{P} = - \mu v \hat{n_0} + m_2 \vec{V}$
+	\end{itemize}
 
 	\section*{Puttanate sugli angoli}
 	\subsection*{CM Frame}
