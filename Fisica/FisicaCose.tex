@@ -9,6 +9,9 @@
 \usepackage{bbm}
 \usepackage{setspace}
 \usepackage{cancel}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[pass]{geometry}
 
 \onehalfspace
 
@@ -56,7 +59,7 @@
 	$\begin{array}{ccc} \vec{r}_{\text{lab}} = \vec{R} + \vec{r}_{\text{rel}} & \vec{v}_{\text{lab}} = \vec{V} + \vec{v}_{\text{rel}} + \vec{\omega} \times \vec{r}_{\text{rel}} & \vec{a}_{\text{lab}} = \vec{A} + \vec{a}_{\text{rel}} + 2 \vec{\omega} \times \vec{v}_{\text{rel}} + \dot{\vec{\omega}} \times \vec{r}_{\text{rel}} + \vec{\omega} \times \left( \vec{\omega} \times \vec{r}_{\text{rel}} \right) \end{array}$
 
 	\section*{Formule che valgono sempre (e siamo sicuri perché abbiamo fatto i conti al contrario dei fisici che le tirano fuori dal cappello ma non sanno come dimostrarle)}
-	Il sistema di riferimento è $\Sigma = O\hat{x}\hat{y}\hat{z}$. Il punto $P$ è quello rispetto a cui si calcolano $\vec{L}_P$ e $\vec{\tau}_P$. Le particelle $\alpha$ hanno raggio vettore rispetto ad $O$ $r_\alpha$ e rispetto a $P$ $\vec{\rho}_\alpha$, quindi $r_\alpha = \vec{OP} + \vec{\rho}_\alpha$ \\
+	Il sistema di riferimento è $\Sigma = O\hat{x}\hat{y}\hat{z}$. Il punto $P$ è quello rispetto a cui si calcolano $\vec{L}_P$ e $\vec{\tau}_P$. Le particelle $\alpha$ hanno raggio vettore rispetto ad $O$ $\vec{r}_\alpha$ e rispetto a $P$ $\vec{\rho}_\alpha$, quindi $\vec{r}_\alpha = \vec{OP} + \vec{\rho}_\alpha$ \\
 	$\vec{L}_P := \sum_\alpha \vec{\rho}_\alpha \times m_\alpha \dot{\vec{r}}_\alpha , \quad \vec{\tau}_P := \sum_\alpha \vec{\rho}_\alpha \times m_\alpha \ddot{\vec{r}}_\alpha$ \\
 	$\vec{L}_P = \sum_\alpha \vec{\rho}_\alpha \times m_\alpha \dot{\vec{r}}_\alpha = \sum_\alpha \left( \vec{r}_\alpha - \vec{OP} \right) \times m_\alpha \dot{\vec{r}}_\alpha = \sum_\alpha \vec{r}_\alpha \times m_\alpha \dot{\vec{r}}_\alpha - \sum_\alpha \vec{OP} \times m_\alpha \dot{\vec{r}}_\alpha = \vec{L}_O - \vec{OP} \times \vec{P}$ \\
 	$\left. \de{\vec{L}_P}{t}\right|_\Sigma = \sum_\alpha \dot{\vec{\rho}}_\alpha \times m_\alpha \dot{\vec{r}}_\alpha +\sum_\alpha {\vec{\rho}}_\alpha \times m_\alpha \ddot{\vec{r}}_\alpha = \vec{\tau}_P + \cancel{\sum_\alpha \dot{\vec{r}}_\alpha \times m_\alpha \dot{\vec{r}}_\alpha } - \sum_\alpha \dot{\vec{OP}} \times m_\alpha \dot{\vec{r}}_\alpha = \vec{\tau}_P - \dot{\vec{OP}} \times \vec{P}$
@@ -71,27 +74,40 @@
 	$E = \frac{1}{2} M {\dot{\vec{R}}}^2 + \frac{1}{2} \mu {\dot{\vec{r}}}^2 + V \left( \mid \vec{r} \mid \right)$ \\ $L = \vec{R} \times M \dot{\vec{R}} + \vec{r} \times \mu \dot{\vec{r}}$
 
 	\section*{Urti}
+
 	Fatti incredibili:
 	\begin{enumerate}
 		\item La $\vec{p}$ si conserva sempre (non ci sono forze esterne)
 		\item Per definizione, se l'urto è elastico, l'energia si conserva
 	\end{enumerate}
+
 	\begin{itemize}
 		\item $m_1, \quad \vec{v}_1, \quad m_2, \quad \vec{v}_2$ \\ masse e velocità relative al sistema del laboratorio.
 		\item $\vec{v} := \vec{v}_1 - \vec{v}_2, \qquad \vec{R} := \frac{m_1\vec{r}_1 + m_2\vec{r}_2}{m_1 + m_2}, \qquad \vec{V} = \dot{\vec{R}}, \qquad \mu := \frac{m_1m_2}{m_1+m_2}$
 		\item $m_1, \quad \vec{v}_{10} = \vec{v}_1 - \vec{V} = \frac{m_2}{m_1 + m_2} \vec{v}, \quad m_2, \quad \vec{v}_{20} = \vec{v}_2 - \vec{V} = -\frac{m_1}{m_1 + m_2} \vec{v}$ \\ masse e velocità relative al sistema del centro di massa.
-		\item $\vec{p}_{10} = m_1 \vec{v}_{10} = \frac{m_2m_1}{m_1 + m_2} \vec{v} = \mu \vec{v}, \qquad \vec{p}_{20} = m_2 \vec{v}_{20} = -\frac{m_1m_2}{m_1 + m_2} \vec{v} = - \mu \vec{v}$
+		\item $\vec{p}_1 = \mu \vec{v} + m_1 \vec{V} \qquad \vec{p}_2 = -\mu \vec{v} + m_2 \vec{V}$
+		\item $\vec{p}_{10} = \vec{p}_1 - m_1\vec{V} = m_1 \vec{v}_{10} = \frac{m_2m_1}{m_1 + m_2} \vec{v} = \mu \vec{v}, \qquad \vec{p}_{20} = \vec{p}_2 - m_2\vec{V} = m_2 \vec{v}_{20} = -\frac{m_1m_2}{m_1 + m_2} \vec{v} = - \mu \vec{v}$
 		\item $\vec{v}'_{10} = \frac{m_2}{m_1 + m_2} v \hat{n_0}, \qquad \vec{v}'_{20} = - \frac{m_1}{m_1 + m_2} v \hat{n_0}$
 		\item $\vec{v}'_1 = \vec{v}'_{10} + \vec{V} = \frac{m_2}{m_1 + m_2} v \hat{n_0} + \frac{m_1\vec{v}_1 + m_2 \vec{v}_2}{m_1 + m_2}, \qquad \vec{v}'_2 = \vec{v}'_{20} + \vec{V} = - \frac{m_1}{m_1 + m_2} v \hat{n_0} + \frac{m_1\vec{v}_1 + m_2\vec{v}_2}{m_1 + m_2}$
 		\item $\vec{p}'_1 = m_1\vec{v}'_1 = \mu v \hat{n_0} + \frac{m_1}{m_1 + m_2} \vec{P} = \mu v \hat{n_0} + m_1 \vec{V}, \qquad \vec{p}'_2 = m_2 \vec{v}'_2 = - \mu v \hat{n_0} + \frac{m_2}{m_1+m_2} \vec{P} = - \mu v \hat{n_0} + m_2 \vec{V}$
 	\end{itemize}
 
 	\section*{Puttanate sugli angoli}
+
+	\begin{minipage}{0.6\textwidth}
 	\subsection*{CM Frame}
 	Angolo qualsiasi. Le palline possono andare dove vogliono.
 
 	\subsection*{LAB Frame}
-	L'angolo è limitato. $\sin \theta_{\text{max}} = \frac{v_\text{rel}}{v_\text{CM}}$
+	L'angolo è limitato. $\sin \theta_{\text{max}} = \frac{\mu v}{m_1 V} = \frac{m_1 v_{10}}{m_1 V} = \frac{v_{10}}{V}$
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.35\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\columnwidth]{AngoloMagico}
+	\end{figure}
+	\end{minipage}
 
 	\section*{Problemi con massa variabile}
 	Cosa utile: $\vec{F} = \dot{\vec{p}}$ \\
@@ -115,7 +131,8 @@
 
 	\section*{Termodinamica}
 	\subsection*{Leggi Universali}
-	$\Delta U = Q - L^{\vec{}} \qquad U = n C_V T = \frac{1}{\gamma -1} nRT$ \\ $S = nC_V \log T + n R \log \left( \frac{V}{n} \right) \qquad S = n C_P \log T - n R \log p$
+	$\Delta U = Q - L^{\vec{}} \qquad U = n C_V T = \frac{1}{\gamma -1} nRT$ \\
+	$\Delta S = nC_V \log \left( \frac{T_2}{T_1} \right) + n R \log \left( \frac{V_2}{V_1} \right) \qquad \Delta S = n C_P \log \left( \frac{T_2}{T_1} \right) - n R \log \left( \frac{p_2}{p_1} \right)$
 
 	\subsection*{Isobara ($p$ costante)}
 	$\Delta U = n C_V \Delta T \qquad Q = n C_P \Delta T \qquad L^{\vec{}} = nR \Delta T = p \Delta V \qquad \Delta S = n C_P \log \left( \frac{T_2}{T_1} \right)$
