@@ -3,8 +3,12 @@
 \newcommand{\Ord}{\text{ord }}
 \newcommand{\sgr}{\le}
 \newcommand{\nrm}{\lhd}
+\newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\Int}{\text{Int }}
+\newcommand{\Ind}{\text{i }}
 \newcommand{\Aut}{\text{Aut }}
+\newcommand{\MCD}{\text{MCD }}
+\newcommand{\mcm}{\text{mcm }}
 
 \usepackage{pgf}
 \usepackage{tikz}
@@ -33,6 +37,13 @@
 		\item ({\bf Corrispondenza tra gruppi normali}) Sia $\Phi: G \mapsto G'$ omomorfismo surgettivo. $K = \Ker \Phi$. Dato $H' \sgr G'$ si definisca $H = \{x\in G \mid \Phi(x) \in H'\}$. \\ Si ha che $H \sgr G \tc K \subseteq H$. Inoltre se $H' \nrm G'$ allora $H \nrm G$. L'associare $H'$ ad $H$ stabilisce una corrispondenza biunivoca dell'insieme di tutti i sottogruppi di $G'$ sull'insieme di tutti i sottogruppi di $G$ che contengono $K$
 		\item ({\bf Secondo teorema di Omomorfismo}) $\Phi: G \mapsto G'$ omomorfismo surgettivo, $K = \Ker \Phi$. Si prenda ora $N' \nrm G'$ e sia $N = \{x \in G \mid \Phi(x) \in N'\}$. Allora $G/N \cong G'/N'$ oppure, in modo equivalente, $G/N \cong (G/K)/(N/K)$.
 		\item ({\bf Caratterizzazione degli automorfismi interni}) $\Int G \cong G/Z$ con $Z = C(G)$ centro di $G$. Inoltre $\Int G \nrm \Aut G$
+	\end{itemize}
+
+	\section*{Trucchi vari}
+	\begin{itemize}
+		\item Se non sai cosa fare, può essere utile considerare il gruppo ciclico generato da un elemento $\gen{a}$
+		\item Il modo più utile di usare l'informazione $\MCD(a, b) = 1$ è tramite Bèzout: $\exists s, t \tc \quad as + bt = 1$, soprattutto se $a$ e $b$ sono ordini di gruppi.
+		\item Se $N \nrm G$, $x^{\Ind_G(N)} \in N$ (poiché $\Ind_G(N)$ è l'ordine del gruppo quoziente $G/N$)
 	\end{itemize}
 
 	\section*{Caratteristiche di $S_n$}

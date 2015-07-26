@@ -178,9 +178,9 @@
 
 \NewDocumentCommand{\de}{gg}{
 	\IfNoValueTF{#1}
-		{\mbox{ d}}
-		{\IfNoValueTF{#2}	{\mbox{ d}#1}
-			{\frac{\mbox{d}#1}{\mbox{d}#2}}
+		{\text{ d}}
+		{\IfNoValueTF{#2}	{\text{ d}#1}
+			{\frac{\text{d}#1}{\text{d}#2}}
 	}
 }
 
