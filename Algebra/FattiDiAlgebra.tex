@@ -1,14 +1,15 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 
 \newcommand{\Ord}{\text{ord }}
-\newcommand{\sgr}{\le}
-\newcommand{\nrm}{\lhd}
+\newcommand{\sgr}{\sqsubseteq}
+\newcommand{\nrm}{\unlhd}
 \newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\Int}{\text{Int }}
 \newcommand{\Ind}{\text{i }}
 \newcommand{\Aut}{\text{Aut }}
 \newcommand{\MCD}{\text{MCD }}
 \newcommand{\mcm}{\text{mcm }}
+\newcommand{\isom}{\equiv}
 
 \usepackage{pgf}
 \usepackage{tikz}
@@ -27,16 +28,35 @@
 		\item ({\bf Ciclicità degli ordini primi}) $G$ finito con ordine primo ($\Ord G = p \in \bbP$), allora $G$ è ciclico
 		\item ({\bf Sottogruppo prodotto}) $H, K \sgr G$. Allora $HK \sgr G \sse HK = KH$
 		\item ({\bf Ordine del prodotto}) $H, K \sgr G$ con $H$ e $K$ sottogruppi finiti. Supponiamo che $HK \sgr G$. Allora $\Ord(HK) = \frac{\Ord(H)\Ord(K)}{\Ord(H\cap K)}$
+		\item ({\bf Definizione di sottogruppo normale}) $N \nrm G \sse \forall x\in G \quad xHx^{-1} = H \sse \forall x \in G \quad xHx^{-1} \subseteq H \sse \forall x \in G \quad xH = Hx$
 		\item ({\bf Gruppo quoziente}) Se $N \nrm G$, allora anche $G/N$ è un gruppo. Inoltre se $G$ è finito, vale $\Ord(G/N) = \frac{\Ord(G)}{\Ord(N)}$
 		\item ({\bf Proiezione al quoziente}) $N \nrm G$. $\Phi: G \mapsto G/N$ definita da $\Phi(g) = Ng$ è un omomorfismo surgettivo.
+		\item ({\bf Gruppi abeliani hanno tutti i sottogruppi normali}) $G$ abeliano. $N \sgr G \implies N \nrm G$.
+		\item ({\bf Controimmagine di un normale è normale}) $N' \nrm G'$, $\Phi: G \rar G'$. Allora $\Phi^{-1}(N') \nrm G$.
+		\item ({\bf Immagine di un normale con morfismo surgettivo è normale}) $N \nrm G$, $\Phi: G \rar G'$ omomorfismo sugettivo. Allora $\Phi(N) \nrm G'$.
 		\item ({\bf Normalità del Ker}) $\Phi: G \mapsto H$ omomorfismo surgettivo. $K = \Ker \Phi \implies K \nrm G$
+		\item ({\bf L'immagine è un sottogruppo}) $\Phi: G \rar G'$ omomorfismo. $\Img \Phi \sgr G'$ (ma NON è detto che sia normale)
 		\item ({\bf Immagini inverse}) $\Phi: G \mapsto H$ omomorfismo. $\Ker \Phi = K \implies \Phi^{-1}\Phi(x) = Kx$
 		\item ({\bf Primo teorema di Omomorfismo}) $\Phi: G \mapsto H$ omomorfismo surgettivo con $K = \Ker \Phi$. Allora $G/K \cong H$.
 		\item ({\bf Teorema di Cauchy}) Sia $p \in \bbP \tc p \mid \Ord G$. Esiste allora $a \neq e \tc a^p = e$
 		\item ({\bf Teorema di Sylow}) Sia $p \in \bbP \tc p^\alpha \mid \Ord G, p^{\alpha + 1} \nmid \Ord G$. Allora $G$ ha un sottogruppo di ordine $p^\alpha$. Inoltre se $G$ è abeliano tale sottogruppo è unico.
 		\item ({\bf Corrispondenza tra gruppi normali}) Sia $\Phi: G \mapsto G'$ omomorfismo surgettivo. $K = \Ker \Phi$. Dato $H' \sgr G'$ si definisca $H = \{x\in G \mid \Phi(x) \in H'\}$. \\ Si ha che $H \sgr G \tc K \subseteq H$. Inoltre se $H' \nrm G'$ allora $H \nrm G$. L'associare $H'$ ad $H$ stabilisce una corrispondenza biunivoca dell'insieme di tutti i sottogruppi di $G'$ sull'insieme di tutti i sottogruppi di $G$ che contengono $K$
 		\item ({\bf Secondo teorema di Omomorfismo}) $\Phi: G \mapsto G'$ omomorfismo surgettivo, $K = \Ker \Phi$. Si prenda ora $N' \nrm G'$ e sia $N = \{x \in G \mid \Phi(x) \in N'\}$. Allora $G/N \cong G'/N'$ oppure, in modo equivalente, $G/N \cong (G/K)/(N/K)$.
-		\item ({\bf Caratterizzazione degli automorfismi interni}) $\Int G \cong G/Z$ con $Z = C(G)$ centro di $G$. Inoltre $\Int G \nrm \Aut G$
+		\item ({\bf Il centro è un sottogruppo normale}) $Z(G) \nrm G$.
+		\item ({\bf Caratterizzazione degli automorfismi interni}) $\Int G \cong G/Z$ con $Z = Z(G)$ centro di $G$. Inoltre $\Int G \nrm \Aut G$
+	\end{itemize}
+
+	\section*{Particolari tipi di gruppi}
+	\begin{itemize}
+		\item ({\bf I gruppi ciclici sono abeliani}) $G$ ciclico $\implies G$ abeliano. (Segue dall'associatività dell'operazione di gruppo)
+		\item ({\bf Ciclicità dei gruppi con ordine primo}) $G$ gruppo. $\Ord G = p \in \bbP \implies G$ è ciclico. (Basta usare Cauchy)
+		\item ({\bf Esiste un unico gruppo ciclico di ogni ordine}) $G$ gruppo ciclico. $\Ord G = n \implies G \isom \bbZ_{n}$
+		\item ({\bf Abelianità di Gruppo con quoziente sul centro ciclico}) $G$ gruppo. $G/Z(G)$ ciclico $\implies G$ abeliano
+	\end{itemize}
+
+	\section*{Controesempi}
+	\begin{itemize}
+		\item ({\bf Gruppo non abeliano con tutti i sottogruppi normali}) $Q_8 = \{1, i, j, k, -1, -i, -j, -k\}$ con le regole di moltiplicazione tra quaternioni. ($i^2 = j^2 = k^2 = 1$, $ij = k, ji = -k, \ldots$)
 	\end{itemize}
 
 	\section*{Trucchi vari}
@@ -44,6 +64,7 @@
 		\item Se non sai cosa fare, può essere utile considerare il gruppo ciclico generato da un elemento $\gen{a}$
 		\item Il modo più utile di usare l'informazione $\MCD(a, b) = 1$ è tramite Bèzout: $\exists s, t \tc \quad as + bt = 1$, soprattutto se $a$ e $b$ sono ordini di gruppi.
 		\item Se $N \nrm G$, $x^{\Ind_G(N)} \in N$ (poiché $\Ind_G(N)$ è l'ordine del gruppo quoziente $G/N$)
+		\item Se $G^k \sgr G$, allora $G^k \nrm G$. (Segue banalmente da $ga^k g^{-1} = (gag^{-1})^k$)
 	\end{itemize}
 
 	\section*{Caratteristiche di $S_n$}
