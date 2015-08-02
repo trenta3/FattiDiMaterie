@@ -1,46 +1,51 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 
+\usepackage{mathabx}
 \newcommand{\Ord}{\text{ord }}
-\newcommand{\sgr}{\le}
+\newcommand{\sgr}{\sqsubseteq}
+\newcommand{\ssgr}{\sqsubsetneq}
 \newcommand{\nrm}{\lhd}
 \newcommand{\cycl}{\odot}
 \newcommand{\ctrl}{{\color{blue} Ancora da controllare }}
 \newcommand{\Ind}{\text{i}}
 \newcommand{\mcm}{\text{m.c.m. }}
 
-\newcommand{\Star}{ $ \star $ }
+\definecolor{gold}{RGB}{198, 142, 23}
+\newcommand{\Star}{$\star$ }
+\newcommand{\Gpsi}{${\color{gold}\Psi}$ }
 
 \newcommand\nnrm{\mathrel{\ooalign{\hss$\diagup$\hss\cr$\lhd$}}}
 \newcommand\nsgr{\mathrel{\ooalign{\hss$\diagup$\hss\cr$\ge$}}}
 
 \begin{document}
 	\title{Esercizi Raccolti Di Algebra}
-	Ho voluto raccogliere gli esercizi teorici più carini / difficili che ho trovato in vari libri
+	Ho voluto raccogliere gli esercizi teorici più carini / difficili che ho trovato in vari libri. Le stelle \Star (da 1 a 3) indicano la difficoltà dei problemi, mentre le psi dorate \Gpsi indicano la bellezza.
 
 	\section*{Teoria dei Gruppi}
 	Nel seguito $G$ indica un qualsiasi gruppo, viene indicata con $e$ l'unità del gruppo. La notazione usata è quella moltiplicativa. $H \sgr G$ indica che $H$ è sottogruppo di $G$ (eventualmente coincidente). $H \nrm G$ indica che $H$ è un sottogruppo normale di $G$.
 	\begin{enumerate}
-		\item \ctrl Se $G$ è un gruppo nel quale $\forall a,b \in G \quad (ab)^i = a^i b^i$ per tre interi $i$ consecutivi. Allora $G$ è abeliano. \\ Trovare inoltre un controesempio all'abelianità di $G$ nel caso in cui la relazione sussista solo per due interi consecutivi.
+		\item Se $G$ è un gruppo nel quale $\forall a,b \in G \quad (ab)^i = a^i b^i$ per tre interi $i$ consecutivi. Allora $G$ è abeliano. \\ Trovare inoltre un controesempio all'abelianità di $G$ nel caso in cui la relazione sussista solo per due interi consecutivi.
 		\item Se $G$ è un gruppo tale che $\forall a \in G \quad a^2 = e$, allora $G$ è abeliano.
-		\item Sia $G$ finito di ordine pari. Allora $\exists a \in G, a \neq e \tc a^2 = e$.
-		\item \ctrl Sia $G$ tale che l'intersezione di tutti i sottogruppi diversi da $(e)$ è un sottogruppo diverso da $(e)$. Dimostrare che ogni elemento di $G$ ha ordine finito e con un esempio mostrare che $G$ non è necessariamente finito.
-		\item \ctrl Se $H \sgr G \implies H = (e)$ dimostrare che $G$ è finito ed ha ordine primo.
-		\item \ctrl Sia $H \sgr G \tc Ha \neq Hb \implies aH \neq bH$. Dimostrare che $\forall g\in G \quad gHg^{-1} \subseteq H$.
-		\item \ctrl $H, K \sgr G$ entrambi di indice finito ($\Ind_G H = a, \Ind_G K = b$). Dimostrare che $H\cap G$ ha indice finito e vale $\Ind_G (H\cap K) \le \Ind_G(H) \Ind_G(K)$. Trovare inoltre un esempio in cui vale l'uguaglianza.
+		\item Sia $G$ tale che l'intersezione di tutti i sottogruppi diversi da $(e)$ è un sottogruppo diverso da $(e)$. Dimostrare che ogni elemento di $G$ ha ordine finito e con un esempio mostrare che $G$ non è necessariamente finito.
+		\item Se $H \ssgr G \implies H = (e)$ dimostrare che $G$ è finito ed ha ordine primo.
+		\item Sia $H \sgr G \tc Ha \neq Hb \implies aH \neq bH$. Dimostrare che $\forall g\in G \quad gHg^{-1} \subseteq H$.
+		\item \Gpsi $H, K \sgr G$ entrambi di indice finito ($\Ind_G H = a, \Ind_G K = b$ e non è detto che $G$ sia finito). Dimostrare che $H\cap K$ ha indice finito e vale $\Ind_G (H\cap K) \le \Ind_G(H) \Ind_G(K)$. Trovare un esempio dove valga l'uguale ed uno dove valga il minore stretto.
 		\item $H \sgr G$, $\Ind_G H$ finito. Dimostrare che esistono solo un numero finito di sottogruppi della forma $aHa^{-1}$ per $a \in G$.
 		\item \Star Sia $G$ finito tale che $3 \nmid \Ord G$ e supponiamo che valga $\forall a,b \in G \quad (ab)^3 = a^3 b^3$. Dimostrare che $G$ è abeliano.
-		\item \ctrl Sia $G$ abeliano e supponiamo che $\exists x,y \in G \tc \Ord x = m, \Ord y = n$. Dimostrare che $\exists z \in G \tc \Ord z = \mcm(m,n)$.
-		\item Supponiamo $\exists a,b \in G, a \neq e, b \neq e \tc a^5 = e, aba^-1 = b^2$. Trovare $\Ord b$.
+		\item \Star Sia $G$ abeliano e supponiamo che $\exists x,y \in G \tc \Ord x = m, \Ord y = n$. Dimostrare che $\exists z \in G \tc \Ord z = \mcm(m,n)$.
+		\item \Gpsi Supponiamo $\exists a,b \in G, a \neq e, b \neq e \tc a^5 = e, aba^{-1} = b^2$. Trovare $\Ord b$.
 		\item \Star \ctrl Sia $G$ abeliano e finito tale che il numero delle soluzioni dell'equazione $x^n = e$ è al più $n$ per ogni intero positivo $n$. Dimostrare che $G$ è ciclico e produrre un controesempio alla tesi nel caso in cui non si supponga $G$ finito.
-		\item Sia $G$ finito e $A \sgr G \tc \forall x \quad \Ord(AxA) = k$. Dimostrare che $\forall g\in G \quad gAg^{-1} = A$.
+		\item \Star Sia $G$ finito e $A \sgr G \tc \forall x \quad \Ord(AxA) = k$. Dimostrare che $\forall g\in G \quad gAg^{-1} = A$.
 		\item Sia $H \sgr G$ tale che $\Ind_G H = 2$. Dimostrare che $H \nrm G$
 		\item Supponiamo $N, M \nrm G$, $N \cap M = (e)$. Dimostrare allora che $\forall n\in N, m\in M \quad nm = mn$
 		\item Trovare un gruppo non abeliano nel quale tutti i sottogruppi siano normali. 
 		\item Dare un esempio di gruppo $G$, $H \sgr G$ ed $a \in G$ tali che $aHa^{-1} \subsetneq H$.
 		\item Dare un esempio di tre sottogruppi $E \subseteq F \subseteq G$ con $E \nrm F, F \nrm G$ ma $E \nnrm G$.
-		\item \Star Sia $G$ finito, e supponiamo che l'automorfismo $T$ sia tale che $T(x) = x \sse x = e$. Inoltre $T^2 = I$. Dimostrare che $G$ è abeliano. (Molto truccoso)
-		\item \Star Sia $G$ finito, e supponiamo che l'automorfismo $T$ mandi più di tre quarti degli elementi di $G$ nel proprio inverso. Dimostrare allora che $T(x) = x^{-1}$ e che $G$ è abeliano. (Molto truccoso)
-		\item \Star Sia $G$ tale che $\Ord G = p^2$ con $p \in \bbP$. Mostrare che allora $G$ è abeliano.
+		\item \Star \Star Sia $G$ finito, e supponiamo che l'automorfismo $T$ sia tale che $T(x) = x \sse x = e$. Inoltre $T^2 = I$. Dimostrare che $G$ è abeliano.
+		\item \Star \Star Sia $G$ finito, e supponiamo che l'automorfismo $T$ mandi più di tre quarti degli elementi di $G$ nel proprio inverso. Dimostrare allora che $T(x) = x^{-1}$ e che $G$ è abeliano.
+		\item \Star \Gpsi Sia $G$ un gruppo di ordine $2n$. Supponiamo che la metà degli elementi di $G$ siano di ordine $2$ e che l'altra metà formi un sottogruppo $H$ di ordine $n$. Dimostrare che $H$ ha ordine dispari ed è un sottogruppo abeliano di $G$.
+		\item \Star \Star Sia $G$ tale che $\Ord G = p^2$ con $p \in \bbP$. Mostrare che allora $G$ è abeliano. (Traccia della soluzione: dimostrare che $G$ ha un sottogruppo normale di ordine $p$ e che questo è contenuto nel centro di $G$. Poi dire che $G$ è abeliano poiché $G/Z(G)$ è ciclico)
+		\item \Star Sia $G$ tale che $\Ord(G) = pq$, con $p, q$ primi distinti. E supponiamo esistano $H, K \nrm G$, con $\Ord H = p, \Ord K = q$. Dimostrare che $G$ è ciclico.
 	\end{enumerate}
 
 	\section*{Da dove ho preso gli esercizi}

@@ -2,7 +2,7 @@
 
 \newcommand{\Ord}{\text{ord }}
 \newcommand{\sgr}{\sqsubseteq}
-\newcommand{\nrm}{\unlhd}
+\newcommand{\nrm}{\lhd}
 \newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\Int}{\text{Int }}
 \newcommand{\Ind}{\text{i }}
@@ -43,7 +43,10 @@
 		\item ({\bf Corrispondenza tra gruppi normali}) Sia $\Phi: G \mapsto G'$ omomorfismo surgettivo. $K = \Ker \Phi$. Dato $H' \sgr G'$ si definisca $H = \{x\in G \mid \Phi(x) \in H'\}$. \\ Si ha che $H \sgr G \tc K \subseteq H$. Inoltre se $H' \nrm G'$ allora $H \nrm G$. L'associare $H'$ ad $H$ stabilisce una corrispondenza biunivoca dell'insieme di tutti i sottogruppi di $G'$ sull'insieme di tutti i sottogruppi di $G$ che contengono $K$
 		\item ({\bf Secondo teorema di Omomorfismo}) $\Phi: G \mapsto G'$ omomorfismo surgettivo, $K = \Ker \Phi$. Si prenda ora $N' \nrm G'$ e sia $N = \{x \in G \mid \Phi(x) \in N'\}$. Allora $G/N \cong G'/N'$ oppure, in modo equivalente, $G/N \cong (G/K)/(N/K)$.
 		\item ({\bf Il centro è un sottogruppo normale}) $Z(G) \nrm G$.
-		\item ({\bf Caratterizzazione degli automorfismi interni}) $\Int G \cong G/Z$ con $Z = Z(G)$ centro di $G$. Inoltre $\Int G \nrm \Aut G$
+		\item ({\bf Caratterizzazione degli automorfismi interni}) $\Int G \cong G/Z$ con $Z = Z(G)$ centro di $G$. Inoltre $\Int G \nrm \Aut G$.
+		\item ({\bf Teorema di Cayley}) Ogni gruppo è isomorfo ad un sottogruppo di $S(X)$, per un opportuno $X$.
+		\item ({\bf Teorema X}) Se $G$ è un gruppo, $H \sgr G$, $X$ l'insieme di tutti i laterali destri di $H$ in $G$, esiste un omomorfismo $\Phi: G \rar S(X)$. Inoltre $\Ker \Phi$ è il più grande sottogruppo normale di $G$ contenuto in $H$.
+		\item ({\bf Corollario dell'indice fattoriale}) Se $G$ è un gruppo finito e $H \neq G$ un sottogruppo di $G$ tale che $\Ord(G) \nmid \Ind_G(H)!$, allora $H$ deve contenere un sottogruppo normale non banale di $G$. In particolare, $G$ non può essere semplice.
 	\end{itemize}
 
 	\section*{Particolari tipi di gruppi}
@@ -61,10 +64,16 @@
 
 	\section*{Trucchi vari}
 	\begin{itemize}
-		\item Se non sai cosa fare, può essere utile considerare il gruppo ciclico generato da un elemento $\gen{a}$
 		\item Il modo più utile di usare l'informazione $\MCD(a, b) = 1$ è tramite Bèzout: $\exists s, t \tc \quad as + bt = 1$, soprattutto se $a$ e $b$ sono ordini di gruppi.
 		\item Se $N \nrm G$, $x^{\Ind_G(N)} \in N$ (poiché $\Ind_G(N)$ è l'ordine del gruppo quoziente $G/N$)
 		\item Se $G^k \sgr G$, allora $G^k \nrm G$. (Segue banalmente da $ga^k g^{-1} = (gag^{-1})^k$)
+		\item Se $H \sgr G$, $\Ord(H) > \frac{\Ord(G)}{2} \implies H = G$
+	\end{itemize}
+
+	\section*{Gruppi Ciclici}
+	\begin{itemize}
+		\item $H, K \sgr G$, $\Ord(H) = a, \Ord(K) = b$. Se $\MCD(a,b) =1$, allora $H \cap K = (e)$. Infatti $H \cap K \sgr H, H\cap K \sgr K \implies \Ord(H\cap K) \mid \Ord(H), \Ord(H\cap K) \mid \Ord(K) \implies \Ord(H \cap K) = 1$.
+		\item Se $H \cap K = (e)$ e $H, K \sgr G$ con $G$ abeliano si ha: Siano $h \in H, k \in K$, $\Ord(h) = r, \Ord(k) = s$. Allora $\Ord(hk) = \mcm(r,s)$. (Infatti $(hk)^{\mcm(r,s)} = h^{\mcm(r,s)} k^{\mcm(r,s)} = e e = e$. Inoltre supponiamo $\exists t < \mcm(r,s) \tc (hk)^t = e$ Allora $h^t k^t = e \implies h^t = k^{-t} \in H \cap K \implies h^t = k^{-t} = e \implies r\mid t, s \mid t \implies \mcm(r,s) \mid t$)
 	\end{itemize}
 
 	\section*{Caratteristiche di $S_n$}
