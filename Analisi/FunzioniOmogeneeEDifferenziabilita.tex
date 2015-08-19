@@ -1,0 +1,63 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\begin{document}
+	\title {Funzioni Omogenee e differenziabilità}
+	
+	\section{Lemmi preliminari}
+	\subsection{Funzioni omogenee sono asintoticamente equivalenti alla norma}
+	Se $f: \bbR^n \setminus \{0\} \rar \bbR$ è continua, omogenea di ordine $a \in \bbR$ e $x \neq 0 \implies f(x) > 0$, allora $f(x) \simeq \norma{x}^a$ quando $x \rar 0$.
+	Infatti la continuità di $f$ implica $sup_{\norma{y} = 1} f(y) \le C$, per compattezza di $\{\norma{y} = 1 \}$. Quindi si ha $f(x) = \norma{x}^a f(\frac{x}{\norma{x}}) \le \norma{x}^a \sup_{\norma{y} = 1} f(y) = C \norma{x}^a$.
+	L'altra disuguaglianza ($f(x) \ge D \norma{x}^a$) segue nello stesso modo prendendo l'$\inf$.
+	
+	\section{Versione Semplice}
+	\subsection{Continuità}
+	Consideriamo una funzione $F(x,y)$ definita da $F(x,y) = \left\{ \begin{array}{cr} \frac{P_a(x,y)}{Q_b(x,y)} & \text{se } (x,y)\in \bbR^2, (x,y) \neq (0,0) \\ c & \text{altrimenti} \\ \end{array} \right.$
+		dove $P_a(x,y)$ e $Q_b(x,y)$ sono funzioni continue ed omogenee di ordine rispettivamente $a$ e $b$, entrambi positivi ($a,b>0$). \\
+	Supponiamo inoltre che $Q_b(x,y)$ sia tale che $\norma{(x,y)} = 1 \implies Q_b(x,y) \neq 0$.
+	
+	\begin{enumerate}
+		\item Se $a > b$ e $c = 0$, allora $F$ è continua anche in $(0,0)$. \\
+			Infatti (per il lemma preliminare) $\norma{\frac{P_a(x,y)}{Q_b(x,y)}} \le C \norma{(x,y)}^{a-b} = o(1)$ per $(x,y) \rar (0,0)$
+		\item Se $a < b$ la funzione $F$ non è limitata oppure $F(x,y) = 0$ in un piccolo intorno di $(0,0)$
+		\item Se $a = b$, allora $L(\theta) = \lim_{r \rar 0^{+}} F(r \cos \theta, r \sin \theta) = \frac{P_a (\cos \theta, \sin \theta)}{Q_b(\cos \theta, \sin\theta)}$
+		\item Se $a = b$, ed esistono $\theta_1, \theta_2 \in \left[ 0, 2 \pi \right)$ tali che $L(\theta_1) \neq L(\theta_2)$, allora $F$ NON è continua in $(0,0)$
+		\item Se $a = b$ e per ogni $\theta_1, \theta_2 \in \left[0, 2\pi \right)$ si ha $L(\theta_1) = L(\theta_2) = L$, allora $F$ è costante.
+	\end{enumerate}
+	Per la 2., 3., 4., 5. basta usare l'identità $F(r \cos \theta, r \sin \theta) = r^{a-b} F(\cos \theta, \sin \theta)$ \\
+	
+	\subsection{Differeziabilità}
+	Consideriamo la funzione $F(x,y)$ definita come sopra e supponiamo che le funzioni $P_a$ e $Q_b$ siano differenziabili su tutto $\bbR^2 \setminus \{0\}$.
+	Vediamo per quali valori di $a,b$ la funzione $F(x,y)$ ammette un'estensione differenziabile in $(0,0)$
+	
+	\begin{enumerate}
+		\item Se $a-b > 1$ allora $F(x,y)$ è differenziabile anche nell'origine. \\
+			Infatti (sempre per il lemma preliminare) si ha $\mid F(x) \mid \le C \norma{x}^{a-b} = o(\norma{x})$ per $x \rar 0$ e si ha
+			quindi che $F(h) - F(0) = 0 + o(\norma{x})$ ovvero che $F$ è differenziabile in $(0.0)$ con differenziale nullo.
+		\item Se $0 < a-b < 1$ allora $F(x,y)$ NON è differenziabile nell'origine. \\
+			Infatti supponiamo per assurdo che $F$ sia differenziabile in $(0,0)$. Allora $\exists v \in \bbR^2$ tale che
+			$F(x) + \scal{v}{x} = o(\norma{x})$ per $x$ sufficientemente piccoli. Usando l'omogeneità di $F$, del prodotto scalare e
+			degli o-piccoli, si ha che (sostituendo $\lambda x$ al posto di $x$) $\lambda ^{a-b-1} F(x) + \scal{v}{x} = o(\norma{x})$
+			per $\lambda$ sufficientemente piccoli. Ma questo è impossibile poiché nel limite $\lambda \rar 0$ si ha che LHS NON è
+			un $o(\norma{x})$.
+		\item Se $ a - b < 0$ $F$ non è differenziabile perché non è nemmeno continua in $(0,0)$
+		\item Se $ a - b = 0$ $F$ è differenziabile se e solo se è costante
+		\item Se $ a - b = 1$ $F$ è differenziabile se e solo se è una funzione lineare.
+	\end{enumerate}
+	
+	\section{Versione Potente}
+	Consideriamo ora la funzione $F(x)$ definita da $F(x) = \left\{ \begin{array}{cr} \frac{P_a(x)+o(\norma{x}^a)}{Q_b(x)+o(\norma{x}^b} & \text{se } x\in \bbR^2, x \neq 0 \\ c & \text{altrimenti} \\ \end{array} \right.$
+	Usando la relazione $$\frac{P_a(r \cos\theta, r \sin\theta) + o(r^a)}{Q_b(r \cos\theta, r \sin\theta) + o(r^b)} = r^{a-b} \left( \frac{P_a(\cos\theta, \sin\theta)}{Q_b(\cos\theta, \sin\theta)} + o(1) \right)$$ si trovano i
+	seguenti casi:
+	
+	\begin{enumerate}
+		\item Se $a > b$ e $c = 0$ la funzione $F$ è continua
+		\item Se $a < b$ ed esiste $y_0$ tale che $\norma{y_0} = 1$ e $P_a(y_0) \neq 0$, allora la funzione $F$ NON è limitata in un intorno di zero.
+		\item Se $a < b$ e $P_a(y) \equiv 0$ allora $F(x) = o(\norma{x}^{a-b})$
+	\end{enumerate}
+	
+	Allo stesso modo (ovvero usando la stessa relazione) si ottiene:
+	\begin{enumerate}
+		\item Se $a-b> 1$ e $c=0$ la funzione $F$ è differenziabile
+		\item $\ldots$
+	\end{enumerate}
+\end{document}

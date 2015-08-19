@@ -1,0 +1,30 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\begin{document}
+	\title {Funzioni Omogenee e differenziabilità}
+	
+	\section{Lemmi preliminari}
+	\subsection{Funzioni omogenee sono asintoticamente equivalenti alla norma}
+	Se $f: \bbR^n \setminus \{0\} \rar \bbR$ è continua, omogenea di ordine $a \in \bbR$ e $x \neq 0 \implies f(x) > 0$, allora $f(x) \simeq \norma{x}^a$ quando $x \rar 0$.
+	Infatti la continuità di $f$ implica $sup_{\norma{y} = 1} f(y) \le C$, per compattezza di $\{\norma{y} = 1 \}$. Quindi si ha $f(x) = \norma{x}^a f(\frac{x}{\norma{x}}) \le \norma{x}^a \sup_{\norma{y} = 1} f(y) = C \norma{x}^a$.
+	L'altra disuguaglianza ($f(x) \ge D \norma{x}^a$) segue nello stesso modo prendendo l'$\inf$.
+	
+	\section{Versione Semplice}
+	\subsection{Continuità}
+	Consideriamo una funzione $F(x,y)$ definita da $F(x,y) = \left\{ \begin{array}{cr} \frac{P_a(x,y)}{Q_b(x,y)} & \text{se } (x,y)\in \bbR^2, (x,y) \neq (0,0) \\ c & \text{altrimenti} \\ \end{array} \right.$
+		dove $P_a(x,y)$ e $Q_b(x,y)$ sono funzioni continue ed omogenee di ordine rispettivamente $a$ e $b$, entrambi positivi ($a,b>0$). \\
+	Supponiamo inoltre che $Q_b(x,y)$ sia tale che $\norma{(x,y)} = 1 \implies Q_b(x,y) \neq 0$.
+	
+	\begin{enumerate}
+		\item Se $a > b$ e $c = 0$, allora $F$ è continua anche in $(0,0)$. \\
+			Infatti (per il lemma preliminare) $\norma{\frac{P_a(x,y)}{Q_b(x,y)}} \le C \norma{(x,y)}^{a-b} = o(1)$ per $(x,y) \rar (0,0)$
+		\item Se $a < b$ la funzione $F$ non è limitata oppure $F(x,y) = 0$ in un piccolo intorno di $(0,0)$
+		\item Se $a = b$, allora $L(\theta) = \lim_{r \rar 0^{+}} F(r \cos \theta, r \sin \theta) = \frac{P_a (\cos \theta, \sin \theta)}{Q_b(\cos \theta, \sin\theta)}$
+		\item Se $a = b$, ed esistono $\theta_1, \theta_2 \in \left[ 0, 2 \pi \right)$ tali che $L(\theta_1) \neq L(\theta_2)$, allora $F$ NON è continua in $(0,0)$
+		\item Se $a = b$ e per ogni $\theta_1, \theta_2 \in \left[0, 2\pi \right)$ si ha $L(\theta_1) = L(\theta_2) = L$, allora $F$ è costante.
+	\end{enumerate}
+	Per la 2., 3., 4., 5. basta usare l'identità $F(r \cos \theta, r \sin \theta) = r^{a-b} F(\cos \theta, \sin \theta)$ \\
+	
+	\subsection{Differeziabilità}
+	
+\end{document}

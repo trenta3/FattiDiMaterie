@@ -10,12 +10,15 @@ all: pdf dvi ps
 
 ps: dvi
 	dvips FattiDiAnalisi.dvi
+	dvips FunzioniOmogeneeEDifferenziabilita.dvi
 
 dvi: download
 	latex --shell-escape FattiDiAnalisi.tex
+	latex --shell-escape FunzioniOmogeneeEDifferenziabilita.tex
 
 pdf: download
 	pdflatex --shell-escape FattiDiAnalisi.tex
+	pdflatex --shell-escape FunzioniOmogeneeEDifferenziabilita.tex
 
 # Dovremmo controllare che sia la versione più recente
 download:
