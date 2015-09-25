@@ -178,9 +178,9 @@
 
 \NewDocumentCommand{\de}{gg}{
 	\IfNoValueTF{#1}
-		{\mbox{ d}}
-		{\IfNoValueTF{#2}	{\mbox{ d}#1}
-			{\frac{\mbox{d}#1}{\mbox{d}#2}}
+		{\text{ d}}
+		{\IfNoValueTF{#2}	{\text{ d}#1}
+			{\frac{\text{d}#1}{\text{d}#2}}
 	}
 }
 
@@ -228,6 +228,7 @@
 	\newcommand{\Supp}{\mbox{Supp }}
 	\newcommand{\Span}{\mbox{Span }}
 	\newcommand{\Symm}{\mbox{Sym }}
+	\newcommand{\Asymm}{\mbox{Asym }}
 	\newcommand{\Img}{\mbox{Im }}
 	\newcommand{\Id}{\mbox{id}}
 	\newcommand{\PS}{\mbox{PS }}
