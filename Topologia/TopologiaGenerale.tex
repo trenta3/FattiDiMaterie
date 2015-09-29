@@ -1,0 +1,27 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\begin{document}
+	\title{Topologia Generale}
+	
+	\section*{Definizioni}
+	\begin{itemize}
+		\item ({\bf Topologia }) $X$ insieme. Una topologia su $X$ è una famiglia $\cT$ di sottoinsiemi di $X$, detti aperti, tali che $X, \emptyset \in \cT$, $\cT$ è stabile per intersezione finita e per unione arbitraria.
+		\item ({\bf Chiusi}) Un $C \subseteq X$ si dice chiuso se è il complementare di un aperto.
+		\item ({\bf Base}) Una sottofamiglia $\cB \subseteq \cT$ si dice una base di $\cT$ se ogni aperto $A \in \cT$ può essere scritto come unione di elementi di $\cB$
+		\item ({\bf Finezza di una topologia}) Date due topologie $\cT$ e $\cR$ su $X$, diremo che $\cT$ è piu' fine di $\cR$ se $\cR \subseteq \cT$, cioè se ogni aperto della topologia $\cR$ è aperto anche in $\cT$
+	\end{itemize}
+	
+	\section*{}
+	\begin{itemize}
+		\item ({\bf Condizione equivalente per essere una base}) Dato $X$ insieme e $\cB \subseteq \cP (X)$ esiste una topologia su $X$ di cui $\cB$ è una base se e soltanto se sono soddisfatte le seguenti due condizioni: $X = \Bigcap \{B \mid B \in \cB \}$ e per ogni coppia $A,B \in \cB$ e per ogni punto $x \in A \cap B$ esiste $C \in \cB$ tale che $x \in C \subseteq A \cap B$.
+	\end{itemize}
+	
+	\section*{Topologie Comuni}
+	\begin{itemize}
+		\item ({\bf Topologia discreta}) $\Tau = \cP (X)$ quindi ogni insieme è aperto. è indotta dalla distanza discreta: $d(x,y) = \left{ \begin{array}{cr} 0 & \text{se } x = y \\ 1 & \text{se } x \neq y \\ \end{array} \right.$
+		\item ({\bf Topologia indiscreta}) $\Tau = \{\emptyset, X\}$, la meno fine tra tutte le topologie.
+		\item ({\bf Topologia euclidea su $\bbR$}) Un sottoinsieme $U \subseteq \bbR$ è aperto se e solo se è unione di intervalli aperti.
+		\item ({\bf Topologia della semicontinuità superiore di $\bbR$}) Gli aperti non vuoti sono tutti e soli i sottoinsiemi della forma $( - \infty , a)$, al variare di $a \in \bbR \cup \{+ \infty\}$
+	\end{itemize}
+
+\end{document}
