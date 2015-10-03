@@ -108,7 +108,46 @@
       
       Un esempio può essere $(\mathbb C^\star, \cdot)$ che può essere scomposto in $R^+$ per la circonferenza unitaria $\{z:\abs z=1\}$, ritrovando così l'usale scomposizione di un complesso come $(\rho,\theta)$.
       
+      \subsection{Gruppo diedrale}
+      Il \myname{gruppo diedrale} di ordine $n$ si indica con $D_n$ ed è il sottogruppo delle isometrie del piano, costituito da tutte le isometrie che mandano un $n-agono$ regolare in se stesso. Chiaramente il centro $O$ deve rimanere fisso, e i verici devono permutare tra loro. Quindi abbiamo solo due possibilità: o rotazioni di centro $O$, o simmetrie rispetto a assi passanti per $O$.
       
+      Chiaramente ho $n$ rotazioni (scelgo dove mandare un vertice e ho fissato la rotazione) e sicuramente ho almeno $n$ simmetrie (rispetto agli assi passanti per vertici e punti medi del poligono). 
+      
+      Inoltre l'ordine dei vertici si conserva: posso scegliere dove mandare $A_1$ in $n$ modi, $A_2$ posso scegliere dove mandarlo in $2$ modi (evitiamo casi patologici tipo $D_1$ e $D_2$, che comunque funzionano ugualmente), e a quel punto l'isometria è fissata. In totale ho $2n$ isometrie, quindi le avevo già trovate tutte \Cooley.
+      
+      Abbiamo quindi scomposto $D_n = R_n \cup S_n$ (rotazioni + simmetrie). \'E facile vedere che $R_n$ è un sottogruppo ciclico di $D_n$, inoltre è pure normale per il seguente lemma:
+      \begin{mylemma}
+       Sia $G$ gruppo con $\abs G = 2n$, e sia $H<G$ con $\abs H=n$. Allora $H \subnorm G$.
+      \end{mylemma}
+      \begin{proof}
+       Dato che $\abs G =2\abs H$ allora esistono due classi laterali di $H$, ossia $H$ e $G\setminus H$. Chiaramente se $x \in H$ vale quindi che $xH=Hx=H$; se invece $x \nin H$ allora vale che $xH\neq H$, $Hx\neq H$, e visto che non ci sono molte classi laterali diverse da $H$, devono essere uguali.
+      \end{proof}
+      
+      Vale $R_n=\gen r$, dove $r$ è un generatore di $R_n$, e anche e $S_n=sR_n$, dove $s$ è una qualsiasi simmetria. Infatti $sR_n$ è una delle due classi laterali di $R_n$, ma non è $R_n$: deve essere quindi $S_n$.
+      
+      Possiamo quindi scrivere $D_n = \{s^ir^j\}$, con $i \in \{0,1\}, 0 \le j \le n-1$.
+      
+      \begin{myprop}[Regola di scambio]\label{prop:scambio}
+       Siano $r,s \in D_n$ con $r$ rotazione, $s$ simmetria. Allora vale $rs=s\inv r$.
+      \end{myprop}
+      \begin{proof}
+       Fissiamo un sistema di riferimento complesso sul piano in modo che l'asse di $s$ sia la retta reale, e lo $0$ sia il centro del poligono. Prendiamo un punto generico $\rho e^{i\theta}$, con $\rho \in \mathbb R$ e $\theta \in [0,2\pi)$. Vale, detto $\alpha$ l'angolo di rotazione,
+       \begin{gather*}
+        r\circ s\left(\rho e^{i\theta}\right) = r\left(\rho e^{-i\theta}\right) = \rho e^{i(\alpha-\theta)} \\
+        s \circ \inv r\left(\rho e^{i\theta}\right)= s\left(\rho e^{i(\theta-\alpha)}\right) = \rho e^{i(\alpha-\theta)}
+       \end{gather*}
 
+      \end{proof}
       
+      Con la regola di scambio so fare qualsiasi operazione nel gruppo: posso infatti anche definire il gruppo diedrale con 
+      \[
+	\begin{cases}
+	  r^n = e\\
+	  s^2 = e\\
+	  rs=s\inv r	  
+	\end{cases}
+      \]
+      Per eseguire le operazioni mi basta scrivere gli elementi come prodotti dei generatori, fare il prodotto e far commutare $r$ e $s$ con la proposizione \ref{prop:scambio}. In particolare, pare che per vedere se $f: D_n \rightarrow G$ è omomorfismo basta verificare che $f(r)^n=f(s)^2=e'$ e che $f(r)f(s)=f(s)f(\inv r)$.
+
 \end{document}
+
