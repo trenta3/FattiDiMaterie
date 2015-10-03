@@ -1,8 +1,100 @@
-\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+%\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+\documentclass[a4paper,10pt,oneside]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{hhline}
+\usepackage{amsfonts}
+\usepackage[italian]{babel}
+\usepackage{hyphenat}
+\usepackage[linktoc=all]{hyperref}
+
+%Comando per la restrizione, servirà? Boh
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+  
+%Ricordarsi di cambiare la lingua e mettere la sillabazione
+
+%Per dichiarare un operatore da stampare dritto (e.g. limsup) usare
+%\DeclareMathOperator{\comando}{cosa si deve stampare}
+
+%Usate \myname per evidenziare i nomi nuovi! Funziona come \emph, ma si può cambiare se non ci garba.
+\newcommand{\myname}[1]{\emph{#1}} 
+
+%Un po' di scorcatoie random
+\newcommand{\nin}{\not\in}
+\newcommand{\parti}[1]{\mathcal{P}(#1)}
+\newcommand{\rel}{\mathcal R}
+\newcommand{\abs}[1]{\left|#1\right|} %Valore assoluto
+\newcommand{\gen}[1]{\left\langle#1\right\rangle} %Gruppo generato da x
+\newcommand{\isom}{\cong}
+
+%TEOREMI IN CORSIVO
+\theoremstyle{plain}
+\newtheorem{mytheorem}{Teorema}[section]
+\newtheorem{mydef}[mytheorem]{Definizione}
+\newtheorem{mylemma}[mytheorem]{Lemma}
+\newtheorem{myprop}[mytheorem]{Proposizione}
+
+\newtheorem{myax}[mytheorem]{Assioma}
+
+
+%TEOREMI NON IN CORSIVO
+\theoremstyle{definition}
+\newtheorem{myex}{Esercizio}
+\newtheorem{mycor}[mytheorem]{Corollario}
+%Note
+\theoremstyle{remark}
+\newtheorem*{myobs}{Osservazione}
+
+
+\setcounter{tocdepth}{4}
+
+
+%\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
+
+\title{Lezioni di Algebra 1}
+\author{Persone varie ed eventuali}
+\date{}
 
 
 \begin{document}
-	\title{Lezioni di Algebra 1}
-	\author{Persone varie ed eventuali}
 
+
+\maketitle
+
+\cleardoublepage	
+  \section{Lezione 1}
+    \subsection{Richiami sui gruppi}
+      Iniziamo con un ripasso del corso di Aritmetica. Si dice \myname{gruppo} una coppia $(G,\cdot)$ con $e \in G$ elemento neutro, e in cui esiste sempre l'inverso. Un gruppo può essere abeliano se $\forall x,y\in G$ vale $xy=yx$. Di non abeliano conosciamo solo il gruppo delle permutazioni $S(n)$.
+      
+      Un gruppo si dice \myname{ciclico} se è generato da un solo elemento, i.e. $G = \gen x = \{x^n: n\in \mathbb Z\}$. Si dimostra facilmente che un gruppo ciclico è isomorfo a $\mathbb Z/n\mathbb Z$.
+      
+      Un gruppo ciclico è ovviamente abeliano ma NON vale il viceversa.
+      
+      Si dice insieme dei generatori di un gruppo G un insieme $S\subseteq G$ tale che non esistono $H<G$ con $S\subseteq H$, e si indica $\gen S =G$ ($S$ genera $G$). In generale $\gen S$ è l'insieme dei prodotti finiti di elementi di $S$ e dei loro inversi.
+      
+      \begin{mytheorem}[Teorema di Lagrange]
+	Sia $G$ un gruppo con $\abs G = n$, sia $H<G$, con $\abs H = d$. Allora $d\mid n$.
+      \end{mytheorem}
+      
+      \begin{mytheorem}[Teorema di Cauchy]
+	Sia $G$ un gruppo con $\abs G = n$ e sia $d\mid n$. Inoltre supponiamo che sia vera almeno una tra
+	\begin{itemize}
+	  \item $G$ è ciclico;
+	  \item $G$ è abeliano;
+	  \item $d$ è primo.
+	\end{itemize}
+	
+	Allora esiste $H<G$ con $\abs H=d\isom$.
+      \end{mytheorem}
+      
+      
 \end{document}
