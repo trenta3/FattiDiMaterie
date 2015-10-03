@@ -5,9 +5,7 @@
 \author{Persone varie ed eventuali}
 \date{}
 
-
 \begin{document}
-
 
 \maketitle
 
@@ -37,5 +35,43 @@
 	Allora esiste $H<G$ con $\abs H=d$.
       \end{mytheorem}
       
+      Dato $x\in G, H<G$ indichiamo con $xH=\{xh: h \in H\}$ la classe laterale sinistra(?) di $H$ rispetto a $x$. Analogalmente per la classe laterale destra. 
+      
+      \begin{mydef}[Sottogruppo normale]
+	Si dice sottogruppo normale di un gruppo $G$ un sottogruppo $H$ tale che $xH=Hx\; \forall x\in G$, o equivalentemente $xHx^{-1}\subseteq H$. Si indica con $H \subnorm G$
+      \end{mydef}
+      
+      Se un sottogruppo è normale, le classi laterali sinistre coincidono con quelle destre.
+      
+      La condizione di normalità di un sottogruppo è particolarmente importante nella definizione di quoziente: se $H\subnorm H$ posso definire una struttura su $G/H$ (i.e. l'insieme delle classi laterali di $H$) con $xH \cdot yH = xyH$.
+      
+      \begin{mydef}[Omomorfismo tra gruppi]
+	Si dice omomorfismo di gruppi una funzione $f: G \rightarrow G'$ che conserva la struttura, i.e $f(x)f(y)=f(xy)$.
+      \end{mydef}
+      
+      Vale il seguente fatto simpatico.
+      
+      \begin{myprop}
+	I sottogruppi normali sono tutti e soli i $\Ker$ di omomorfismi.
+      \end{myprop}
+      \begin{proof}
+	Ogni sottogruppo normale è $\Ker$ della proiezione canonica su $G/H$. Inoltre se $H = \Ker f$, allora $f(xh\inv{x})= f(x)f(h)f(\inv x)=e$ quindi $xh\inv x\in H$.
+      \end{proof}
+      
+      Siamo pronti per riprendere il primo teorema di omomorfismo.
+      \begin{mytheorem}\label{th:Hom1}
+	Sia $f: G\rightarrow G'$ omomorfismo di gruppi, e sia $K= \Ker f$. Detta $\pi: G\rightarrow G/K$ la proiezione canonica di $G$ su $K$, allora 
+	\[\exists!\phi: G/K \rightarrow G' \quad\mbox{tale che}\quad f=\phi\circ\pi\]
+	
+	Inoltre $\phi$ è iniettivo.
+      \end{mytheorem}
+      
+      Sostituendo $K$ con un qualsiasi $H\subnorm \Ker f$ si ottiene lo stesso risultato perdendo però l'iniettività di $\phi$.
+      
+      \begin{myprop}
+	Sia $f: G \rightarrow G'$ omomorfismo suriettivo, allora $H<G \Rightarrow f(H)<G'$, e viceversa $H'<G' \Rightarrow \inv f(H)<G$. In altre parole la relazione di essere sottogruppo si conserva per passaggio all'immagine e alla controimmagine. Lo stesso vale per sottogruppi normali.
+      \end{myprop}
+
+      Da questa proposizione e dal teorema \ref{th:Hom1} segue che i sottogruppi di $G$ che contengono $\Ker f$ sono in corrispondenza biunivoca con i sottogruppi di $G'$.
       
 \end{document}
