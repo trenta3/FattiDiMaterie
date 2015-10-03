@@ -7,6 +7,6 @@ Un po' di consigli:
 	git commit -m "Wow, very commit message"
 	git push
 
-- Ho aggiunto un po' di scorciatoie buffe in alto sul documento (come \gen per scrivere <x> in modo decente). Dateci un'occhiata ;)
+- Ho aggiunto un po' di scorciatoie buffe in alto sul documento (come \gen per scrivere il gruppo generato in modo decente). Dateci un'occhiata ;)
 
 Miglio
