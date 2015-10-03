@@ -74,4 +74,41 @@
 
       Da questa proposizione e dal teorema \ref{th:Hom1} segue che i sottogruppi di $G$ che contengono $\Ker f$ sono in corrispondenza biunivoca con i sottogruppi di $G'$.
       
+      \subsection{Scomposizione di un gruppo come prodotto}
+
+      Dati due gruppi $G$ e $H$, sappiamo definire il prodotto $G \times H$ con l'operazione $(g,h)\cdot (g',h')=(gg',hh')$. Vogliamo ora, dato un gruppo $G$, trovare due sottogruppi $G_1$ e $G_2$ tali che $G=G_1\times G_2$. Ci viene in aiuto il seguente teorema:
+      
+      \begin{mytheorem}
+	Sia $G$ un gruppo (non necessariamente finito) e siano $H\subnorm G, K \subnorm G$ tali che:
+	\begin{itemize}
+	 \item $H\cap K=\{e\}$;
+	 \item $G = HK = \{hk: h\in H, g \in G\}$
+	\end{itemize}
+	Allora $G \isom H\times K$
+      \end{mytheorem}
+      \begin{proof}
+	Definiamo la funzione $f: H\times K \rightarrow G$ tale che $f(h,k)=hk$. Per ipotesi sappiamo che è suriettiva; inoltre ha $\Ker$ banale, infatti 
+	\[f(h,k)=hk=e \Rightarrow H \ni h = \inv k \in K \Rightarrow h,k \in H \cap K = \{e\} \]
+	ed è quindi iniettiva.
+	
+	Verifichiamo che è un omomorfismo: 
+	\begin{gather*}
+	  f(h,k)f(h',k')=hkh'k' \\
+	  f\left((h,k)\cdot(h',k')\right)=f(hh',kk')=hh'kk'
+	\end{gather*}
+      
+	Quindi se gli elementi di $H$ commutassero con quelli di $K$ avrei finito, infatti avrei costruito un isomorfismo tra $H\times K$ e $G$.
+	
+	Dimostriamo quindi che $hk=kh$ per ogni $ h\in H, k \in K$. Questo equivale a dimostare $hk\inv h\inv k=e$. Ma per la normalità (si dirà così?) di $H,K$ abbiamo
+	\[
+	H \ni h\underbrace{k\inv h \inv k}_{\in H} = \underbrace{hk\inv h}_{\in K}\inv k \in K
+	\]
+	e visto che $H\cap K=\{e\}$ ho finito.
+      \end{proof}
+      
+      Un esempio può essere $(\mathbb C^\star, \cdot)$ che può essere scomposto in $R^+$ per la circonferenza unitaria $\{z:\abs z=1\}$, ritrovando così l'usale scomposizione di un complesso come $(\rho,\theta)$.
+      
+      
+
+      
 \end{document}
