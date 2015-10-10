@@ -11,14 +11,17 @@ all: pdf dvi ps
 ps: dvi
 	dvips EserciziRaccoltiAlgebra.dvi
 	dvips FattiDiAlgebra.dvi
+	dvips TeoriaAnelli.dvi
 
 dvi: download
 	latex --shell-escape EserciziRaccoltiAlgebra.tex
 	latex --shell-escape FattiDiAlgebra.tex
+	latex --shell-escape TeoriaAnelli.tex
 
 pdf: download
 	pdflatex --shell-escape EserciziRaccoltiAlgebra.tex
 	pdflatex --shell-escape FattiDiAlgebra.tex
+	pdflatex --shell-escape TeoriaAnelli.tex
 
 # Dovremmo controllare che sia la versione più recente
 download:
