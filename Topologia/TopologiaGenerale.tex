@@ -1,27 +1,72 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+\newcommand{\crossmark}{$\times$}
 
 \begin{document}
 	\title{Topologia Generale}
 	
-	\section*{Definizioni}
+	\section*{Equivalenze}
 	\begin{itemize}
-		\item ({\bf Topologia }) $X$ insieme. Una topologia su $X$ è una famiglia $\cT$ di sottoinsiemi di $X$, detti aperti, tali che $X, \emptyset \in \cT$, $\cT$ è stabile per intersezione finita e per unione arbitraria.
-		\item ({\bf Chiusi}) Un $C \subseteq X$ si dice chiuso se è il complementare di un aperto.
-		\item ({\bf Base}) Una sottofamiglia $\cB \subseteq \cT$ si dice una base di $\cT$ se ogni aperto $A \in \cT$ può essere scritto come unione di elementi di $\cB$
-		\item ({\bf Finezza di una topologia}) Date due topologie $\cT$ e $\cR$ su $X$, diremo che $\cT$ è piu' fine di $\cR$ se $\cR \subseteq \cT$, cioè se ogni aperto della topologia $\cR$ è aperto anche in $\cT$
+		\item ({\bf Condizione equivalente per essere una base}) Dato $X$ insieme e $\cB \subseteq \cP (X)$ esiste una topologia su $X$ di cui $\cB$ è una base se e soltanto se sono soddisfatte le seguenti due condizioni: $X = \cap \{B \mid B \in \cB \}$ e per ogni coppia $A,B \in \cB$ e per ogni punto $x \in A \cap B$ esiste $C \in \cB$ tale che $x \in C \subseteq A \cap B$.
+		\item ({\bf Condizioni equivalenti alla continuità}) $f$ è continua $\sse$ controimmagine di aperti è aperta $\sse$ $\forall A \subseteq X \quad f(\bar{A}) \subseteq \bar{f(A)}$ $\sse$ $\forall x \in X \quad \forall U \tc f(x) \in U \quad \exists V \tc x \in V \quad f(V) \subseteq U$.
+		\item ({\bf Condizioni equivalenti ad essere un omeomorfismo}) $f: X \rar Y$ continua. Allora $f$ è un omeomorfismo $\sse$ $f$ è chiusa e biggettiva $\sse$ $f$ è aperta e biggettiva.
+		\item ({\bf Condizioni che implicano essere immersione}) Sia $f: X \rar Y$ continua. Allora se $f$ è chiusa ed iniettiva, essa è un'immersione chiusa. Se invece $f$ è aperta ed iniettiva, allora è un'immersione aperta.
+		\item ({\bf Condizioni equivalenti alla sconnessione}) $X$ è sconnesso $\sse$ $X$ è unione disgiunta di due aperti propri $\sse$ $X$ è unione disgiunta di due chiusi propri.
 	\end{itemize}
 	
-	\section*{}
+	\section*{Connessione}
 	\begin{itemize}
-		\item ({\bf Condizione equivalente per essere una base}) Dato $X$ insieme e $\cB \subseteq \cP (X)$ esiste una topologia su $X$ di cui $\cB$ è una base se e soltanto se sono soddisfatte le seguenti due condizioni: $X = \Bigcap \{B \mid B \in \cB \}$ e per ogni coppia $A,B \in \cB$ e per ogni punto $x \in A \cap B$ esiste $C \in \cB$ tale che $x \in C \subseteq A \cap B$.
+		\item ({\bf Multilemma sulla connessione}) Sia $Y$ connesso e $f: X \rar Y$ una funzione {\it continua} (?) e surgettiva tale che $f^{-1}(y)$ è connesso $\forall y \in Y$. Se $f$ è aperta oppure se $f$ è chiusa, allora anche $X$ è connesso.
+		\item ({\bf Connessione della chiusura}) Sia $Y$ un sottospazio connesso di $X$, e sia $Y \subseteq W \subseteq \bar{Y}$. Allora anche $W$ è connesso.
+		\item ({\bf Chiusura delle componenti connesse}) Le componenti connesse sono chiuse.
+		\item ({\bf Estensione delle componenti connesse}) Supponiamo di avere $\{Z_\lambda\}_{\lambda \in \Lambda} \tc Z_i$ è connesso $\forall i$ e tali che $\forall i, j \in \Lambda \quad \exists i=k_1, k_2, \ldots, k_n = j \in \Lambda$ tali che $Z_{k_l} \cap Z_{k_{l+1}} \neq \emptyset$. Allora $\cup_{\lambda \in \Lambda} Z_\lambda$ è connesso.
+	\end{itemize}
+
+	\section*{Compattezza}
+	\begin{itemize}
+		\item ({\bf Heine-Borel}) Un sottospazio $K \subset \bbR^n$ è compatto se e solo se è chiuso e limitato.
+		\item ({\bf Multilemma sulla compattezza}) Sia $Y$ compatto e $f: X \rar Y$ una funzione chiusa. Se $f^{-1}(y)$ è compatto $\forall y \in Y$, allora anche $X$ è compatto.
+		\item ({\bf Catene discendenti di compatti}) Siano $K_i$ chiusi e compatti tali che $\ldots \subset K_2 \subset K_1$ una catena discendente numerabile di chiusi non vuoti e compatti di uno spazio topologico. Allora $\cap_i K_i \neq \emptyset$.
+		\item ({\bf Lemma di Wallace}) $X,Y$ spazi topologici. $A \subseteq X, B \subseteq Y$ sottospazi compatti e $W \subset X \times Y$ un aperto tale che $A \times B \subseteq W$. Allora $\exists U \subseteq X, V \subseteq Y$, aperti tali che $A \subseteq U, B \subseteq V, U\times V \subseteq W$.
+		\item ({\bf Compatti hanno proiezioni chiuse}) Se $X$ è compatto, la proiezione $p: X \times Y \rar Y$ è un'applicazione chiusa.
+		\item ({\bf Localmente compatto $\implies$ ammette un ricoprimento fondamentale in compatti}).
+	\end{itemize}
+
+	\section*{Compattificazioni}
+	\begin{itemize}
+		\item ({\bf La compattificazione di Alexandroff è $T_2$}) $\hat{X}$ è di Hausdorff se e solo se $X$ è di Hausdorff ed ogni punto di $X$ possiede un intorno compatto.
+		\item ({\bf Immersioni aperte si estendono ad Alexandroff}) $f: X \rar Y$ immersione aperta. Allora l'applicazione $g: Y \rar \hat{X}$ definita da $g(y) := \left\{ \begin{array}{cr} x & \text{ se } y = f(x) \\ \infty & \text{ se } y \notin f(X) \end{array} \right.$ è continua. In particolare ogni spazio topologico compatto di Hausdorff $Y$ coincide con la compattificazione di Alexandroff di $Y \setminus \{y\} \quad \forall y \in Y$ 
 	\end{itemize}
 	
+	\section*{Altri Lemmi}
+	\begin{itemize}
+		\item ({\bf Continuità e ricoprimenti fondamentali}) Sia $\cA$ un ricoprimento fondamentale di $X$. Un'applicazione $f:X \rar Y$ è continua $\sse \forall A \in \cA$ la restrizione $f\mid_A: A \rar Y$ è continua.
+		\item ({\bf $[0,1]$ è connesso e compatto}) L'intervallo $[0,1]$ per la topologia euclidea è connesso, connesso per archi e compatto.
+		\item ({\bf Ricoprimenti localmente finiti}) I ricoprimenti aperti ed i ricoprimenti chiusi localmente finiti sono fondamentali.
+	\end{itemize}	
+
+
 	\section*{Topologie Comuni}
 	\begin{itemize}
-		\item ({\bf Topologia discreta}) $\Tau = \cP (X)$ quindi ogni insieme è aperto. è indotta dalla distanza discreta: $d(x,y) = \left{ \begin{array}{cr} 0 & \text{se } x = y \\ 1 & \text{se } x \neq y \\ \end{array} \right.$
-		\item ({\bf Topologia indiscreta}) $\Tau = \{\emptyset, X\}$, la meno fine tra tutte le topologie.
+		\item ({\bf Topologia discreta}) $\tau = \cP (X)$ quindi ogni insieme è aperto. è indotta dalla distanza discreta: $d(x,y) = \left\{ \begin{array}{cr} 0 & \text{se } x = y \\ 1 & \text{se } x \neq y \\ \end{array} \right. $
+		\item ({\bf Topologia indiscreta}) $\tau = \{\emptyset, X\}$, la meno fine tra tutte le topologie.
 		\item ({\bf Topologia euclidea su $\bbR$}) Un sottoinsieme $U \subseteq \bbR$ è aperto se e solo se è unione di intervalli aperti.
 		\item ({\bf Topologia della semicontinuità superiore di $\bbR$}) Gli aperti non vuoti sono tutti e soli i sottoinsiemi della forma $( - \infty , a)$, al variare di $a \in \bbR \cup \{+ \infty\}$
 	\end{itemize}
+
+	\section*{Che proprietà passano a cosa?}
+	Vediamo alcune proprietà degli spazi \\
+	\begin{tabular}{lcccccc}
+	{\bf Proprietà} & {\bf Sottospazi} & {\bf Prodotti} & {\bf Quozienti} & {\bf Funzioni $\cC^0$} & {\bf Implica} \\
+	$T_0$ & & & & &  \\
+	$T_1$ & & & & & $T_0$ \\
+	$T_2$ & \checkmark & Finiti & & & $T_1$ \\
+	Cpt & Chiusi & Arbitrari & & \checkmark & (+$T_2$) chiuso \\
+	Conn & & Arbitrari & & \checkmark & \\
+	Path-Conn & & Finiti & & \checkmark & Conn \\
+	\end{tabular} \vskip 1.5cm
+	
 
 \end{document}

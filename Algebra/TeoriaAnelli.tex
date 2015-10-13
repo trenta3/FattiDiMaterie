@@ -4,12 +4,13 @@
 \newcommand{\opp}{\text{ oppure }}
 \newcommand{\Enunciato}{\vskip 0.05cm \noindent \textbf{Enunciato} \\ }
 \renewcommand{\Dimostrazione}{\vskip 0.05cm \noindent \textbf{Dimostrazione} \\ }
-\newcommand{\frdx}{\framebox[\heigth\width]{ \implies }}
-\newcommand{\frsx}{\framebox[\heigth\width]{ \Leftarrow }}
+\newcommand{\frdx}{ \framebox[\width]{ $\Rightarrow$ } }
+\newcommand{\frsx}{ \framebox[\width]{ $\Leftarrow$ } }
 \newcommand{\gen}{\text{Gen }}
 \newcommand{\MCD}{\text{MCD }}
 \newcommand{\Lead}{\text{Lead }}
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+\newcommand{\crossmark}{$\times$}
 
 \begin{document}
 	\title{Teoria degli Anelli Commutativi Unitari}
@@ -104,14 +105,36 @@
 		$(ii)$ Sia $f \in R[x]$ non costante, allora $f$ è irriducibile in $R[x]$ se e solo se è irriducibile in $F(R)[x]$ e primitivo in $R[x]$. \\
 	\Dimostrazione
 		$(i)$ Scritto $f = c(f) \sum_{i=0}^{n} \alpha_i x^i$ e $g = c(g) \sum_{j=0}^{m} \beta_j x^j$ si ha $fg = c(f) c(g) \sum_{k = 0}^{m+n} ( \sum_{i + j = k} \alpha_i \beta_j ) x^k$. Vorremmo mostrare $c(fg) = c(f)c(g)$, supponiamo WLOG $c(f) = c(g) = 1$. Se uno dei due polinomi $f, g$ ha al più un termine, il risultato è ovvio. Questo copre in particolare ogni caso con meno di quattro termini nonzero. Assumiamo ora quindi che sia $f$ che $g$ abbiano grado almeno due e che il risultato sia dimostrato per tutti i polinomi con un numero minore di termini. Allora se il contenuto $C := c(fg)$ non è invertibile, ha un divisore non banale in comune con il coefficiente del termine di testa di almeno uno tra $f$ e $g$ (siccome divide il loro prodotto, che è il coefficiente di testa di $fg$). WLOG supponiamo $d = \MCD(C,\Lead(f)) \neq 1$. Siccome $d \mid fg$, $d \mid \Lead(f)g$ si ha $d \mid (f - \Lead(f))g$, cioè divide il suo contenuto, che per induzione ($(f - \Lead(f))g$ è di grado minore di $fg$) è $c(f - \Lead(f))c(g) = c(f - \Lead(f))$. Siccome $d$ divide anche $c(\Lead(f))$, divide anche $c(f) = 1$, quindi $d$ era invertibile $\implies C$ invertibile. Ovvero vale $c(fg) = c(f)c(g)$ \\
-		$(ii)$ 
+		$(ii)$ \frsx Ovvia (infatti se abbiamo una fattorizzazione in $R[x]$ ed il polinomio è primitivo, allora la fattorizzazione si trasporta anche in $F(R)[x]$ con gli stessi polinomi, che hanno grado positivo). \\
+		$(ii)$ \frdx Proviamo che se $f$ ha grado positivo ed è irriducibile in $R[x]$ allora è irriducibile anche in $F(R)[x]$. Notiamo che in $F(R)[x] \setminus \{0\}$ ogni classe di elementi associati (ovvero relazionati da moltiplicazione per un elemento non-zero del campo $F(R)$) incontra l'insieme degli elementi primitivi in $R[x]$: a partire da un arbitrario elemento della classe, uno può prima moltiplicare per un elemento diverso da zero di $R$ per togliere i denominatori ed entrare in $R[x]$, poi può dividere per il MCD dei coefficienti per ottenere un polinomio primitivo. Ora assumiamo che $f$ sia riducibile in $F(R)[x]$, ovvero $f = gh$, con $g, h \in F(R)[x]$ non costanti. Possiamo rimpiazzare $g, h$ da elementi associati e ottenere $f = \alpha g' h'$, per qualche $\alpha \neq 0 \in F(R)$. Ma $g'h'$ è primitivo in $R[x]$ per il punto $(i)$, quindi $\alpha \in R$ (Se $\alpha$ si scrive come frazione $\frac{a}{b}$, allora $b$ deve dividere tutti i coefficienti di $ag'h'$, quindi $b \mid c(ag'h') = a$, che significa $\alpha \in R$) e la decomposizione $f = \alpha g'h'$ contraddice l'irriducibilità di $f$ in $R[x]$.
+
+	\subsection{Relazioni tra Primo ed Irriducibile}
+	\Enunciato
+		$(i)$ (ID) Primo $\implies$ Irriducibile \\
+		$(ii)$ (GCD + ID) Irriducibile $\implies$ Primo \\
+	\Dimostrazione
+		$(i)$ Sia $p \in R$ primo. E supponiamo che $p = ab$, allora $p \mid ab \implies p \mid a \opp p \mid b$. WLOG supponiamo $p \mid a$, allora $a = kp$, ovvero $p = ab = kpb \implies 1 = kb$, quindi $b$ è invertibile, contro le ipotesi. \\
+		$(ii)$ Sia $r \in R$ irriducibile. Supponiamo $r \mid ab$. Allora si ha $\MCD(r,a) = 1 \opp r$ perché $r = \MCD(r,a) k$ e $k$ invertibile, oppure $\MCD(r,a)$ invertibile. Se $\MCD(r,a) = 1$ si ha (Lemma ii su GCD+ID) $r \mid b$, se invece $\MCD(r,a) = r$ si ha $r \mid a$, da cui la tesi. \\
+
+	\subsection{GCD + ID + ACCP $\implies$ UFD}
+
+	\subsection{UFD $\implies$ ACCP}
+
+	\subsection{UFD $\implies$ GCD}
 
 	\section*{Cosa passa a strutture create da $R$}
 	
 	\begin{tabular}{lccccc}
 	 & {\bf Sottoanelli} & {\bf Ideali} & {\bf Quozienti} & {\bf $R[x]$} & {\bf Localizzazione} \\
 	{\bf ID} & \checkmark & \checkmark & & \checkmark & \\
-	{\bf ACC} & & & & & \\
+	{\bf ACC} & & & & \checkmark & \\
+	{\bf ACCP} & & & & \checkmark & \\
+	{\bf GCD + ID} & & & & \checkmark & \\
+	{\bf UFD + ID} & & & & \checkmark & \\
+	{\bf PID} & & & & \crossmark & \\
+	{\bf ED} & & & & \crossmark & \\
+	{\bf Bèzout} & & & & & \\
+	
 	\end{tabular} \vskip 1cm
 
 	

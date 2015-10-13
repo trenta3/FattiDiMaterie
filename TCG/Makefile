@@ -9,13 +9,13 @@ all: pdf dvi ps
 	make clean
 
 ps: dvi
-	dvips FattiDiTCC.dvi
+	dvips TeoriaCampiGalois.dvi
 
 dvi: download
-	latex --shell-escape FattiDiTCC.tex
+	latex --shell-escape TeoriaCampiGalois.tex
 
 pdf: download
-	pdflatex --shell-escape FattiDiTCC.tex
+	pdflatex --shell-escape TeoriaCampiGalois.tex
 
 # Dovremmo controllare che sia la versione più recente
 download:
