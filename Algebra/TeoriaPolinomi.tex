@@ -1,0 +1,88 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\newcommand{\opp}{\text{ oppure }}
+\newcommand{\Enunciato}{\vskip 0.05cm \noindent \textbf{Enunciato} \\ }
+\renewcommand{\Dimostrazione}{\vskip 0.05cm \noindent \textbf{Dimostrazione} \\ }
+\newcommand{\frdx}{ \framebox[\width]{ $\Rightarrow$ } }
+\newcommand{\frsx}{ \framebox[\width]{ $\Leftarrow$ } }
+\newcommand{\gen}{\text{Gen }}
+\newcommand{\MCD}{\text{MCD }}
+\newcommand{\Lead}{\text{Lead }}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+\newcommand{\crossmark}{$\times$}
+
+\begin{document}
+	\title{Teoria dei Polinomi}
+	Argomenti trattati: polinomi in una o più variabili, polinomi simmetrici, polinomi omogenei, teoria del risultante.
+
+	\section*{Notazione e Convenzioni}
+	All'interno della presente trattazione adottiamo le seguenti convenzioni:
+	\begin{itemize}
+		\item Quando non diversamente specificato assumiamo che $R$ sia un anello commutativo unitario ed anche dominio d'integrità. In particolare il fatto che $R$ sia ID, ci permette di dire che, se $f,g \in R[x]$ allora $\Deg(fg) = \Deg(f) + \Deg(g)$, cosa che useremo abbastanza spesso.
+		\item Tutte le sommatorie che compaiono si intendono finite
+		\item Con $a \mid_S b$ intendiamo che $\exists s \in S \tc b = as$
+	\end{itemize} \vskip 0.2cm
+
+	Ed useremo la seguente notazione:
+	\begin{itemize}
+		\item Indichiamo con $Q_R$ il campo delle frazioni su $R$
+		\item $f'(x)$ indica la derivata formale di $f(x)$, ovvero se $f(x) = \sum_i a_i x^i$ definiamo $f'(x) = \sum_i (i\star a_i) x^{i-1}$, dove $\star: \bbN \times R \rar R$ è tale che $\star(n, r) = \underbrace{r + r + \ldots + r}{n \text{ volte}}$.
+		\item Con $\bbP_R$ indichiamo l'insieme dei primi in $R$
+	\end{itemize}
+
+	\section*{Polinomi in una variabile}
+
+	\subsection{Teorema di Ruffini}
+	\Enunciato Sia $f(x) \in R[x]$. Allora $f(\alpha)=0 \sse (x-\alpha) \mid_R f(x)$
+	\Dimostrazione \frdx $\quad $ Notiamo che possiamo effettuare la solita divisione euclidea tra $f(x)$ e $(x-\alpha)$ restando ad ogni passaggio in $R[x]$ in quanto $x-\alpha$ è monico. Allora si ha $\exists q(x), r(x) \in R[x] \tc f(x) = q(x)(x-\alpha) + r(x)$, con $\Deg r < 1 \opp r = 0$. Valutando in $\alpha$ si ha $0 = f(\alpha) = r(\alpha) \implies r = 0$ perché $r$ ha al più grado $0$. \\
+		\frsx $\quad$ Scriviamo $f(x) = (x-\alpha)q(x)$ e valutando in $\alpha$ si ha la tesi.
+	
+	\subsection{Lemma della derivata e molteplicità delle radici}
+	\Enunciato $f(x) \in R[x]$. Allora $(x-\alpha)^2 \mid_R f(x) \sse f(\alpha) = 0 \text{ e } f'(\alpha) = 0$.
+	\Dimostrazione \frdx $\quad$ $f(x) = (x-\alpha)^2g(x) \implies f(\alpha) = (\alpha-\alpha)^2g(\alpha) = 0$ e $f'(\alpha) = (2(x-\alpha)g(x) + (x-\alpha)^2 g'(x))\mid_{x = \alpha} = 0$ \\
+		\frsx $\quad$ Dal teorema di Ruffini sappiamo che $f(\alpha) = 0 \implies f(x) = xh(x)$. Allora $f'(x) = h(x) + (x-\alpha) h'(x)$ e $0 = f'(\alpha) = h(\alpha)$ quindi, ancora per Ruffini, abbiamo $(x-\alpha) \mid h(x)$, ovvero $(x-\alpha)^2 \mid f(x)$
+
+	\subsection{Massimo numero di radici del polinomio}
+	\Enunciato $f(x) \neq 0 \in R[x], \Deg f = n$. Allora $f(x)$ ha al più $n$ radici in $R$.
+	\Dimostrazione Ogni volta che troviamo una radice $\alpha$ di $f$, possiamo dire $f(x) = (x-a)g(x)$ e abbiamo che $\Deg g = \Deg f - 1$, da cui la tesi.
+
+	\subsection{Teorema delle Radici in $Q_R$}
+	\Enunciato Sia $R$ GCD, $f(x) \in R[x]$, $\Deg f = n$, $f(x) = \sum_i a_i x^i$, $\alpha \in Q_R$ una sua radice. Allora, detti $p, q \in R \tc \alpha = \frac{p}{q}$, si ha che $p \mid a_0$ e $q \mid a_n$.
+	\Dimostrazione Sappiamo che $0 = f(\frac{p}{q}) = a_n (\frac{p}{q})^n + \ldots + a_1 \frac{p}{q} + a_0$ e possiamo supporre $\frac{p}{q}$ ridotta ai minimi termini, ovvero con $(p,q) = 1$. Moltiplicando da ambo i lati per $q^n$ si ottiene $0 = a_n p^n + a_{n-1} p^{n-1}q + \ldots + a_1 pq^{n-1} + a_0 q^n$ e notiamo che $q$ divide tutti i termini tranne $a_n p^n$ e $p$ divide tutti i termini tranne $a_0 q^n$, quindi si ha, poiché $q$ e $p$ sono coprimi, $p \mid a_0$ e $q \mid a_n$.
+
+	\subsection{Principio di identità dei Polinomi}
+	\Enunciato $f(x) \in R[x]$, $\Deg f = n$, $f(x) = \sum_i a_i x^i$. Supponiamo $\exists \alpha_1, \ldots, \alpha_{n+1}$ $n+1$ radici con molteplicità di $f(x)$. Allora $f(x) \equiv 0$.
+	\Dimostrazione Ovvia, segue dal "Massimo numero di radici del polinomio".
+
+	\subsection{Strana Divisibilità}
+	\Enunciato $f(x) \in R[x]$, $a, b \in R$. Allora $(b-a) \mid_R (f(b) - f(a))$.
+	\Dimostrazione Effettuiamo la divisione di $f(x)$ per $(x-a)$. Si ha $\exists q(x), r(x) \in R[x]$ tali che $f(x) = (x-a)q(x) + r(x)$. Ora valutando in $a$ si ottiene $f(a) = r(a) = r(x)$ (perché $\Deg r \le 0$) e, valutando in $b$ si ha $f(b) = (b-a)q(b) + r(b) = (b-a)q(b) + f(a)$, e sottraendo $f(b)-f(a) = (b-a) q(b)$, quindi $(b-a) \mid_R (f(b)-f(a))$.
+
+	\subsection{Criterio di Irriducibilità di Eisenstein}
+	\Enunciato $f(x) = \sum_i a_i x^i \in R[x]$, $\Deg f = n$. Se $\exists p \in \bbP_R \tc p \nmid a_n, \quad p \mid a_0, a_1, \ldots, a_{n-1}, \quad p^2 \nmid a_0$ allora $f(x)$ si può ridurre solo come $\beta \cdot h(x)$ con $\beta \in R$.
+	\Dimostrazione Supponiamo $\exists g(x), h(x) \in R[x] \tc f(x) = g(x) \cdot h(x)$. Sia $A = R/(p)$ il dominio d'integrità quoziente (perché $(p)$ è un ideale primo). Allora abbiamo $\bar{f}(x) = \bar{a_n}x^n$. Quindi la fattorizzazione di $\bar{f} = \bar{g} \cdot \bar{h}$ implica $\bar{g}, \bar{h}$ sono monomi (perché altrimenti il prodotto ha più termini di uno siccome $A$ è ID). Allora abbiamo $\bar{g} = \bar{g_s}x^s$, $\bar{h} = \bar{h_r}x^r$, con $\bar{g_s}, \bar{h_r} \neq_A 0$. Quindi $s+r = n$ e se $s \opp r \ge 1$ si ha $p^2 \mid a_0$. Assurdo. Allora WLOG $\Deg g = 0$. Ovvero $f(x) = g_0 \cdot h(x)$.
+
+	\subsection{Irriducibilità per Traslazioni}
+	\Enunciato Se $f(x)$ si fattorizza come $g(x)h(x)$, allora anche $f(x+a)$ si fattorizza
+	\Dimostrazione Ovvia: $g(x+a)h(x+a) = f(x+a)$ e notiamo che $\Deg g(x+a) = \Deg g(x)$ e $\Deg h(x+a) = \Deg h(x)$. Può essere usato con profitto per poi usare Eisenstein sul polinomio traslato.
+
+	\subsection{Hensel lifting lemma}
+	\Enunciato $f(x) \in R[x]$
+	\Dimostrazione
+
+	\section*{Polinomi in più variabili}
+	\subsection{Principio di Identità dei Polinomi}
+	\Enunciato $R$ di cardinalità infinita. Se $f \in R[x_1, \ldots, x_n]$ è tale che $\forall a = (a_1, \ldots, a_n) \in R^n \quad f(a) = 0$ allora si ha $f \equiv 0$, ovvero $f$ è il polinomio identicamente nullo.
+	\Dimostrazione Mostriamo per induzione sul numero di incognite $n$ che se $f \neq 0$ allora esiste un punto dove $f$ non ha valore nullo. Per $n=1$ l'abbiamo già fatto con l'analogo teorema in una variabile. Mostriamo ora il passo induttivo: supponiamo che $f \in R[x_1, \ldots, x_n][x_{n+1}]$ e chiamiamo $y = x_{n+1}$ per comodità. Allora, ordinando i termini per il loro grado in $y$ si ha $f = y^s (a_0 + a_1 y + \ldots + a_r y^r)$. Prendiamo il punto $\bar{x} \in R^n \tc a_0(\bar{x}) \neq 0$ e valutiamo tutti i polinomi $a_k$ in $\bar{x}$, ottenendo $f(\bar{x}, y) = y^s (u_0 + u_1 y + \ldots + u_r y^r)$ dove $u_j = a_j(\bar{x}) \in R$. Sapendo che ora $g(y) := f(\bar{x}, y) \in R[y]$ è non nullo e che $R$ ha cardinalità infinita so che $\exists q \in R \tc g(q) \neq 0$ allora so che il punto $(\bar{x}, q)$ è tale che $f(\bar{x}, q) \neq 0$. Abbiamo così dimostrato ciò che volevamo.
+
+	\subsection{Nullstellensatz}
+
+	\section*{Polinomi simmetrici}
+
+	\section*{Polinomi omogenei}
+	\subsection{I fattori di polinomi omogenei sono omogenei}
+
+	\section*{Il risultante}
+
+\end{document}

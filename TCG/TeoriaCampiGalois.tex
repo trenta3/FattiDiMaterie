@@ -44,6 +44,18 @@
 				\item Se $\Char K = p$ e $p^r$ è la molteplicità di $\alpha$ in $\mu_\alpha$ allora $[L:K] = p^r [L:K]_S$
 			\end{itemize}
 		\item ({\bf Il grado di separabilità è moltiplicativo}) $K \subseteq L \subseteq M$ algebriche. Allora $[M:K]_S = [M:L]_S \cdot [L:K]_S$
+		\item ({\bf Grado di separabilità su estensioni finite}) $L/K$ finita. Allora \\
+			\begin{itemize}
+				\item Se $\Char K = 0$ allora $[L:K] = [L:K]_S$
+				\item Se $\Char K = p$ allora $[L:K] = p^r [L:K]_S$
+			\end{itemize}
+		\item ({\bf Condizioni equivalenti alla separabilità}) $L/K$ finita. Allora sono equivalenti \\
+			\begin{itemize}
+				\item $L/K$ separabile
+				\item $\exists \alpha_1, \ldots, \alpha_s$ separabili su $K$ tali che $L = K(\alpha_1, \ldots, \alpha_s)$
+				\item $[L:K] = [L:K]_S$
+			\end{itemize}
+			Inoltre se $L/K$ algebrica (ma non necessariamente finita) e $L = K(S)$ allora $L/K$ è separabile $\sse$ $\forall \alpha \in S$ si ha $\alpha$ è separabile su $K$. Inoltre, se $L/K$ è separabile si ha che $[L:K] = [L:K]_S$.
 	\end{enumerate}
 
 	\section*{Proprietà delle estensioni}
@@ -52,13 +64,13 @@
 	Finita & \checkmark & \checkmark & \checkmark & Algebrica \\
 	Algebrica & \checkmark & \checkmark & \checkmark & \\
 	Normale & \crossmark & \checkmark & \checkmark & \\
-	Separabile & & & & \\
+	Separabile & \checkmark & \checkmark & \checkmark & \\
 	\end{tabular} \vskip 1cm
 
 	\section*{Proprietà delle chiusure}
 	\begin{tabular}{ll}
 	{\bf Chiusura} & {\bf Proprietà varie} \\
 	Chiusura Algebrica & Se $K$ è infinito $\bar{K}$ ha la stessa cardinalità \\
-	Chiusura Normale & Se $F/K$ è finita anche $\tilde{F}/K$ è finita \\
+	Chiusura Normale & Se $F/K$ è finita anche $\tilde{F}/K$ è finita. Se $F/K$ è separabile allora anche $\tilde{L}/K$ è separabile. \\
 	\end{tabular} \vskip 1cm
 \end{document}
