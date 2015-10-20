@@ -1,16 +1,13 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata}
-\newcommand{\opp}{\text{ oppure }}
 \newcommand{\Enunciato}{\vskip 0.05cm \noindent \textbf{Enunciato} \\ }
 \renewcommand{\Dimostrazione}{\vskip 0.05cm \noindent \textbf{Dimostrazione} \\ }
-\newcommand{\frdx}{ \framebox[\width]{ $\Rightarrow$ } }
-\newcommand{\frsx}{ \framebox[\width]{ $\Leftarrow$ } }
 \newcommand{\gen}{\text{Gen }}
 \newcommand{\MCD}{\text{MCD }}
 \newcommand{\Lead}{\text{Lead }}
-\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
-\newcommand{\crossmark}{$\times$}
+\renewcommand{\bar}{\overline}
+\newcommand{\ims}{\hookrightarrow}
 
 \begin{document}
 	\title{Teoria dei Polinomi}
@@ -68,8 +65,11 @@
 	\Dimostrazione Ovvia: $g(x+a)h(x+a) = f(x+a)$ e notiamo che $\Deg g(x+a) = \Deg g(x)$ e $\Deg h(x+a) = \Deg h(x)$. Può essere usato con profitto per poi usare Eisenstein sul polinomio traslato.
 
 	\subsection{Hensel lifting lemma}
-	\Enunciato $f(x) \in R[x]$
-	\Dimostrazione
+	Qui i primi {\bf non} indicano la derivata, ma altri polinomi.
+	\Enunciato $I \subseteq R$ ideale. Dati $f,g,h,s,t \in R$ tali che $f \equiv gh \mod I$ e $sg + th \equiv 1 \mod I$ allora $\exists g',h' \in R$ tali che $f \equiv g'h' \mod I^2$, $g' \equiv g \mod I$ e $h' \equiv h \mod I$. Inoltre se $g'$ e $h'$ soddisfano le condizioni precedenti allora si ha anche $s'g'+t'h' \equiv 1 \mod I^2$ per qualche $s' \equiv s \mod I$ e $t' \equiv t \mod I$. $g',h'$ sono unici nel senso che ogni altra soluzione $g^{*}$ e $h^{*}$ che soddisfa le condizioni sopra soddisfa anche $g^{*} \equiv (1+u) g' \mod I^2$ e $h^{*} \equiv (1-u) h' \mod I^2$ per qualche $u \in I$.
+	\Dimostrazione Sia $f - gh \equiv e \mod I^2$, verifichiamo che $g' := g + te \mod I^2$ e $h' := h + se \mod I^2$ soddisfano le condizioni $f \equiv g'h' \mod I^2$, $g' \equiv g \mod I$ e $h' \equiv h \mod I$. Ci riferiamo a queste tre condizioni assieme con C. \\
+	Per tutti i $g', h'$ che soddisfano C, sia $d := sg' + th' -1 \mod I^2$, verifichiamo che $s' := (1-d) s \mod I^2$ e che $t' := (1-d) t \mod I^2$ soddisfano le condizioni $s'g' + t'h' \equiv 1 \mod I^2$, $s \equiv s' \mod I$ e $t' \equiv t \mod I$. \\
+	Supponiamo che $g^{*}, h^{*}$ siano altre soluzioni che soddisfano C. Sia $v := g^{*} - g'$, $w := h^{*} - h'$. La relazione $g^{*}h^{*} \equiv g'h' \mod I^2$ implica $g'w+h'v \equiv 0 \mod I^2$, siccome $v, w \in I$. Allora visto che $s'g'+t'h' \equiv 1 \mod I^2$, moltiplicando entrambi i membri per $v$ otteniamo $(s'v-t'w)g' \equiv v \mod I^2$. Prendendo $u = s'v-t'w \in I$, $g^{*} \equiv (1+u)g' \mod I^2$, in maniera simile $h^{*} = (1-u)h' \mod I^2$.
 
 	\section*{Polinomi in più variabili}
 	\subsection{Principio di Identità dei Polinomi}
@@ -77,6 +77,18 @@
 	\Dimostrazione Mostriamo per induzione sul numero di incognite $n$ che se $f \neq 0$ allora esiste un punto dove $f$ non ha valore nullo. Per $n=1$ l'abbiamo già fatto con l'analogo teorema in una variabile. Mostriamo ora il passo induttivo: supponiamo che $f \in R[x_1, \ldots, x_n][x_{n+1}]$ e chiamiamo $y = x_{n+1}$ per comodità. Allora, ordinando i termini per il loro grado in $y$ si ha $f = y^s (a_0 + a_1 y + \ldots + a_r y^r)$. Prendiamo il punto $\bar{x} \in R^n \tc a_0(\bar{x}) \neq 0$ e valutiamo tutti i polinomi $a_k$ in $\bar{x}$, ottenendo $f(\bar{x}, y) = y^s (u_0 + u_1 y + \ldots + u_r y^r)$ dove $u_j = a_j(\bar{x}) \in R$. Sapendo che ora $g(y) := f(\bar{x}, y) \in R[y]$ è non nullo e che $R$ ha cardinalità infinita so che $\exists q \in R \tc g(q) \neq 0$ allora so che il punto $(\bar{x}, q)$ è tale che $f(\bar{x}, q) \neq 0$. Abbiamo così dimostrato ciò che volevamo.
 
 	\subsection{Nullstellensatz}
+	{\bf Lemma delle $K$-algebre} \\
+	\Enunciato Dato $K$ un campo, sia $L$ una $K$-algebra finitamente generata su $K$. Se $L$ è anche un campo, allora $L$ è algebrico su $K$
+	\Dimostrazione Sia $L = K[\alpha_1, \ldots, \alpha_n]$. Supponiamo per assurdo che $L$ {\bf non} sia algebrico su $K$. Allora $\exists i \tc \alpha_i$ non è algebrico su $K$ (se lo fossero tutti avrei $L/K$ algebrico per torri). Consideriamo quindi $K(\alpha_i) \ims L$ poichè $L$ è un campo. Inoltre abbiamo $K(x) \cong K(\alpha_i)$ perché usando il morfismo che manda $x \mapsto \alpha_i$ otteniamo che ha $\Ker$ banale (altrimenti troviamo $p \in K[x] \tc p(\alpha_i) = 0$ assurdo). Adesso mostriamo che $K(x)$ {\bf non} è finitamente generata come $K$-algebra: supponiamo che lo sia. Allora esistono $\{e_i\}_{i=1}^{r} \subset K(x) \tc \forall f(x) \in K(x) \quad f(x) = \sum_{i}^{\text{finite}} s_i \prod_{j}^{\text{finite}} e_j$ dove $s_i \in K$. Ma, scrivendo $e_i = \frac{a_i(x)}{b_i(x)}$ notiamo che necessariamente si avrebbe che ogni elemento di $K(x)$ può avere al denominatore solo elementi irriducibili che compaiono nella fattorizzazione di almeno uno dei $b_i(x)$, denominatori della base in numero finito. Mostrando ora che esistono infiniti polinomi irriducibili in $K[x]$ terminiamo la dimostrazione, ottenendo un assurdo e dovendo quindi avere che $L/K$ è algebrico. \\
+	Supponiamo che esistano solo un numero finito di polinomi irriducibili in $K[x]$. Siano essi $p_1, \ldots, p_m$. Consideriamo allora $S^{*} = \left( \prod_{i=1}^{m} p_i \right) + 1$. Siccome $K[x]$ è PID (e quindi UFD) abbiamo che gli elementi irriducibili sono anche primi, quindi i $(p_i)$ sono ideali primi, ovvero sono anche massimali. O $S^{*}$ è irriducibile, assurdo, oppure $S^{*} = \prod_{j=1}^{m} p_j^{\beta_j}$. Sia $\bar{k} \tc \beta_k \ge 1$ e consideriamo $S^{*} \mod (p_k)$. Otteniamo $0 \equiv \prod_{j=1}^m p_j^{\beta_j} \equiv S^{*} \equiv 1 + \left( \prod_{i=1}^m p_i \right) \equiv 1 \mod (p_k)$ quindi $(p_k) = (1)$ e $p_k$ è invertibile, contro l'ipotesi che fosse irriducibile. Abbiamo quindi l'assurdo voluto. \\
+	
+	{\bf Nullstellensatz, forma debole} \\
+	\Enunciato Sia $K$ un campo algebricamente chiuso. Allora ogni ideale massimale nell'anello di polinomi $R = K[x_1, \ldots, x_n]$ ha la forma $(x_1-a_1, \ldots, x_n-a_n)$ per qualche $a_1, \ldots, a_n \in K$. Come conseguenza, una famiglia di funzioni polinomiali su $K^n$ con nessuno zero in comune genera l'ideale unitario di $R$.
+	\Dimostrazione Se $M$ è un ideale massimale di $R$, allora $R/M$ è un campo che è finitamente generato come $K$-algebra. Per il lemma precedente, e poiché $K$ è algebricamente chiuso si ha $R/M \cong K$. Quindi ogni $x_i$ viene mappato in qualche $a_i \in K$ dalla mappa naturale $R \rar R/M \cong K$, quindi $M$ contiene l'ideale $(x_1-a_1, \ldots, x_n-a_n)$. Questo è un ideale massimale, quindi è uguale a $M$. Per quanto riguarda la seconda affermazione, si consideri l'ideale generato da qualche funzione polinomiale data senza zeri in comune. Se stesse in qualche ideale massimale, ovvero $(x_1-a_1, \ldots, x_n-a_n)$, allora tutte le funzioni dovrebbero avere uno zero in $(a_1, \ldots, a_n) \in K^n$, contrariamente alle ipotesi. Siccome non sta in nessun ideale massimale, deve essere tutto $R$. \\
+
+	{\bf Nullstellensatz, forma forte} \\
+	\Enunciato Sia $K$ un campo algebricamente chiuso e $g$ e $f_1, \ldots, f_m$ siano membri di $R = K[x_1, \ldots, x_n]$, visti come funzioni polinomiali su $K^n$. Se $g$ si azzera sul luogo degli zeri comuni degli $f_i$, allora qualche potenza di $g$ appartiene all'ideale che generano.
+	\Dimostrazione ({\it Rabinowitsch trick}: aggiungiamo un'incognita) I polinomi $f_1, \ldots, f_m$ e $x_{n+1}g-1$ non hanno zeri comuni in $K^{n+1}$, quindi per il Nullstellensatz debole si ha $$ 1 = p_1 f_1 + \ldots + p_m f_m + p_{m+1} (x_{n+1}g-1) $$ dove i $p_i$ sono polinomi in $x_1, \ldots, x_{n+1}$. Prendendo l'immagine di questa equazione attraverso l'omomorfismo $K[x_1, \ldots, x_{n+1}] \rar K(x_1, \ldots, x_n)$ dato da $x_{n+1} \mapsto \frac{1}{g}$ troviamo che $$ 1 = p_1(x_1, \ldots, x_n, \frac{1}{g}) f_1 + \ldots + p_m(x_1, \ldots, x_n, \frac{1}{g}) f_m$$ Moltiplicando ora per la giusta potenza di $g$ per cancellare i denominatori si ha la tesi.
 
 	\section*{Polinomi simmetrici}
 
