@@ -7,6 +7,7 @@
 \newcommand{\Int}{\text{Int }}
 \newcommand{\Ind}{\text{i }}
 \newcommand{\Aut}{\text{Aut }}
+\newcommand{\Out}{\text{Out }}
 \newcommand{\MCD}{\text{MCD }}
 \newcommand{\mcm}{\text{mcm }}
 \newcommand{\isom}{\equiv}
@@ -61,7 +62,7 @@
 	\begin{itemize}
 		\item ({\bf I gruppi ciclici sono abeliani}) $G$ ciclico $\implies G$ abeliano. (Segue dall'associatività dell'operazione di gruppo)
 		\item ({\bf Ciclicità dei gruppi con ordine primo}) $G$ gruppo. $\Ord G = p \in \bbP \implies G$ è ciclico. (Basta usare Cauchy)
-		\item ({\bf Esiste un unico gruppo ciclico di ogni ordine}) $G$ gruppo ciclico. $\Ord G = n \implies G \isom \bbZ_{n}$
+		\item ({\bf Esiste un unico gruppo ciclico di ogni ordine}) $G$ gruppo ciclico. $\Ord G = n \implies G \cong \bbZ_{n}$
 		\item ({\bf Abelianità di Gruppo con quoziente sul centro ciclico}) $G$ gruppo. $G/Z(G)$ ciclico $\implies G$ abeliano
 	\end{itemize}
 
@@ -101,6 +102,7 @@
 		\item In $A_n$ tutti i $k$-cicli sono coniugati per $k = {1,...,n-2}$
 		\item Se un sottogruppo normale di $A_n$ contiene un $3$-ciclo allora coincide con $A_n$
 		\item Ogni sottogruppo normale di $A_n$, per $n \ge 5$, contiene un $3$-ciclo: quindi $A_n$ è semplice
+		\item Data una classe di coniugio di $S_n$ di permutazioni pari, ci sono due possibilità per una classe di coniugio di $A_n$: o la classe di coniugio è uguale a una singola classe di coniugio di $A_n$ o questa si spezza in due classi in $A_n$. In particolare dato $g \in A_n$ la classe di $g$ in $S_n$ non si spezza se $C_{S_n}(g) \nsubseteq A_n$. Equivalentemente non si spezza se esiste una permutazione dispari che commuta con $g$. Equivalentemente non si spezza se la decomposizione in cicli disgiunti di $g$ contiene un ciclo pari o due cicli della stessa lunghezza.
 	\end{itemize}
 
 	\section*{Layout completo di $S_4$}
@@ -134,6 +136,22 @@
 		\item ({\bf Sottogruppi Abeliani di $D_n$}) Tutti i $C_m$ e i $D_1, D_2$
 	\end{itemize}
 
+	\section*{Automorfismi di gruppi classici}
+	\noindent \begin{tabular}{lcccc}
+	{\bf $n$} & {\bf $\Aut(A_n)$} & {\bf $\Out(A_n)$} & {\bf $\Aut(S_n)$} & {\bf $\Out(S_n)$} \\
+	$n=1,2$ & 1 & 1 & 1 & 1 \\
+	$n=3$ & $C_2$ & $C_2$ & $S_3$ & 1 \\
+	$n=6$ & $S_6 \rtimes C_2$ & $V_4$ & $S_6 \rtimes C_2$ & $C_2$ \\
+	$n \ge 4, n \neq 6$ & $S_n$ & $C_2$ & $S_n$ & 1 \\
+	\end{tabular} \vskip 1em
+	\begin{itemize}
+		\item $\Aut(D_n) \cong \Aff(C_n)$
+		\item $\Aut(Q_8) \cong S_4$, \; $\Int(Q_8) \cong V_4$, \; $\Out(Q_8) \cong \Aut(Q_8)/\Int(Q_8) \cong S_4/V_4 \cong S_3$
+		\item $\Aut(C_p) \cong C_p^*$, \; $\Aut(C_p^n) \cong \GL_n(\mathbb{F}_p)$,\; con $p$ primo
+		\item $\Aut(\mathbb{Q}) \cong \mathbb{Q}^*$
+		\item $\Aut(C_2^2) \cong \GL_2(\mathbb{F}_2) \cong S_3$
+	\end{itemize}
+\;
 	\section*{Elenco dei gruppi di ordine piccolo}
 	\noindent \begin{tabular}{lcc}
 	{\bf Ordine} & {\bf Gruppi Abeliani} & {\bf Gruppi Non Abeliani} \\
@@ -146,6 +164,7 @@
 	7 & $C_7$ & \\
 	8 & $C_8$, $C_4 \times C_2$, $C_2 \times C_2 \times C_2$ & $D_4$, $Q_8$ \\
 	9 & $C_9$, $C_3 \times C_3$ & \\
+	10 & $C_{10}$ & $D_5$\\
 	\end{tabular} \vskip 1em
 
 	\title{Teoria degli Anelli}
