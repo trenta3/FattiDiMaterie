@@ -12,7 +12,9 @@ Per compilare i file .tex non usate comandi tipo pdflatex o simili, ma date il c
 
 3) Dovrebbe comparirvi la cartella FattiDiMaterie
 
-4) Apportate le vostre modifiche (usando un qualsiasi editor tipo Gedit)
+4) Apportate le vostre modifiche e compilate (usando un qualsiasi editor tipo Gedit)
+
+4bis) Se compilate con i computer Starfleet aprite il terminale nella cartella in cui volete compilare e compilate con il comando "make"
 
 5) Se è la prima volta che apportate modifiche al repository git vi chiederà di dirgli chi siete (insomma farà delle storie sul terminale). Date i comandi "git config --global user.email "<Vostra mail con cui siete iscritti a GitHub>"" e poi "git config --global user.name "<Vostro username su GitHub>""
 
