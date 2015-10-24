@@ -153,6 +153,13 @@
 	{\paragrafo{}}
 	{\paragrafo{#1}}}
 
+\newcommand{\frdx}{ \framebox[\width]{ $\Rightarrow$ } }
+\newcommand{\frsx}{ \framebox[\width]{ $\Leftarrow$ } }
+\newcommand{\opp}{\text{ oppure }}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+\newcommand{\crossmark}{$\times$}
+
+
 %mathbb mathcal mathfrak e mathbm per le lettere dell'alfabeto e anche mathbb per quelle greche
 \def\mydeflett#1{\expandafter\def\csname bb#1\endcsname{\mathbb{#1}}
 		\expandafter\def\csname c#1\endcsname{\mathcal{#1}}
@@ -247,4 +254,6 @@
 %---Comandi Strani---
 \newcommand{\TODO}{{\LARGE\bf TO DO}}
 
+
 \sloppy
+

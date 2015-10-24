@@ -1,12 +1,63 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata}
-\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
-\newcommand{\crossmark}{$\times$}
+\newcommand{\aperto}{\text{ aperto }}
+\newcommand{\chiuso}{\text{ chiuso }}
+\newcommand{\compatto}{\text{ compatto }}
+\newcommand{\continua}{\text{ continua }}
 
 \begin{document}
 	\title{Topologia Generale}
 	
+	\section*{Definizioni delle Proprietà}
+	\begin{itemize}
+		\item[N1] Ogni punto ha una base di intorni numerabile.
+		\item[N2] Lo spazio ha una base di aperti numerabile.
+		\item[Sep] Se esiste un sottoinsieme denso e numerabile.
+		\item[T0] Dati due punti c'è un aperto che li distingue. ($\forall x, y \in X \quad \exists A \aperto \tc x \in A, y \notin A \opp x \notin A, y \in A$)
+		\item[T1] I punti sono chiusi.
+		\item[T2] Punti distinti hanno intorni disgiunti.
+		\item[Reg] Un punto ed un chiuso che non lo contiene hanno intorni disgiunti.
+		\item[Norm] Ogni coppia di chiusi disgiunti ha intorni disgiunti.
+		\item[T3] Reg + T0.
+		\item[T4] Norm + T1.
+		\item[Cpt] Ogni ricoprimento di aperti ha un sottoricoprimento finito.
+		\item[Lind] Ogni ricoprimento di aperti ha un raffinamento numerabile.
+		\item[Conn] Non esistono due aperti propri la cui unione è lo spazio intero. (Vale anche con i chiusi)
+		\item[PathConn] Presi due punti esiste un arco che li connette ($\forall x, y \in X \quad \exists \gamma: [0,1] \rar X \continua \tc \gamma(0) = x, \gamma(1) = y$)
+		\item[LocConn] Ogni punto ha una base di intorni connessi.
+		\item[LocPathConn] Ogni punto ha una base di intorni connessi per archi.
+	\end{itemize} \vskip 0.5cm
+	\begin{center}
+		\begin{tikzpicture}[scale=2.5]
+			%\node (ED) at (0,0) {ED};
+			%\draw[->] (+1) -- node[above] {+ ID} (UFD);
+			\node (T4) at (0,0) {T4};
+			\node (T3) at (1,0) {T3};
+			\node (T2) at (2,0) {T2};
+			\node (T1) at (3,0) {T1};
+			\node (T0) at (4,0) {T0};
+			\node (N2) at (0,-2) {N2};
+			\node (Lind) at (1,-1) {Lind};
+			\node (Sep) at (1,-2) {Sep};
+			\node (N1) at (1,-3) {N1};
+			\node (PathConn) at (2,-1) {PathConn};
+			\node (Conn) at (4, -1) {Conn};
+			\node (Reg) at (2,-2) {Reg};
+			\node (Norm) at (4,-2) {Norm};
+
+			\draw[->] (T4) -- (T3);
+			\draw[->] (T3) -- (T2);
+			\draw[->] (T2) -- (T1);
+			\draw[->] (T1) -- (T0);
+			\draw[->] (N2) -- (Lind);
+			\draw[->] (N2) -- (Sep);
+			\draw[->] (N2) -- (N1);
+			\draw[->] (PathConn) -- (Conn);
+			\draw[->] (Reg) -- node[above] {+ N2 / + Lind} (Norm);
+		\end{tikzpicture}
+	\end{center} \vskip 0.5cm
+
 	\section*{Equivalenze}
 	\begin{itemize}
 		\item ({\bf Condizione equivalente per essere una base}) Dato $X$ insieme e $\cB \subseteq \cP (X)$ esiste una topologia su $X$ di cui $\cB$ è una base se e soltanto se sono soddisfatte le seguenti due condizioni: $X = \cap \{B \mid B \in \cB \}$ e per ogni coppia $A,B \in \cB$ e per ogni punto $x \in A \cap B$ esiste $C \in \cB$ tale che $x \in C \subseteq A \cap B$.
@@ -56,16 +107,34 @@
 		\item ({\bf Topologia della semicontinuità superiore di $\bbR$}) Gli aperti non vuoti sono tutti e soli i sottoinsiemi della forma $( - \infty , a)$, al variare di $a \in \bbR \cup \{+ \infty\}$
 	\end{itemize}
 
+	\section*{}
+	\begin{itemize}
+		\item 
+	\end{itemize}
+
 	\section*{Che proprietà passano a cosa?}
 	Vediamo alcune proprietà degli spazi \\
 	\begin{tabular}{lcccccc}
 	{\bf Proprietà} & {\bf Sottospazi} & {\bf Prodotti} & {\bf Quozienti} & {\bf Funzioni $\cC^0$} & {\bf Implica} \\
-	$T_0$ & & & & &  \\
-	$T_1$ & & & & & $T_0$ \\
-	$T_2$ & \checkmark & Finiti & & & $T_1$ \\
-	Cpt & Chiusi & Arbitrari & & \checkmark & (+$T_2$) chiuso \\
-	Conn & & Arbitrari & & \checkmark & \\
-	Path-Conn & & Finiti & & \checkmark & Conn \\
+	N1              &                  &                &                 &                        &               \\ \hline
+	N2              &                  &                &                 &                        &               \\ \hline
+	Sep             &                  &                &                 &                        &               \\ \hline
+	T0              & \checkmark       &                &                 &                        &               \\ \hline
+
+	T1              & \checkmark       &                &                 &                        &               \\ \hline
+	T2              & \checkmark       & Finiti         &                 &                        &               \\ \hline
+	Reg             & \checkmark       &                &                 &                        &               \\ \hline
+	Norm            & Chiusi           &                &                 &                        &               \\ \hline
+
+	T3              & \checkmark       &                &                 &                        &               \\ \hline
+	T4              &                  &                &                 &                        &               \\ \hline
+	Cpt             & Chiusi           & Arbitrari      &                 & \checkmark             & (+T2) Chiuso  \\ \hline
+	Lind            &                  &                &                 &                        &               \\ \hline
+
+	Conn            &                  & Arbitrari      &                 & \checkmark             &               \\ \hline
+	PathConn        &                  & Finiti         &                 & \checkmark             & Conn          \\ \hline
+	LocConn         & Aperti           &                &                 &                        &               \\ \hline
+	LocPathConn     & Aperti           &                &                 &                        &               \\ \hline
 	\end{tabular} \vskip 1.5cm
 	
 
