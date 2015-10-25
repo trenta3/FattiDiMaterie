@@ -5,6 +5,7 @@
 \newcommand{\Enunciato}{\vskip 0.05cm \noindent \textbf{Enunciato} \\ }
 \renewcommand{\Dimostrazione}{\vskip 0.05cm \noindent \textbf{Dimostrazione} \\ }
 
+\renewcommand{\bar}{\overline}
 \newcommand{\aperto}{\text{ aperto }}
 \newcommand{\apertoin}{\text{ aperto in }}
 \newcommand{\chiuso}{\text{ chiuso }}
@@ -45,26 +46,83 @@
 	\section*{N1}
 	\section*{N2}
 	\section*{Sep}
+	\subsection*{La Separabilità NON passa ai sottospazi}
+	Usando il fatto (dimostrato dopo) che prodotti numerabili di separabili sono separabili, si consideri $\bbR_{sf}$, ovvero $\bbR$ con la topologia di Sorgenfrey. Esso è separabile, infatti $\bbQ_{sf}$ è sicuramente numerabile, inoltre è denso. Sia infatti $x \in \bbR_{sf}$ e sia $U_x$ un suo intorno. Allora, siccome sono una base per la topologia, $\exists a, b \tc x \in [a, b) \subseteq U_x$. Per densità dei razionali nell'ordinamento dei reali, si ha $\exists q \in \bbQ_{sf} \tc q \in [a, b)$. Allora anche $\bbR_{sf} \times \bbR_{sf}$ è separabile, ma non lo è il suo sottospazio $R = \{ (x, y) \in \bbR_{sf} \times \bbR_{sf} \mid x + y = 0 \}$: mostriamo infatti che esso ha la topologia discreta come sottospazio. Infatti sia $(x, -x) \in R$, esso è aperto poiché $(x, -x) = [x, x+h) \times [-x, -x+h) \cap R$, con $h > 0$. Quindi abbiamo un insieme di cardinalità del continuo con la topologia discreta, che non può essere separabile.
+
+	\subsection*{La Separabilità passa ai prodotti numerabili}
+	\Enunciato $X := \prod_{n \in \bbN} X_n$, con $D_i \subseteq X_i$ denso e numerabile. Allora anche $X$ è separabile.
+	\Dimostrazione Sia $a_n \in D_n$ un punto a caso. Prendiamo $D = \{ (r_i)_{i \in \bbN} \in \prod_{n \in \bbN} D_n \mid r_i = a_i \text{ per tutti tranne un numero finito di indici} \}$, ovvero l'insieme che è costituito da prodotti finiti dei $D_i$ in tutte le varie posizioni possibili. Questo insieme è denso: sia $x \in X$, allora $\forall U_x$ intorni abbiamo $\exists A = \prod_{n \in \bbN}^{FIN} [A_n / X_n] \tc x \in A \subseteq U_x$. Allora per ogni indice $i$ tale che $\pi_i(A) \neq X_i$ selezioniamo $r_i = d_i \in \pi_i(A)$, mentre per gli altri scegliamo $r_i = a_i$. Allora $(r_i)_{i \in \bbN} \in D \cap A$. Inoltre è anche numerabile poiché si può scrivere un suo elemento in questo modo: si denoti con $(i)_2$ la stringa che in base due denota $i \in \bbN$ con soli zeri e uni. Allora si associ ad un elemento $x = (r_i)_{i \in \bbN} \in D$ la stringa ottenuta concatenando le seguenti informazioni: $ \forall i, T_i := \left\{ \begin{array}{lc} 2 & \text{ se } r_i = a_i \\ (r_i)_2 & \text{ se } r_i \neq a_i \\ \end{array} \right. $ Questa stringa è infinita ma termina con un numero infinito di $"2"$. Si levino questi numeri e si legga il numero così costruito in base tre. Allora questa è una iniezione nei naturali. \\
+	In realtà la separabilità si trasmette anche ai prodotti di cardinalità continua (Marcewski-Hewitt), ma è molto difficile da dimostrare, quindi non lo facciamo.
+
+	\subsection*{Immagine $\cC^0$ di un separabile è separabile}
+	\Enunciato $X$ separabile. $f: X \rar Y \in \cC^0$, allora $f(X)$ è separabile.
+	\Dimostrazione Sia $D \subset X$ il denso e numerabile di $X$. Allora dico che $f(D) \cap f(X)$ è il denso e numerabile di $f(X)$. Ovviamente è numerabile. Mostriamo che è denso: $f(X) = f(\bar{D}) \subseteq \bar{f(D)}^{{}_{f(X)}} = \bar{f(D) \cap f(X)} \cap f(X)$. dove l'$\subseteq$ vale per una definizione equivalente di continuità e sappiamo che la chiusura di $f(D)$ in $f(X)$ è uguale alla chiusura di $f(D)$ intersecato $f(X)$.
+
 	\section*{T0}
+	\subsection*{T0 passa ai sottospazi}
+	\Enunciato $X$ T0, $Y \subseteq X \implies Y$ T0.
+	\Dimostrazione Siano $a, b \in Y$. Allora esiste un aperto $A \subset X \tc a \in A, b \notin A \opp a \notin A, b \in A$. Allora $B := A \cap Y$ è aperto in $Y$ e vale $a \in B, b \notin B \opp a \notin B, b \in B$, a seconda di quale valeva prima.
+
+	\subsection*{Prodotto arbitrario di T0 è T0}
+	\Enunciato $X := \prod_i X_i$, $X_i$ T0 $\forall i$, allora $X$ è T0.
+	\Dimostrazione Siano $a, b \in X$. Allora $a \neq b \implies \exists j \tc a_j \neq b_j$. Siccome $X_j$ è T0, ho che $\exists A_j \subset X_j$ aperto $\tc a_j \in A_j, b_j \notin A_j \opp a_j \notin A_j, b_j \in A_j$. Allora $A := A_j \times \prod_{i \neq j} X_i$ è un aperto di $X$ che fa ciò che vogliamo.
+
 	\section*{T1}
+	\subsection*{T1 passa ai sottospazi}
+	\Enunciato $X$ T1, $Y \subseteq X \implies Y$ T1.
+	\Dimostrazione Sia $a \in Y$. Allora $\{a\} \subset X$ è chiuso in $X$, quindi $\{a\} = \{a\} \cap Y$ è chiuso in $Y$.
+
+	\subsection*{Prodotto arbitrario di T1 è T1}
+	\Enunciato $X := \prod_i X_i$, $X_i$ T1 $\forall i$, allora $X$ è T1.
+	\Dimostrazione Sia $x = (x_i)_{i \in I} \in X$. Allora $C_j := \{x_j\} \times \prod_{i \neq j} X_i$ è chiuso in $X \quad \forall j$. Inoltre $x = \cap_j C_j$, quindi $\{x\}$ è chiuso in $X$.
+
 	\section*{T2}
+	\subsection*{T2 passa ai sottospazi}
+	\Enunciato $X$ T2, $Y \subseteq X \implies Y$ T2.
+	\Dimostrazione Siano $a, b \in Y, a \neq b$ e siano $A, B \subseteq X$ gli aperti di $X$ tali che $a \in A, b \in B, A \cap B = \emptyset$. Allora $A \cap Y$ e $B \cap Y$ sono aperti in $Y$, ancora disgiunti e contengono i due punti.
+
+	\subsection*{Prodotto arbitrario di T2 è T2}
+	\Enunciato $X := \prod_i X_i$, $X_i$ T2 $\forall i$, allora $X$ è T2.
+	\Dimostrazione Siano $a, b \in X, a \neq b$. Allora $\exists j \tc a_j \neq b_j$. Siano $A_j, B_j \subseteq X_j$ gli aperti di $X_j$ tali che $A_j \cap B_j = \emptyset$, $a_j \in A_j, b_j \in B_j$. Allora $A := A_j \prod \times_{i \neq j} X_i$, $B := B_j \prod \times_{i \neq j} X_i$ sono due aperti di $X$ tali che $a \in A, b \in B$. Inoltre $A \cap B = (A_j \cap B_j) \prod \times_{i \neq j} X_i = \emptyset$.
+	
 	\section*{Reg}
 	\section*{Norm}
 	\section*{T3}
 	\section*{T4}
 	
 	\section*{Cpt}
+	\subsection*{Chiuso in un compatto è compatto}
+	\Enunciato $X$ compatto. $Y \subset X$ chiuso in $X$, allora $Y$ è compatto.
+	\Dimostrazione Sia $\{A_\lambda \cap Y\}_{\lambda \in \Lambda}$ il ricoprimento aperto di $Y$. Allora considero $\{A_\lambda\}_{\lambda \in \Lambda} \cup (X \setminus Y)$ come ricoprimento di $X$ (siccome $X \setminus Y$ è aperto in $X$). Allora ne esiste un ricoprimento finito, da cui abbiamo $A_1, \ldots, A_n, X \setminus Y$ tali che $Y \subseteq \cup_{i=1}^n A_i$.
+
+	\subsection*{La compattezza NON passa a sottospazi arbitrari}
+	Basta considerare $Y = \{\frac{1}{n} \mid n \in \bbN\}$ come sottoinsieme di $[0,1]$ con la topologia euclidea. $[0,1]$ è compatto, mentre $\{ (\frac{1}{n} - \frac{1}{3n}, \frac{1}{n} + \frac{1}{3n}) \mid n \in \bbN \}$ è un ricoprimento aperto di $Y$ di cui non ne esiste uno finito, perché altrimenti lascia scoperto qualche $\frac{1}{n}$ per qualche $n$ abbastanza grande.
+
 	\subsection*{Immagine $\cC^0$ di Compatti è compatta}
 	\Enunciato $f: X \rar Y$ con $X$ Cpt. Allora $f(X)$ è Cpt.
 	\Dimostrazione Siano $A_\lambda \subset Y$ aperti in $Y \tc f(X) \subseteq \cup_{\lambda \in \Lambda} A_\lambda$. Consideriamo $B_\lambda := f^{-1}(A_\lambda)$. Essi sono un ricoprimento aperto (perché $f$ è $\cC^0$) di $X$. Per compattezza ne esiste un ricoprimento finito $B_1, \ldots, B_n$. Allora $A_1, \ldots, A_n$ ricoprono $f(X)$.
 
+	\subsection*{Compatto in un T2 è Chiuso}
+	\Enunciato $Y \subseteq X$ compatto, $X$ T2 allora $Y$ è chiuso in $X$.
+	\Dimostrazione Mostriamo che $A := X \setminus Y$ è aperto in $X$: sia $a \in A$, siccome $X$ è T2 abbiamo $\forall y \in Y, \exists A_y, Y_y$ aperti in $X \tc a \in A_y, y \in Y_y, A_y \cap Y_y = \emptyset$. Allora $\{Y_y\}_{y \in Y}$ sono un ricoprimento aperto di $Y$, allora ne estraggo un ricoprimento finito $Y_{y_1}, \ldots, Y_{y_n}$. Considero ora $U := \cap_{i=1}^{n} A_{y_n}$ che è un insieme aperto in $X$ (in quanto intersezione di un numero finito di aperti) che è disgiunto da ciascuno degli $Y_i$ ed è quindi disgiunto da $Y$, ovvero $X \setminus Y$ è aperto.
+
 	\section*{Lind}
+	\subsection*{Chiuso in un Lindel\"of è Lindel\"of}
+	\Enunciato $X$ Lindel\"of. $Y \subset X$ chiuso in $X$, allora $Y$ è Lindel\"of.
+	\Dimostrazione Sia $\{A_\lambda \cap Y\}_{\lambda \in \Lambda}$ il ricoprimento aperto di $Y$. Allora considero $\{A_\lambda\}_{\lambda \in \Lambda} \cup (X \setminus Y)$ come ricoprimento di $X$ (siccome $X \setminus Y$ è aperto in $X$). Allora ne esiste un ricoprimento numerabile, da cui abbiamo $\{A_n\}_{n \in \bbN}, X \setminus Y$ tali che $Y \subseteq \cup_{i \in \bbN} A_i$.
+
 	\section*{Conn}
+	\subsection*{Sottospazi di un connesso NON sono connessi}
+	Si prenda $[0,1]$ con la topologia euclidea e si considerino arbitrari tipi di sottospazi, solitamente non sono connessi. Ad esempio $X = \{0\} \cup \{1\}$.
+
 	\subsection*{Immagine $\cC^0$ di Connessi è connessa}
 	\Enunciato $f: X \rar Y$ con $X$ Conn. Allora $f(X)$ è Conn.
 	\Dimostrazione Per assurdo siano $A_1, A_2$ i due aperti in $Y$ che sconnettono $f(X)$. Allora $B_1 := f^{-1}(A_1), B_2 := f^{-1}(A_2)$ sono aperti (sono ancora disgiunti) che sconnettono $X$, Assurdo.
 
 	\section*{PathConn}
+	\subsection*{Sottospazi di un connesso per archi NON sono connessi per archi}
+	Si prenda $[0,1]$ con la topologia euclidea e si considerino arbitrari tipi di sottospazi, solitamente non sono connessi per archi. Ad esempio $X = \{0\} \cup \{1\}$.
+
 	\subsection*{Immagine $\cC^0$ di Connessi per archi è connessa per archi}
 	\Enunciato $f: X \rar Y$ con $X$ PathConn. Allora $f(X)$ è PathConn.
 	\Dimostrazione Siano $y_1, y_2 \in f(X)$, ovvero $y_1 = f(x_1), y_2 = f(x_2)$. Per ipotesi sia $\gamma: [0,1] \rar X \in \cC^0$ tale che $\gamma(0) = x_1, \gamma(1) = x_2$, consideriamo allora $g := f \circ \gamma$, anch'essa continua. Abbiamo $g: [0,1] \rar Y \in \cC^0$ tale che $g(0) = y_1, g(1) = y_2$.
@@ -82,5 +140,7 @@
 	\section*{ParaCpt}
 
 
+	\section*{Sorgenfrey}
+	
 \end{document}
 	
