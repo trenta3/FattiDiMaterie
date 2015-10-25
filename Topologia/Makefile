@@ -9,12 +9,15 @@ all: pdf dvi ps
 	make clean
 
 ps: dvi
+	dvips TopologiaGeneraleDimostrazioni.dvi
 	dvips TopologiaGenerale.dvi
 
 dvi: download
+	latex --shell-escape TopologiaGeneraleDimostrazioni.tex
 	latex --shell-escape TopologiaGenerale.tex
 
 pdf: download
+	pdflatex --shell-escape TopologiaGeneraleDimostrazioni.tex
 	pdflatex --shell-escape TopologiaGenerale.tex
 
 # Dovremmo controllare che sia la versione più recente

@@ -2,13 +2,24 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata}
 \newcommand{\aperto}{\text{ aperto }}
+\newcommand{\apertoin}{\text{ aperto in }}
 \newcommand{\chiuso}{\text{ chiuso }}
+\newcommand{\chiusoin}{\text{ chiuso in }}
 \newcommand{\compatto}{\text{ compatto }}
 \newcommand{\continua}{\text{ continua }}
+\newcommand{\se}{\text{ se }}
+\newcommand{\iin}{\text{ in }}
+\newcommand{\intornodi}{\text{ intorno di }}
+\newcommand{\allora}{\text{ allora }}
+\newcommand{\Finiti}{Finiti}
+\newcommand{\Arbitrari}{Arbitrari}
+\newcommand{\Numerabili}{Numerabili}
+\newcommand{\rd}[1]{{\color{red} #1 }}
 
 \begin{document}
 	\title{Topologia Generale}
 	
+	%<*DefinizioniProprieta>
 	\section*{Definizioni delle Proprietà}
 	\begin{itemize}
 		\item[N1] Ogni punto ha una base di intorni numerabile.
@@ -27,7 +38,14 @@
 		\item[PathConn] Presi due punti esiste un arco che li connette ($\forall x, y \in X \quad \exists \gamma: [0,1] \rar X \continua \tc \gamma(0) = x, \gamma(1) = y$)
 		\item[LocConn] Ogni punto ha una base di intorni connessi.
 		\item[LocPathConn] Ogni punto ha una base di intorni connessi per archi.
+		\item[LocCpt] Ogni punto ha una base di intorni compatti.
+		\item[ParaCpt] Ogni ricoprimento aperto ha un raffinamento localmente finito.
+		\item[Metr] Metrizzabile, ovvero esiste una distanza che induce la topologia.
 	\end{itemize} \vskip 0.5cm
+	%</DefinizioniProprieta>
+
+	Da aggiungere: \\
+	Metr: Sep <=> N2 <=> Lind, Metr => N1, Metr: Cpt => Sep, N2: Cpt <=> SeqCpt, Cpt => ParaCpt, ParaCpt + T2 => Norm.
 	\begin{center}
 		\begin{tikzpicture}[scale=2.5]
 			%\node (ED) at (0,0) {ED};
@@ -94,10 +112,20 @@
 	\section*{Altri Lemmi}
 	\begin{itemize}
 		\item ({\bf Continuità e ricoprimenti fondamentali}) Sia $\cA$ un ricoprimento fondamentale di $X$. Un'applicazione $f:X \rar Y$ è continua $\sse \forall A \in \cA$ la restrizione $f\mid_A: A \rar Y$ è continua.
-		\item ({\bf $[0,1]$ è connesso e compatto}) L'intervallo $[0,1]$ per la topologia euclidea è connesso, connesso per archi e compatto.
+		\item ({\bf $[0,1]$ è tutto quanto}) L'intervallo $[0,1]$ per la topologia euclidea è connesso, connesso per archi, compatto, localmente connesso, localmente connesso per archi, localmente compatto.
 		\item ({\bf Ricoprimenti localmente finiti}) I ricoprimenti aperti ed i ricoprimenti chiusi localmente finiti sono fondamentali.
 	\end{itemize}	
 
+	\section*{Sottospazi}
+	\begin{itemize}
+		\item ({\bf Passaggio della chiusura}) $Y \subseteq X$ sottospazio, $A \subseteq Y$. Allora la chiusura di $A$ in $Y$ è uguale all'intersezione di $Y$ con la chiusura di $A$ in $X$.
+		\item ({\bf Passaggio di aperti-chiusi}) $Y \subseteq X$, $Z \subseteq Y$. Allora si hanno: \\
+			\begin{itemize}
+				\item $\se Y \apertoin X, \allora Z \apertoin Y \sse Z \apertoin X$
+				\item $\se Y \chiusoin X, \allora Z \chiusoin Y \sse Z \chiusoin X$
+				\item $\se Y \intornodi y, \allora Z \intornodi y \iin Y \sse Z \intornodi y \iin X$
+			\end{itemize}
+	\end{itemize}
 
 	\section*{Topologie Comuni}
 	\begin{itemize}
@@ -107,35 +135,40 @@
 		\item ({\bf Topologia della semicontinuità superiore di $\bbR$}) Gli aperti non vuoti sono tutti e soli i sottoinsiemi della forma $( - \infty , a)$, al variare di $a \in \bbR \cup \{+ \infty\}$
 	\end{itemize}
 
-	\section*{}
+	\section*{Metrizzabilità}
 	\begin{itemize}
-		\item 
+		\item ({\bf Proprietà di un metrico}) Sia $X$ spazio metrico. Allora $X$ è T2.
 	\end{itemize}
 
 	\section*{Che proprietà passano a cosa?}
 	Vediamo alcune proprietà degli spazi \\
+	Attenzione! Non vi fidate troppo delle cose in rosso perchè devo ancora verificare i risultati \\
+	%<*TabellaProprieta>
 	\begin{tabular}{lcccccc}
 	{\bf Proprietà} & {\bf Sottospazi} & {\bf Prodotti} & {\bf Quozienti} & {\bf Funzioni $\cC^0$} & {\bf Implica} \\
-	N1              &                  &                &                 &                        &               \\ \hline
-	N2              &                  &                &                 &                        &               \\ \hline
-	Sep             &                  &                &                 &                        &               \\ \hline
-	T0              & \checkmark       &                &                 &                        &               \\ \hline
+	N1              & \rd\checkmark    & \rd\Numerabili &                 &                        &               \\ \hline
+	N2              & \rd\checkmark    & \rd\Numerabili & \rd{Aperti}     & \rd{Aperte}            &               \\ \hline
+	Sep             & \rd\crossmark    & \rd\Numerabili &                 & \rd\checkmark          &               \\ \hline
+	T0              & \rd\checkmark    & \rd\Arbitrari  &                 &                        &               \\ \hline
 
-	T1              & \checkmark       &                &                 &                        &               \\ \hline
-	T2              & \checkmark       & Finiti         &                 &                        &               \\ \hline
-	Reg             & \checkmark       &                &                 &                        &               \\ \hline
-	Norm            & Chiusi           &                &                 &                        &               \\ \hline
+	T1              & \rd\checkmark    & \rd\Arbitrari  &                 &                        &               \\ \hline
+	T2              & \rd\checkmark    & \rd\Arbitrari  &                 &                        &               \\ \hline
+	Reg             & \rd\checkmark    & \rd\Arbitrari  &                 &                        &               \\ \hline
+	Norm            & \rd{Chiusi}      & \rd\crossmark  &                 &                        &               \\ \hline
 
-	T3              & \checkmark       &                &                 &                        &               \\ \hline
-	T4              &                  &                &                 &                        &               \\ \hline
-	Cpt             & Chiusi           & Arbitrari      &                 & \checkmark             & (+T2) Chiuso  \\ \hline
-	Lind            &                  &                &                 &                        &               \\ \hline
+	T3              & \rd\checkmark    & \rd\Arbitrari  &                 &                        &               \\ \hline
+	T4              & \rd{Chiusi}      & \rd\crossmark  &                 &                        &               \\ \hline
+	Cpt             & \rd{Chiusi}      & \rd\Arbitrari  &                 & \checkmark             & (+T2) Chiuso  \\ \hline
+	Lind            & \rd{Chiusi}      & \rd\crossmark  &                 &                        &               \\ \hline
 
-	Conn            &                  & Arbitrari      &                 & \checkmark             &               \\ \hline
-	PathConn        &                  & Finiti         &                 & \checkmark             & Conn          \\ \hline
-	LocConn         & Aperti           &                &                 &                        &               \\ \hline
-	LocPathConn     & Aperti           &                &                 &                        &               \\ \hline
+	Conn            & \rd\crossmark    & \rd\Arbitrari  &                 & \checkmark             &               \\ \hline
+	PathConn        & \rd\crossmark    & \rd\Arbitrari  &                 & \checkmark             & Conn          \\ \hline
+	LocConn         & \rd{Aperti}      &                &                 &                        &               \\ \hline
+	LocPathConn     & \rd{Aperti}      &                &                 &                        &               \\ \hline
+
+	Metr            & \checkmark       & \rd\Numerabili &                 &                        &               \\ \hline
+	ParaCpt         & \rd{Chiusi}      & \rd\crossmark  &                 &                        &               \\ \hline
 	\end{tabular} \vskip 1.5cm
-	
+	%</TabellaProprieta>
 
 \end{document}

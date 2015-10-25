@@ -1,0 +1,86 @@
+\documentclass[a4paper,11pt,NoNotes,GeneralMath]{stdmdoc}
+\usepackage{tikz}
+\usepackage{catchfilebetweentags}
+\usetikzlibrary{arrows,automata}
+\newcommand{\Enunciato}{\vskip 0.05cm \noindent \textbf{Enunciato} \\ }
+\renewcommand{\Dimostrazione}{\vskip 0.05cm \noindent \textbf{Dimostrazione} \\ }
+
+\newcommand{\aperto}{\text{ aperto }}
+\newcommand{\apertoin}{\text{ aperto in }}
+\newcommand{\chiuso}{\text{ chiuso }}
+\newcommand{\chiusoin}{\text{ chiuso in }}
+\newcommand{\compatto}{\text{ compatto }}
+\newcommand{\continua}{\text{ continua }}
+\newcommand{\se}{\text{ se }}
+\newcommand{\iin}{\text{ in }}
+\newcommand{\intornodi}{\text{ intorno di }}
+\newcommand{\allora}{\text{ allora }}
+\newcommand{\Finiti}{Finiti}
+\newcommand{\Arbitrari}{Arbitrari}
+\newcommand{\Numerabili}{Numerabili}
+\newcommand{\rd}[1]{{\color{red} #1 }}
+
+\begin{document}
+	\title{Topologia Generale}
+	\author{Dimostrazioni e Controesempi}
+	
+	%Include le definizioni dall'altro file
+	\ExecuteMetaData[TopologiaGenerale.tex]{DefinizioniProprieta}
+
+	%Include la tabella delle proprietà vere e false dall'altro file
+	\ExecuteMetaData[TopologiaGenerale.tex]{TabellaProprieta}
+	
+	\section*{Lemmi insiemistici utili}
+	$f: A \rar B$ funzione, $X \subseteq A$, $Y \subseteq B$. Allora valgono:
+	\begin{itemize}
+		\item $X \subseteq f^{-1}(f(X))$
+		\item $f(f^{-1}(Y)) \subseteq Y$
+		\item $f(\cup_i X_i) = \cup_i f(X_i)$
+		\item $f(\cap_i X_i) \subseteq \cap_i f(X_i)$
+		\item Se $f$ è iniettiva allora $f(\cap_i X_i) = \cap_i f(X_i)$
+		\item $f^{-1}(\cup_i Y_i) = \cup_i f^{-1}(Y_i)$
+		\item $f^{-1}(\cap_i Y_i) = \cap_i f^{-1}(Y_i)$
+	\end{itemize}
+
+	\section*{N1}
+	\section*{N2}
+	\section*{Sep}
+	\section*{T0}
+	\section*{T1}
+	\section*{T2}
+	\section*{Reg}
+	\section*{Norm}
+	\section*{T3}
+	\section*{T4}
+	
+	\section*{Cpt}
+	\subsection*{Immagine $\cC^0$ di Compatti è compatta}
+	\Enunciato $f: X \rar Y$ con $X$ Cpt. Allora $f(X)$ è Cpt.
+	\Dimostrazione Siano $A_\lambda \subset Y$ aperti in $Y \tc f(X) \subseteq \cup_{\lambda \in \Lambda} A_\lambda$. Consideriamo $B_\lambda := f^{-1}(A_\lambda)$. Essi sono un ricoprimento aperto (perché $f$ è $\cC^0$) di $X$. Per compattezza ne esiste un ricoprimento finito $B_1, \ldots, B_n$. Allora $A_1, \ldots, A_n$ ricoprono $f(X)$.
+
+	\section*{Lind}
+	\section*{Conn}
+	\subsection*{Immagine $\cC^0$ di Connessi è connessa}
+	\Enunciato $f: X \rar Y$ con $X$ Conn. Allora $f(X)$ è Conn.
+	\Dimostrazione Per assurdo siano $A_1, A_2$ i due aperti in $Y$ che sconnettono $f(X)$. Allora $B_1 := f^{-1}(A_1), B_2 := f^{-1}(A_2)$ sono aperti (sono ancora disgiunti) che sconnettono $X$, Assurdo.
+
+	\section*{PathConn}
+	\subsection*{Immagine $\cC^0$ di Connessi per archi è connessa per archi}
+	\Enunciato $f: X \rar Y$ con $X$ PathConn. Allora $f(X)$ è PathConn.
+	\Dimostrazione Siano $y_1, y_2 \in f(X)$, ovvero $y_1 = f(x_1), y_2 = f(x_2)$. Per ipotesi sia $\gamma: [0,1] \rar X \in \cC^0$ tale che $\gamma(0) = x_1, \gamma(1) = x_2$, consideriamo allora $g := f \circ \gamma$, anch'essa continua. Abbiamo $g: [0,1] \rar Y \in \cC^0$ tale che $g(0) = y_1, g(1) = y_2$.
+
+	\subsection*{Connesso per Archi implica Connesso}
+	\Enunciato $X$ PathConn $\implies X$ Conn.
+	\Dimostrazione Per assurdo siano $A_1, A_2$ i due aperti in $X$ che lo sconnettono. Siano $x_1 \in A_1, x_2 \in A_2$ e si prenda $\gamma: [0,1] \rar X \in \cC^0$ tale che $\gamma(0) = x_1, \gamma(1) = x_2$. Allora $B_1 := \gamma^{-1}(A_1), B_2 := \gamma^{-1}(A_2)$ sono ancora aperti e sconnettono $[0,1]$, Assurdo.
+
+	\section*{LocConn}
+	\section*{LocPathConn}
+	\section*{Metr}
+	\subsection*{Sottospazi di Metrizzabili sono Metrizzabili}
+	Ovvio, basta restringere la funzione distanza
+
+	\section*{ParaCpt}
+
+
+\end{document}
+	
