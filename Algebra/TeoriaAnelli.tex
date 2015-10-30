@@ -64,15 +64,11 @@
 		\item ({\bf PRI - Prime Ideal}) Un ideale $I \subseteq R$ è detto primo se $I \neq (1)$ e se $xy \in I \implies x \in I \opp y \in I$
 		\item ({\bf MXI - Maximal Ideal}) Un ideale $I \subseteq R$ è detto massimale se $I \neq (1)$ e se $\forall J \subseteq R$ ideale $\tc I \subseteq J$ si abbia $J = I \opp J = R$
 		\item ({\bf PPI - Principal Ideal}) Un ideale $I \subseteq R$ si dice principale se è monogenerato, ovvero se $\exists a \in R \tc I = (a)$
+		\item ({\bf RDI - Radical Ideal}) Un ideale $I \subseteq R$ si dice radicale se $x^n \in I \implies x \in I$
+		\item ({\bf PMI - Primary Ideal}) Un ideale $I \subseteq R$ si dice primario se $xy \in I \implies x \in I \opp y^n \in I$
 	\end{itemize}
 
-	\section*{Teoremi con dimostrazione}
-	\subsection{Equivalenze di Ideali}
-	\Enunciato
-		$(i) \quad P $ PRI $\sse R/P$ è ID \\
-		$(ii) \quad M $ MXI $\sse R/M$ è un campo \\
-	\Dimostrazione Ovvie
-
+	\section*{Anelli e loro proprietà}
 	\subsection{ED $\implies$ PID}
 	Sia $I \subseteq R$ ideale. Vogliamo mostrare che è principale. Si prenda un qualunque $a \in I \tc \nu(a)$ è la minima possibile tra gli elementi in $I$. Allora si ha (ED) $\forall b \in I \quad \exists q,r \in R \tc b = aq + r$, da cui segue $r = b - aq \in I$ e sappiamo che $r = 0 \opp \nu(r) < \nu(a)$, ma siccome $r \in I$, per come abbiamo scelto $a$, deve essere $r = 0$, ovvero $\forall b \in I \quad \exists q \in R \tc b = aq$, ovvero $I = (a)$
 	
@@ -123,8 +119,21 @@
 
 	\subsection{UFD $\implies$ GCD}
 
+	\section*{Ideali}
+	\subsection{Equivalenze di Ideali}
+	\Enunciato
+		$(i) \quad P $ PRI $\sse R/P$ è ID \\
+		$(ii) \quad M $ MXI $\sse R/M$ è un campo \\
+		$(iii) \quad I $ RDI $\sse R/I$ è ridotto, ovvero privo di elementi nilpotenti \\
+	\Dimostrazione Ovvie
+
+	\subsection{Ideali importanti}
+	\begin{itemize}
+		\item ({\bf Ideale di Jacobson})
+		\item ({\bf })
+	\end{itemize}
+
 	\section*{Cosa passa a strutture create da $R$}
-	
 	\begin{tabular}{lccccc}
 	 & {\bf Sottoanelli} & {\bf Ideali} & {\bf Quozienti} & {\bf $R[x]$} & {\bf Localizzazione} \\
 	{\bf ID} & \checkmark & \checkmark & & \checkmark & \\
