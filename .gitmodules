@@ -1,3 +1,6 @@
 [submodule "RappresentazioniGruppi"]
 	path = RappresentazioniGruppi
 	url = https://github.com/frame95/Rappresentazioni.git
+[submodule "ETI/AscariMigliorini"]
+	path = ETI/AscariMigliorini
+	url = http://github.com/auron95/eti.git
