@@ -4,3 +4,6 @@
 [submodule "ETI/AscariMigliorini"]
 	path = ETI/AscariMigliorini
 	url = http://github.com/auron95/eti.git
+[submodule "SoluzioniMantegazzario"]
+	path = SoluzioniMantegazzario
+	url = http://github.com/birba/SoluzioniMantegazzario.git
