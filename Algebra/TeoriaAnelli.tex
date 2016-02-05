@@ -9,6 +9,9 @@
 \newcommand{\gen}{\text{Gen }}
 \newcommand{\MCD}{\text{MCD }}
 \newcommand{\Lead}{\text{Lead }}
+\newcommand{\Res}{\text{Res }}
+\newcommand{\rarr}{\twoheadrightarrow}
+\newcommand{\kp}{\mathfrak{p}}
 %\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
 %\newcommand{\crossmark}{$\times$}
 
@@ -66,6 +69,7 @@
 		\item ({\bf PPI - Principal Ideal}) Un ideale $I \subseteq R$ si dice principale se è monogenerato, ovvero se $\exists a \in R \tc I = (a)$
 		\item ({\bf RDI - Radical Ideal}) Un ideale $I \subseteq R$ si dice radicale se $x^n \in I \implies x \in I$
 		\item ({\bf PMI - Primary Ideal}) Un ideale $I \subseteq R$ si dice primario se $xy \in I \implies x \in I \opp y^n \in I$
+		\item ({\bf IRI - Irreducible Ideal}) Un ideale $I \subseteq R$ si dice irriducibile se $I = L \cap J \implies I = L \opp I = J$
 	\end{itemize}
 
 	\section*{Anelli e loro proprietà}
@@ -113,6 +117,10 @@
 		$(i)$ Sia $p \in R$ primo. E supponiamo che $p = ab$, allora $p \mid ab \implies p \mid a \opp p \mid b$. WLOG supponiamo $p \mid a$, allora $a = kp$, ovvero $p = ab = kpb \implies 1 = kb$, quindi $b$ è invertibile, contro le ipotesi. \\
 		$(ii)$ Sia $r \in R$ irriducibile. Supponiamo $r \mid ab$. Allora si ha $\MCD(r,a) = 1 \opp r$ perché $r = \MCD(r,a) k$ e $k$ invertibile, oppure $\MCD(r,a)$ invertibile. Se $\MCD(r,a) = 1$ si ha (Lemma ii su GCD+ID) $r \mid b$, se invece $\MCD(r,a) = r$ si ha $r \mid a$, da cui la tesi. \\
 
+	\subsection{$R$ PID $\sse$ $R$ UFD e ogni ideale primo è massimale}
+	Dimostreremo prima che se $R$ è UFD e ogni ideale primo è massimale allora ogni ideale primo di $R$ è principale. Poi dimostreremo che quest'ultima proprietà implica che $R$ sia un PID. \\
+	Sia $P \subseteq R$ un ideale primo. Allora sia $x \in P$ un qualunque elemento non invertibile. Per UFD si ha $x = p_1^{\alpha_1} \ldots p_n^{\alpha_n}$ e per primalità dell'ideale $\exists i \tc p_i \in P$, da cui segue che $(p_i) \subseteq P$ e per massimalità degli ideali primi (Infatti $(p_i)$ è primo) si ha che $P = (p_i)$. Quindi ogni ideale primo è principale. \\
+
 	\subsection{GCD + ID + ACCP $\implies$ UFD}
 
 	\subsection{UFD $\implies$ ACCP}
@@ -125,6 +133,7 @@
 		$(i) \quad P $ PRI $\sse R/P$ è ID \\
 		$(ii) \quad M $ MXI $\sse R/M$ è un campo \\
 		$(iii) \quad I $ RDI $\sse R/I$ è ridotto, ovvero privo di elementi nilpotenti \\
+		$(iv) \quad I $ PMI $\sse$ in $R/I$ i nilpotenti sono tutti e soli i divisori di zero \\
 	\Dimostrazione Ovvie
 
 	\subsection{Ideali importanti}
@@ -135,15 +144,15 @@
 
 	\section*{Cosa passa a strutture create da $R$}
 	\begin{tabular}{lccccc}
-	 & {\bf Sottoanelli} & {\bf Ideali} & {\bf Quozienti} & {\bf $R[x]$} & {\bf Localizzazione} \\
-	{\bf ID} & \checkmark & \checkmark & & \checkmark & \\
-	{\bf ACC} & & & & \checkmark & \\
-	{\bf ACCP} & & & & \checkmark & \\
-	{\bf GCD + ID} & & & & \checkmark & \\
-	{\bf UFD + ID} & & & & \checkmark & \\
-	{\bf PID} & & & & \crossmark & \\
-	{\bf ED} & & & & \crossmark & \\
-	{\bf Bèzout} & & & & & \\
+	               & {\bf Sottoanelli} & {\bf Ideali} & {\bf Quozienti} & {\bf $R[x]$} & {\bf Localizzazione} \\
+	{\bf ID}       & \checkmark        & \checkmark   &                 & \checkmark   & \\
+	{\bf ACC}      &                   &              &                 & \checkmark   & \\
+	{\bf ACCP}     &                   &              &                 & \checkmark   & \\
+	{\bf GCD + ID} &                   &              &                 & \checkmark   & \\
+	{\bf UFD + ID} &                   &              &                 & \checkmark   & \\
+	{\bf PID}      &                   &              &                 & \crossmark   & \\
+	{\bf ED}       &                   &              &                 & \crossmark   & \\
+	{\bf Bèzout}   &                   &              &                 &              & \\
 	
 	\end{tabular} \vskip 1cm
 
@@ -175,5 +184,74 @@
 	\subsection{Cosa passa agli anelli quoziente}
 
 	\subsection{Cosa passa all'anello localizzato}
+
+	\section*{Ideali}
+	Definiamo le seguenti operazioni tra gli ideali $I$ di un anello $A$: \\
+	\begin{itemize}
+		\item ({\bf Intersezione}) $I\cap J \subseteq A$ è un ideale contenuto in $I$ ed in $J$.
+		\item ({\bf Somma}) $I + J := \{ x + y \mid x \in I, y \in J \}$ è un ideale di $A$ che contiene sia $I$ che $J$.
+		\item ({\bf Prodotto}) $IJ := \{ \sum_i^{\text{Finite}} x_iy_i \mid x_i \in I, y_i \in J \}$ è un ideale di $A$ contenuto in $I$ ed in $J$.
+		\item ({\bf Quoziente}) $ I:J := \{ a \in A \mid aJ \subseteq I \} $ ideale che contiene $I$. Si denota con $\Ann(J) = 0:J$ l'annullatore di un ideale.
+		\item ({\bf Radicale}) $\sqrt{I} = \{ a \in A \mid a^n \in I \text{ per qualche } n \in \bbN^{*} \}$ ideale che contiene $I$.
+	\end{itemize}
+
+	\subsection{Proprietà delle operazioni}
+	\begin{itemize}
+		\item $\sqrt{\sqrt{I}} = \sqrt{I}$
+		\item $\sqrt{I^n} = \sqrt{I}$
+		\item $I \subseteq J \implies \sqrt{I} \subseteq \sqrt{J}$
+		\item $\sqrt{IJ} = \sqrt{I \cap J} = \sqrt{I} \cap \sqrt{J}$
+		\item $\sqrt{I + J} = \sqrt{\sqrt{I} + \sqrt{J}}$
+		\item $I + J = A \implies \forall n, m \in \bbN I^n + J^m = A$
+	\end{itemize}
+
+	\subsection{Proprietà degli ideali}
+	Come si comportano le proprietà degli ideali sotto operazione? Ovvero se tutti gli ideali coinvolti nell'operazione hanno una certa proprietà ce l'ha anche l'ideale uscente?
+	\vskip 0.3cm \begin{tabular}{lcccccc}
+	{\bf Proprietà} & {\bf $I + J$} & {\bf $I \cap J$} & {\bf $IJ$} & {\bf $I:J$} & {\bf $\sqrt{I}$} & {\bf $\cup_i^{Catena} I_i$} \\
+	\end{tabular} \vskip 0.3cm
+
+	\section*{Estensione e Contrazione}
+	Sia $\phi: A \rar B$ un omomorfismo di anelli. Sugli ideali di $A$ e di $B$ definiamo allora le seguenti operazioni: \\
+	\begin{itemize}
+		\item ({\bf Estensione}) Sia $I \subseteq A$ ideale. Definiamo $I^e := (\phi(I))$, ovvero come l'ideale generato dall'immagine di $I$ attraverso $\phi$
+		\item ({\bf Contrazione}) Sia $J \subseteq B$ ideale. Definiamo $J^c := \phi^{-1}(J)$, cioè la controimmagine di $J$ attraverso $\phi$. Notiamo che questo è sempre un ideale di $A$.
+	\end{itemize}
+	Ci chiediamo come si comportino le operazioni tra ideali e le proprietà degli ideali per contrazione e per estensione. Di seguito useremo la notazione standard appena introdotta con $I \subseteq A$ e $J \subseteq B$
+	\vskip 0.3cm \begin{tabular}{lcc}
+	{\bf Operazione} & {\bf Per estensione}                          & {\bf Per contrazione}                   \\
+	Somma            & $(I_1 + I_2)^e = I_1^e + I_2^e$               & $(J_1 + J_2)^c \supseteq J_1^c + J_2^c$ \\
+	Intersezione     & $(I_1 \cap I_2)^e \subseteq I_1^e \cap I_2^e$ & $(J_1 \cap J_2)^c = J_1^c \cap J_2^c$   \\
+	Prodotto         & $(I_1 I_2)^e = I_1^e I_2^e$                   & $(J_1 J_2)^c \supseteq J_1^c J_2^c$     \\
+	Quoziente        & $(I_1:I_2)^e \subseteq (I_1^e : I_2^e)$       & $(J_1:J_2)^c \subseteq (J_1^c : J_2^c)$ \\
+	\end{tabular} \vskip 0.3cm
+	Inoltre valgono $I \subseteq I^{ec}$, $J \supseteq J^{ce}$ e $J^c = J^{cec}$, $I^e = I^{ece}$. \\
+	
+	\vskip 0.5cm \begin{tabular}{lcc}
+	{\bf Proprietà} & {\bf Per estensione} & {\bf Per contrazione} \\
+	Primo           &                      &                       \\
+	Massimale       &                      &                       \\
+	Principale      &                      &                       \\
+	Radicale        &                      &                       \\
+	Irriducibile    &                      &                       \\
+	Primario        &                      &                       \\
+	\end{tabular} \vskip 0.3cm
+
+	\subsection{Trucchi assurdi}
+	\begin{itemize}
+		\item L'unione di una catena di ideali non-principali è non-principale
+		\item L'elemento massimale per inclusione tra gli ideali non-principali è primo
+	\end{itemize}
+
+	\section*{Localizzazione}
+	Studiamo ora la relazione tra gli ideali di $A$ e quelli di $A_S := S^{-1}A$. Chiamiamo banale l'ideale unitario $I = (1) = A$. Dato un ideale $I \subseteq A$ definiamo l'ideale $\Res (I) \subseteq A_S$ (denotato anche $I_S$) come gli elementi $\{ \frac{a}{s} \mid a \in I \}$. \\
+
+	\'E semplice verificare che $I_S$ è non banale $\sse I \cap S = \emptyset$. Inoltre $A_S / I_S = (A/I)_S$ dove l'$S$ che compare a destra è l'immagine di $S$ sotto la mappa naturale $A \rarr A/I$
+
+	\vskip 0.3cm \begin{tabular}{lcc}
+	{\bf Proprietà} & {\bf $I \implies I_S$} & {\bf $I_S \implies I$} \\
+	Primo           & \checkmark             & \checkmark             \\
+	Massimale       & \checkmark             & \crossmark             \\
+	\end{tabular} \vskip 0.3cm	
 
 \end{document}

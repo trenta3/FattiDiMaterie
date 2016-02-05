@@ -1,0 +1,23 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\newcommand{\Aut}{\text{Aut }}
+
+\begin{document}
+	\title{Coomologia di Gruppi}
+	
+	\section*{Classificazione dei complementi}
+	Sia dato $\phi: \pi \rar \Aut(G)$ omomorfismo e costruiamo il prodotto semidiretto $G \rtimes_\phi \pi$ con l'azione data dal morfismo $\phi$. In questo gruppo esistono, in generale, altre complementi di $G$ oltre a $\pi$. Ci poniamo lo scopo di classificarli attraverso alcune funzioni $f: \pi \rar G$. (indicheremo $\phi(\sigma)(g)$ con $g^\sigma$) \\
+	
+	Se $\omega$ è un complemento per $G$ e $\sigma \in \pi$ esiste un unico elemento $g \in G$ tale che $\sigma g \in \omega$. Definiamo allora una funzione $f: \pi \rar G$ che associa a $\sigma \in \pi$ l'elemento $g \in G$ tale che $\sigma g \in \omega$. La $f$ gode della proprietà $f(\sigma \tau) = f(\sigma)^\tau f(\tau)$ (proprietà degli omomorfismi crociati). Notiamo inoltre che dato un omomorfismo crociato $f$ le coppie $(\sigma, f(\sigma))$ formano un sottogruppo di $G \rtimes_\phi \pi$ \\
+	
+	Inoltre notiamo che questi procedimenti stabiliscono una biggezione tra gli omomorfismi crociati ed i complementi di $G$ in $G \rtimes_\phi \pi$ \\
+	
+	Se $\psi$ è l'omomorfismo di proiezione su $\pi$ ($\psi(\sigma, g) = \sigma$) ed $\exists s$ omomorfismo $\pi \rar G \rtimes_\phi \pi$ tali che $\psi s = \Id_\pi$ allora $s$ si dice spezzamento. \\
+	
+	Supponiamo ora di avere $\omega_1$ ed $\omega_2$ due complementi di $G$ coniugati tra loro, ovvero tali che $\omega_1^x = \omega_2$. Sia $x = yg_1$, con $y \in \omega_1, g_1 \in G$. Definiamo $g := g_1^{-1}$ e con un po' di conti si vede che $\omega_1$ ed $\omega_2$ sono coniugati se e solo se vale la seguente relazione tra gli omomorfismi crociati indotti $f_1, f_2$: $$ f_2(\sigma) = g^\sigma f_1(\sigma) g^{-1} \quad \forall \sigma \in \pi $$ Inoltre la relazione così indotta sugli omomorfismi crociati è di equivalenza. \\
+	
+	Esiste quindi una corrispondenza biunivoca tra le classi di coniugio dei complementi di $G$ nel prodotto semidiretto $G \rtimes_\phi \pi$ e le classi $[f]$ dell'equivalenza data sopra. Notiamo poi che gli omomorfismi crociati equivalenti a quello indotto da $\pi$ sono quelli per i quali $\exists g \in G \tc f(\sigma) = g^\sigma g^{-1} \quad \forall \sigma \in \pi$. Tali omomorfismi crociati si chiamano principali. \\
+	
+	\section*{Primo gruppo di coomologia}
+	
+\end{document}

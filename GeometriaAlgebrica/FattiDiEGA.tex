@@ -2,10 +2,67 @@
 \usepackage{pgf}
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata}
+\newcommand{\Molt}{\text{molt }}
 
 \begin{document}
 	\title{Fatti di EGA}
+	
+	\section*{Notazioni ed Introduzione}
+	Il corso da cui sono tratti gli enunciati è diviso in alcune parti: nella prima si cerca di dare un'introduzione più concreta alla geometria algebrica attraverso anche esempi di curve in $\bbP^2$, nella seconda si fanno altre cose... bla bla bla...
 
-	\section*{}
+	\section*{Prima Parte}
+
+	\subsection*{Studio dell'irriducibilità dei polinomi "quadratici"}	
+	$p(x,y) = y^2 - f(x) \in \bbK[x][y]$. Se nella fattorizzazione di $f(x) = c \cdot p_1^{\alpha_1} \ldots p_k^{\alpha_k}$ con $p_i$ irriducibili e distinti, $\alpha_i > 0$ esiste un $i$ tale che $\alpha_i$ è dispari allora si ha $p(x,y)$ irriducibile. Inoltre se $\bbK$ è algebricamente chiuso questa condizione è anche necessaria.
+
+	\subsection*{Studio locale delle Ipersuperfici Affini}
+	$f \in \bbK[x_1, \ldots, x_n]$, $p \in V(f) \subseteq \bbA^n$. Sia $l$ retta di $\bbA^n$ passante per $p$, ovvero $l = \{p + tv \mid t \in \bbK \}$ con $v \in \bbK^n \setminus \{0\}$. \\
+
+	Consideriamo il polinomio $g(t) := f(p + tv) \in \bbK[t]$ e distinguiamo due casi:
+	\begin{itemize}
+		\item $g \equiv 0$: Significa che la retta $l$ è contenuta in $V(f)$ e quindi diciamo che $l$ interseca $\cI_f$ in $p$ con molteplicità infinita.
+		\item $g \not\equiv 0$, ma $g(0) = 0$ perché $p \in V(f)$. Quindi in $t=0$ ha una radice con una certa molteplicità $g(t) = t^m h(t)$ con $h(0) \neq 0$. Allora dico che $l$ interseca $\cI_f$ in $p$ con molteplicità $m$.
+	\end{itemize}
+	Se $m > 1$ diciamo che $l$ è tangente a $\cI_f$ in $p$. \\
+	Invece diciamo che $p$ è un punto liscio o non singolare di $\cI_f$ se esiste almeno una retta $l$ che passa per $p$ e non è tangente. \\
+	Fissato un punto $p$ vengono chiamate tangenti principali le rette tangenti che intersecano $\cI_f$ con molteplicità massima.
+
+	\vskip 1.2cm
+	
+	In generale, a meno di una traslazione possiamo supporre $p = (0,0)$ e $p \in V(f)$. Allora considero una retta per l'origine $l= \{ tv \mid t \in \bbK \}$ e $g(t) := f(tv)$, con $v = (v_1, \ldots, v_n) \in \bbK^n \setminus \{0\}$. \\
+	Allora $l$ è tangente a $f$ in $p$ $\sse g'(0) = 0$. $g'(t)\mid_{t=0} = \sum_{i=1}^n \dpar{f}{x_i} (tv) \cdot v_i \mid_{t=0} = \sum_{i=1}^{n} \dpar{f}{x_i} (p) \cdot v_i$ quindi $g'(0) = 0 \sse \sum_{i=1}^{n} \dpar{f}{x_i} (p) \cdot v_i = 0$ e distinguiamo dunque due casi:
+	\begin{itemize}
+		\item $\dpar{f}{x_i} (p) = 0 \quad \forall i$ allora $p$ è un punto singolare
+		\item $\exists i \tc \dpar{f}{x_i} (p) \neq 0$ allora $p$ è liscio e l'insieme delle direazioni in $\bbK^n$ tangenti a $\cI_f$ in $p$ è un iperpiano di equazione $\sum_i \dpar{f}{x_i} (p) \cdot v_i = 0$
+	\end{itemize}
+
+	\vskip 1.2cm
+
+	Inoltre, se scriviamo $f(x_1, \ldots, x_n) = f_m(\bm x) + h(\bm x)$ dove $f_m$ è omogeneo di grado $m \ge 1$ e tutti i monomi di $h$ hanno grado maggiore di $m$ allora abbiamo $\cI_f$ è liscia in $p$ $\sse$ $m = 1$ e inoltre sappiamo che ogni retta interseca $\cI_f$ in $p$ con molteplicità $\ge m$. E se il campo è infinito, per il principio di identità dei polinomi ho che $m$ è il minimo della molteplicità d'intersezione di $l$ con $\cI_f$ in $p$ al variare di $l$ tra le rette in $p$. Essa viene chiamata molteplicità del punto.
+	Una retta si dice trasversale se $\Molt (l) = 1$.
+
+	Si chiama cono tangente a $\cI_f$ in $p$ l'insieme delle rette che intersecano $\cI_f$ in $p$ con molteplicità maggiore del minimo $m$. è dato dall'equazione $f_m = 0$.
+
+	Inoltre la molteplicità di $p$ per $\cI_f$ è uguale a $m$ $\sse$ tutte le derivate parziali di $f$ di ordine minore di $m$ si annullano in $p$ e c'è almeno una derivata parziale $m$-esima che non è nulla.
+
+	Diciamo che un punto è un nodo se è singolare di molteplicità due.
+
+	\subsection*{Omogenizzazione e Disomogeneizzazione}
+	$D: \bbK[x_0, \ldots, x_n] \rar \bbK[x_1, \ldots, x_n]$ tale che $F(x_0, \ldots, x_n) \mapsto F(1, x_1, \ldots, x_n)$ che è ovviamente un omomorfismo di $\bbK$-algebre. \\
+	$H: \bbK[x_1, \ldots, x_n] \rar \bbK[x_0, \ldots, x_n]$ che omogeneizza i polinomi, ovvero dato $f \neq 0$, $f \in \bbK[x_1, \ldots, x_n]$ sia $d = \Deg f$. Allora $H(f) := x_0^d \cdot f(\frac{x_1}{x_0}, \frac{x_2}{x_0}, \ldots, \frac{x_n}{x_0})$. Notiamo che $H$ NON è un omomorfismo però è moltiplicativo. \\
+	Allora valgono:
+	\begin{itemize}
+		\item $H$ è moltiplicativo: $H(fg) = H(f) H(g)$
+		\item $D \circ H = \Id$
+		\item $H \circ D \mid_{\text{Polinomi Omogenei}} (F) = F_1$ con $F \in \bbK[x_0, \ldots, x_n]_d$ e vale $F = x_0^m F_1$ e $x_0 \nmid F_1$. Ovvero se $x_0 \mid F$ perdiamo le potenze di $x_0$ nel polinomio, altrimenti otteniamo la stessa cosa.
+		\item $f \in \bbK[x_1, \ldots, x_n]$ irriducibile $\implies$ $F=H(f)$ irriducibile.
+		\item $F \in \bbK[x_0, \ldots, x_n]$ irriducibile e $\neq x_0$ $\implies$ $f=D(F)$ irriducibile.
+	\end{itemize}
+
+	\subsection*{Fattorizzazione dei Polinomi Omogenei}
+	Sia $F$ omogeneo, allora scrivo $F = x_0^m G$, con $G$ omogeneo e $x_0 \nmid G$. Considero allora $g := D(G) = D(F) \in \bbK[x_1, \ldots, x_n]$ e $g = c \cdot p_1^{\alpha_1} \ldots p_k^{\alpha_k}$ con i $p_i$ irriducibili distinti e $\alpha_i > 0$, $c \in \bbK^{*}$. Allora $P_i := H(p_i)$ che è ancora irriducibile e $F = x_0^m G = x_0^m H(g) = c x_0^m P_1^{\alpha_1} \ldots P_k^{\alpha_k}$. Quindi la fattorizzazione dei polinomi omogenei avviene in una variabile in meno ed i fattori di un polinomio omogeneo sono omogenei.
+	
+	\subsection*{Studio locale delle Ipersuperfici Proiettive}
+	Lo facciamo passando alle carte affini: supponiamo di avere $[f]$ di $\bbA^n$ e ci associamo $[F]$ ipersuperficie proiettiva (detta chiusura proiettiva) $F = H(f)$ e inoltre data $[F]$ di $\bbP^n$ associamo $[D(F)]$ chiamato parte affine.
 
 \end{document}

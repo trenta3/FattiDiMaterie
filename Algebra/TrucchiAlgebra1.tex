@@ -1,0 +1,142 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\newcommand{\Aut}{\text{Aut }}
+\newcommand{\sgr}{\sqsubseteq}
+\newcommand{\nrm}{\lhd}
+
+\begin{document}
+	\title{Trucchi di Algebra 1}
+	\autodate
+	Abbiamo cercato di raccogliere tutti i trucchi che ci è capitato di vedere più di una volta negli esercizi dei compiti d'esame di Algebra 1 e ne abbiamo fatto uno studio sistematico ed un po' più approfondito siccome al corso spiegano solo la teoria, mentre per fare gli esercizi serve una serie infinita di trucchetti vari.
+	
+	\section{Gruppi}
+	\subsection{Teorema di Sylow Espanso}
+	Versione "potenziata" del teorema di Sylow, con tutte le conseguenze che esso ha:
+	\begin{itemize}
+		\item
+	\end{itemize}
+	
+	\subsection{Lemma del più piccolo primo}
+	Se $H \sgr G$, con $G$ finito, è tale che $[G:H] = p$, dove $p$ è il più piccolo primo che compare nella fattorizzazione di $\mid G \mid$ allora $H$ è normale in $G$ (basta usare il teorema dell'indice fattoriale e notare che il sottogruppo normale che ci restituisce è proprio $H$)
+	
+	\subsection{Conteggio numero di sottogruppi ciclici}
+	Supponiamo di contare il numero di sottogruppi ciclici di ordine $n$ del gruppo $G$. Basterà allora contare il numero di elementi di ordine $n$ in $G$ (solitamente molto più agevole) e poi dividere questo numero per $\phi(n)$ (dove la $\phi$ è quella di Eulero): infatti siamo interessati al numero di sottogruppi, ciascuno dei quali ha esattamente $\phi(n)$ generatori.
+	
+	\subsection{Conteggio numero di sottogruppi isomorfi a $\bbZ_p \times \bbZ_p$}
+	
+	
+	\subsection{Particolari sottogruppi caratteristici (in un abeliano)} 
+	Ricordiamo che nei gruppi abeliani l'elevamento a potenza è un morfismo: $\phi_k: G \rar G$ definito da $\phi_k(g) = g^k$. Allora in particolare si può osservare che, $\forall k$, $\Ker \phi_k$ e $\Im \phi_k$ sono sottogruppi caratteristici, sono infatti rispettivamente tutti gli elementi ad avere ordine divisore di $k$ e tutti gli elementi ad ottenersi come potenza $k$-esima di un qualche elemento in $G$	
+	
+	\subsection{Modi per dire che un sottogruppo è caratteristico}
+	Per dire che un certo sottogruppo è caratteristico va caratterizzato in maniera quasi letteraria, con espressioni astratte di cui diamo qualche esempio (conta molto la fantasia):
+	\begin{itemize}
+		\item \'E il generato da tutti gli elementi di ordine due.
+		\item \'E il normalizzatore del generato da tutti gli elementi di ordine quattro e cinque.
+		\item \'E il centro del sottogruppo dei commutatori.
+		\item \'E il più grande sottogruppo ad avere intersezione banale con il sottogruppo generato dagli elementi di ordine tre.
+	\end{itemize}
+
+	\subsection{Trucchi per gruppi semplici}
+
+	\subsection{Dualità ordine-indice per i gruppi abeliani}
+	
+	\subsection{Centralizzatore e Normalizzatore in $S_n$ ed in $A_n$}
+
+	\subsection{Immersioni minime in $S_n$ ed $A_n$}
+	
+	\subsection{Equazione $\sigma^k = \tau$ in $S_n$}
+	
+	\subsection{$p$-Sylow di $S_n$}
+	Scriviamo $n$ in base $p$: $n = k_0 + k_1 p + k_2 p^2 + \ldots + k_r p^r$. Allora i $p$-Sylow di $S_n$ (Li indichiamo con $Q_{p, n}$) sono isomorfi a
+	$$ Q_{p,n} \cong \underbrace{Q_{p, p} \times \ldots \times Q_{p,p}}_{k_1 \text{volte}} \times \underbrace{Q_{p, p^2} \times \ldots \times Q_{p, p^2}}_{k_2 \text{volte}} \times \ldots \times \underbrace{Q_{p, p^r} \times \ldots \times Q_{p,p^r}}_{k_r \text{volte}} $$
+	Questo si vede abbastanza bene appena si capisce come sono fatti quelli di $S_{p^k}$: In pratica sono costituiti da tutti i $p$-cicli disgiunti possibili, uniti a $p$ a $p$ con un'altra azione di scambio tra di loro.
+	[DA INSERIRE DISEGNO DEI P-SYLOW]
+	Per mostrare che sono effettivamente fatti così, si calcola la cardinalità di questi sottogruppi di $S_n$ e si nota che è uguale a quella attesa da un $p$-Sylow di $S_n$
+	
+	
+	\subsection{Lemmi noti sui $p$-gruppi}
+	Sia $P$ un $p$-gruppo, ovvero $\mid P \mid = p^k$. Allora si ha:
+	\begin{itemize}
+		\item $P$ ha centro non banale, ovvero $Z(P) \neq (e)$
+		\item $P$ contiene almeno un sottogruppo di ogni ordine possibile e contiene almeno un sottogruppo normale di ogni ordine possibile
+		\item Se ho $H \nrm P$ allora $H \cap Z(P) \neq (e)$, ovvero ogni sottogruppo normale interseca il centro in maniera non banale
+	\end{itemize}
+	
+	\subsection{Numero di sottogruppi (normali e non) di un $p$-gruppo}
+	
+	\subsection{Automorfismi di $\bbZ_{p^{\alpha_1}} \times \ldots \times \bbZ_{p^{\alpha_n}}$}
+	
+	\subsection{Centro di un prodotto diretto e semidiretto}
+	Siano $H$, $K$ due gruppi finiti e $G = H \times K$ allora $Z(G) = Z(H) \times Z(K)$ (segue banalmente impostando il conto). \\
+	Se invece $G = H \rtimes_\phi K$ allora [INSERIRE FORMULA PER IL CENTRO]
+	
+	\subsection{Quozientare $H \rtimes_\phi K$ per $H$}
+	Esempio: Siano $p$ un numero primo, $\phi: \bbZ_{p-1} \rar \Aut{\bbZ_p}$ un omomorfismo iniettivo, $G = \bbZ_p \rtimes_\phi \bbZ_{p-1}$ e $d$ un divisore di $p-1$. Dimostrare allora che ogni sottogruppo di $G$ di ordine $d$ è ciclico e che, se $H$ e $K$ sono due sottogruppi distinti di $G$ di ordine $d$, allora $H \cap K = \{e\}$
+
+	\subsection{$p$-Sylow di gruppi abeliani}
+	Se $G$ è un gruppo abeliano finito, ricordiamo che i $p$-Sylow esistono e sono unici (perché essendo sottogruppi sono normali) e sono tali che, detto $G_p = \{ x \in G \mid \text{Ord }(x) = p^k \}$ allora si ha $G = \prod_{p \in \bbP} G_p$. \\
+	Inoltre se $H \sgr G$ allora, definiti $H_p$ come sopra si ha $H = \prod_{p \in \bbP} H_p$ e inoltre $H_p \sgr G_p$.
+	
+	\subsection{Formula delle cardinalità di $HK$}
+	Utile in molti contesti: $$ \mid HK \mid = \frac{\mid H \mid \cdot \mid K \mid}{\mid H \cap K \mid} $$
+	dove per $HK$ si intende il sottoinsieme (in generale non è un sottogruppo) $HK := \{ hk \mid h \in H, k \in K \}$
+	
+	\subsection{Sottogruppi di indice $k$ in $S_n$}
+	Per $k \neq 2$, $n \ge 5$ e $k < n$ non ci sono sottogruppi di questo indice (corollario dell'indice fattoriale e poi usare che $A_n$ è l'unico sottogruppo normale), mentre per $k = n$ tutti i sottogruppi di indice $n$ sono isomorfi a $S_{n-1}$ (basta considerare l'azione di traslazione sulle loro classi laterali)
+
+	\section{Anelli}
+	\subsection{Conteggio di zero-divisori, invertibili e nilpotenti in un anello polinomiale quoziente}
+
+	\subsection{Fatti sugli interi di Gauss}
+	
+	\subsection{Versione potenziata di Eisenstein}
+	Sia $f(x) \in A[x]$ un polinomio. Allora sia $P \subseteq A$ un ideale primo di $A$. Se scrivendo $f(x) = \sum_i a_i x^i$ si ha che $a_0, a_1, \ldots, a_{n-1} \in P$ e $a_n \not\in P$ e $a_0 \not\in P^2$ allora ogni fattorizzazione di $f$ in $A[x]$ è tale che uno dei due polinomi è una costante. \\
+	Supponiamo infatti che si scriva $f(x) = g(x)h(x)$. Riduciamo allora tutti i coefficienti di $f, g, h$ modulo $P$ ed otteniamo $\bar{f}(x) = \bar{g}(x) \bar{h}(x) \in \frac{A}{P}[x]$. Notiamo che $\Deg \bar{f} = \Deg f$ poiché $a_n \not\in P$. Inoltre ora si deve avere che $\bar{f}(x) = \bar{a_n} x^n$. Ma $\bar{g}$ e $\bar{h}$ adesso devono essere entrambi della forma $\lambda x^k$ e $\mu x^h$ (basta immergere $\frac{A}{P}$ nel suo campo delle frazioni e sappiamo che $K[x]$ è UFD). Quindi se $h,k>0$ allora abbiamo vinto perché otterremmo che $a_0 \in P^2$, altrimenti otteniamo che uno dei due è semplicemente una costante.
+	
+	\subsection{Invertibili di $S^{-1}A$ e proprietà di $S^{-1}A$}
+	(Dovrebbe starci scritto quando è che è un PID, etc.)
+	
+	\subsection{Ideale di Jacobson e nilradicale}
+	
+	\subsection{Possibile grado su $\bbZ[\gamma]$ con $\gamma$ di secondo grado}
+	Ad esempio $\bbZ[\frac{1+i\sqrt{7}}{2}]$ è un anello euclideo con il grado dato da $d(m+n\gamma) = m^2 + mn + 2n^2$
+	
+	\subsection{Teorema cinese}
+	Riportiamo l'enunciato solo perché spesso ce ne si dimentica ed in alcuni esercizi invece è l'unico modo per risolverli. Siano $I, J \subseteq A$ due ideali. Se $I + J = A$ allora $\frac{A}{IJ} \cong \frac{A}{I \cap J} \cong \frac{A}{I} \times \frac{A}{J}$
+	
+	\subsection{Ideali primi di $\bbZ[x]$}
+	
+	\section{Campi}
+	\subsection{Sottoestensioni quadratiche di $\bbQ(\zeta_m)$}
+	
+	\subsection{Polinomi di gradi $2$, $3$ e $4$ biquadratici}
+	
+	\subsection{Confronto tra estensioni quadratiche}
+	$K(\alpha), K(\beta)$ due estensioni quadratiche di $K$. Allora $K(\alpha) = K(\beta) \sse \alpha\beta \in K^2$.
+	[DIMOSTRAZIONE DA METTERE]
+	
+	\subsection{Estensioni quadratiche sono sempre normali}
+	Sia $L$ su $K$ un'estensione di grado due. Allora si prenda $\alpha \in L \setminus K$ è tale che $L = K(\alpha)$. Quindi si prenda il polinomio minimo di $\alpha$ su $K$: $\mu(x) = (x-\alpha)(x-\beta) = x^2 + rx + s$. Allora per le formule di Viète si ha $\alpha\beta = s \in K$ e quindi ogni estensione di $K$ che contiene $\alpha$ deve contenere anche $\beta$.
+	
+	\subsection{Campo di spezzamento di $x^n - a$}
+	
+	\subsection{$\sqrt[n]{b} \in \bbQ(\sqrt[n]{a})$?}
+	
+	\subsection{Fattorizzazione di un irriducibile in un'estensione normale}
+	
+	\subsection{Estensione $\bbQ(\sqrt[3]{a + \sqrt[2]{b}})$}
+	
+	\subsection{Estensione $\bbQ(\sqrt[2]{a + \sqrt[2]{b}})$}
+	
+	\subsection{Metodi per dire che un polinomio è irriducibile}
+	
+	\subsection{Fatti sui campi finiti}
+	
+	\subsection{Fatti sulle estensioni di Galois}
+	
+	\subsection{Sottoestensioni di $\bbQ(\sqrt[n]{a})$}
+	
+	\subsection{$\sqrt[n]{a} \in \bbQ(\zeta_m)$?}
+
+\end{document}
