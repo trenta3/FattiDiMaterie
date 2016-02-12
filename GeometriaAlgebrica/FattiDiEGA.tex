@@ -1,4 +1,6 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+\usepackage[small,nohug,heads=vee]{diagrams}
+\diagramstyle[labelstyle=\scriptstyle]
 \usepackage{pgf}
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata}
@@ -84,10 +86,24 @@
 	\subsection*{Spazio tangente a $F$ in $a$ (applicato)}
 	$\sum_{i=1}^{n} \dpar{f}{x_i} (a) \cdot (x_i - a_i) = 0$ è come fare $\sum_{i=1}^{n} \dpar{F}{x_i} (p) \cdot x_i - \sum_{i=1}^{n} \dpar{F}{x_i} (p) \cdot a_i$ e, supponendo che $p \in V(F)$ si ha (eulero) $ = \dpar{F}{x_0} (p) + \sum_{i=1}^n \dpar{F}{x_i}(p) \cdot x_i$ ovvero siccome la chiusura proiettiva si ottiene omogeneizzando con $x_0$ lo spazio tangente proiettivo è $\sum_{i=0}^n x_i \cdot \dpar{F}{x_i}(p) = 0$
 	
+	\subsection*{Teoria del Risultante}
+	$A$ dominio d'integrità commutativo unitario. $F, G \in A[y]$, $F = a_0 + a_1 y + a_2 y^2 + \ldots + a_m y^m$, $G = b_0 + b_1 y + \ldots + b_n y^n$ dove $a_i, b_i \in A$ allora
+	$$ Ris_y (F,G) := \Det \left( \begin{array}{ccccccccc}
+	a_0		& a_1		& \ldots	& \ldots	& a_m		& 0	 		& 0			& \ldots	& 0		 \\
+	0		& a_0		& \ldots	& \ldots	& \ldots	& a_m		& 0			& \ldots	& 0		 \\
+	\vdots	& \vdots	& \vdots	& \vdots	& \vdots	& \vdots	& \vdots	& \vdots	& \vdots \\
+	0		& \ldots	& 0			& a_0		& \ldots	& \ldots	& \ldots	& \ldots	& a_m	 \\
+	\hline
+	b_0		& b_1		& \ldots	& \ldots	& \ldots	& b_n		& 0			& 0			& 0		 \\
+	0		& b_0		& \ldots	& \ldots	& \ldots	& \ldots	& b_n		& 0			& 0		 \\
+	\vdots	& \vdots	& \vdots	& \vdots	& \vdots	& \vdots	& \vdots	& \vdots	& \vdots \\
+	0		& \ldots	& 0			& b_0		& \ldots	& \ldots	& \ldots	& \ldots	& b_n	 \\
+	\end{array} \right) $$
+
 	\subsection*{Teorema di Bèzout}
 	$\cC = [F], \cD = [G]$, con $m = \Deg \cC, n = \Deg \cD$, $K$ infinito. Allora si ha
 	\begin{enumerate}
-		\item Se il numero di intersezioni tra $\cC$ e $\cD$ è $\ge mn$ allora $\cC$ e $\cD$ hanno una componente in comune
+		\item Se il numero di intersezioni tra $\cC$ e $\cD$ è $> mn$ allora $\cC$ e $\cD$ hanno una componente in comune
 		\item Se $K$ è algebricamente chiuso e $\cC$ e $\cD$ non hanno componenti in comune, allora $\cC \cap \cD$ consta di esattamente $mn$ punti se contati con molteplicità
 	\end{enumerate}
 	
@@ -180,8 +196,11 @@
 	I chiusi di $\bbA^1$ sono $\bbA^1$, $\emptyset$ e gli insiemi finiti di punti, ovvero La topologia di Zariski su $\bbA^1$ coincide con la cofinita. \\
 	I chiusi di $\bbA^2$ sono unioni finite di punti e di ipersuperfici.
 	
+	\subsection*{Ipersuperfici}
+	Con $K$ algebricamente chiuso intederemo ora per ipersuperficie il luogo di zeri di un'equazione e non più l'equazione stessa. Infatti se $X = V(f)$ ipersuperficie ($J = (f)$) allora se $f = p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ con $p_i$ irriducibili e distinti, $\alpha_i \ge 0$, si ha $I(X) = \sqrt{(f)} = (p_1 \cdot \ldots \cdot p_k)$ e $V(f) = V(p_1) \cup \ldots \cup V(p_k)$ e, a meno di fattori multipli, il supporto le identifica univocamente.
+	
 	\subsection*{Chiusura proiettiva di chiusi algebrici}
-	$X \subseteq \bbA^n$ chiuso. Allora la chiusura proiettiva è la chiusura di $X$ secondo Zariski nello spazio proiettivo $\bbP^n$ nel quale $\bbA^n$ è naturalmente immerso. Non basta omogeneizzare i generatori dell'ideale (vedi cubica gobba), serve prendere ogni elemento dell'ideale, omogeneizzaarlo e poi prendere l'ideale omogeneo generato. $I(\bar{X}) = (H(f), f \in I(X))$
+	$X \subseteq \bbA^n$ chiuso. Allora la chiusura proiettiva è la chiusura di $X$ secondo Zariski nello spazio proiettivo $\bbP^n$ nel quale $\bbA^n$ è naturalmente immerso. Non basta omogeneizzare i generatori dell'ideale (vedi cubica gobba), serve prendere ogni elemento dell'ideale, omogeneizzaarlo e poi prendere l'ideale omogeneo generato. $I(\bar{X}) = (H(f), f \in I(X))$, ma se $X$ è un'ipersuperficie, allora ovviamente basta omogeneizzare la singola equazione (tanto le altre sono tutte sue multipli).
 	
 	\subsection*{Nullstellensatz}
 	Se $K$ è un campo algebricamente chiuso, $J \subseteq K[x_1, \ldots, x_n]$ ideale. Allora le seguenti condizioni sono equivalenti:
@@ -212,19 +231,103 @@
 	Abbiamo una forma "Relativa" del Nullstellensatz, come corrispodenza $1:1$ tra gli ideali radicali di $K[X]$ e i sottoinsiemi chiusi $Y \subseteq X$.
 	
 	\subsection*{su $K$ algebricamente chiuso $r_X$ è un isomorfismo di $K$-algebre}
+	$K$ algebricamente chiuso, allora $r_X : \frac{K[x_1, \ldots, x_n]}{I(X)} = K[X] \rar \cO_X(X)$ definita da $f \mapsto f\mid_X$ è un'isomorfismo di $K$-algebre. Ovviamente è un morfismo di $K$-algebre ed è iniettivo per come lo abbiamo costruito (quozientando sul ker). \\
+	Sia allora $\phi \in \cO_X(X)$ e $J := \{ f \in K[X] \mid f\phi \in K[X] \} \subseteq K[X]$ ideale. Allora dico che $V(J) = \emptyset$ (da cui seguirebbe per NSS che $1 \in J$ e quindi $1 = \sum^{\text{Finita}} a_i(x) f_i(x)$ con $a_i \in K[X]$ e $f_i \in J$. Allora avrei $\phi = \sum_i a_i (f_i\phi)$ e sappiamo che $f_i \phi \in K[X]$ per definizione delle $f_i$). \\
+	Fissiamo allora $p \in X$ e mostriamo che $p \not\in V(J)$. Decomponiamo per prima cosa $X$ in irriducibili e li separiamo in base a se contengono $p$ oppure no: $$ X = \underbrace{(X_1 \cup \ldots \cup X_k)}{\text{che contengono }p} \cup \underbrace{(X_{k+1} \cup \ldots \cup X_s)}{\text{che non contengono }p} $$
+	Allora $\exists U_p$ aperto di $X$ tale che $p \in U_p$ e $a, b \in K[X]$ tali che $\phi\mid_{U_p} \equiv \frac{a}{b}$. Consideriamo la funzione $b\phi - a = 0$ su $U_p$ ma $U_p \cap X_i \neq \emptyset \quad \forall i = 1, \ldots, k$ e quindi $U_p$ è denso in $X_1 \cup \ldots \cup X_k$, da cui segue $b\phi - a = 0$ su $X_1 \cup \ldots \cup X_k$ perchè il luogo di zeri di una funzione regolare è un chiuso. \\
+	Inoltre, siccome $p \not\in X_{k+1} \cup \ldots \cup X_s$ allora (per definizione di chiusi di Zariski) $\exists c \in K[X], c \in I(X_{k+1} \cup \ldots \cup X_s) \tc c(p) \neq 0$ allora $c(b\phi -a) \equiv 0$ su tutto $X$ ma allora $ca \in K[X]$ e si ha $ac = (cb)\phi$ e quindi $cb \in J$ ma allora $(cb)(p) \neq 0$
 	
 	\subsection*{Morfismi da una VQP in $\bbA^m$}
 	Data $X \subseteq \bbP^n$ VQP vorrei descrivere i morfismi $X \xrar{f} \bbA^m$. Vale che $f: X \rar \bbA^m$ è un morfismo di VQP se e solo se le componenti di $f$ sono funzioni regolari.
 	
 	\subsection*{Varietà Affini}
 	$X$ VQP si dice varietà affine se $X$ è isomorfo ad un chiuso di uno spazio affine. \\
-	ATTENZIONE: Sia $X \subseteq \bbA^n$ chiuso e scegliamo $f \in K[X] \setminus 0$ e diciamo $X_f := \{ x \in X \mid f(x) \neq 0 \}$ è un aperto principale. Avevamo già osservato che gli aperti principali formano una base della topologia di Zariski di $X$. Mostriamo ora che $X_f$ è una varietà affine.
+	ATTENZIONE: Sia $X \subseteq \bbA^n$ chiuso e scegliamo $f \in K[X] \setminus 0$ e diciamo $X_f := \{ x \in X \mid f(x) \neq 0 \}$ è un aperto principale. Avevamo già osservato che gli aperti principali formano una base della topologia di Zariski di $X$. Mostriamo ora che $X_f$ è una varietà affine. (Basta "mandare gli zeri all'infinito", come nel Rabinowitsch trick) e quindi otteniamo il risultato che ogni VQP ha una base di aperti affini.
 	
 	\subsection*{Dualità Algebro-Geometrica}
 	$f: X \rar Y$ morfismo di VQP. Allora $\exists f^{*}: \cO_Y(Y) \rar \cO_X(X)$ chiamato pullback definito da $\phi \mapsto \phi \circ f$ ed è un morfismo di $K$-algebre. \\
-	Inoltre se $f$ è un isomorfismo di VQP allora $f^{*}$ è un isomorfismo di $K$-algebre.
+	Inoltre se $f$ è un isomorfismo di VQP allora $f^{*}$ è un isomorfismo di $K$-algebre.\\
+	Notiamo che se $X$ è un chiuso affine allora $K[X]$ è una $K$-algebra finitamente generata e ridotta, ovvero senza nilpotenti. \\
+	Ciò ci permette di determinare $K[X_f]$ per $X_f$ un aperto principale. (Usare l'isomorfismo dato dal fatto che gli aperti principali sono affini e passando alla star localizzare ad $f$)
 	
-	\section*{Terza Parte: Dimensione}
+	\subsection*{Funzioni Regolari su tutto $\bbP^n$}
+	$K$ algebricamente chiuso, allora ogni funzione regolare su tutto $\bbP^n$ è costante. (Piuttosto agile, ad esempio su $\bbP^1$ considerare i due aperti principali con le loro equazioni $f = p(t) = q(\frac{1}{t})$)
+	
+	\subsection*{$K$ algebricamente chiuso, $\bbA^2 \setminus \{(0,0)\}$ non è una VQP}
+	$K$ algebricamente chiuso. Se copriamo $X = \bbA^2 \setminus \{(0,0)\}$ con due aperti $U = \{x \neq 0\}$ e $V = \{y \neq 0\}$ che sono affini, si ha $K[U] = K[\bbA^2]_x = K[x, y]_x$ e $K[V] = K[x,y]_y$. Allora $\alpha: X \rar \bbA^2$ l'immersione mi da l'applicazione di pullback $\alpha^*$. Mostrando ora che è iniettiva e surgettiva vediamo che $X$ non è una VQP perché abbiamo un ideale fantasma ($M = (x,y)$ che è massimale, ma $V_X(M) = \emptyset$) e quindi fallisce il Nullstellensatz relativo.
+		
+	\subsection*{Lemmi e definizioni un po' casuali}
+	\begin{itemize}
+		\item Un morfismo $X \xrar{f} Y$ di VQP si dice dominante se la sua immagine è densa.
+		\item Nel caso affine (se $X$ e $Y$ sono affini), $f$ è dominante se e solo se $f^{*}$ è iniettiva.
+		\item In generale i morfismi non sono né aperti né chiusi.
+		\item Diciamo che un insieme è costruibile se è un'unione finita di localmente chiusi. (Non lo dimostreremo, ma l'immagine di ogni morfismo è un costruibile)
+		\item $\bbZ \subseteq \bbC$ è denso con la topologia di Zariski.
+		\item $K[\bbA^n] \cong K[x_1, \ldots, x_n]$
+		\item $X \subseteq \bbA^n, Y \subseteq \bbA^m$ chiusi. Allora $f: X \rar Y$ morfismo si dice immersione chiusa se $Z = f(X)$ è chiuso e $X \xrar{f} Z$ è un isomorfismo. \\
+			Vale che $f$ è un'immersione chiusa $\sse f^{*}$ è surgettiva.
+		\item $X, Y$ {\bf affini}. Allora $\phi: K[Y] \rar K[X]$ omomorfismo di $K$-algebre $\implies \exists ! f: X \rar Y$ morfismo tale che $\phi = f^*$
+		\item $X, Y$ {\bf affini}, $f: X \rar Y$ morfismo. Allora $f$ è isomorfismo se e solo se $f^*$ lo è (insomma abbiamo il viceversa se le varietà sono affini)
+	\end{itemize}
+	
+	\subsection*{Mappa di Veronese}
+	$\cV_{1,2}: \bbP^1 \rar \bbP^2$ definita da $[x_0, x_1] \mapsto [x_0^2, x_0x_1, x_1^2]$ è ben definita, continua, ed è un morfismo che ha come immagine $\Img \cV_{1,2} = \{y_0y_2 - y_1^2 = 0\}$, viene detta mappa di Veronese. \\
+	$\cV_{a,b}: \bbP^k \rar \bbP^N$ è la mappa di Veronese, dove $a$ è la dimensione dello spazio di partenza e $b$ è il grado dei monomi in arrivo e quindi $N = \binom{n+k}{k} - 1$ e su $\bbP^N$ abbiamo le coordinate $z_I$ dove $I$ è un multiindice di lunghezza $k$ e di grado $n$. La mappa di veronese è quindi definita da $\cV_{a,b} ([x_0, \ldots, x_k]) = [x^I]_I$ al variare di tutti i multiindici $I$ ed è un morfismo. \\
+	Il fatto che gli $x^I$ commutino tra di loro ci dice quali sono le condizioni sulle coordinate immagine. Sia $\Sigma_{k,N} := \{ z_I z_J = z_{I'} z_{J'} \mid \forall I, J, I', J' \tc I+J = I'+J' \}$ che è quindi definito da una collezione di quadriche. È chiaro che $\Img \cV_{k,N} \subseteq \Sigma_{k,N}$ e definiamo l'inversa $g: \Sigma_{k,N} \rar \bbP^k$ mostrando che ci sono alcune coordinate che non si annullano mai e prendendo stringhe di queste... \\
+	Tutta questa trafila serve per dimostrare che il complementare {\bf in $\bbP^n$} di un'ipersuperficie proiettiva è un chiuso affine, infatti la mappa di Veronese ci da un isomorfismo con l'immagine e il complementare di ipersuperfici nel proiettivo attraverso la mappa diventa un chiuso proiettivo tolto un piano (linearizza il polinomio) che è quindi un chiuso affine.
+	
+	\subsection*{VQP Prodotto}
+	Vogliamo costruire il prodotto (in senso categorico) di due VQP $X$ e $Y$. Un prodotto di $X$ e $Y$ è una VQP $Z$ tale che $\exists p_1: Z \rar X, p_2: Z \rar Y$ morfismi tali che $\forall f: W \rar X, g: W \rar Y$ morfismi $\exists ! \phi: W \rar Z$ tale che il seguente diagramma commuti:
+	\begin{diagram}
+					&					&X					&					&\\
+					&\ruTo^{f}			&					&\luTo^{p_1}		&\\
+	W				&\rDashto^{\phi}	&					&					&Z\\
+					&\rdTo^{g}			&					&\ldTo^{p_2}		&\\
+					&					&Y					&					&
+	\end{diagram}
+	Basta dimostrare l'esistenza di $Z$ perché l'unicità è ovvia a meno di unico isomorfismo. Supponiamo infatti di avere due prodotti $(Z_1, p_1, p_2), (Z_2, q_1, q_2)$. Allora presi i due unici morfismi $\phi, \psi$ dati dall'essere prodotti si ha:
+	\begin{diagram}
+					&					&X					&					&\\
+					&\ruTo^{p_1}		&					&\luTo^{p_1}		&\\
+	Z_1				&\rDashto^{\psi\circ\phi}	&			&					&Z_1\\
+					&\rdTo^{p_2}		&					&\ldTo^{p_2}		&\\
+					&					&Y					&					&
+	\end{diagram}
+	E siccome anche l'identità fa commutare il diagramma si ha per unicità che $\psi\circ\phi = \Id$.
+	\vskip 0.8cm
+	Nel caso di varietà affini si ha $\bbA^n \times \bbA^m \cong \bbA^{m+n}$. Infatti prese le proiezioni naturali sulle componenti si verifica la proprietà universale sapendo che una mappa a valori in uno spazio affine è un morfismo se e solo se le sue componenti sono funzioni regolari. \\
+	ATTENZIONE: $\bbA^{m+n}$ NON ha la topologia prodotto, ne ha una più fine (quella di Zariski su $\bbA^{m+n}$) \\
+	Nel caso di varietà affini si verifica agilmente che se $X \subseteq \bbA^n, Y \subseteq \bbA^m$ sono due chiusi allora $X \times Y \subseteq \bbA^n \times \bbA^m$ è un chiuso ed è il prodotto di $X$ e di $Y$.\\
+	L'anello delle coordinate del prodotto è $K[X \times Y] = K[X] \otimes_K K[Y]$
+	Il prodotto di due spazi proiettivi si fa immergendoli in un proiettivo più grosso attraverso la mappa di Segre e si mostra che il morfismo così ottenuto è in realtà una biggezione con l'immagine. \\
+	La mappa di Segre è: $S_{n,m}: \bbP^n \times \bbP^m \rar \bbP^{(n+1)(m+1)-1}$ definita da $([x_i],[y_j]) \mapsto [x_iy_j]$. e definito $\Sigma_{n,m} = \{ [z_{i,j}] \mid \Rk [z_{i,j}] \le 1 \}$ che si nota essere un chiuso in quanto intersezione di quadriche si hanno le due proiezioni / morfismi su $\bbP^n$ e su $\bbP^m$ dati da righe e colonne della matrice. \\
+	Una base di chiusi del prodotto di due spazi proiettivi è data dal luogo di zeri di un polinomio biomogeneo (anche di gradi diversi). In particolare, anche in questo caso la topologia del prodotto è più fine della topologia prodotto.
+	\vskip 0.8cm
+	Il caso generale del prodotto di VQP segue in maniera semplice: siano $X, Y$ VQP. Allora $X = U\cap Z \subseteq \bbP^n$ e $Y = V \cap W \subseteq \bbP^m$ con $U,V$ aperti e $Z,W$ chiusi. Considero allora $X \times Y$ come sottoinsieme di $\bbP^n \times \bbP^m$ dato da $(U \times V) \cap (Z \times W)$ e si nota che $U \times V$ e $Z \times W$ sono rispettivamente aperto e chiuso in $\bbP^n \times \bbP^m$. Quindi $X \times Y$ è una VQP. Inoltre si vede anche che se $X, Y$ sono proiettive allora anche $X \times Y$ è una varietà proiettiva e che se $X,Y$ sono affini allora anche $X \times Y$ è affine.
+	
+	\subsection*{Quasi-T2 e proprietà del prodotto}
+	Faremo un po' di striccheggi che in topologia generale si fanno se lo spazio è T2, ma qui ci riusciamo anche senza!
+	\begin{itemize}
+		\item ({\bf Diagonale chiusa nel prodotto}) $\Delta_X = \{ (x, x) \mid x \in X \} \subseteq X \times X$ è un chiuso
+		\item ({\bf Due morfismi coincidono su un chiuso}) Siano $f,g: X \rar Y$ due morfismi. Allora $Z = \{ x \mid f(x) = g(x) \}$ è chiuso in $X$. (e quindi in particolare se due morfismi coincidono su un denso allora $f=g$)
+	\end{itemize}
+	Inoltre $X, Y$ irriducibili come VQP $\implies X \times Y$ è irriducibile (cosa che non è ovvia poiché la topologia del prodotto è molto fine)
+	
+	\subsection*{Cose casuali}
+	\begin{enumerate}
+	\item Diciamo che $G$ è un gruppo algebrico se
+		\begin{itemize}
+			\item G è una VQP
+			\item G è un gruppo
+			\item Le funzioni di inverso e di moltiplicazione sono morfismi
+		\end{itemize}
+	\item Se $X$ è una varietà proiettiva allora $P_2: X \times Y \rar Y$ (la proiezione) è una mappa chiusa $\forall Y$ VQP (Si dice che $X$ è universalmente chiusa)
+	\item $X$ proiettiva. $f: X \rar Y$ morfismo. Allora $f$ è una mappa chiusa
+	\item Se $X$ è proiettiva e connessa, $f: X \rar K$ è regolare allora $f$ è costante.
+	\end{enumerate}	
+	
+	\section*{Terza Parte: Geometria Birazionale}
+	\subsection*{Funzioni razionali (parziali)}
 	
 	
 	\section*{Varie ed Eventuali}
