@@ -3,6 +3,7 @@
 \newcommand{\Aut}{\text{Aut }}
 \newcommand{\sgr}{\sqsubseteq}
 \newcommand{\nrm}{\lhd}
+\newcommand{\Gal}{\text{Gal }}
 
 \begin{document}
 	\title{Trucchi di Algebra 1}
@@ -119,17 +120,25 @@
 	\subsection{Estensioni quadratiche sono sempre normali}
 	Sia $L$ su $K$ un'estensione di grado due. Allora si prenda $\alpha \in L \setminus K$ è tale che $L = K(\alpha)$. Quindi si prenda il polinomio minimo di $\alpha$ su $K$: $\mu(x) = (x-\alpha)(x-\beta) = x^2 + rx + s$. Allora per le formule di Viète si ha $\alpha\beta = s \in K$ e quindi ogni estensione di $K$ che contiene $\alpha$ deve contenere anche $\beta$.
 	
-	\subsection{Campo di spezzamento di $x^n - a$}
+	\subsection{Galois del Campo di spezzamento di $x^n - a$ su $\bbQ$}
+	Il campo di spezzamento di $x^n - a$ è ovviamente $L = \bbQ(\sqrt[n]{a}, \zeta_n)$, che è il composto di $E = \bbQ(\sqrt[n]{a})$ e $F = \bbQ(\zeta_n)$ e quindi si ha $\Gal(L/\bbQ) \hookrightarrow \Gal(L/E) \rtimes \Gal(L/F)$ tramite la funzione $\sigma \mapsto (\sigma\mid_E, \sigma\mid_F)$. Quindi supponiamo di sapere chi è il campo $K = \bbQ(\sqrt[n]{a}) \cap \bbQ(\zeta_n)$ (problema che viene comunque risolto in questo file perché trattiamo il problema di quali sono le sottoestensioni di entrambi). Allora $\Gal(L/E) \cong \Gal(F/K)$ per teoria generale e $\Gal(F/K)$ è noto per la teoria delle estensioni ciclotomiche.
+	[DA FINIRE]
+	
+	\subsection{Campo di spezzamento di $x^n - a$ su $\bbF_p$}
 	
 	\subsection{$\sqrt[n]{b} \in \bbQ(\sqrt[n]{a})$?}
 	
 	\subsection{Fattorizzazione di un irriducibile in un'estensione normale}
+	Sia $f$ irriducibile in $K[x]$ e sia $L/K$ normale. Allora $f = f_1 \cdot \ldots \cdot f_r$ con $f_i$ irriducibile in $L[x]$. Allora $\Deg f_i = \Deg f_j$. Infatti presi gli automorfismi $\sigma_k \in \Aut_K(L)$, se $\alpha_i$ radice di $f$ è anche radice di $f_i$, si ha che $\sigma_k(f_i)$ è un polinomio irriducibile che ha $\sigma_k(\alpha_i) = \alpha_j$ come radice e coincide quindi a meno di un fattore moltiplicativo con il polinomio minimo di $\alpha_j$ su $L$. Quindi $\sigma_k$ applicato ai polinomi deve mandare $f_i$ in $\lambda f_j$ con $\lambda \in L$, ovvero $\Deg f_i = \Deg f_j$.
 	
 	\subsection{Estensione $\bbQ(\sqrt[3]{a + \sqrt[2]{b}})$}
 	
 	\subsection{Estensione $\bbQ(\sqrt[2]{a + \sqrt[2]{b}})$}
 	
 	\subsection{Metodi per dire che un polinomio è irriducibile}
+	Per i gradi bassi si ha: Un polinomio $f(x)$ di grado minore o uguale a $3$ è irriducibile su $K[x]$ se e solo se non ha radici in $K$. \\
+	Per cose di grado più grande o in più variabili si può cercare di usare Eisenstein nella seguente forma: [DA METTERE] \\
+	Se si cerca di sollevare l'irriducibilità può essere utile tenere presente il lemma che dice che un polinomio irriducibile $f(x) \in K[x]$ si scompone nel prodotto di $r$ fattori dello stesso grado in $L[x]$ (se $L/K$ è normale). In questo modo ad esempio, se so che $x^p - a$ è irriducibile in $\bbQ[x]$ (E se $a \in \bbZ, a \neq 0,1,-1$ lo è per Eisenstein) con $p$ primo, allora su una generica estensione normale di $\bbQ$ è irriducibile se e solo se non ha radici (che è in generale una condizione più semplice da verificare).
 	
 	\subsection{Fatti sui campi finiti}
 	
@@ -138,5 +147,6 @@
 	\subsection{Sottoestensioni di $\bbQ(\sqrt[n]{a})$}
 	
 	\subsection{$\sqrt[n]{a} \in \bbQ(\zeta_m)$?}
+	Sappiamo che $\Gal \left( \frac{\bbQ(\zeta_m)}{\bbQ} \right) \cong \left( \frac{\bbZ}{m\bbZ} \right) ^{*}$ ed è quindi abeliano. Ma allora tutti i suoi sottogruppi (e quindi tutti i suoi sottocampi) sono normali, e quindi necessariamente $n = 2$. E questo caso è già stato trattato.
 
 \end{document}
