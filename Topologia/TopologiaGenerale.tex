@@ -15,6 +15,7 @@
 \newcommand{\Arbitrari}{Arbitrari}
 \newcommand{\Numerabili}{Numerabili}
 \newcommand{\rd}[1]{{\color{red} #1 }}
+\newcommand{\sgr}{\sqsubseteq}
 
 \begin{document}
 	\title{Topologia Generale}
@@ -33,13 +34,15 @@
 		\item[T3] Reg + T0.
 		\item[T4] Norm + T1.
 		\item[Cpt] Ogni ricoprimento di aperti ha un sottoricoprimento finito.
-		\item[Lind] Ogni ricoprimento di aperti ha un raffinamento numerabile.
+		\item[Lind] Ogni ricoprimento di aperti ha un sottoricoprimento numerabile.
 		\item[Conn] Non esistono due aperti propri la cui unione è lo spazio intero. (Vale anche con i chiusi)
 		\item[PathConn] Presi due punti esiste un arco che li connette ($\forall x, y \in X \quad \exists \gamma: [0,1] \rar X \continua \tc \gamma(0) = x, \gamma(1) = y$)
 		\item[LocConn] Ogni punto ha una base di intorni connessi.
 		\item[LocPathConn] Ogni punto ha una base di intorni connessi per archi.
-		\item[LocCpt] Ogni punto ha una base di intorni compatti.
+		\item[LocCpt] Ogni punto ha un intorno compatto
+		\item[SemilocCpt] Ogni punto ha un sistema fondamentale di intorni compatti
 		\item[ParaCpt] Ogni ricoprimento aperto ha un raffinamento localmente finito.
+		\item[ExCpt] Lo spazio possiede un'esaustione in compatti
 		\item[Metr] Metrizzabile, ovvero esiste una distanza che induce la topologia.
 	\end{itemize} \vskip 0.5cm
 	%</DefinizioniProprieta>
@@ -140,35 +143,52 @@
 		\item ({\bf Proprietà di un metrico}) Sia $X$ spazio metrico. Allora $X$ è T2.
 	\end{itemize}
 
+	\section*{Gruppi Topologici}
+	\begin{itemize}
+		\item $G$ è T2 $\sse$ $\{ e \}$ è chiuso
+		\item $H \sgr G$. Se la parte interna di $H$ è non vuota, allora $H$ è aperto e chiuso in $G$
+		\item $H \sgr G \implies \bar{H} \sgr G$
+		\item La componente connessa di $e$ è un sottogruppo chiuso di $G$
+	\end{itemize}
+
 	\section*{Che proprietà passano a cosa?}
 	Vediamo alcune proprietà degli spazi \\
 	Attenzione! Non vi fidate troppo delle cose in rosso perchè devo ancora verificare i risultati \\
 	%<*TabellaProprieta>
 	\begin{tabular}{lcccccc}
-	{\bf Proprietà} & {\bf Sottospazi} & {\bf Prodotti} & {\bf Quozienti} & {\bf Funzioni $\cC^0$} & {\bf Implica} \\
-	N1              & \rd\checkmark    & \rd\Numerabili &                 &                        &               \\ \hline
-	N2              & \rd\checkmark    & \rd\Numerabili & \rd{Aperti}     & \rd{Aperte}            &               \\ \hline
-	Sep             & \crossmark       & \Numerabili    &                 & \checkmark             &               \\ \hline
-	T0              & \checkmark       & \Arbitrari     &                 &                        &               \\ \hline
+	{\bf Proprietà} & {\bf Sottospazi} & {\bf Prodotti} & {\bf Quozienti} & {\bf Funzioni $\cC^0$} & {\bf Implica}     \\
+	N1              & \rd\checkmark    & \rd\Numerabili &                 &                        &                   \\ \hline
+	N2              & \rd\checkmark    & \rd\Numerabili & \rd{Aperti}     & \rd{Aperte}            & Sep, Lind, N1     \\ \hline
+	Sep             & \crossmark       & \Numerabili    &                 & \checkmark             & (+Metr) N2        \\ \hline
+	T0              & \checkmark       & \Arbitrari     &                 &                        &                   \\ \hline
 
-	T1              & \checkmark       & \Arbitrari     &                 &                        &               \\ \hline
-	T2              & \checkmark       & \Arbitrari     &                 &                        &               \\ \hline
-	Reg             & \rd\checkmark    & \rd\Arbitrari  &                 &                        &               \\ \hline
-	Norm            & \rd{Chiusi}      & \rd\crossmark  &                 &                        &               \\ \hline
+	T1              & \checkmark       & \Arbitrari     &                 &                        & T0                \\ \hline
+	T2              & \checkmark       & \Arbitrari     &                 &                        & T1                \\ \hline
+	Reg             & \rd\checkmark    & \rd\Arbitrari  &                 &                        &                   \\ \hline
+	Norm            & \rd{Chiusi}      & \rd\crossmark  &                 &                        &                   \\ \hline
 
-	T3              & \rd\checkmark    & \rd\Arbitrari  &                 &                        &               \\ \hline
-	T4              & \rd{Chiusi}      & \rd\crossmark  &                 &                        &               \\ \hline
-	Cpt             & Chiusi           & \rd\Arbitrari  &                 & \checkmark             & (+T2) Chiuso  \\ \hline
-	Lind            & Chiusi           & \rd\crossmark  &                 &                        &               \\ \hline
+	T3              & \rd\checkmark    & \rd\Arbitrari  &                 &                        & T2                \\ \hline
+	T4              & \rd{Chiusi}      & \rd\crossmark  &                 &                        & T3                \\ \hline
+	Cpt             & Chiusi           & \rd\Arbitrari  &                 & \checkmark             & (+T2) Chiuso      \\ \hline
+	Lind            & Chiusi           & \rd\crossmark  &                 &                        &                   \\ \hline
 
-	Conn            & \crossmark       & \rd\Arbitrari  &                 & \checkmark             &               \\ \hline
-	PathConn        & \crossmark       & \rd\Arbitrari  &                 & \checkmark             & Conn          \\ \hline
-	LocConn         & \rd{Aperti}      &                &                 &                        &               \\ \hline
-	LocPathConn     & \rd{Aperti}      &                &                 &                        &               \\ \hline
+	Conn            & \crossmark       & \rd\Arbitrari  &                 & \checkmark             &                   \\ \hline
+	PathConn        & \crossmark       & \rd\Arbitrari  &                 & \checkmark             & Conn              \\ \hline
+	LocConn         & \rd{Aperti}      &                &                 &                        &                   \\ \hline
+	LocPathConn     & \rd{Aperti}      &                &                 &                        &                   \\ \hline
 
-	Metr            & \checkmark       & \rd\Numerabili &                 &                        &               \\ \hline
-	ParaCpt         & \rd{Chiusi}      & \rd\crossmark  &                 &                        &               \\ \hline
+	LocCpt          & \rd{Chiusi}      & \rd\Finiti     &                 &                        & (+T2) SemiLocCpt  \\ \hline
+	SemiLocCpt      &                  &                &                 &                        &                   \\ \hline
+	ParaCpt         & \rd{Chiusi}      & \rd\crossmark  &                 &                        &                   \\ \hline
+	ExCpt           &                  &                &                 &                        &                   \\ \hline
+
+	Metr            & \checkmark       & \rd\Numerabili &                 &                        & N1                \\ \hline
 	\end{tabular} \vskip 1.5cm
 	%</TabellaProprieta>
+	
+	\section*{Lemmi}
+	\begin{itemize}
+		\item LocCpt + T2 + N2 => ExCpt
+	\end{itemize}
 
 \end{document}
