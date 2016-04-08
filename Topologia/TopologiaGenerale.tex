@@ -151,6 +151,33 @@
 		\item La componente connessa di $e$ è un sottogruppo chiuso di $G$
 	\end{itemize}
 
+	\section*{$\pi_1$ e Rivestimenti}
+	\begin{itemize}
+		\item Sia $Y \subseteq \bbR^n$ un sottospazio convesso. Allora per ogni spazio topologico $X$ si ha che due qualunque funzioni $f, g: X \rar Y$ sono omotope attraverso $H(t, x) := t \cdot f(x) + (1-t) \cdot g(x)$
+		\item Se $A$ è un retratto di $X$ allora $i_*: \pi_1(A, a) \rar \pi_1(X, a)$ è iniettiva
+		\item Se $A$ è un retratto per deformazione di $X$ allora $i_*: \pi_1(A, a) \rar \pi_1(X, a)$ è un isomorfismo di gruppi
+		\item Sia $f: X \rar Y$ un'equivalenza omotopica di spazi topologici. Allora $\forall a \in X$, l'applicazione $f_*: \pi_1(X, a) \rar \pi_1(Y, f(a))$ è un isomorfismo di gruppi
+		\item $S^n$ per $n \ge 2$ è semplicemente connesso (ovvero $\pi_1(S^n) = \{e\}$)
+		\item $\bbR^n \setminus \{ p_1, \ldots, p_m \}$ è semplicemente connesso per $n \ge 3$
+		\item Lo spazio proiettivo complesso $\bbP^m(\bbC)$ è semplicemente connesso per ogni $m \ge 0$
+		\item Sia $X$ uno spazio topologico semplicemente connesso. Allora ogni rivestimento connesso $p: E \rar X$ è banale, ossia un omeomorfismo
+		\item 
+	\end{itemize}
+
+	\subsection{Esistenza di Sollevamenti}
+	Siano $p: E \rar X$ un rivestimento e $f: S \rar X$ un'applicazione continua. Per ogni $y \in S$ ed ogni $e \in p^{-1}(f(y))$ esiste un unico sollevamento $g: S \rar E$ dell'applicazione $f$ tale che $g(y) = e$. \\
+	Gli $S$ per cui è noto che si possa fare sono: $[0, 1]$, $[0, 1]^2$, $S^2$, $\bbR^2$
+
+	\subsection{Teoremi di non-esistenza}
+	\begin{itemize}
+		\item ({\bf Borsuk}) Non esistono applicazioni continue $f: S^2 \rar S^1$ tali che $f(-x) = -f(x)$ per ogni $x \in S^2$
+		\item Per ogni applicazione continua $g: S^2 \rar \bbR^2$ esiste un punto $x \in S^2$ tale che $g(x) = g(-x)$
+		\item Siano $n \ge 3$ ed $A \subseteq \bbR^n$ un aperto non vuoto. Allora ogni applicazione continua $f: A \rar \bbR^2$ non è iniettiva
+		\item Non esistono applicazioni continue $r: D^2 \rar S^1$ tali che $r(-x) = -r(x)$ per ogni $x \in S^1$
+		\item ({\bf Brouwer}) Ogni applicazione continua $f: D^2 \rar D^2$ possiede almeno un punto fisso
+		\item Sia $f: \bbR^2 \rar \bbR^2$ un'applicazione continua. Si assuma che esistano due costanti positive $a$ e $b$ con $a < 1$ tali che $\mid\mid x - f(x) \mid\mid \le a \mid\mid x \mid\mid + b$ per ogni $x \in \bbR^2$. Allora $f$ è surgettiva
+	\end{itemize}
+
 	\section*{Che proprietà passano a cosa?}
 	Vediamo alcune proprietà degli spazi \\
 	Attenzione! Non vi fidate troppo delle cose in rosso perchè devo ancora verificare i risultati \\
