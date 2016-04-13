@@ -1,0 +1,76 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+\begin{document}
+	\title{Algebra 2}
+	
+	\section*{Anelli}
+	\begin{itemize}
+		\item Se $A$ è un anello finito allora $A = A^* \sqcup \cD(A)$
+		\item $f: A \rar B$ allora $\Img f \cong \frac{A}{\Ker f}$
+		\item $I \subseteq A$ ideale, $B \subseteq A$ sottoanello allora vale $\frac{I+B}{I} \cong \frac{B}{I\cap B}$
+		\item $I, J \subseteq A$ ideali e $I \subseteq J$. Allora vale $\frac{\frac{A}{I}}{\frac{J}{I}} \cong \frac{A}{J}$ \\
+			Si ha inoltre la corrispondenza tra gli ideali di $\frac{A}{I}$ e gli ideali $J \subseteq A$ tali che $I \subseteq J$. In questa corrispondenza i primi ed i massimali si corrispondono
+		\item $IJ \subseteq I \cap J$. Se vale $I + J = 1$ allora $IJ = I \cap J$
+		\item È FALSO che $I \cap (J + K) = (I \cap J) + (I \cap K)$. FALSO
+		\item $I \subseteq \sqrt{I}$
+		\item ($A$ dominio) $a$ primo $\implies$ $a$ irriducibile
+		\item ($A$ UFD) $a$ irriducibile $\implies$ $a$ primo
+		\item Se $H \subseteq A \times B$ è ideale allora $H = I \times J$ con $I \subseteq A$, $J \subseteq B$ ideali
+		\item $A \cong A_1 \times A_2 \sse \exists e \in A, e \neq 0,1 \quad e^2 = e$
+		\item $\cD(A) = \cup_{a \notin A^*} (0 : a) = \cup_{a \notin A^*} \sqrt{(0 : a)}$ e $\sqrt{\cD(A)} = \cD(A)$, anche se non è necessariamente un ideale
+		\item $\{ E_\lambda \}_{\lambda \in \Lambda}$ sottoinsiemi di $A$. Allora $\cup_{\lambda \in \Lambda} \sqrt{E_\lambda} = \sqrt{\cup_{\lambda \in \Lambda} E_\lambda}$
+		\item Sia $A$ dominio con un numero infinito di elementi e $\mid A^* \mid < \infty$ allora $A$ possiede infiniti ideali massimali
+		\item $I$ massimale $\implies I$ primo $\implies I$ primario. Inoltre $A$ dominio $\sse (0)$ ideale primo
+		\item Sono equivalenti:
+			\begin{itemize}
+				\item $A$ ha un unico ideale massimale
+				\item $\exists \mathfrak{m} \subseteq A$ ideale massimale $\tc \forall a \in A \setminus \mathfrak{m} \implies a \notin A^*$
+				\item $\exists \km \subseteq A$ ideale massimale $\tc$ ogni elemento della forma $1 + \km$ è invertibile
+			\end{itemize}
+		\item $a \in \cJ(A) \sse \forall b \in A \quad 1-ab \in A^*$
+		\item $\sqrt{I} = \cap_{I \subseteq P \text{ primi }} P$
+		\item ({\bf Lemma di Scansamento}) $P_1, \ldots, P_n$ ideali primi. Sia $I \subseteq A$ ideale $\tc I \subseteq \cup_{i=1}^n P_i$. Allora $\exists j \tc I \subseteq P_j$
+		\item $I_1, \ldots, I_n$ ideali e $P$ ideale primo. $\cap_{i=1}^n I_i \subseteq P \implies \exists j \tc I_j \subset P$. Inoltre se $P = \cap_i I_i$ allora $\exists j \tc I_j = P$
+		\item ({\bf Teorema cinese}) Siano $I_1, \ldots, I_n \subseteq A$ ideali tali che $I_i + I_j = 1$. Allora $\forall a_1, \ldots, a_n \in A \quad \exists a \in A \tc a \equiv a_i (I_i)$
+		\item $A$ anello c.u. Allora si ha che
+			\begin{itemize}
+				\item $f \in A[x]$ è un'unità $\sse$ $f = \sum_{i=0}^n a_i x^i$ con $a_i \in A$ tali che $a_0 \in A^*$ e $a_i \in \cN(A) \quad \forall i \ge 1$
+				\item $f \in A[x]$ è nilpotente $\sse$ $\forall i \quad a_i \in \cN(A)$
+				\item $f \in A[x]$ è divisore di zero $\sse$ $\exists c \in A, c \neq 0 \tc cf = 0$
+			\end{itemize}
+			Si ha inoltre per gli anelli di polinomi che
+			\begin{itemize}
+				\item $I$ primo $\sse I[x]$ primo
+				\item $I$ primario $\sse I[x]$ primario
+			\end{itemize}
+			NON è vero che tutti gli ideali di $A[x]$ sono del tipo $I[x]$, come ad esempio $(x)$
+		\item Gli ideali primi di $\bbZ[x]$ sono dei seguenti tipi:
+			\begin{itemize}
+				\item $(0)$
+				\item $(p)[x]$ con $p \in \bbP$
+				\item $(f(x))$ con $f$ irriducibile
+				\item $(p, f(x))$ con $p \in \bbP$ e $f$ irriducibile modulo $p$ (Questi sono anche massimali)
+			\end{itemize}
+		\item $u \in A^*$, $a \in \cN(A)$, allora $u + a \in A^*$ (Somma di un nilpotente e di un invertibile è invertibile)
+		\item $I$ primo $\implies I $ irriducibile
+		\item In $A[x]$ si ha $\cN(A[x]) = \cJ(A[x])$ (Mentre in generale vale solo che $\cN(A) \subseteq \cJ(A)$)
+		\item Sia $\phi: A \rar B$ omomorfismo di anelli. Allora
+			\begin{itemize}
+				\item $\phi(\cN(A)) \subseteq \cN(B)$
+				\item Se $\phi$ è surgettivo allora $\phi(\cJ(A)) \subseteq \cJ(B)$
+				\item $A$ semilocale (con un numero finito di ideali massimali) $\implies \phi(\cJ(A)) = \cJ(B)$
+			\end{itemize}
+		\item $A$ PID $\implies \cJ(A) = \cN(A)$
+		\item $A \tc$ ogni ideale è primo $\implies$ $A$ è un campo
+		\item $A \tc$ ogni ideale primo è principale $\implies A$ è un anello ad ideali principali
+	\end{itemize}
+	
+	\section*{Basi di Gröbner}
+	\begin{itemize}
+		\item 
+	\end{itemize}
+	
+\end{document}

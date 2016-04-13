@@ -1,0 +1,28 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\begin{document}
+	\title{Piccola Teoria dei Matroidi}
+	
+	\section*{Definizioni}
+	\subsection*{Matroide}
+	Un Matroide è una coppia di insiemi $(E, \cI)$ tali che $\cI \subseteq \cP(E)$ e $\cI$ ha le seguenti proprietà:
+		\begin{itemize}
+			\item {\bf (I1)} $\cI$ è non vuoto
+			\item {\bf (I2 - Ereditarietà)} $B \in \cI$ e $A \subseteq B \implies A \in \cI$
+			\item {\bf (I3 - Augmentation)} $X, Y \in \cI$ e $\mid X \mid = \mid Y \mid + 1$ allora esiste un elemento $x \in X \setminus Y$ tale che $Y \cup \{ x \} \in \cI$
+			\item {\bf (I4 - Extension)} $\{B_\lambda\}_{\lambda \in \Lambda}$ una catena di elementi di $\cI$ ordinata per inclusione. Allora $\cup_\lambda B_\lambda \in \cI$
+		\end{itemize}
+	L'idea sarebbe quella di catturare la proprietà dell'"Essere Indipendenti", ad esempio si può pensare ad $\cI$ come l'insieme dei sottoinsiemi linearmente indipendenti di uno spazio vettoriale $V = E$ oppure come gli elementi algebricamente indipendenti di un'estensione di campi. \\
+	Con una semplice induzione si nota che la proprietà di Augmentation vale anche nella seguente forma un po' più generale (e che utilizzeremo in seguito): $X, Y \in \cI$ e $\mid X \mid \ge \mid Y \mid + n$ allora esistono $n$ elementi $x_1, \ldots, x_n \in X \setminus Y$ tali che $Y \cup \{x_1, \ldots, x_n\} \in \cI$.
+	
+	\subsection*{Base}
+	Si dice {\it Base} un qualunque elemento di $\cI$ massimale per inclusione. Esistono sempre (basta usare in maniera classica Zorn sfruttando I4 per dire che una catena di tizi indipendenti è ancora indipendente)
+	
+	\subsection*{Duale}
+	
+	\subsection*{Somma Diretta}
+	
+	\section*{Teoremini}
+	\subsection*{}
+
+\end{document}

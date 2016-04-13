@@ -1,17 +1,24 @@
 # Makefile per la compilazione del progetto LaTeX
-# Creato mar 19 gen 2016, 18.27.01, CET
+# Creato mer 13 apr 2016, 10.01.50, CEST
 
-.PHONY: alldocuments CoomologiaGruppi EserciziRaccoltiAlgebra FattiDiAlgebra TeoriaAnelli TeoriaModuli TeoriaPolinomi TrucchiAlgebra1 
+.PHONY: alldocuments Algebra2 CoomologiaGruppi EserciziRaccoltiAlgebra FattiDiAlgebra Matroidi TeoriaAnelli TeoriaModuli TeoriaPolinomi TrucchiAlgebra1 
 
 alldocuments: 
 	wget https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls -O stdmdoc.cls
+	pdflatex --shell-escape Algebra2.tex
 	pdflatex --shell-escape CoomologiaGruppi.tex
 	pdflatex --shell-escape EserciziRaccoltiAlgebra.tex
 	pdflatex --shell-escape FattiDiAlgebra.tex
+	pdflatex --shell-escape Matroidi.tex
 	pdflatex --shell-escape TeoriaAnelli.tex
 	pdflatex --shell-escape TeoriaModuli.tex
 	pdflatex --shell-escape TeoriaPolinomi.tex
 	pdflatex --shell-escape TrucchiAlgebra1.tex
+	rm -f *.aux *.log *.out
+
+Algebra2:
+	wget https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls -O stdmdoc.cls
+	pdflatex --shell-escape Algebra2.tex
 	rm -f *.aux *.log *.out
 
 CoomologiaGruppi:
@@ -27,6 +34,11 @@ EserciziRaccoltiAlgebra:
 FattiDiAlgebra:
 	wget https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls -O stdmdoc.cls
 	pdflatex --shell-escape FattiDiAlgebra.tex
+	rm -f *.aux *.log *.out
+
+Matroidi:
+	wget https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls -O stdmdoc.cls
+	pdflatex --shell-escape Matroidi.tex
 	rm -f *.aux *.log *.out
 
 TeoriaAnelli:
