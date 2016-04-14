@@ -2,6 +2,10 @@
 \usepackage{pgf}
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata}
+\newcommand{\MCD}{\text{MCD }}
+\newcommand{\Lt}{\text{lt }}
+\newcommand{\Lc}{\text{lc }}
+\newcommand{\BdG}{\text{BdG }}
 
 \begin{document}
 	\title{Algebra 2}
@@ -66,9 +70,86 @@
 		\item $A$ PID $\implies \cJ(A) = \cN(A)$
 		\item $A \tc$ ogni ideale è primo $\implies$ $A$ è un campo
 		\item $A \tc$ ogni ideale primo è principale $\implies A$ è un anello ad ideali principali
+		\item $\sqrt{I}$ massimale $\implies I$ primario.
+		\item ({\bf Teorema della base di Hilbert}) Se $A$ è un anello Nötheriano, allora $A[x]$ è Nötheriano
 	\end{itemize}
 	
 	\section*{Basi di Gröbner}
+	\subsection*{Ideali Monomiali}
+	Un ideale monomiale in $K[x_1, \ldots, x_n]$ è un ideale generato dai monomi
+	\begin{itemize}
+		\item ({\bf Criterio di appartenenza}) Sia $I$ un ideale monomiale e $f \in K[x_1, \ldots, x_n]$, $f = \sum_\beta c_\beta x^\beta$ con $c_\beta \in K$. Allora $f \in K \sse \forall \beta x^\beta \in I$
+		\item ({\bf Lemma di Dickson}) Ogni ideale monomiale è finitamente generato. (La frontiera minimale di un ideale monomiale è unica, e viene detta Escalièr)
+		\item ({\bf Operazioni con ideali monomiali}) Siano $I_1 = (m_1, \ldots, m_k)$ e $I_2 = (n_1, \ldots, n_s)$ con $m_i, n_j$ monomi. Allora si ha
+			\begin{itemize}
+				\item $I_1 + I_2 = (m_1, \ldots, m_k, n_1, \ldots, n_s)$
+				\item $I_1 \cap I_2 = (\MCD_{i,j} (m_i, n_j))$
+				\item $I_1 \cdot I_2 = (m_i \cdot n_j)_{i,j}$
+				\item ({\bf Iatto}) $(I, m \cdot n) = (I, m) \cap (I, n)$ se $\MCD(m, n) = 1$ come monomi
+				\item $I$ primo $\sse I = (x_{i_1}, \ldots, x_{i_k})$ (ed è massimale solo se le variabili compaiono tutte, ma DEVE essere monomiale)
+				\item $I = \sqrt{I}$ (ovvero $I$ è radicale) $\sse \sqrt{m_i} = m_i \forall i$
+				\item $I$ è primario $\sse I = (x_{i_1}^{\alpha_1}, \ldots, x_{i_k}^{\alpha_k}, m_1, \ldots, m_s)$ dove $m_1, \ldots, m_s \in K[x_{i_1}, \ldots, x_{i_k}]$
+				\item $I$ è irriducibile $\sse$ $I = (x_{i_1}^{\alpha_1}, \ldots, x_{i_k}^{\alpha_k})$
+				\item $I\cdot J = I \cap J \sse \forall i,j \quad \MCD(m_i, n_j) = 1$
+				\item $I : J = \cap_i (I : n_i)$ e $I : (n_i) = (\frac{m_j}{\MCD(n_i, m_j)})_{j}$
+			\end{itemize}
+		\item Notare che usando la terza relazione del punto precedente possiamo spezzare ogni ideale monomiale in ideali primari e utilizzando $\sqrt{I \cap J} = \sqrt{I} \cap \sqrt{J}$ si possono calcolare anche gli ideali primi associati. \\
+			Inoltre con la decomposizione in primari si calcolano bene i divisori di zero, i nilpotenti, etc.
+	\end{itemize}
+	
+	\subsection*{Ordinamenti Monomiali Comuni}
+	\begin{itemize}
+		\item LEX $x_1 > x_2 > \ldots > x_n$. Dico che $\alpha \ge \beta \sse$ In $\alpha - \beta$ la prima coordinata $\neq 0$ è positiva
+		\item DEGLEX Sia $\mid \alpha \mid := \sum_i \alpha_i$. Allora $\alpha \ge \beta \sse$ si ha $\mid \alpha \mid \ge \mid \beta \mid$ oppure $\mid \alpha \mid = \mid \beta \mid$ e vale $\alpha \ge \beta$ con LEX
+		\item DEGREVLEX $\alpha \ge \beta \sse \mid \alpha \mid > \mid \beta \mid$ oppure si ha $\mid \alpha \mid = \mid \beta \mid$ e in $\alpha - \beta$ l'ultima coordinata $\neq 0$ è negativa
+	\end{itemize}
+
+	\subsection*{}
+	\begin{itemize}
+		\item ({\bf Algoritmo di Divisione}) Siano $f_1, \ldots, f_k, f \in K[x_1, \ldots, x_n]$ allora $\exists a_1, \ldots, x_k, r \in K[x_1, \ldots, x_n]$ tali che $f = \sum_i a_i f_i + r$ e $\Deg (a_i f_i) \le \Deg(f)$. Inoltre se $r = \sum_\alpha r_\alpha x^\alpha$ si ha che se $r_\alpha \neq 0$ allora $x^\alpha \in (\Lt(f_1), \ldots, \Lt(f_k))$ \\
+		Notiamo che posso fare dei passaggi "a mano" prima di partire con l'algoritmo di divisione e lui funzionerà comunque. La cosa importante è ricordarsi di soddisfare la condizione $\Deg (a_i f_i) \le \Deg(f)$ ad ogni passaggio.
+		\item ({\bf Base di Gröbner}) Un insieme di polinomi $g_1, \ldots, g_k$ generatori di un ideale $I$ i cui leading term generano $\Lt(I)$ si dicono base di Gröbner. Sono equivalenti inoltre:
+			\begin{itemize}
+				\item $\forall f \quad \exists ! r$ resto della divisione di $f$ per $\{g_1, \ldots, g_k\}$
+				\item $\forall f \in I = (g_1, \ldots, g_k)$ si ha $r = 0$ dall'algoritmo di divisione
+				\item $\forall i,j \quad S(g_i, g_j)$ ha resto $r = 0$ nell'algoritmo di divisione
+			\end{itemize}
+		Dove per divisione si intende un risultato che soddisfi le ipotesi dell'algoritmo di divisione
+		\item ({\bf Base di Gröbner ridotta}) Una BdG $G = \{ g_1, \ldots, g_k \}$ si dice ridotta se è minimale per inclusione e inoltre
+			\begin{itemize}
+				\item $\Lc(g_i) = 1 \quad \forall i$
+				\item $(\Deg(g_1), \ldots, \Deg(g_k))$ sono un'escalièr per $\Deg(I)$
+				\item $\forall g_i \quad g_i = \sum_\alpha c_\alpha x^\alpha$ allora $x^\alpha \notin \Lt(G \setminus \{g_i\})$
+			\end{itemize}
+		Teorema: La base ridotta è unica. Per ridurre una BdG basta prendere ciascun elemento $g$ ed effettuare la divisione per $G \setminus \{g\}$
+		\item ({\bf S-polinomio}) Dati $f, g \in K[x_1, \ldots, x_n]$ e supponiamo $f = c_\alpha x^\alpha + f_1$ e $g = d_\beta x^\beta + g_1$ con $\Deg f = \alpha, \Deg g = \beta$. Allora dico S-polinomio tra $f, g$ il polinomio definito da $\gamma = (\gamma_1, \ldots, \gamma_n)$ con $\gamma_i = \max(\alpha_i, \beta_i)$
+			$$ S(f, g) = \frac{x^\gamma}{c_\alpha x^\alpha} f - \frac{x^\gamma}{d_\beta x^\beta} g $$
+		\item ({\bf Eliminazione di LEX}) $I \subseteq K[x_1, \ldots, x_n]$ allora $I_k = I \cap K[x_{k+1}, \ldots, x_n]$ è il $k$-esimo ideale di eliminazione. Vale il teorema: Se $G$ è una BdG rispetto a LEX con $x_1 \ge \ldots \ge x_n$ allora $\forall k = 1, \ldots, n-1$ si ha che $G_k = G \cap K[x_{k+1}, \ldots, x_n]$ è BdG di $I_k$
+		\item ({\bf Cose calcolabili}) Dati $I, J \subseteq K[x_1, \ldots, x_n]$ e note le loro due BdG si ha
+			\begin{itemize}
+				\item ({\bf Intersezione}) $I \cap J = (tI, (1-t)J) \cap K[x_1, \ldots, x_n]$ dove quindi bisognerà usare l'ordinamento LEX con $t$ come variabile più pesante per poter usare eliminazione
+				\item ({\bf Colon}) Se $\BdG(J) = \{h_1, \ldots, h_r\}$ allora $I : J = \cap_{i=1}^r (I : h_i)$. \\
+					Se ora ho $f \in K[x_1, \ldots, x_n]$ e voglio calcolare $I : (f) = \{g \mid gf \in I\}$ allora ho che $I : (f) = \frac{1}{f} \cdot (I\cap (f))$, ovvero se $\BdG(I \cap (f)) = \{g_1 f, \ldots, g_k f\}$ allora ho $\BdG(I : (f)) = \{g_1, \ldots, g_k\}$
+				\item ({\bf Ker di morfismi}) Sia $\Phi: K[x_1, \ldots, x_n] \rar K[y_1, \ldots, y_n]$ tale che $f_i(Y) := \Phi(x_i)$. Allora si ha $\Ker \Phi = (x_1 - f_1(Y), \ldots, x_n - f_n(Y)) \cap K[x_1, \ldots, x_n]$ ovvero bisogna calcolare l'ideale di eliminazione senza le $Y$
+			\end{itemize}
+		\item ({\bf Sistemi di equazioni polinomiali}) Cerchiamo le soluzioni comuni di $f_1 = 0, \ldots, f_n = 0$ in $K^n$. Valgono:
+			\begin{itemize}
+				\item Se $K$ è algebricamente chiuso, il sistema non ha soluzioni se e solo se $1 \in I = (f_1, \ldots, f_n)$, che si vede subito se c'è o meno con una BdG
+			\end{itemize}
+	\end{itemize}
+	
+	\section*{Ideali e Varietà}
+	Siano $I, J \subseteq K[x_1, \ldots, x_n]$ ideali e $V$ varietà affine. Allora vale
+	\begin{itemize}
+		\item $I \subseteq J \implies \cV(J) \subseteq \cV(I)$
+		\item $I \subseteq \cI(\cV(I))$
+		\item $\cV(\cI(V)) = V$
+		\item $\cV(I) \subseteq \cV(J) \implies \cI(\cV(J)) \subseteq \cI(\cV(I))$
+		\item $\cV(I + J) = \cV(I) \cap \cV(J)$
+		\item $\cV(I\cdot J) = \cV(I) \cup \cV(J) = \cV(I \cap J)$
+		\item $\cV(I) = \cV(\sqrt{I})$
+	\end{itemize}
+	Valgono inoltre i seguenti fatti:
 	\begin{itemize}
 		\item 
 	\end{itemize}
