@@ -131,27 +131,51 @@
 				\item ({\bf Colon}) Se $\BdG(J) = \{h_1, \ldots, h_r\}$ allora $I : J = \cap_{i=1}^r (I : h_i)$. \\
 					Se ora ho $f \in K[x_1, \ldots, x_n]$ e voglio calcolare $I : (f) = \{g \mid gf \in I\}$ allora ho che $I : (f) = \frac{1}{f} \cdot (I\cap (f))$, ovvero se $\BdG(I \cap (f)) = \{g_1 f, \ldots, g_k f\}$ allora ho $\BdG(I : (f)) = \{g_1, \ldots, g_k\}$
 				\item ({\bf Ker di morfismi}) Sia $\Phi: K[x_1, \ldots, x_n] \rar K[y_1, \ldots, y_n]$ tale che $f_i(Y) := \Phi(x_i)$. Allora si ha $\Ker \Phi = (x_1 - f_1(Y), \ldots, x_n - f_n(Y)) \cap K[x_1, \ldots, x_n]$ ovvero bisogna calcolare l'ideale di eliminazione senza le $Y$
+				\item ({\bf Appartenenza al radicale}) $f \in \sqrt{I} \sse 1 \in (I, 1-tf)$ e NON serve $K$ algebricamente chiuso
 			\end{itemize}
 		\item ({\bf Sistemi di equazioni polinomiali}) Cerchiamo le soluzioni comuni di $f_1 = 0, \ldots, f_n = 0$ in $K^n$. Valgono:
 			\begin{itemize}
-				\item Se $K$ è algebricamente chiuso, il sistema non ha soluzioni se e solo se $1 \in I = (f_1, \ldots, f_n)$, che si vede subito se c'è o meno con una BdG
+				\item ({\bf Esistenza di soluzioni}) Se $K$ è algebricamente chiuso, il sistema non ha soluzioni se e solo se $1 \in I = (f_1, \ldots, f_n)$, che si vede subito se c'è o meno con una BdG
+				\item ({\bf Teorema di Estensione}) $I = (f_1, \ldots, f_k)$ e supponiamo $K$ algebricamente chiuso. $I_1 = I \cap K[x_2, \ldots, x_n]$ e $\beta \in \cV(I_1)$. $f_i = c_i(x_2, \ldots, x_n) \cdot x_1^{n_1} + \ldots \in K[x_2, \ldots, x_n][x_1]$. Se $\beta \notin \cV(c_1, \ldots, c_k)$ allora $\exists a \in K \tc (a, \beta) \in \cV(I)$. Ovvero se i termini davanti alle potenze più alte di $x_1$ non si annullano tutti su $\beta$ allora posso estendere $\beta$ ad una radice di $I$.
+				\item ({\bf Conseguenza di Estensione}) Se la BdG è del tipo $\{x_1^{N_1} + \ldots, x_2^{N_2} + \ldots, \ldots, x_k^{N_k} + \ldots \}$ (deve essere di questa forma in tutte le variabili) allora la varietà è finita.
+				\item ({\bf Soluzioni finite}) $K$ algebricamente chiuso. $I \subseteq A$. Allora sono fatti equivalenti:
+					\begin{itemize}
+						\item $\mid \cV(I) \mid < \infty$
+						\item $\forall i = 1, \ldots, n \quad \exists m_i \tc x_i^{m_i} \in \Lt(I)$
+						\item $G = \{ g_1, \ldots, g_r\}$ BdG di $I$ allora $\forall i = 1, \ldots, n \quad \exists h_i \in \bbN \quad \exists g_r \in G \tc \Lt(g_r) \mid x_i^{h_i}$
+						\item $\Dim_K \frac{A}{I} < \infty$
+					\end{itemize}
+					Inoltre vale che una $K$-base di $\frac{A}{I}$ è $\{x^\alpha \tc x^\alpha \notin \Lt(I)\}$, e anche $\Dim_K \frac{A}{I} = \mid \cV(I) \mid$ \\
+					Osservazione: Il nullstellensatz serve solo per la freccia che $\mid \cV(I) \mid < \infty$ implica una delle altre. Per le freccie inverse non serve.
 			\end{itemize}
 	\end{itemize}
 	
 	\section*{Ideali e Varietà}
 	Siano $I, J \subseteq K[x_1, \ldots, x_n]$ ideali e $V$ varietà affine. Allora vale
 	\begin{itemize}
-		\item $I \subseteq J \implies \cV(J) \subseteq \cV(I)$
+		\item $I \subseteq J \sse \cV(J) \subseteq \cV(I)$
 		\item $I \subseteq \cI(\cV(I))$
 		\item $\cV(\cI(V)) = V$
-		\item $\cV(I) \subseteq \cV(J) \implies \cI(\cV(J)) \subseteq \cI(\cV(I))$
+		\item $\cV(I) \subseteq \cV(J) \sse \cI(\cV(J)) \subseteq \cI(\cV(I))$
 		\item $\cV(I + J) = \cV(I) \cap \cV(J)$
 		\item $\cV(I\cdot J) = \cV(I) \cup \cV(J) = \cV(I \cap J)$
 		\item $\cV(I) = \cV(\sqrt{I})$
 	\end{itemize}
 	Valgono inoltre i seguenti fatti:
 	\begin{itemize}
-		\item 
+		\item $V$ è irriducibile $\sse \cI(V)$ è primo
+		\item Ogni varietà affine si decompone come unione di un numero finito di varietà irriducibili
+		\item $I, J, H$ ideali. Allora $\cV(I, JH) = \cV(I, J) \cup \cV(I, H)$
+		\item $V = \{\alpha\}$ con $\alpha = (\alpha_1, \ldots, \alpha_n)$ allora $\cI(V) = (x_1 - \alpha_1, \ldots, x_n - \alpha_n)$ è un ideale massimale. (Se $K$ è algebricamente chiuso allora $I$ è massimale se e solo se è di quella forma)
+		\item ({\bf Nullstellensatz}) $K$ algebricamente chiuso. Allora $I \subseteq K[x_1, \ldots, x_n]$ e si ha:
+			\begin{itemize}
+				\item ({\bf Forma debole}) $\cV(I) = \emptyset \sse 1 \in I$
+				\item ({\bf Forma forte}) $\cI(\cV(I)) = \sqrt{I}$
+			\end{itemize}
+		\item ({\bf Normalizzazione di Nöther}) $K$ infinito. Se $f$ è un polinomio in $K[x_1, \ldots, x_n] \tc f \notin I_1 = K[x_2, \ldots, x_n]$ (ovvero $x_1$ compare) allora $\exists \phi$ cambio lineare di coordinate tale che $\phi(f) = c \cdot x_1^N + \overline{f}$ con $\Deg_{x_1} \overline{f} < N$ e $c \neq 0$ costante. 
+		\item $K$ algebricamente chiuso. Se $I$ è radicale allora $I = \cap_{i=1}^k P_i$ con $P_i$ primi. (Basta decomporre la varietà)
 	\end{itemize}
+	
+	%\section*{Risultante}
 	
 \end{document}
