@@ -270,14 +270,69 @@
 		Inoltre dato $g: M \rar P$ si ha $g_*: \Hom_A(N, M) \rar \Hom_A(N, P)$ definito da $\psi \mapsto g \circ \psi$, che è covariante. 
 	\end{itemize}
 	
-	\subsection*{Omomorfismi tra moduli liberi e forma normale di Schmidt}
+	\subsection*{Omomorfismi tra moduli liberi e forma normale di Smith}
 	\begin{itemize}
 		\item Ogni elemento di $\Hom_A(A^m, A^n)$ si può rappresentare in modo unico come matrice, quindi mi basta sapere dove vanno gli $e_i$ base di $A^m$ per sapere dove vanno tutti gli altri elementi. Inoltre una matrice sarà invertibile se e solo se il suo determinante è un elemento invertibile dell'anello (Basta usare l'aggiunta sapendo che $M M^* = (\Det M) \Id$)
+		\item $S, T$ matrici si dicono equivalenti per righe se $\exists P$ invertibile tale che $PS = T$, equivalenti per colonne se $\exists Q$ invertibile tale che $SQ = T$ e si dicono equivalenti se $\exists P, Q$ tali che $PSQ = T$
+		\item Se $A$ è PID, allora si ha che ogni matrice è equivalente ad una matrice diagonale ($D$ si dice diagonale se $D_{ij} = 0$ quando $i \neq j$). \\
+			Il trucco fondamentale è che sui blocchetti $2\times 2$ riesco a triangolarli. Infatti, usando che $A$ è PID si ha $d = \MCD(a, b)$ e quindi $\exists s, t \tc d = as + bt$ ovvero $$ \left( \begin{array}{cc} a & b \\ u & v \\ \end{array} \right) \cdot \left[ \begin{array}{cc} s & - \frac{b}{d} \\ t & \frac{a}{d} \\ \end{array} \right] = \left( \begin{array}{cc} d & 0 \\ w & x \\ \end{array} \right)$$ e trasponendo la relazione si riesce anche a portare in forma triangolare superiore. \\
+			Il modo generale di procedere è piuttosto semplice: con il metodo precedente si pongono a zero tutti i numeri sulla prima riga tranne il primo, a questo punto si mettono a zero tutti i numeri sulla prima colonna tranne il primo, e si procede riga-colonna fino a quando non sono nulli sia tutti i numeri sulla prima riga che sulla prima colonna (tranne ovviamente il primo). Questa cosa deve succere prima o poi. Quando accade si ricorre per induzione sulla sottomatrice $(n-1) \times (n-1)$ che si ottiene levando la prima riga e la prima colonna.
+		\item ({\bf Forma normale di Smith}) $A$ PID. Vogliamo dare una forma canonica alle matrici che rappresentano gli omomorfismi tra moduli liberi. Una matrice diagonale $D$ si dice in forma di Smith se $d_1 \mid d_2 \mid \ldots \mid d_n$ con $D = \left( \begin{array}{cccc} d_1 & & & \\ & d_2 & & \\ & & \ddots & \\ & & & d_n \\ \end{array} \right)$
+		\item ({\bf Ogni matrice diagonale si può portare in forma di Smith}) Infatti data $\left( \begin{array}{cc} a & 0 \\ 0 & b \\ \end{array} \right)$ e detto $d = \MCD(a, b) = as + bt$ si computa $\left( \begin{array}{cc} s & t \\ -\frac{b}{d} & \frac{a}{d} \\ \end{array} \right) \cdot \left( \begin{array}{cc} a & 0 \\ 0 & b \\ \end{array} \right) \cdot \left( \begin{array}{cc} 1 & - \frac{tb}{d} \\ 1 & \frac{sa}{d} \\ \end{array} \right) = \left( \begin{array}{cc} d & 0 \\ 0 & \frac{ab}{d} \\ \end{array} \right)$
+		\item ({\bf Caratterizzazione tramite ideali determinanti}) Se $S$ è una matrice definiamo $\Delta_i(S)$ come l'ideale generato dai determinanti delle sottomatrici $i \times i$ di $S$. Se $S, T$ $m \times n$ sono equivalenti allora $\Delta_i S = \Delta_i T \quad \forall i$. Se $D_1$ e $D_2$ sono matrici in forma di Smith allora $D_1$ è equivalente a $D_2$ se e solo se $d_i^{(1)}$ e $d_i^{(2)}$ differiscono di un invertibile (ovvero sono associati)
+		\item ({\bf Sottomoduli di moduli liberi su PID}) Se $M$ è un $A$-modulo libero con $A$ PID e $N \subseteq M$ sottomodulo, allora $N$ è libero e inoltre vale che $\Rk N \le \Rk M$
+		\item ({\bf Teorema di struttura di moduli f.g. su PID}) Ogni modulo finitamente generato su PID si scrive come somma diretta di moduli ciclici. $M$ f.g. su PID (ovvero è quoziente di un modulo libero). $M = \gen{m_1, \ldots, m_k}$. Allora $A^n \rar^f M \rar 0$ con $f(e_i) = m_i$ e $f(a_1, \ldots, a_n) = \sum_i a_i m_i$ ovvero $M \cong \frac{A^n}{\Ker f}$ e $\Ker f \subseteq A^n$ è un sottomodulo di modulo libero. \\
+		Sapendo che ogni sottomodulo di modulo libero su PID è libero abbiamo che $A^m \rar^\phi A^k \rar^f M \rar 0$ allora $M \cong \frac{A^m}{\Ker f} \cong \frac{A^k}{\Img \phi} \cong \coKer \phi \cong \oplus_i \frac{A}{(d_i)} \cong \oplus_i \gen{z_i}$ con $d_i = \Ann(z_i)$
+		\item Se $M = \gen{m}$ è un $A$-modulo ciclico allora $M \cong \frac{A}{\Ann(m)}$
+		\item $M = \frac{A}{J}$ come $A$-modulo. Dato $a \in A$ si ha $(a) \cdot M \cong \frac{A}{(J \cdot (a))}$
+		\item $A^n \cong A^m \sse n = m$
+		\item $\phi: A^m \srar A^n$ surgettivo e $m < n \implies A = 0$
+		\item $M = \frac{A}{J_1} \oplus \frac{A}{J_2}$, con $I \subseteq A$ ideale. Allora valgono:
+			\begin{itemize}
+				\item $IM \cong \frac{I + J_1}{J_1} \oplus \frac{I + J_2}{J_2}$
+				\item $\frac{M}{IM} \cong \frac{A}{I + J_1} \oplus \frac{A}{I + J_2}$
+			\end{itemize}
+		\item Sia $M$ un $A$-modulo finitamente generato su PID allora $M$ si scrive come somma diretta di moduli ciclici $M = \gen{m_1} \oplus \ldots \oplus \gen{m_k}$
+		\item Se ho due catene di ideali $I_n \subseteq \ldots \subseteq I_1$, $J_m \subseteq \ldots \subseteq J_1$ con $n \ge m$, e supponiamo $M = \oplus_{k=1}^n \frac{A}{I_k} = \oplus_{i=1}^m \frac{A}{J_i}$ allora $J_1 = \ldots = J_{n-m} = A$ e $I_i = J_{n-m+i}$
+		\item Se $A$ è un dominio ed $M$ un $A$-modulo, allora chiamiamo sottomodulo di torsione $\tau(M) = \{ m \in M \mid \Ann(m) \neq 0 \} \subseteq M$.
+			\begin{itemize}
+				\item $f \in \Hom_A(M, N) \implies f(\tau(M)) \subseteq \tau(M)$
+				\item Data $0 \rar M \rar N \rar P \rar 0$ esatta $\implies 0 \rar \tau(M) \rar \tau(N) \rar \tau(P)$ è esatta ma non a destra
+				\item $M$ f.g. su $A$ PID. Allora $M \cong \tau(M) \oplus A^k$ per un qualche $k$
+			\end{itemize}
+		\item $M$ si dice modulo $p$-primario se $\Ann(M) = (p^s)$
+		\item ({\bf Riassunto di tutto}) $M$ f.g. su $A$ PID. allora valgono:
+			\begin{itemize}
+				\item $M = (\oplus_{i=1}^m \frac{A}{(d_i)}) \oplus A^k$ con $d_1 \mid \ldots \mid d_m$ non necessariamente distinti, unicamente determinati a meno di associati. Tali $d_i$ si chiamo fattori invarianti di $M$.
+				\item $M \cong (\oplus_{p_i} M_{p_i}) \oplus A^k$ dove gli $M_{p_i}$ sono moduli ciclici $p_i$-primari di torsione. Tutti i $p_1^{s_1} \ldots p_r^{s_r}$ si chiamano divisori elementari di $M$. \\
+				Infatti se $\tau(M) = \oplus_i \frac{A}{(d_i)}$ con $d_i \in A$ PID allora se $d_i = p_{i_1}^{s_1} \cdot \ldots \cdot p_{i_k}^{s_k} \implies \frac{A}{(d_i)} = \oplus_{j=1}^k \frac{A}{p_{ij}^{s_j}}$
+			\end{itemize}
 	\end{itemize}
 	
 	\subsection*{Successioni Esatte di Moduli}
 	\begin{itemize}
 		\item La successione $M_1 \rar^f M \rar^g M_2 \rar 0$ è esatta $\sse$ la successione $0 \rar \Hom_A(M_2, N) \rar^{g^*} \Hom_A(M, N) \rar^{f^*} \Hom_A(M_1, N)$ è esatta $\forall N$ $A$-moduli.
 		\item La successione $0 \rar M_1 \rar^f M \rar^g M_2$ è esatta $\sse$ la successione $\Hom_A(N, M_1) \rar^{f_*} \Hom_A(N, M) \rar^{g^*} \Hom_A(N, M_2) \rar 0$ è esatta $\forall N$ $A$-moduli.
+		\item ({\bf Successioni che spezzano}) Data una successione esatta corta di $A$-moduli $0 \rar M \rar^\alpha N \rar^\beta P \rar 0$ si ha TFAE:
+			\begin{itemize}
+				\item $N \cong M \oplus P$
+				\item $\exists r: N \rar M \tc r \circ \alpha = \Id_M$
+				\item $\exists s: P \rar N \tc \beta \circ s = \Id_P$
+			\end{itemize}
+		\item ({\bf Proprietà estremi-intermedio}) Sia $0 \rar M \rar^\alpha N \rar^\beta P \rar 0$ una successione esatta di $A$-moduli. Allora valgono le seguenti:
+			\begin{itemize}
+				\item $M, P$ f.g $\implies N$ f.g
+			\end{itemize}
+		\item ({\bf Moduli Proiettivi}) $P$ si dice proiettivo se vale una delle seguenti, tutte equivalenti:
+			\begin{itemize}
+				\item Data $\phi: M \srar N$ surgettivo si ha $\forall f: P \rar N$, $\exists g: P \rar M$ tale che $f = \phi \circ g$
+				\item $\forall g: M \srar N$ surgettiva l'omomorfismo indotto $\Hom_A(P,M) \rar^{g^*} \Hom_A(P,N)$ è surgettivo
+				\item Ogni successione esatta corta $0 \rar M \rar N \rar P \rar 0$ spezza
+				\item %TODO
+			\end{itemize}
+		\item ({\bf Implicazioni varie})
+			\begin{itemize}
+				\item Libero $\implies$ Proiettivo
+			\end{itemize}
 	\end{itemize}
 \end{document}
