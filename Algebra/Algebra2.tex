@@ -309,6 +309,108 @@
 			\end{itemize}
 	\end{itemize}
 	
+	\subsection*{Prodotto tensore}
+	\begin{itemize}
+		\item ({\bf Proprietà universale}) Sia $R$ un anello, $M, N$ due $R$-moduli. Un prodotto tensore di $M$ e $N$ è un $R$-modulo denotato con $M \otimes_R N$ con una mappa $\tau: M \times N \rar M \otimes_R N$ bilineare tale che $\forall \phi: M \times N \rar P$ bilineare (con $P$ un generico $R$-modulo) $\exists ! \tilde\phi: M \otimes_R N \rar P$ tale che $\phi = \tilde\phi \circ \tau$ \\
+		Deriva dalla definizione che se un tale modulo esiste allora è unico a meno di unico isomorfismo. \\
+		Si può costruire in maniera piuttosto semplice sui moduli prendendo l'$R$-modulo libero generato dagli elementi di $M \times N$ e quozientando per il sottomodulo delle relazioni, ovvero il generato da $i(m_1+m_2, n) - i(m_1, n) - i(m_2,n)$, $i(m, n_1+n_2) - i(m, n_1) - i(m, n_2)$, $i(r-m, n) - r i(m, n)$, $i(m, rn) - r i (m,n)$
+		\item ({\bf Tensori semplici}) Una cosa della forma $m \otimes n$ in $M \otimes_R N$ è detto tensore semplice. L'insieme dei tensori semplici genera $M \otimes_R N$ come $R$-modulo. Inoltre se $\{m_\alpha\}$ genera $M$ e $\{n_\beta\}$ genera $N$, allora $\{m_\alpha \otimes n_\beta\}$ genera $M \otimes_R N$
+		\item ({\bf Formule di uguaglianza}) Valgono le seguenti cose, alcune ovvie alcune meno:
+			\begin{itemize}
+				\item $R \otimes_R M \cong M$
+				\item $M \otimes_R N \cong N \otimes_R M$
+				\item $(M \otimes_R N) \otimes_R P \cong M \otimes_R (N \otimes_R P)$
+				\item $(M \oplus N) \otimes_R P \cong (M \otimes_R P) \oplus (M \otimes_R P)$ (vale anche per somme dirette infinite)
+				\item $\frac{R}{I} \otimes_R M \cong \frac{M}{IM}$
+				\item $M_\kp \otimes_{A_\kp} N_\kp = (M \otimes_A N)_\kp$
+			\end{itemize}
+		\item ({\bf Aggiunzione con $\Hom$}) $M, N, P$ tre $R$-moduli. Allora vale che $\Hom_R(M \otimes_R N, P) \cong \Hom_R(M, \Hom_R(N, P))$ dove l'isomorfismo è naturale (e vale in particolare anche a livello di $R$-moduli)
+		\item ({\bf Esattezza a destra}) Essendo aggiunto sinistro il funtore $\textunderscore \otimes_R M$ (o anche $M \otimes_R \textunderscore$, che è canonicamente equivalente al primo) è esatto a destra, cioè: \\
+		$M \rar N \rar P \rar 0$ è esatta $\sse \forall Q \qquad M \otimes Q \rar N \otimes Q \rar P \otimes Q \rar 0$ è esatta
+		\item ({\bf Implicazioni varie})
+			\begin{itemize}
+				\item $M, N$ f.g. $\implies M \otimes_R N$ f.g.
+				\item $M, N$ liberi $\implies M \otimes_R N$ libero
+			\end{itemize}
+	\end{itemize}
+	
+	\subsection*{Anello e Modulo delle frazioni}
+	\begin{itemize}
+		\item ({\bf Anello delle frazioni}) $A$ anello ed $S \subseteq A$ moltiplicativamente chiuso ($1 \in S, s,t \in S \implies st \in S$). Allora l'insieme $A \times S$ quozientato per la relazione di equivalenza $(a, s) \sim (b, t) \sse \exists u \neq 0 \in S \tc u (at - bs) = 0$ è un anello dotato di una mappa $A \rar \frac{A \times S}{\sim}$ tale per cui ogni elemento di $S$ va a finire in un invertibile. \\
+		Gode inoltre della proprietà universale per la quale per ogni altro anello $B$ e morfismo di anelli $g: A \rar B$ tale che tutti gli elementi di $S$ vadano a finire in elementi invertibili di $B$, allora questo morfismo si spezza in modo unico attraverso il passaggio per $S^{-1}A := \frac{A \times S}{\sim}$
+		\item ({\bf Nullità dell'anello delle frazioni}) $0 \in S \sse S^{-1}A = 0$
+		\item ({\bf Ideali di $S^{-1}A$}) Valgono le seguenti affermazioni sugli ideali di $S^{-1}A$:
+			\begin{itemize}
+				\item Ogni ideale di $S^{-1}A$ è un ideale esteso
+				\item Sia $I \subseteq A$ ideale. Allora $I^e = 1 \sse I \cap S \neq \emptyset$
+				\item $I^{ec} = \cup_{s \in S} (I : s)$
+				\item C'è una corrispondenza biunivoca tra gli ideali primi di $A$ che non intersecano $S$ ed i primi di $S^{-1}A$. Infatti:
+					\begin{itemize}
+						\item Se $Q$ è primo in $S^{-1}A$ allora $Q^c$ è primo in $A$ (e questo è sempre vero)
+						\item $P$ primo in $A$, $P \cap S = \emptyset \quad \implies S^{-1}P$ primo
+					\end{itemize}
+				\item $P_1$, $P_2$ ideali primi. Allora si ha $S^{-1}P_1 = S^{-1}P_2 \implies P_1 = P_2$
+			\end{itemize}
+		\item ({\bf $S^{-1}$ e le altre operazioni}) Potremmo dire in linea di massima che $S^{-1}$ commuta con tutte le operazioni principali, purché siano finite:
+			\begin{itemize}
+				\item $S^{-1}(I + J) = S^{-1}I + S^{-1}J$
+				\item $S^{-1}(I \cap J) = S^{-1}I \cap S^{-1}J$
+				\item $S^{-1}(I \cdot J) = (S^{-1}I) \cdot (S^{-1}J)$
+				\item $S^{-1}\sqrt{I} = \sqrt{S^{-1}I}$
+			\end{itemize}
+		\item ({\bf Modulo delle frazioni}) Sia $M$ un $A$-modulo ed $S \subseteq A$ un insieme moltiplicativamente chiuso. Allora definiamo $S^{-1}M := \frac{S \times M}{\sim}$ dove $(m, s) \sim (m', s') \sse \exists u \in S \quad u (s'm - sm') = 0$ ed indicheremo con $\frac{m}{s}$ la classe di equivalenza. \\
+		$S^{-1}M$ ha una struttura di $S^{-1}A$-modulo. Inoltre si può facilmente verificare che $S^{-1}$ è un funtore dalla categoria degli $A$-moduli a quella degli $S^{-1}A$-moduli, dove dato $f: M \rar N$ morfismo si può definire $S^{-1}f: S^{-1}M \rar S^{-1}N$ come $(S^{-1}f) (\frac{m}{s}) = \frac{f(m)}{s}$
+		\item ({\bf $S^{-1}$ è un funtore esatto}) Si ha che $S^{-1}$ è esatto, ovvero se $M \rar^f N \rar^g P$ è una sequenza esatta di $A$-moduli allora $S^{-1}M \rar^{S^{-1}f} S^{-1}N \rar^{S^{-1}g} S^{-1}P$ è una sequenza esatta di $S^{-1}A$-moduli. \\
+		In particolare omomorfismi iniettivi o surgettivi rimangono rispettivamente iniettivi o surgettivi
+		\item ({\bf $S^{-1}$ e le altre operazioni}) Siano $M, P \subseteq N$ sotto$A$-moduli, $S \subseteq A$ moltiplicativamente chiuso. Allora $S^{-1}$ commuta con somme finite, intersezioni finite e quozienti, ovvero vale che
+			\begin{itemize}
+				\item $S^{-1}(M + P) = S^{-1}M + S^{-1}P$
+				\item $S^{-1}(M \cap P) = S^{-1}M \cap S^{-1}P$
+				\item $S^{-1}(\frac{N}{M}) \cong \frac{S^{-1}N}{S^{-1}M}$ dove l'isomorfismo è come $S^{-1}A$-moduli
+				\item Se $M$ è f.g. allora $\Ann(S^{-1}M) = S^{-1}\Ann(M)$
+				\item Sapendo che $(N:P) = \Ann(\frac{N+P}{N})$ si può mostrare che se $P$ è f.g. allora $S^{-1}(N:P) = (S^{-1}N : S^{-1}P)$
+			\end{itemize}
+		Valgono inoltre le seguenti uguaglianze furbe:
+			\begin{itemize}
+				\item $S^{-1}A \otimes_A M = S^{-1}M$
+				\item $S^{-1}(M \otimes_A N) \cong S^{-1}M \otimes_{S^{-1}A} S^{-1}N$
+			\end{itemize}
+		\item ({\bf Correlazione tra anello e modulo delle frazione e prodotto tensore}) Vale che $S^{-1}A \otimes_A M = S^{-1}M$. \\
+			Inoltre abbiamo anche dimostrato che $S^{-1}A$ è un $A$-modulo piatto, ovvero $0 \rar M \rar^f N$ rimane iniettiva tensorizzando per il piatto, cioè $0 \rar S^{-1}A \otimes_A M \rar^{S^{-1}A \otimes_A f} S^{-1}A \otimes_A N$ per l'osservazione precedente.
+		\item ({\bf Altri fatti})
+			\begin{itemize}
+				\item $f: A \rar B$ omomorfismo di anelli, $S \subseteq A$ motliplicativamente chiuso e $T = f(S)$. Allora $S^{-1}B \cong T^{-1}B$ come $S^{-1}A$-moduli
+				\item $S \subseteq A$ molt. chiuso. Diciamo che $S$ è saturato se $xy \in S \implies x \in S, y \in S$. Si ha allora che:
+					\begin{itemize}
+						\item $S$ saturato $\sse S = A \setminus \cup_{\kp \cap S = \emptyset} \kp$
+						\item Se $S$ è un sistema molt. chiuso allora $\exists ! S \subseteq \overline{S}$ con $\overline{S}$ saturato e minimale rispetto alla proprietà di contenere $S$.
+						\item $\overline{S}^{-1}A \cong S^{-1}A$
+					\end{itemize}
+			\end{itemize}
+	\end{itemize}
+	
+	\subsection*{Localizzazione e proprietà locali}
+	\begin{itemize}
+		\item ({\bf Definizione}) $A$ anello, $\kp \subseteq A$ ideale primo e consideriamo $S = A \setminus \kp$ che è moltiplicativamente chiuso. Allora $A_\kp := S^{-1}A$ si dice localizzazione a $\kp$. Si ha che $A_\kp$ è un anello locale, dove l'unico ideale massimale è $\kp_\kp = \{ \frac{a}{s} \mid a \in \kp, s \notin \kp \}$
+		\item ({\bf Proprietà locali}) $P$ è una proprietà per $A$ anello oppure per $M$ modulo si dice che è locale se \\
+			$P$ vale per $A$ (o per $M$) $\sse P$ vale per $A_\kp$ (o $M_\kp$) $\forall \kp$ primo
+		\item ({\bf Essere nullo è una proprietà locale (e anche massimale)}) $M$ un $A$-modulo. TFAE:
+			\begin{itemize}
+				\item $M = 0$
+				\item $M_\kp = 0 \quad \forall \kp$ primo
+				\item $M_\km = 0 \quad \forall \km$ massimale
+			\end{itemize}
+		\item ({\bf Per un omomorfismo essere iniettivo (o surgettivo) è una proprietà locale (e anche massimale)}) Sia $f: M \rar N$. TFAE:
+			\begin{itemize}
+				\item $f$ iniettivo (surgettivo)
+				\item $f_\kp: M_\kp \rar N_\kp$ iniettivo (surgettivo) $\forall \kp$ primo
+				\item $f_\km: M_\km \rar N_\km$ iniettivo (surgettivo) $\forall \km$ massimale
+			\end{itemize}
+			Per l'iniettività basta mostrare che $\Ker f_\kp = (\Ker f)_\kp$ e usare che $M = 0$ è locale. Uguale per la surgettività con i $\coKer$
+		\item ({\bf Essere ridotto è una proprietà locale}) Un anello infatti è ridotto se $\cN(A) = 0$ e abbiamo mostrato che $S^{-1}\cN(A) = \cN(S^{-1}A)$, ovvero $N(A) = 0 \sse N(A)_\kp = N(A_\kp) = 0 \quad \forall \kp$ primo
+		\item ({\bf Dominio NON è una proprietà locale})
+	\end{itemize}
+	
 	\subsection*{Successioni Esatte di Moduli}
 	\begin{itemize}
 		\item La successione $M_1 \rar^f M \rar^g M_2 \rar 0$ è esatta $\sse$ la successione $0 \rar \Hom_A(M_2, N) \rar^{g^*} \Hom_A(M, N) \rar^{f^*} \Hom_A(M_1, N)$ è esatta $\forall N$ $A$-moduli.
@@ -328,11 +430,44 @@
 				\item Data $\phi: M \srar N$ surgettivo si ha $\forall f: P \rar N$, $\exists g: P \rar M$ tale che $f = \phi \circ g$
 				\item $\forall g: M \srar N$ surgettiva l'omomorfismo indotto $\Hom_A(P,M) \rar^{g^*} \Hom_A(P,N)$ è surgettivo
 				\item Ogni successione esatta corta $0 \rar M \rar N \rar P \rar 0$ spezza
-				\item %TODO
+				\item $P$ è sommando diretto di un modulo libero (ovvero $\exists F$ libero $\tc F = P \oplus C$)
+				\item $0 \rar K \rar M \rar N \rar 0$ esatta $\sse 0 \rar \Hom_A(P, K) \rar \Hom_A(P, M) \rar \Hom_A(P, N) \rar 0$ esatta \\
+					Ovvero anche $\Hom_A(P, \textunderscore)$ è un funtore esatto
+			\end{itemize}
+			Hanno inoltre le seguenti proprietà rispetto ad alcune costruzioni:
+			\begin{itemize}
+				\item $P_1 \oplus P_2$ proiettivo $\sse P_1$ e $P_2$ sono proiettivi
+				\item $P_1, P_2$ proiettivi $\implies P_1 \otimes_R P_2$ proiettivo (il viceversa non vale)
+			\end{itemize}
+		\item ({\bf Moduli Iniettivi}) $Q$ si dice modulo iniettivo se vale una delle seguenti, tutte equivalenti:
+			\begin{itemize}
+				\item Per ogni $f: N \hrar M$ iniettiva e $g: N \rar Q$ si ha $\exists G: M \rar Q$ tale che $g = G \circ f$
+				\item Ogni successione esatta $0 \rar Q \rar M \rar N \rar 0$ spezza
+				\item Per ogni $I \subseteq A$ ideale vale la caratterizzazione (1) con $N = I$ e $M = A$ \\
+					Si può dire anche per per ogni $I$ ideale di $A$ si ha che ogni $f: I \rar Q$ si estende ad una funzione $\tilde{f}: A \rar Q$
+				\item $0 \rar K \rar M \rar N \rar 0$ esatta $\sse 0 \rar \Hom_A(N, Q) \rar \Hom_A(M, Q) \rar \Hom_A(K, Q) \rar 0$ esatta \\
+					Ovvero anche $\Hom_A(\textunderscore, Q)$ è un funtore esatto
+			\end{itemize}
+		\item ({\bf Moduli Piatti}) $N$ è un $R$-modulo piatto se il funtore $N \otimes_R \textunderscore$ è esatto \\
+			Valgono le seguenti proprietà rispetto alle costruzioni:
+			\begin{itemize}
+				\item $N, M$ piatti $\sse N \oplus M$ piatto
+				\item $N, M$ piatti $\implies N \otimes_R M$ piatto (il viceversa non vale)
+				\item $S^{-1}R$ è un $R$-modulo piatto $\forall S \subseteq R$ moltiplicativamente chiusi
+			\end{itemize}
+			Per quozienti si può controllare la piattezza sapendo che le seguenti sono equivalenti:
+			\begin{itemize}
+				\item $a \in a^2A$
+				\item $aA$ è sommando diretto di $A$
+				\item $\frac{A}{aA}$ è $A$-piatto
 			\end{itemize}
 		\item ({\bf Implicazioni varie})
 			\begin{itemize}
-				\item Libero $\implies$ Proiettivo
+				\item Libero $\implies$ Proiettivo (Il viceversa vale se $A$ è PID oppure anche se $A$ è locale e $P$ f.g.)
+				\item Proiettivo $\implies$ Piatto (Viene da Libero $\implies$ Piatto, piuttosto semplice da mostrare usando che $L = \oplus_\ni R^{(\ni)}$ se $L$ è libero ed utilizzando il fatto che un modulo proiettivo è un sommando diretto di un modulo libero). \\ Il viceversa non vale. Ad esempio $\bbQ$ come $\bbZ$-modulo
 			\end{itemize}
+		\item ({\bf Lemma del Serpente}) %TODO
+		\item ({\bf Lemma dei cinque}) %TODO
 	\end{itemize}
+	
 \end{document}
