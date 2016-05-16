@@ -6,6 +6,12 @@
 \newcommand{\Lt}{\text{lt }}
 \newcommand{\Lc}{\text{lc }}
 \newcommand{\BdG}{\text{BdG }}
+\newcommand{\Ris}{\text{Ris }}
+\newcommand{\srar}{\twoheadrightarrow}
+\newcommand{\hrar}{\hookrightarrow}
+\newcommand{\Hom}{\text{Hom }}
+\newcommand{\coKer}{\text{coKer }}
+\newcommand{\gen}[1]{\langle {#1} \rangle}
 
 \begin{document}
 	\title{Algebra 2}
@@ -71,6 +77,8 @@
 		\item $A \tc$ ogni ideale è primo $\implies$ $A$ è un campo
 		\item $A \tc$ ogni ideale primo è principale $\implies A$ è un anello ad ideali principali
 		\item $\sqrt{I}$ massimale $\implies I$ primario.
+		\item $I$ primario, $J \not\subseteq \sqrt{I} \implies \sqrt{I : J^i} = \sqrt{I} \forall i$
+		\item $I = \sqrt{I}$ e $h \notin I \implies I:h$ è radicale
 		\item ({\bf Teorema della base di Hilbert}) Se $A$ è un anello Nötheriano, allora $A[x]$ è Nötheriano
 	\end{itemize}
 	
@@ -104,7 +112,7 @@
 		\item DEGREVLEX $\alpha \ge \beta \sse \mid \alpha \mid > \mid \beta \mid$ oppure si ha $\mid \alpha \mid = \mid \beta \mid$ e in $\alpha - \beta$ l'ultima coordinata $\neq 0$ è negativa
 	\end{itemize}
 
-	\subsection*{}
+	\subsection*{Basi di Gröbner e Algoritmo di Divisione}
 	\begin{itemize}
 		\item ({\bf Algoritmo di Divisione}) Siano $f_1, \ldots, f_k, f \in K[x_1, \ldots, x_n]$ allora $\exists a_1, \ldots, x_k, r \in K[x_1, \ldots, x_n]$ tali che $f = \sum_i a_i f_i + r$ e $\Deg (a_i f_i) \le \Deg(f)$. Inoltre se $r = \sum_\alpha r_\alpha x^\alpha$ si ha che se $r_\alpha \neq 0$ allora $x^\alpha \in (\Lt(f_1), \ldots, \Lt(f_k))$ \\
 		Notiamo che posso fare dei passaggi "a mano" prima di partire con l'algoritmo di divisione e lui funzionerà comunque. La cosa importante è ricordarsi di soddisfare la condizione $\Deg (a_i f_i) \le \Deg(f)$ ad ogni passaggio.
@@ -124,6 +132,10 @@
 		Teorema: La base ridotta è unica. Per ridurre una BdG basta prendere ciascun elemento $g$ ed effettuare la divisione per $G \setminus \{g\}$
 		\item ({\bf S-polinomio}) Dati $f, g \in K[x_1, \ldots, x_n]$ e supponiamo $f = c_\alpha x^\alpha + f_1$ e $g = d_\beta x^\beta + g_1$ con $\Deg f = \alpha, \Deg g = \beta$. Allora dico S-polinomio tra $f, g$ il polinomio definito da $\gamma = (\gamma_1, \ldots, \gamma_n)$ con $\gamma_i = \max(\alpha_i, \beta_i)$
 			$$ S(f, g) = \frac{x^\gamma}{c_\alpha x^\alpha} f - \frac{x^\gamma}{d_\beta x^\beta} g $$
+	\end{itemize}
+	
+	\subsection*{Applicazioni e Computazioni}
+	\begin{itemize}
 		\item ({\bf Eliminazione di LEX}) $I \subseteq K[x_1, \ldots, x_n]$ allora $I_k = I \cap K[x_{k+1}, \ldots, x_n]$ è il $k$-esimo ideale di eliminazione. Vale il teorema: Se $G$ è una BdG rispetto a LEX con $x_1 \ge \ldots \ge x_n$ allora $\forall k = 1, \ldots, n-1$ si ha che $G_k = G \cap K[x_{k+1}, \ldots, x_n]$ è BdG di $I_k$
 		\item ({\bf Cose calcolabili}) Dati $I, J \subseteq K[x_1, \ldots, x_n]$ e note le loro due BdG si ha
 			\begin{itemize}
@@ -140,10 +152,11 @@
 				\item ({\bf Conseguenza di Estensione}) Se la BdG è del tipo $\{x_1^{N_1} + \ldots, x_2^{N_2} + \ldots, \ldots, x_k^{N_k} + \ldots \}$ (deve essere di questa forma in tutte le variabili) allora la varietà è finita.
 				\item ({\bf Soluzioni finite}) $K$ algebricamente chiuso. $I \subseteq A$. Allora sono fatti equivalenti:
 					\begin{itemize}
-						\item $\mid \cV(I) \mid < \infty$
+						\item $\mid \cV(I) \mid < \infty$ ($\cV(I)$ è costituita da un numero finito di punti)
 						\item $\forall i = 1, \ldots, n \quad \exists m_i \tc x_i^{m_i} \in \Lt(I)$
 						\item $G = \{ g_1, \ldots, g_r\}$ BdG di $I$ allora $\forall i = 1, \ldots, n \quad \exists h_i \in \bbN \quad \exists g_r \in G \tc \Lt(g_r) \mid x_i^{h_i}$
 						\item $\Dim_K \frac{A}{I} < \infty$
+						\item $\Dim I = 0$ (come dimensione di Krull)
 					\end{itemize}
 					Inoltre vale che una $K$-base di $\frac{A}{I}$ è $\{x^\alpha \tc x^\alpha \notin \Lt(I)\}$, e anche $\Dim_K \frac{A}{I} = \mid \cV(I) \mid$ \\
 					Osservazione: Il nullstellensatz serve solo per la freccia che $\mid \cV(I) \mid < \infty$ implica una delle altre. Per le freccie inverse non serve.
@@ -151,7 +164,7 @@
 	\end{itemize}
 	
 	\section*{Ideali e Varietà}
-	Siano $I, J \subseteq K[x_1, \ldots, x_n]$ ideali e $V$ varietà affine. Allora vale
+	Siano $I, J, H \subseteq K[x_1, \ldots, x_n]$ ideali e $V$ varietà affine. Allora vale
 	\begin{itemize}
 		\item $I \subseteq J \implies \cV(J) \subseteq \cV(I)$
 		\item $I \subseteq \cI(\cV(I))$
@@ -160,12 +173,12 @@
 		\item $\cV(I + J) = \cV(I) \cap \cV(J)$
 		\item $\cV(I\cdot J) = \cV(I) \cup \cV(J) = \cV(I \cap J)$
 		\item $\cV(I) = \cV(\sqrt{I})$
+		\item $\cV(I, JH) = \cV(I, J) \cup \cV(I, H)$
 	\end{itemize}
 	Valgono inoltre i seguenti fatti:
 	\begin{itemize}
-		\item $V$ è irriducibile $\sse \cI(V)$ è primo
-		\item Ogni varietà affine si decompone come unione di un numero finito di varietà irriducibili
-		\item $I, J, H$ ideali. Allora $\cV(I, JH) = \cV(I, J) \cup \cV(I, H)$
+		\item $V$ è irriducibile $\implies \exists \kp \text{primo} \tc V = \cV(\kp)$ (il viceversa è vero se $K$ è algebricamente chiuso)
+		\item Ogni varietà affine si decompone come unione di un numero finito di varietà irriducibili. Tale decomposizione si può minimizzare nel modo seguente: se compaiono due varietà irriducibili una contenuta dentro l'altra si toglie dall'unione la più piccola. La decomposizione minimalizzata è unica a meno dell'ordine con cui compaiono i fattori irriducibili
 		\item $V = \{\alpha\}$ con $\alpha = (\alpha_1, \ldots, \alpha_n)$ allora $\cI(V) = (x_1 - \alpha_1, \ldots, x_n - \alpha_n)$ è un ideale massimale. (Se $K$ è algebricamente chiuso allora $I$ è massimale se e solo se è di quella forma)
 		\item ({\bf Nullstellensatz}) $K$ algebricamente chiuso. Allora $I \subseteq K[x_1, \ldots, x_n]$ e si ha:
 			\begin{itemize}
@@ -176,6 +189,95 @@
 		\item $K$ algebricamente chiuso. Se $I$ è radicale allora $I = \cap_{i=1}^k P_i$ con $P_i$ primi. (Basta decomporre la varietà)
 	\end{itemize}
 	
-	%\section*{Risultante}
+	\section*{Risultante}
+	\begin{itemize}
+		\item ({\bf Definizione di Risultante}) Sia $R$ un dominio d'integrità, $f, g \in R[x]$ e $f = \sum_{i=0}^n a_i x^i$, $g = \sum_{i=0}^m b_i x^i$. Definiamo allora la matrice di Sylvester come
+		$$ \text{Sylv}(f, g) = \left[ \begin{array}{cccccccccc}
+		a_0     & a_1     & \ldots  & \ldots  & a_n     & 0       & \ldots  & \ldots  & \ldots  & 0       \\
+		0       & a_0     & a_1     & \ldots  & \ldots  & a_n     & 0       & \ldots  & \ldots  & 0       \\
+		\vdots  &         & \ddots  &         &         &         & \ddots  &         &         & \vdots  \\
+		0       & \ldots  & 0       & a_0     & a_1     & \ldots  & \ldots  & a_n     & \ldots  & 0       \\ \hline
+		b_0     & b_1     & \ldots  & b_m     & 0       & \ldots  & \ldots  & \ldots  & \ldots  & 0       \\
+		0       & b_0     & b_1     & \ldots  & b_m     & 0       & \ldots  & \ldots  & \ldots  & 0       \\
+		0       & 0       & b_0     & b_1     & \ldots  & b_m     & 0       & \ldots  & \ldots  & 0       \\
+		\vdots  &         &         & \ddots  &         &         &         & \ddots  &         & \vdots  \\
+		0       & \ldots  & \ldots  & 0       & b_0     & b_1     & \ldots  & \ldots  & b_m     & 0       \\
+		\end{array} \right]$$
+		Ed il risultante di $f$ e $g$ è $\Ris(f, g) = \Det \text{Sylv}(f, g)$
+		\item ({\bf Definizione alternativa}) $\Ris(f, g) = a_n^m b_m^n \prod_{i,j} (\alpha_i - \beta_j) = a_n^m \cdot \prod_{f(\alpha_i) = 0} g(\alpha_i) = (-1)^{mn} b_m^n \cdot \prod_{g(\beta_j) = 0} f(\beta_j)$ dove le $\alpha_i$ e le $\beta_j$ sono le radici rispettivamente di $f$ e di $g$, con molteplicità
+		\item ({\bf Proprietà del risultante}) Valgono le seguenti proprietà:
+			\begin{itemize}
+				\item $\Ris(f, g) = (-1)^{mn} \Ris(g, f)$
+				\item $\Ris(af, g) = a^n \Ris(f, g)$ con $a \in R$ scalare
+				\item $\Ris(f, ag) = a^m \Ris(f, g)$ con $a \in R$ scalare
+				\item $\Ris(a, b) = 1$ dove $a, b \in R$ sono scalari
+				\item $\Ris(f, g) = 0 \sse \exists \alpha \in \overline{R} \tc f(\alpha) = g(\alpha) = 0$ (ovvero il risultante è nullo se e solo se $f$ e $g$ hanno una radice in comune nella chiusura algebrica del campo delle frazioni di $R$). Inoltre, se $R$ è UFD allora le due precedenti sono equivalenti a $\exists h \in R[x] \tc \Deg h > 0, h \mid f, h \mid g$
+				\item $f, g \in R[x]$ e $\Deg f = n, \Deg g = m$, allora $\Ris(f,g) = Af + Bg$ con $A, B \in R[x]$ e $\Deg A < m, \Deg B < n$
+				\item $\Ris(f, h_1 \cdot h_2) = \Ris(f, h_1) \cdot \Ris(f, h_2)$
+				\item $\Ris(f, hf+g) = a_m^{\Deg (hf + g) \cdot \Deg g} \cdot \Ris(f, g)$ [ATTENZIONE: della formula a fianco non sono completamente sicuro]
+				\item In molti casi vale che $\Ris(f,g) \mid_\alpha = \Ris(f\mid_\alpha, g\mid_\alpha)$ dove con $\mid_\alpha$ si intende la valutazione in $\alpha$. Bisogna solo stare attenti che almeno uno dei coefficienti direttivi valutati sia non nullo, altrimenti cambia la dimensione della matrice di sylvester e di conseguenza anche il polinomio che definisce il risultante
+				\item Può essere comodo sapere che, detti $a_i$ e $b_j$ i coefficienti di $f$ e di $g$, si ha che $\Ris(f, g) \in \bbZ[a_i, b_j]$
+			\end{itemize}
+		\item ({\bf Trucchi utili con il risultante}) Dati $f = \prod_i (x - \alpha_i)$ e $g = \prod_j (x - \beta_j)$, allora si possono costruire i seguenti polinomi:
+			\begin{itemize}
+				\item $\Ris_y (f(x-y), g(y))$ ha radici $\gamma_{i,j} = \alpha_i + \beta_j$
+				\item $\Ris_y (f(x+y), g(y))$ ha radici $\gamma_{i,j} = \alpha_i - \beta_j$
+				\item $\Ris_y (y^{\Deg f} f(\frac{x}{y}), g(y))$ ha radici $\gamma_{i,j} = \alpha_i \cdot \beta_j$
+				\item Se $g(0) \neq 0$ allora $\Ris_y (f(xy), g(y))$ ha radici $\gamma_{i,j} = \frac{\alpha_i}{\beta_j}$
+			\end{itemize}
+	\end{itemize}
 	
+	\section*{Moduli}
+	\subsection*{Primi fatti}
+	\begin{itemize}
+		\item ({\bf Fregatura dei Moduli}) Attenzione che le seguenti cose non sono sempre vere su moduli generici:
+			\begin{itemize}
+				\item Non sempre esiste una base
+				\item Un sistema di generatori minimale non è necessariamente una base
+				\item Un insieme libero massimale non è necessariamente una base
+				\item Due sistemi di generatori minimali non hanno necessariamente la stessa cardinalità (e nemmeno gli insiemi liberi massimali)
+			\end{itemize}
+		\item ({\bf Omomorfismi di $A$-Moduli}) Dati due $A$-Moduli $M$ ed $N$, allora si ha che anche $\Hom_A(M, N)$ è un $A$-modulo con le operazioni di somma e di prodotto scalare effettuate in arrivo. (Notare che questa proprietà è particolarmente strana e ci tornerà utile più volte). \\
+		Inoltre si può notare come dato un omomorfismo $f: M \rar N$ di $A$-moduli si ha che $\Ker f = \{ m \in M \mid f(m) = 0 \}$ ed $\Img f = \{ f(m) \mid m \in M \}$ sono entrambi due sottomoduli rispettivamente di $M$ e di $N$. Allora possiamo anche sempre definire $\coKer f = \frac{N}{\Img f}$
+		\item ({\bf Fatti di base e definizioni di operazioni importanti}) Valgono le seguenti cose:
+			\begin{itemize}
+				\item $\Hom_A(A, M) \cong_{\text{A-mod}} M$. Infatti conoscere il valore di $f(1)$ caratterizza tutto l'omomorfismo $f$, visto che è di $A$-moduli
+				\item $L \subseteq N \subseteq M$ allora vale $\frac{M}{N} \cong_{\text{A-mod}} \frac{\frac{M}{L}}{\frac{N}{L}}$
+				\item $M_1, M_2 \subseteq M$ sottomoduli. $M_1 + M_2 := \{ m_1 + m_2 \mid m_1 \in M_1, m_2 \in M_2 \}$ allora vale che $\frac{M_1 + M_2}{M_2} \cong_{\text{A-mod}} \frac{M_1}{M_1 \cap M_2}$
+				\item ({\bf $\frac{A}{I}$-moduli}) Dato $I \subseteq A$ idale ed $M$ modulo si può definire $IM = \{ \sum_i a_i m_i \mid a_i \in I, m_i \in M \}$ e si verifica che è un sottomodulo di $M$. Inoltre vale che $\frac{M}{IM}$ è anche un $\frac{A}{I}$-modulo. \\
+				Possiamo invece notare che $M$ non è sempre un $\frac{A}{I}$-modulo. Ci possiamo però riuscire se $I \subseteq (0 : M) = \{ a \in A \mid aM \subseteq (0) \}$.
+				\item ({\bf Somma diretta e prodotto}) Dati $\{M_i\}_{i \in I}$ una famiglia di $A$-moduli si definisce $$\oplus_i M_i = \{ (a_i)_{i \in I} \mid a_i \in M_i, a_i \neq 0 \text{ solo per un numero finito di indici}\}$$ Inoltre si definisce $$\prod_i M_i = \{ (a_i)_{i \in I} \mid a_i \in M_i \}$$ senza la condizione di sopra. \\
+				Se l'insieme $I$ di indici è finito allora si ha che $\oplus_i M_i = \prod_i M_i$. Valgono inoltre le seguenti proprietà universali per somma diretta e prodotto:
+				\begin{itemize}
+					\item Dati $\{M_i\}_{i \in I}$ $A$-moduli, si hanno $M_i \hrar^{j_i} \oplus_i M_i$ date da $m_i \mapsto (0, \ldots, 0, m_i, 0, \ldots)$. Allora per ogni assegnamento di $\{\varphi_i\}_{i \in I}$ con $\varphi_i: M_i \rar N$ omomorfismi di $A$-moduli, esiste unico $\tilde\phi: \oplus_i M_i \rar N$ tale che $\varphi_i = \tilde\phi \circ j_i$
+					\item Dati $\{M_i\}_{i \in I}$ $A$-moduli, si hanno $\prod_i M_i \srar^{\pi_i} M_i$ le proiezioni date da $m = (m_j)_{j \in I} \mapsto m_i$. Allora per ogni assegnamento di $\{\varphi_i\}_{i \in I}$ con $\varphi_i: N \rar M_i$ omomorfismi di $A$-moduli, esiste unico $\tilde\phi: N \rar \prod_i M_i$ tale che $\varphi_i = \pi_i \circ \tilde\phi$
+				\end{itemize}
+			\end{itemize}
+		\item ({\bf Morfismi da un modulo libero}) Sia $M$ un $A$-modulo libero e sia $S = \{s_1, \ldots, s_k\}$ una sua base. Allora dati $n_1, \ldots, n_k \in N$ ($N$ è un altro $A$-modulo) si ha che $\exists ! \Phi: M \rar N$ tale che $\Phi(s_i) = n_i$, $\Phi$ morfismo di $A$-moduli
+		\item ({\bf Rango di un modulo libero}) Sia $M$ un $A$-modulo libero con base $B = \{b_1, \ldots, b_k\}$ finita. Allora ogni altra base di $M$ ha cardinalità $k$. Se $M$ è libero con base di cardinalità $k$ si dice che $M$ ha rango $k$ ($\Rk M = k$)
+		\item $\Hom_A(A^n, M) \cong M^n$.
+		\item $M$ è un $A$-modulo finitamente generato $\sse M \cong \frac{A^k}{\Ker \varphi}$ per un certo $k \in \bbN$ e per un certo $\varphi$. Se $M = \gen{m_1, \ldots, m_k}$ si ha $\varphi: A^k \rar M$ definito da $e_i \mapsto m_i$. Allora $M \cong \frac{A^k}{\Ker \varphi}$. Il viceversa è ovvio.
+		\item ({\bf Hamilton-Cayley}) Sia $M$ un $A$-modulo finitamente generato, $I \subseteq A$ ideale. Sia $\varphi \in \Hom_A(M, M)$ endomorfismo tale che $\phi(M) \subseteq IM$. Allora $\exists b_0, \ldots, b_{n-1} \in I \tc \phi^n + \sum_{i=0}^{n-1} a_i \phi^i = 0$ in $\Hom_A(M, M)$
+		\item ({\bf Nakayama}) Come corollario di Hamilton-Cayley si ottengono le seguenti tre versioni di Nakayama:
+			\begin{itemize}
+				\item Sia $M$ un $A$-modulo finitamente generato, $I \subseteq A$ ideale $\tc M = IM$. Allora $\exists a \in A \tc a \equiv 1 (\mod I)$ e $a \cdot M = 0$ (Basta applicare HC a $\varphi = \Id$)
+				\item Sia $M$ un $A$-modulo finitamente generato, $\cJ(A)$ radicale di Jacobson, $I \subseteq \cJ(A)$ ideale di $A$ tale che $M = IM$. Allora $M = 0$ (Usiamo il Nakayama precedente ed usiamo la caratterizzazione del radicale di Jacobson)
+				\item Sia $M$ un $A$-modulo finitamente generato, $N$ un sottomodulo, $I \subseteq \cJ(A)$ ideale di $A$. Se $M = N + IM$ allora $M = N$ (Usando il Nakayama precedente basta mostrare che $\frac{M}{N} = I(\frac{M}{N})$ così che $\frac{M}{N} = (0) \implies M = N$ e questo è piuttosto semplice)
+			\end{itemize}
+			Come corollario otteniamo che se $A$ è un anello locale e $\km$ un suo ideale massimale, $M$ un $A$-modulo finitamente generato. Allora se $n_1, \ldots, n_k$ sono elementi di $M$ tali che si ha che $\overline{n_1}, \ldots, \overline{n_k}$ generato $\frac{M}{\km M}$ allora $n_1, \ldots, n_k$ generano $M$ (considerare $N \hrar M \srar \frac{M}{\km M}$
+		\item Sia $M$ un $A$-modulo finitamente generato, $f \in \End_A(M)$ surgettivo $\implies f$ è un isomorfismo.
+		\item ({\bf Funtori $f^*$ e $g_*$}) Se ho $f: P \rar M$ allora posso considerare $f^*: \Hom_A(M, N) \rar \Hom_A(P, N)$ definito da $\phi \mapsto \phi \circ f$. Notiamo che è contravariante. \\
+		Inoltre dato $g: M \rar P$ si ha $g_*: \Hom_A(N, M) \rar \Hom_A(N, P)$ definito da $\psi \mapsto g \circ \psi$, che è covariante. 
+	\end{itemize}
+	
+	\subsection*{Omomorfismi tra moduli liberi e forma normale di Schmidt}
+	\begin{itemize}
+		\item Ogni elemento di $\Hom_A(A^m, A^n)$ si può rappresentare in modo unico come matrice, quindi mi basta sapere dove vanno gli $e_i$ base di $A^m$ per sapere dove vanno tutti gli altri elementi. Inoltre una matrice sarà invertibile se e solo se il suo determinante è un elemento invertibile dell'anello (Basta usare l'aggiunta sapendo che $M M^* = (\Det M) \Id$)
+	\end{itemize}
+	
+	\subsection*{Successioni Esatte di Moduli}
+	\begin{itemize}
+		\item La successione $M_1 \rar^f M \rar^g M_2 \rar 0$ è esatta $\sse$ la successione $0 \rar \Hom_A(M_2, N) \rar^{g^*} \Hom_A(M, N) \rar^{f^*} \Hom_A(M_1, N)$ è esatta $\forall N$ $A$-moduli.
+		\item La successione $0 \rar M_1 \rar^f M \rar^g M_2$ è esatta $\sse$ la successione $\Hom_A(N, M_1) \rar^{f_*} \Hom_A(N, M) \rar^{g^*} \Hom_A(N, M_2) \rar 0$ è esatta $\forall N$ $A$-moduli.
+	\end{itemize}
 \end{document}
