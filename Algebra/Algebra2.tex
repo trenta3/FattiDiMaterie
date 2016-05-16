@@ -80,6 +80,7 @@
 		\item $I$ primario, $J \not\subseteq \sqrt{I} \implies \sqrt{I : J^i} = \sqrt{I} \forall i$
 		\item $I = \sqrt{I}$ e $h \notin I \implies I:h$ è radicale
 		\item ({\bf Teorema della base di Hilbert}) Se $A$ è un anello Nötheriano, allora $A[x]$ è Nötheriano
+		\item Se $A$ è locale, $\km$ il suo ideale massimale e $Q$ è $\km$-primario, allora si ha $(\frac{A}{Q})_{\frac{\km}{Q}} \cong \frac{A}{Q}$
 	\end{itemize}
 	
 	\section*{Basi di Gröbner}
@@ -350,6 +351,8 @@
 						\item $P$ primo in $A$, $P \cap S = \emptyset \quad \implies S^{-1}P$ primo
 					\end{itemize}
 				\item $P_1$, $P_2$ ideali primi. Allora si ha $S^{-1}P_1 = S^{-1}P_2 \implies P_1 = P_2$
+				\item $Q \subseteq A$ ideale $P$-primario. Allora se $S \cap P \neq \emptyset$ si ha $S^{-1}Q = S^{-1}A$ \\
+					Se $S \cap P = \emptyset$ allora $S^{-1}Q$ è $S^{-1}P$-primario ed inoltre $(S^{-1}Q)^c = Q$
 			\end{itemize}
 		\item ({\bf $S^{-1}$ e le altre operazioni}) Potremmo dire in linea di massima che $S^{-1}$ commuta con tutte le operazioni principali, purché siano finite:
 			\begin{itemize}
@@ -470,4 +473,72 @@
 		\item ({\bf Lemma dei cinque}) %TODO
 	\end{itemize}
 	
+	\section*{Moduli Nötheriani ed Artiniati}
+	\begin{itemize}
+		\item ({\bf Definizione}) Se $(\Sigma, \le)$ è un insieme parzialmente ordinato allora sono equivalenti:
+			\begin{itemize}
+				\item Ogni catena ascendente è stazionaria
+				\item Ogni sottoinsieme diverso dal vuoto ha un elemento massimale
+			\end{itemize}
+			Sia ora $A$ un anello, $M$ un $A$-modulo e $\Sigma = \{ N \subseteq M \text{ sottomodulo } \}$. Se $(\Sigma, \subseteq)$ soddisfa una delle due condizioni equivalenti di cui sopra, $M$ viene detto $A$-modulo Nötheriano [ACC] \\
+			Se invece è $(\Sigma, \supseteq)$ a soddisfare una delle due condizioni, $M$ viene detto $A$-modulo Artiniano [DCC] \\
+			Un anello $A$ si dice Artiniano (Nötheriano) se è Artiniano (Nötheriano) come $A$-modulo su sè stesso
+		\item ({\bf Condizione equivalente alla Nötherianità}) $M$ è un $A$-modulo Nötheriano $\sse$ ogni sottomodulo è f.g.
+		\item ({\bf Passaggio per sequenze esatte}) Sia $0 \rar M \rar N \rar P \rar 0$ una sequenza esatta corta. Allora vale che:
+			\begin{itemize}
+				\item $N$ Nötheriano $\sse M, P$ Nötheriani
+				\item $N$ Artiniano $\sse M, P$ Artiniani
+			\end{itemize}
+			Come corollari si ottengono i seguenti:
+			\begin{itemize}
+				\item $M_1, \ldots, M_n$ Nötheriani $\sse \oplus_i M_i$ Nötheriano
+				\item $A$ Nötheriano e $M$ $A$-modulo f.g. $\implies M$ Nötheriano
+				\item $A$ Nötheriano e $I \subseteq A$ ideale $\implies \frac{A}{I}$ Nötheriano
+				\item $f: A \srar B$ surgettiva. Allora $A$ Nötheriano $\implies B$ Nötheriano
+				\item $A$ Nötheriano $\implies S^{-1}A$ Nötheriano (per la corrispondenza tra ideali)
+				\item Vale inoltre che $A$ Nötheriano $\implies A[x]$ Nötheriano (Base di Hilbert)
+			\end{itemize}
+		\item ({\bf Lemmi per i Nötheriani}) Valgono le seguenti cose a caso:
+			\begin{itemize}
+				\item $A$ Nötheriano. Ogni ideale contiene allora una potenza del suo radicale, ovvero $\forall I \subseteq A \quad \exists n \tc (\sqrt{I})^n \subseteq I$
+				\item $A$ Nötheriano, $\km$ ideale massimale. Allora TFAE:
+					\begin{itemize}
+						\item $Q$ è $\km$-primario
+						\item $\sqrt{Q} = \km$
+						\item $\exists n \quad \km^n \subseteq Q \subseteq \km$
+					\end{itemize}
+			\end{itemize}
+		\item ({\bf Teoremi per gli Artiniani})
+			\begin{itemize}
+				\item $A$ è Artiniano $\sse A$ è Nötheriano e $\Dim A = 0$ [Non dimostrato]
+				\item ({\bf Teorema di Struttura per anelli artiniani}) $A$ è Artiniano $\sse A = \oplus_i A_i$ con gli $A_i$ Artiniani e Locali. La decomposizione è unica a meno di isomorfismi [Non dimostrato]
+				\item $A$ Artiniano $\implies A$ semilocale
+			\end{itemize}
+	\end{itemize}
+	
+	\section*{Decomposizione Primaria}
+	\begin{itemize}
+		\item ({\bf Decomposizione primaria di un ideale}) $I \subseteq A$ ideale si dice decomponibile se si può scrivere come intersezione di un numero finito di ideali primari $Q_1, \ldots, Q_n$ come $I = \cap_i Q_i$. (Definiamo inoltre primi associati ad una decomposizione $P_i := \sqrt{Q_i}$)
+		\item ({\bf Minimalizzazione di una decomposizione}) Se $P_i = P_j$ in una decomposizione allora vale che $Q_i \cap Q_j$ è ancora primario e posso quindi sostituirlo al posto di $Q_i$ e $Q_j$ (Vale ancora che $\sqrt{Q_i \cap Q_j} = P_i = P_j$. \\
+		Una decomposizione si dice minimale o irridondante se $P_i \neq P_j \quad \forall i \neq j$ e $\cap_{i\neq j} Q_j \not\subseteq Q_i$
+		\item ({\bf Proposizione tecniche}) $Q$ primario e $P = \sqrt{Q}$, $a \in A$. Allora valgono le seguenti:
+			\begin{itemize}
+				\item Se $a \in Q$ si ha $(Q : a) = 1$
+				\item Se $a \notin Q$ allora $(Q : a)$ è $P$-primario, ovvero $Q:a$ è primario e $\sqrt{Q:a} = P$
+				\item Se $a \notin P$ allora $(Q : a) = Q$
+			\end{itemize}
+		\item ({\bf Unicità dei primi associati}) Sia $I = \cap_{i=1}^n Q_i$ con $\sqrt{Q_i} = P_i$ e supponiamo la scrittura minimale. Allora i $P_i$ sono indipendenti dalla decomposizione ed inoltre vale che $\{P_1, \ldots, P_n\} = \{ \sqrt{I:a} \text{ primi} \mid a \in A \}$ (Ovvero $\forall a \in A$ faccio $\sqrt{I:a}$. Se $\sqrt{I:a}$ è primo allora lo prendo.
+		\item ({\bf Primi minimali}) Data una decomposizione minimale di $I$, considero i primi associati $P_i$. Tra questi posso considerare i primi minimali per inclusione (detti primi minimali). In particolare i primi minimali associati ad $I$ sono quelli tali che $\forall P$ primo tale che $I \subseteq P$ allora si ha $\exists i$ tale che $P_i \subseteq P$ dove $P_i$ è un primo minimale.
+		\item ({\bf Nilradicale}) In particolare se $(0)$ è decomponibile allora $\cN(A) = \cap_{P_i \text{ minimali di } (0)} P_i$
+		\item ({\bf Caratterizzazione dell'unione dei primi associati}) $I = \cap_i Q_i$ minimale con $P_i = \sqrt{Q_i}$ allora $\{ a \in A \mid (I:a) \neq I \} = \cup_i P_i$
+		\item ({\bf Divisori di Zero}) Se $(0)$ è decomponibile allora si ha $\cD(A) = \cup_{0 \neq a \in A} \sqrt{0 : a}$ e se $(0) = \cap_i Q_i$ allora $\sqrt{0:a} = \cap_{a \notin Q} \sqrt{Q:a} = \cap_{a \notin Q_i} P_i \subseteq P_i$, ovvero $\cD(A) \subseteq \cup_i P_i$ e visto che $P_i = \sqrt{0:a}$ si ha $P_i \subseteq \cD(A)$
+		\item ({\bf Decomposizione Primaria con $S^{-1}$}) $S \subseteq A$ e $I = \cap_i Q_i$ minimale. Siano inoltre $P_1, \ldots, P_m, P_{m+1}, \ldots, P_n$ i primi associati ordinati in modo che $S \cap P_i = \emptyset$ con $i \le m$ e che $S \cap P_j \neq \emptyset$ se $j \ge m+1$. \\
+		Allora si ha che $S^{-1}I = \cap_i S^{-1}Q_i = \cap_{i \le m} S^{-1}Q_i$ e quindi $(S^{-1}I)^c = Q_1 \cap \ldots \cap Q_m$. "Facendo così abbiamo ucciso le componenti i cui primi intersecano $S$" 
+		\item ({\bf Unicità dei primari minimali}) Per il lemma di sopra abbiamo l'unicità dei primari minimali. Infatti visto che $P_i$ è minimale si ha $S = A \cap P_i$ e allora $S \cap P_j \quad \forall j \neq i$ e quindi $Q_i$ non dipende dalla decomposizione perché anche i $P_i$ non dipendono dalla decomposizione.
+		\item ({\bf Esistenza della Decomposizione Primaria}) Mostriamo che in un anello Nötheriano ogni ideale è decomponibile, nei seguenti due step:
+			\begin{itemize}
+				\item Dimostriamo prima che $I \subseteq A$ ideale, con $A$ Nötheriano, allora $I = \cap_i I_i$ dove gli $I_i$ sono ideali irriducibili (ovvero tali che $I_i = J \cap K \implies I = J$ oppure $I = K$)
+				\item Ogni irriducibile in un Nötheriano è primario
+			\end{itemize}
+	\end{itemize}
 \end{document}
