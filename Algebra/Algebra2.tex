@@ -238,6 +238,7 @@
 				\item Un insieme libero massimale non è necessariamente una base
 				\item Due sistemi di generatori minimali non hanno necessariamente la stessa cardinalità (e nemmeno gli insiemi liberi massimali)
 			\end{itemize}
+		\item ({\bf Cardinalità di una base di un modulo libero}) Se un modulo $M$ è libero, allora ogni base ha la stessa cardinalità. Inoltre ogni insieme di generatori di $M$ ha cardinalità maggiore o uguale a quella di una base.
 		\item ({\bf Omomorfismi di $A$-Moduli}) Dati due $A$-Moduli $M$ ed $N$, allora si ha che anche $\Hom_A(M, N)$ è un $A$-modulo con le operazioni di somma e di prodotto scalare effettuate in arrivo. (Notare che questa proprietà è particolarmente strana e ci tornerà utile più volte). \\
 		Inoltre si può notare come dato un omomorfismo $f: M \rar N$ di $A$-moduli si ha che $\Ker f = \{ m \in M \mid f(m) = 0 \}$ ed $\Img f = \{ f(m) \mid m \in M \}$ sono entrambi due sottomoduli rispettivamente di $M$ e di $N$. Allora possiamo anche sempre definire $\coKer f = \frac{N}{\Img f}$
 		\item ({\bf Fatti di base e definizioni di operazioni importanti}) Valgono le seguenti cose:
@@ -265,8 +266,8 @@
 				\item Sia $M$ un $A$-modulo finitamente generato, $\cJ(A)$ radicale di Jacobson, $I \subseteq \cJ(A)$ ideale di $A$ tale che $M = IM$. Allora $M = 0$ (Usiamo il Nakayama precedente ed usiamo la caratterizzazione del radicale di Jacobson)
 				\item Sia $M$ un $A$-modulo finitamente generato, $N$ un sottomodulo, $I \subseteq \cJ(A)$ ideale di $A$. Se $M = N + IM$ allora $M = N$ (Usando il Nakayama precedente basta mostrare che $\frac{M}{N} = I(\frac{M}{N})$ così che $\frac{M}{N} = (0) \implies M = N$ e questo è piuttosto semplice)
 			\end{itemize}
-			Come corollario otteniamo che se $A$ è un anello locale e $\km$ un suo ideale massimale, $M$ un $A$-modulo finitamente generato. Allora se $n_1, \ldots, n_k$ sono elementi di $M$ tali che si ha che $\overline{n_1}, \ldots, \overline{n_k}$ generato $\frac{M}{\km M}$ allora $n_1, \ldots, n_k$ generano $M$ (considerare $N \hrar M \srar \frac{M}{\km M}$
-		\item Sia $M$ un $A$-modulo finitamente generato, $f \in \End_A(M)$ surgettivo $\implies f$ è un isomorfismo.
+			Come corollario otteniamo che se $A$ è un anello locale e $\km$ un suo ideale massimale, $M$ un $A$-modulo finitamente generato. Allora se $n_1, \ldots, n_k$ sono elementi di $M$ tali che si ha che $\overline{n_1}, \ldots, \overline{n_k}$ generano $\frac{M}{\km M}$ come $\frac{A}{\km}$-modulo (ovvero come spazio vettoriale) allora $n_1, \ldots, n_k$ generano $M$ come $A$-modulo (considerare $N \hrar M \srar \frac{M}{\km M}$ e usare Nakayama 3) \\
+			Come altro corollario sia $M$ un $A$-modulo finitamente generato, $f \in \End_A(M)$ surgettivo $\implies f$ è un isomorfismo.
 		\item ({\bf Funtori $f^*$ e $g_*$}) Se ho $f: P \rar M$ allora posso considerare $f^*: \Hom_A(M, N) \rar \Hom_A(P, N)$ definito da $\phi \mapsto \phi \circ f$. Notiamo che è contravariante. \\
 		Inoltre dato $g: M \rar P$ si ha $g_*: \Hom_A(N, M) \rar \Hom_A(N, P)$ definito da $\psi \mapsto g \circ \psi$, che è covariante. 
 	\end{itemize}
@@ -280,7 +281,7 @@
 			Il modo generale di procedere è piuttosto semplice: con il metodo precedente si pongono a zero tutti i numeri sulla prima riga tranne il primo, a questo punto si mettono a zero tutti i numeri sulla prima colonna tranne il primo, e si procede riga-colonna fino a quando non sono nulli sia tutti i numeri sulla prima riga che sulla prima colonna (tranne ovviamente il primo). Questa cosa deve succere prima o poi. Quando accade si ricorre per induzione sulla sottomatrice $(n-1) \times (n-1)$ che si ottiene levando la prima riga e la prima colonna.
 		\item ({\bf Forma normale di Smith}) $A$ PID. Vogliamo dare una forma canonica alle matrici che rappresentano gli omomorfismi tra moduli liberi. Una matrice diagonale $D$ si dice in forma di Smith se $d_1 \mid d_2 \mid \ldots \mid d_n$ con $D = \left( \begin{array}{cccc} d_1 & & & \\ & d_2 & & \\ & & \ddots & \\ & & & d_n \\ \end{array} \right)$
 		\item ({\bf Ogni matrice diagonale si può portare in forma di Smith}) Infatti data $\left( \begin{array}{cc} a & 0 \\ 0 & b \\ \end{array} \right)$ e detto $d = \MCD(a, b) = as + bt$ si computa $\left( \begin{array}{cc} s & t \\ -\frac{b}{d} & \frac{a}{d} \\ \end{array} \right) \cdot \left( \begin{array}{cc} a & 0 \\ 0 & b \\ \end{array} \right) \cdot \left( \begin{array}{cc} 1 & - \frac{tb}{d} \\ 1 & \frac{sa}{d} \\ \end{array} \right) = \left( \begin{array}{cc} d & 0 \\ 0 & \frac{ab}{d} \\ \end{array} \right)$
-		\item ({\bf Caratterizzazione tramite ideali determinanti}) Se $S$ è una matrice definiamo $\Delta_i(S)$ come l'ideale generato dai determinanti delle sottomatrici $i \times i$ di $S$. Se $S, T$ $m \times n$ sono equivalenti allora $\Delta_i S = \Delta_i T \quad \forall i$. Se $D_1$ e $D_2$ sono matrici in forma di Smith allora $D_1$ è equivalente a $D_2$ se e solo se $d_i^{(1)}$ e $d_i^{(2)}$ differiscono di un invertibile (ovvero sono associati)
+		\item ({\bf Caratterizzazione tramite ideali determinanti}) Se $S$ è una matrice definiamo $\Delta_i(S)$ come l'ideale generato dai determinanti delle sottomatrici $i \times i$ di $S$. Se $S, T$ $m \times n$ sono equivalenti allora $\Delta_i S = \Delta_i T \quad \forall i$. Se $D_1$ e $D_2$ sono matrici in forma di Smith allora $D_1$ è equivalente a $D_2$ se e solo se $d_i^{(1)}$ e $d_i^{(2)}$ differiscono di un invertibile (ovvero sono associati). Inoltre si ha che i $d_i$ sono $d_i = \frac{\Delta_{i}}{\Delta_{i-1}}$ per $i \ge 1$ (dove convenzionalmente $\Delta_0 = 1$)
 		\item ({\bf Sottomoduli di moduli liberi su PID}) Se $M$ è un $A$-modulo libero con $A$ PID e $N \subseteq M$ sottomodulo, allora $N$ è libero e inoltre vale che $\Rk N \le \Rk M$
 		\item ({\bf Teorema di struttura di moduli f.g. su PID}) Ogni modulo finitamente generato su PID si scrive come somma diretta di moduli ciclici. $M$ f.g. su PID (ovvero è quoziente di un modulo libero). $M = \gen{m_1, \ldots, m_k}$. Allora $A^n \rar^f M \rar 0$ con $f(e_i) = m_i$ e $f(a_1, \ldots, a_n) = \sum_i a_i m_i$ ovvero $M \cong \frac{A^n}{\Ker f}$ e $\Ker f \subseteq A^n$ è un sottomodulo di modulo libero. \\
 		Sapendo che ogni sottomodulo di modulo libero su PID è libero abbiamo che $A^m \rar^\phi A^k \rar^f M \rar 0$ allora $M \cong \frac{A^m}{\Ker f} \cong \frac{A^k}{\Img \phi} \cong \coKer \phi \cong \oplus_i \frac{A}{(d_i)} \cong \oplus_i \gen{z_i}$ con $d_i = \Ann(z_i)$
@@ -324,6 +325,8 @@
 				\item $(M \oplus N) \otimes_R P \cong (M \otimes_R P) \oplus (M \otimes_R P)$ (vale anche per somme dirette infinite)
 				\item $\frac{R}{I} \otimes_R M \cong \frac{M}{IM}$
 				\item $M_\kp \otimes_{A_\kp} N_\kp = (M \otimes_A N)_\kp$
+				\item $\frac{A}{I} \otimes_A \frac{A}{J} \cong \frac{A}{I+J}$
+				\item $\Hom_A(\frac{A}{I}, \frac{A}{J}) \cong \frac{(J : I)}{J}$ [Non fatta in classe]
 			\end{itemize}
 		\item ({\bf Aggiunzione con $\Hom$}) $M, N, P$ tre $R$-moduli. Allora vale che $\Hom_R(M \otimes_R N, P) \cong \Hom_R(M, \Hom_R(N, P))$ dove l'isomorfismo è naturale (e vale in particolare anche a livello di $R$-moduli)
 		\item ({\bf Esattezza a destra}) Essendo aggiunto sinistro il funtore $\textunderscore \otimes_R M$ (o anche $M \otimes_R \textunderscore$, che è canonicamente equivalente al primo) è esatto a destra, cioè: \\
@@ -412,12 +415,13 @@
 			Per l'iniettività basta mostrare che $\Ker f_\kp = (\Ker f)_\kp$ e usare che $M = 0$ è locale. Uguale per la surgettività con i $\coKer$
 		\item ({\bf Essere ridotto è una proprietà locale}) Un anello infatti è ridotto se $\cN(A) = 0$ e abbiamo mostrato che $S^{-1}\cN(A) = \cN(S^{-1}A)$, ovvero $N(A) = 0 \sse N(A)_\kp = N(A_\kp) = 0 \quad \forall \kp$ primo
 		\item ({\bf Dominio NON è una proprietà locale})
+		\item ({\bf L'esattezza è una proprietà locale e massimale}) $M \rar N \rar P$ è esatta in $N$ se e solo se lo solo le sequenze localizzate ai primi o ai massimali [Questo ci viene detto da D.A. ma non è stato fatto a lezione]
 	\end{itemize}
 	
 	\subsection*{Successioni Esatte di Moduli}
 	\begin{itemize}
 		\item La successione $M_1 \rar^f M \rar^g M_2 \rar 0$ è esatta $\sse$ la successione $0 \rar \Hom_A(M_2, N) \rar^{g^*} \Hom_A(M, N) \rar^{f^*} \Hom_A(M_1, N)$ è esatta $\forall N$ $A$-moduli.
-		\item La successione $0 \rar M_1 \rar^f M \rar^g M_2$ è esatta $\sse$ la successione $\Hom_A(N, M_1) \rar^{f_*} \Hom_A(N, M) \rar^{g^*} \Hom_A(N, M_2) \rar 0$ è esatta $\forall N$ $A$-moduli.
+		\item La successione $0 \rar M_1 \rar^f M \rar^g M_2$ è esatta $\sse$ la successione $0 \rar \Hom_A(N, M_1) \rar^{f^*} \Hom_A(N, M) \rar^{g^*} \Hom_A(N, M_2)$ è esatta $\forall N$ $A$-moduli.
 		\item ({\bf Successioni che spezzano}) Data una successione esatta corta di $A$-moduli $0 \rar M \rar^\alpha N \rar^\beta P \rar 0$ si ha TFAE:
 			\begin{itemize}
 				\item $N \cong M \oplus P$
@@ -426,7 +430,7 @@
 			\end{itemize}
 		\item ({\bf Proprietà estremi-intermedio}) Sia $0 \rar M \rar^\alpha N \rar^\beta P \rar 0$ una successione esatta di $A$-moduli. Allora valgono le seguenti:
 			\begin{itemize}
-				\item $M, P$ f.g $\implies N$ f.g
+				\item $M, P$ f.g $\implies N$ f.g (Il viceversa non vale)
 			\end{itemize}
 		\item ({\bf Moduli Proiettivi}) $P$ si dice proiettivo se vale una delle seguenti, tutte equivalenti:
 			\begin{itemize}
@@ -446,10 +450,16 @@
 			\begin{itemize}
 				\item Per ogni $f: N \hrar M$ iniettiva e $g: N \rar Q$ si ha $\exists G: M \rar Q$ tale che $g = G \circ f$
 				\item Ogni successione esatta $0 \rar Q \rar M \rar N \rar 0$ spezza
+				\item $\forall g: N \hrar M$ iniettiva l'omomorfismo indotto $\Hom_A(M, Q) \rar^{g_*} \Hom_A(N, Q)$ è iniettivo
 				\item Per ogni $I \subseteq A$ ideale vale la caratterizzazione (1) con $N = I$ e $M = A$ \\
-					Si può dire anche per per ogni $I$ ideale di $A$ si ha che ogni $f: I \rar Q$ si estende ad una funzione $\tilde{f}: A \rar Q$
+					Si può dire anche per per ogni $I$ ideale di $A$ si ha che ogni $f: I \rar Q$ si estende ad una funzione $\tilde{f}: A \rar Q$ [Su questa serbiamo qualche dubbio]
 				\item $0 \rar K \rar M \rar N \rar 0$ esatta $\sse 0 \rar \Hom_A(N, Q) \rar \Hom_A(M, Q) \rar \Hom_A(K, Q) \rar 0$ esatta \\
 					Ovvero anche $\Hom_A(\textunderscore, Q)$ è un funtore esatto
+			\end{itemize}
+			Hanno inoltre le seguenti proprietà rispetto ad alcune costruzioni:
+			\begin{itemize}
+				\item $Q_1 \oplus Q_2$ iniettivo $\sse Q_1, Q_2$ iniettivi
+				\item NON è invece detto che $P_1, P_2$ iniettivo $\implies P_1 \otimes P_2$ iniettivo FALSO
 			\end{itemize}
 		\item ({\bf Moduli Piatti}) $N$ è un $R$-modulo piatto se il funtore $N \otimes_R \textunderscore$ è esatto \\
 			Valgono le seguenti proprietà rispetto alle costruzioni:
@@ -469,11 +479,11 @@
 				\item Libero $\implies$ Proiettivo (Il viceversa vale se $A$ è PID oppure anche se $A$ è locale e $P$ f.g.)
 				\item Proiettivo $\implies$ Piatto (Viene da Libero $\implies$ Piatto, piuttosto semplice da mostrare usando che $L = \oplus_\ni R^{(\ni)}$ se $L$ è libero ed utilizzando il fatto che un modulo proiettivo è un sommando diretto di un modulo libero). \\ Il viceversa non vale. Ad esempio $\bbQ$ come $\bbZ$-modulo
 			\end{itemize}
-		\item ({\bf Lemma del Serpente}) %TODO
-		\item ({\bf Lemma dei cinque}) %TODO
+%		\item ({\bf Lemma del Serpente}) %TODO
+%		\item ({\bf Lemma dei cinque}) %TODO
 	\end{itemize}
 	
-	\section*{Moduli Nötheriani ed Artiniati}
+	\section*{Moduli Nötheriani ed Artiniani}
 	\begin{itemize}
 		\item ({\bf Definizione}) Se $(\Sigma, \le)$ è un insieme parzialmente ordinato allora sono equivalenti:
 			\begin{itemize}
@@ -527,6 +537,7 @@
 				\item Se $a \notin Q$ allora $(Q : a)$ è $P$-primario, ovvero $Q:a$ è primario e $\sqrt{Q:a} = P$
 				\item Se $a \notin P$ allora $(Q : a) = Q$
 			\end{itemize}
+			Notare che se dovessi avere un ideale $J$ finitamente generato al posto di $a$, basta ricordare che $(Q : \sum_i J_i) = \cap_i (Q : J_i)$ per ricavarne le relative proposizioni
 		\item ({\bf Unicità dei primi associati}) Sia $I = \cap_{i=1}^n Q_i$ con $\sqrt{Q_i} = P_i$ e supponiamo la scrittura minimale. Allora i $P_i$ sono indipendenti dalla decomposizione ed inoltre vale che $\{P_1, \ldots, P_n\} = \{ \sqrt{I:a} \text{ primi} \mid a \in A \}$ (Ovvero $\forall a \in A$ faccio $\sqrt{I:a}$. Se $\sqrt{I:a}$ è primo allora lo prendo.
 		\item ({\bf Primi minimali}) Data una decomposizione minimale di $I$, considero i primi associati $P_i$. Tra questi posso considerare i primi minimali per inclusione (detti primi minimali). In particolare i primi minimali associati ad $I$ sono quelli tali che $\forall P$ primo tale che $I \subseteq P$ allora si ha $\exists i$ tale che $P_i \subseteq P$ dove $P_i$ è un primo minimale.
 		\item ({\bf Nilradicale}) In particolare se $(0)$ è decomponibile allora $\cN(A) = \cap_{P_i \text{ minimali di } (0)} P_i$
@@ -541,4 +552,63 @@
 				\item Ogni irriducibile in un Nötheriano è primario
 			\end{itemize}
 	\end{itemize}
+	
+	\clearpage
+	\title {Prontuario di cose utili (da ascari)}
+	\section*{Operazioni tra ideali}
+	$\forall \ka, \kb, \kc, \kd$ ideali di $A$ valgono le seguenti:
+	\begin{itemize}
+		\item $\ka (\kb + \kd) = \ka \kb + \ka \kd$
+		\item $\ka \kb \subseteq \ka \cap \kb$
+		\item $(\ka + \kb)(\ka \cap \kb) \subseteq \ka \kb$
+		\item $\ka \subseteq (\ka : \kb)$
+		\item $(\ka : \kb)\kb \subseteq \ka$
+		\item $((\ka : \kb) : \kc) = ((\ka : \kc) : \kb) = (\ka : \kb\kc)$
+		\item $(\cap_i \ka_i : \kb) = \cap_i (\ka_i : \kb)$
+		\item $(\ka : \sum_i \kb_i) = \cap_i (\ka : \kb_i)$
+		\item $\ka \subseteq \sqrt{\ka}$
+		\item $\sqrt{\sqrt{\ka}} = \sqrt{\ka}$
+		\item $\sqrt{\ka \kb} = \sqrt{\ka \cap \kb} = \sqrt{\ka} \cap \sqrt{\kb}$
+		\item $\sqrt{\ka + \kb} = \sqrt{\sqrt{\ka} + \sqrt{\kb}}$
+		\item Due ideali $\ka$ e $\kb$ si dicono coprimi se $\ka + \kb = 1$.
+		\item $\ka + \kb = 1$, $\ka + \kd = 1$ $\implies \ka + \kb\kd = 1$
+		\item $\ka + \kb = 1 \implies \ka\kb = \ka \cap \kb$
+	\end{itemize}
+	
+	\section*{Estensione e contrazione}
+	Sia dato un morfismo di anelli $\phi: A \rar B$. Allora si hanno le due operazioni di estensione e contrazione. Indicheremo con $\ka$ gli ideali di $A$ e con $\kb$ ideali di $B$. Allora vale che:
+	\begin{itemize}
+		\item $\ka \subseteq \ka^{ec}$
+		\item $\kb \supseteq \kb^{ce}$
+		\item $\ka^{ece} = \ka^e$
+		\item $\kb^{cec} = \kb^c$
+		\item L'insieme degli ideali contratti e di quelli estesi sono in biggezione tramite le operazioni di estensione e contrazione
+		\item $(\ka_1 + \ka_2)^e = \ka_1^e + \ka_2^e$
+		\item $(\ka_1 \cap \ka_2)^e \subseteq \ka_1^e \cap \ka_2^e$
+		\item $(\ka_1 \ka_2)^e = \ka_1^e \ka_2^e$
+		\item $(\ka_1 : \ka_2)^e \subseteq (\ka_1^e : \ka_2^e)$
+		\item $(\sqrt{\ka})^e \subseteq \sqrt{\ka^e}$
+		\item $(\kb_1 + \kb_2)^{c} \supseteq \kb_1^c + \kb_2^c$
+		\item $(\kb_1 \cap \kb_2)^{c} = \kb_1^c \cap \kb_2^c$
+		\item $(\kb_1 \kb_2)^{c} \supseteq \kb_1^c \kb_2^c$
+		\item $(\kb_1 : \kb_2)^{c} \subseteq (\kb_1^c : \kb_2^c)$
+		\item $(\sqrt{\kb})^c = \sqrt{\kb^c}$
+		\item Inoltre si ha che se $\kb$ è primo (primario) (radicale) allora $\kb^c$ è primo (primario) (radicale)
+		\item Se $\ka$ è principale (finitamente generato) allora $\ka^e$ è principale (finitamente generato)
+	\end{itemize}
+	
+	\section*{$S^{-1}$ e corrispondenze tra ideali}
+	\begin{itemize}
+		\item $\kb$ radicale (primario) (primo) $\sse$ $\kb^c$ radicale (primario) (primo)
+		\item $\kb$ massimale $\sse \kb^c$ massimale tra quelli che non intersecano $S$
+		\item $\ka$ primo (primario) (massimale) tale che $\ka \cap S = \emptyset \quad \implies$ $\ka^{ec} = \ka$ ed $\ka^e$ primo (primario) (massimale)
+		\item $\kb$ principale (finitamente generato) $\implies \kb^c$ principale (finitamente generato) (Con $A$ dominio vale anche il viceversa)
+	\end{itemize}
+	Vale inoltre che:
+	\begin{itemize}
+		\item $(\ka_1 \cap \ka_2)^e = \ka_1^e + \ka_2^e$
+		\item $(\sqrt{\ka})^e = \sqrt{\ka^e}$
+		\item Se $\ka_2$ è f.g. allora $(\ka_1 : \ka_2)^e = (\ka_1^e : \ka_2^e)$
+	\end{itemize}
+	Inoltre se $A$ è dominio (UFD) (PID) (Nötheriano) allora $S^{-1}A$ è dominio (UFD) (PID) (Nötheriano)
 \end{document}
