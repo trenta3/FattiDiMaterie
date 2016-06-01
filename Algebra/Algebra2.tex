@@ -109,7 +109,7 @@
 	\subsection*{Ordinamenti Monomiali Comuni}
 	\begin{itemize}
 		\item LEX $x_1 > x_2 > \ldots > x_n$. Dico che $\alpha \ge \beta \sse$ In $\alpha - \beta$ la prima coordinata $\neq 0$ è positiva
-		\item DEGLEX Sia $\mid \alpha \mid := \sum_i \alpha_i$. Allora $\alpha \ge \beta \sse$ si ha $\mid \alpha \mid \ge \mid \beta \mid$ oppure $\mid \alpha \mid = \mid \beta \mid$ e vale $\alpha \ge \beta$ con LEX
+		\item DEGLEX Sia $\mid \alpha \mid := \sum_i \alpha_i$. Allora $\alpha \ge \beta \sse$ si ha $\mid \alpha \mid > \mid \beta \mid$ oppure $\mid \alpha \mid = \mid \beta \mid$ e vale $\alpha \ge \beta$ con LEX
 		\item DEGREVLEX $\alpha \ge \beta \sse \mid \alpha \mid > \mid \beta \mid$ oppure si ha $\mid \alpha \mid = \mid \beta \mid$ e in $\alpha - \beta$ l'ultima coordinata $\neq 0$ è negativa
 	\end{itemize}
 
@@ -159,7 +159,7 @@
 						\item $\Dim_K \frac{A}{I} < \infty$
 						\item $\Dim I = 0$ (come dimensione di Krull)
 					\end{itemize}
-					Inoltre vale che una $K$-base di $\frac{A}{I}$ è $\{x^\alpha \tc x^\alpha \notin \Lt(I)\}$, e anche $\Dim_K \frac{A}{I} = \mid \cV(I) \mid$ \\
+					Inoltre vale che una $K$-base di $\frac{A}{I}$ è $\{x^\alpha \tc x^\alpha \notin \Lt(I)\}$, e anche $\Dim_K \frac{A}{\sqrt{I}} = \mid \cV(I) \mid$ \\
 					Osservazione: Il nullstellensatz serve solo per la freccia che $\mid \cV(I) \mid < \infty$ implica una delle altre. Per le freccie inverse non serve.
 			\end{itemize}
 	\end{itemize}
@@ -193,29 +193,30 @@
 	\section*{Risultante}
 	\begin{itemize}
 		\item ({\bf Definizione di Risultante}) Sia $R$ un dominio d'integrità, $f, g \in R[x]$ e $f = \sum_{i=0}^n a_i x^i$, $g = \sum_{i=0}^m b_i x^i$. Definiamo allora la matrice di Sylvester come
-		$$ \text{Sylv}(f, g) = \left[ \begin{array}{cccccccccc}
-		a_0     & a_1     & \ldots  & \ldots  & a_n     & 0       & \ldots  & \ldots  & \ldots  & 0       \\
-		0       & a_0     & a_1     & \ldots  & \ldots  & a_n     & 0       & \ldots  & \ldots  & 0       \\
-		\vdots  &         & \ddots  &         &         &         & \ddots  &         &         & \vdots  \\
-		0       & \ldots  & 0       & a_0     & a_1     & \ldots  & \ldots  & a_n     & \ldots  & 0       \\ \hline
-		b_0     & b_1     & \ldots  & b_m     & 0       & \ldots  & \ldots  & \ldots  & \ldots  & 0       \\
-		0       & b_0     & b_1     & \ldots  & b_m     & 0       & \ldots  & \ldots  & \ldots  & 0       \\
-		0       & 0       & b_0     & b_1     & \ldots  & b_m     & 0       & \ldots  & \ldots  & 0       \\
-		\vdots  &         &         & \ddots  &         &         &         & \ddots  &         & \vdots  \\
-		0       & \ldots  & \ldots  & 0       & b_0     & b_1     & \ldots  & \ldots  & b_m     & 0       \\
+		$$ \text{Sylv}(f, g) = \left[ \begin{array}{cccccccc}
+		a_0     & a_1     & \ldots  & \ldots  & a_n     & 0       & \ldots  & 0       \\
+		0       & a_0     & a_1     & \ldots  & \ldots  & a_n     & 0       & 0       \\
+		\vdots  &         & \ddots  &         &         &         & \ddots  & \vdots  \\
+		0       & \ldots  & 0       & a_0     & a_1     & \ldots  & \ldots  & a_n     \\ \hline
+		b_0     & b_1     & \ldots  & b_m     & 0       & \ldots  & \ldots  & 0       \\
+		0       & b_0     & b_1     & \ldots  & b_m     & 0       & \ldots  & 0       \\
+		0       & 0       & b_0     & b_1     & \ldots  & b_m     & 0       & 0       \\
+		\vdots  &         &         & \ddots  &         &         & \ddots  & \vdots  \\
+		0       & \ldots  & \ldots  & 0       & b_0     & b_1     & \ldots  & b_m     \\
 		\end{array} \right]$$
 		Ed il risultante di $f$ e $g$ è $\Ris(f, g) = \Det \text{Sylv}(f, g)$
 		\item ({\bf Definizione alternativa}) $\Ris(f, g) = a_n^m b_m^n \prod_{i,j} (\alpha_i - \beta_j) = a_n^m \cdot \prod_{f(\alpha_i) = 0} g(\alpha_i) = (-1)^{mn} b_m^n \cdot \prod_{g(\beta_j) = 0} f(\beta_j)$ dove le $\alpha_i$ e le $\beta_j$ sono le radici rispettivamente di $f$ e di $g$, con molteplicità
 		\item ({\bf Proprietà del risultante}) Valgono le seguenti proprietà:
 			\begin{itemize}
 				\item $\Ris(f, g) = (-1)^{mn} \Ris(g, f)$
-				\item $\Ris(af, g) = a^n \Ris(f, g)$ con $a \in R$ scalare
-				\item $\Ris(f, ag) = a^m \Ris(f, g)$ con $a \in R$ scalare
+				\item $\Ris(af, g) = a^m \Ris(f, g)$ con $a \in R$ scalare
+				\item $\Ris(f, ag) = a^n \Ris(f, g)$ con $a \in R$ scalare
 				\item $\Ris(a, b) = 1$ dove $a, b \in R$ sono scalari
 				\item $\Ris(f, g) = 0 \sse \exists \alpha \in \overline{R} \tc f(\alpha) = g(\alpha) = 0$ (ovvero il risultante è nullo se e solo se $f$ e $g$ hanno una radice in comune nella chiusura algebrica del campo delle frazioni di $R$). Inoltre, se $R$ è UFD allora le due precedenti sono equivalenti a $\exists h \in R[x] \tc \Deg h > 0, h \mid f, h \mid g$
 				\item $f, g \in R[x]$ e $\Deg f = n, \Deg g = m$, allora $\Ris(f,g) = Af + Bg$ con $A, B \in R[x]$ e $\Deg A < m, \Deg B < n$
 				\item $\Ris(f, h_1 \cdot h_2) = \Ris(f, h_1) \cdot \Ris(f, h_2)$
-				\item $\Ris(f, hf+g) = a_m^{\Deg (hf + g) \cdot \Deg g} \cdot \Ris(f, g)$ [ATTENZIONE: della formula a fianco non sono completamente sicuro]
+				\item $\Ris(f, hf+g) = a_m^{\Deg (hf + g) - \Deg g} \cdot \Ris(f, g)$ [ATTENZIONE: della formula a fianco non sono completamente sicuro]
+				%$\Ris(f, hf+g)=a_m^{\Deg(hf+g)}\Prod_{f(\alpha_i)=0}{(hf+g)(\alpha_i)}=a_m{^\Deg(hf+g)}\Prod_{f(\alpha_i)=0}{g(\alpha_i)}=a_m^{\Deg(hf+g)-\Deg g}\cdot a_m^{\Deg g}\Prod_{f(\alpha_i)=0}{g(\alpha_i)}=a_m^{\Deg (hf + g) - \Deg g} \cdot \Ris(f, g)$
 				\item In molti casi vale che $\Ris(f,g) \mid_\alpha = \Ris(f\mid_\alpha, g\mid_\alpha)$ dove con $\mid_\alpha$ si intende la valutazione in $\alpha$. Bisogna solo stare attenti che almeno uno dei coefficienti direttivi valutati sia non nullo, altrimenti cambia la dimensione della matrice di sylvester e di conseguenza anche il polinomio che definisce il risultante
 				\item Può essere comodo sapere che, detti $a_i$ e $b_j$ i coefficienti di $f$ e di $g$, si ha che $\Ris(f, g) \in \bbZ[a_i, b_j]$
 			\end{itemize}
