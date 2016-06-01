@@ -23,9 +23,11 @@
 		\item $I \subseteq A$ ideale, $B \subseteq A$ sottoanello allora vale $\frac{I+B}{I} \cong \frac{B}{I\cap B}$
 		\item $I, J \subseteq A$ ideali e $I \subseteq J$. Allora vale $\frac{\frac{A}{I}}{\frac{J}{I}} \cong \frac{A}{J}$ \\
 			Si ha inoltre la corrispondenza tra gli ideali di $\frac{A}{I}$ e gli ideali $J \subseteq A$ tali che $I \subseteq J$. In questa corrispondenza i primi ed i massimali si corrispondono
-		\item $IJ \subseteq I \cap J$. Se vale $I + J = 1$ allora $IJ = I \cap J$
+		\item $IJ \subseteq I \cap J$. Se vale $I + J = 1$ allora $IJ = I \cap J$. Inoltre vale che $(I \cap J)(I + J) \subseteq IJ$
+		\item Sorprendentemente $I + J = 1 \implies \forall n, m \in \bbN \quad I^n + J^m = 1$
 		\item È FALSO che $I \cap (J + K) = (I \cap J) + (I \cap K)$. FALSO
-		\item $I \subseteq \sqrt{I}$
+		\item $I \subseteq \sqrt{I}$. $I \subseteq \sqrt{J} \implies \sqrt{I} \subseteq \sqrt{J}$
+		\item $I \subseteq J \implies \forall n \quad I^n \subseteq J^n$
 		\item ($A$ dominio) $a$ primo $\implies$ $a$ irriducibile
 		\item ($A$ UFD) $a$ irriducibile $\implies$ $a$ primo
 		\item Se $H \subseteq A \times B$ è ideale allora $H = I \times J$ con $I \subseteq A$, $J \subseteq B$ ideali
@@ -33,14 +35,15 @@
 		\item $\cD(A) = \cup_{a \notin A^*} (0 : a) = \cup_{a \notin A^*} \sqrt{(0 : a)}$ e $\sqrt{\cD(A)} = \cD(A)$, anche se non è necessariamente un ideale
 		\item $\{ E_\lambda \}_{\lambda \in \Lambda}$ sottoinsiemi di $A$. Allora $\cup_{\lambda \in \Lambda} \sqrt{E_\lambda} = \sqrt{\cup_{\lambda \in \Lambda} E_\lambda}$
 		\item Sia $A$ dominio con un numero infinito di elementi e $\mid A^* \mid < \infty$ allora $A$ possiede infiniti ideali massimali
-		\item $I$ massimale $\implies I$ primo $\implies I$ primario. Inoltre $A$ dominio $\sse (0)$ ideale primo
+		\item $I$ massimale $\implies I$ primo $\implies I$ primario. Inoltre $A$ dominio $\sse (0)$ ideale primo. \\
+			$I$ primo $\implies I$ radicale (infatti $x^n \in I \implies x \in I$ con $I$ primo) inoltre $I$ primo $\implies I$ irriducibile (vedi lemma di scansamento più sotto).
 		\item Sono equivalenti:
 			\begin{itemize}
-				\item $A$ ha un unico ideale massimale
+				\item $A$ ha un unico ideale massimale (ovvero $A$ è locale)
 				\item $\exists \mathfrak{m} \subseteq A$ ideale massimale $\tc \forall a \in A \setminus \mathfrak{m} \implies a \notin A^*$
 				\item $\exists \km \subseteq A$ ideale massimale $\tc$ ogni elemento della forma $1 + \km$ è invertibile
 			\end{itemize}
-		\item $a \in \cJ(A) \sse \forall b \in A \quad 1-ab \in A^*$
+		\item $a \in \cJ(A) = \cap_{\km \text{ max}} \km \sse \forall b \in A \quad 1-ab \in A^*$
 		\item $\sqrt{I} = \cap_{I \subseteq P \text{ primi }} P$
 		\item ({\bf Lemma di Scansamento}) $P_1, \ldots, P_n$ ideali primi. Sia $I \subseteq A$ ideale $\tc I \subseteq \cup_{i=1}^n P_i$. Allora $\exists j \tc I \subseteq P_j$
 		\item $I_1, \ldots, I_n$ ideali e $P$ ideale primo. $\cap_{i=1}^n I_i \subseteq P \implies \exists j \tc I_j \subset P$. Inoltre se $P = \cap_i I_i$ allora $\exists j \tc I_j = P$
@@ -65,7 +68,6 @@
 				\item $(p, f(x))$ con $p \in \bbP$ e $f$ irriducibile modulo $p$ (Questi sono anche massimali)
 			\end{itemize}
 		\item $u \in A^*$, $a \in \cN(A)$, allora $u + a \in A^*$ (Somma di un nilpotente e di un invertibile è invertibile)
-		\item $I$ primo $\implies I $ irriducibile
 		\item In $A[x]$ si ha $\cN(A[x]) = \cJ(A[x])$ (Mentre in generale vale solo che $\cN(A) \subseteq \cJ(A)$)
 		\item Sia $\phi: A \rar B$ omomorfismo di anelli. Allora
 			\begin{itemize}
@@ -77,6 +79,10 @@
 		\item $A \tc$ ogni ideale è primo $\implies$ $A$ è un campo
 		\item $A \tc$ ogni ideale primo è principale $\implies A$ è un anello ad ideali principali
 		\item $\sqrt{I}$ massimale $\implies I$ primario.
+		\item $I$ primario e radicale $\implies I$ primo.
+		\item $I = (f_i)_i, J = (g_j)_j$ allora si ha $IJ = (f_ig_j)_{i,j}$
+		\item $P$ primo $\sse \forall I, J \subseteq A$ ideali si ha $IJ \subseteq P, I \not\subseteq P \implies J \subseteq P$
+		\item $P$ primario $\sse$ [$\forall I, J \subseteq A$ ideali finitamente generati si ha $IJ \subseteq P, I \not\subseteq P \implies \exists n \quad J^n \subseteq P$] $\sse$ [$\forall I, J \subseteq A \quad IJ \subseteq P, I \not\subseteq P \implies J \subseteq \sqrt{P}$]
 		\item $I$ primario, $J \not\subseteq \sqrt{I} \implies \sqrt{I : J^i} = \sqrt{I} \forall i$
 		\item $I = \sqrt{I}$ e $h \notin I \implies I:h$ è radicale
 		\item ({\bf Teorema della base di Hilbert}) Se $A$ è un anello Nötheriano, allora $A[x]$ è Nötheriano
@@ -344,6 +350,7 @@
 		\item ({\bf Anello delle frazioni}) $A$ anello ed $S \subseteq A$ moltiplicativamente chiuso ($1 \in S, s,t \in S \implies st \in S$). Allora l'insieme $A \times S$ quozientato per la relazione di equivalenza $(a, s) \sim (b, t) \sse \exists u \neq 0 \in S \tc u (at - bs) = 0$ è un anello dotato di una mappa $A \rar \frac{A \times S}{\sim}$ tale per cui ogni elemento di $S$ va a finire in un invertibile. \\
 		Gode inoltre della proprietà universale per la quale per ogni altro anello $B$ e morfismo di anelli $g: A \rar B$ tale che tutti gli elementi di $S$ vadano a finire in elementi invertibili di $B$, allora questo morfismo si spezza in modo unico attraverso il passaggio per $S^{-1}A := \frac{A \times S}{\sim}$
 		\item ({\bf Nullità dell'anello delle frazioni}) $0 \in S \sse S^{-1}A = 0$
+		\item ({\bf Ingigantimento di un ideale}) $I \subseteq A$ ideale. Allora $S^{-1}I = 1 \sse I \cap S \neq \emptyset$.
 		\item ({\bf Ideali di $S^{-1}A$}) Valgono le seguenti affermazioni sugli ideali di $S^{-1}A$:
 			\begin{itemize}
 				\item Ogni ideale di $S^{-1}A$ è un ideale esteso
@@ -366,7 +373,8 @@
 				\item $S^{-1}\sqrt{I} = \sqrt{S^{-1}I}$
 			\end{itemize}
 		\item ({\bf Modulo delle frazioni}) Sia $M$ un $A$-modulo ed $S \subseteq A$ un insieme moltiplicativamente chiuso. Allora definiamo $S^{-1}M := \frac{S \times M}{\sim}$ dove $(m, s) \sim (m', s') \sse \exists u \in S \quad u (s'm - sm') = 0$ ed indicheremo con $\frac{m}{s}$ la classe di equivalenza. \\
-		$S^{-1}M$ ha una struttura di $S^{-1}A$-modulo. Inoltre si può facilmente verificare che $S^{-1}$ è un funtore dalla categoria degli $A$-moduli a quella degli $S^{-1}A$-moduli, dove dato $f: M \rar N$ morfismo si può definire $S^{-1}f: S^{-1}M \rar S^{-1}N$ come $(S^{-1}f) (\frac{m}{s}) = \frac{f(m)}{s}$
+		\item ({\bf Nullità del Modulo delle frazioni}) Sia $M$ un $A$-modulo finitamente generato e $S \subseteq A$ moltiplicativamente chiuso. Allora si ha $S^{-1}M = 0 \sse \exists s \in S \tc sM = 0$
+		\item $S^{-1}M$ ha una struttura di $S^{-1}A$-modulo. Inoltre si può facilmente verificare che $S^{-1}$ è un funtore dalla categoria degli $A$-moduli a quella degli $S^{-1}A$-moduli, dove dato $f: M \rar N$ morfismo si può definire $S^{-1}f: S^{-1}M \rar S^{-1}N$ come $(S^{-1}f) (\frac{m}{s}) = \frac{f(m)}{s}$
 		\item ({\bf $S^{-1}$ è un funtore esatto}) Si ha che $S^{-1}$ è esatto, ovvero se $M \rar^f N \rar^g P$ è una sequenza esatta di $A$-moduli allora $S^{-1}M \rar^{S^{-1}f} S^{-1}N \rar^{S^{-1}g} S^{-1}P$ è una sequenza esatta di $S^{-1}A$-moduli. \\
 		In particolare omomorfismi iniettivi o surgettivi rimangono rispettivamente iniettivi o surgettivi
 		\item ({\bf $S^{-1}$ e le altre operazioni}) Siano $M, P \subseteq N$ sotto$A$-moduli, $S \subseteq A$ moltiplicativamente chiuso. Allora $S^{-1}$ commuta con somme finite, intersezioni finite e quozienti, ovvero vale che
@@ -414,7 +422,7 @@
 				\item $f_\km: M_\km \rar N_\km$ iniettivo (surgettivo) $\forall \km$ massimale
 			\end{itemize}
 			Per l'iniettività basta mostrare che $\Ker f_\kp = (\Ker f)_\kp$ e usare che $M = 0$ è locale. Uguale per la surgettività con i $\coKer$
-		\item ({\bf Essere ridotto è una proprietà locale}) Un anello infatti è ridotto se $\cN(A) = 0$ e abbiamo mostrato che $S^{-1}\cN(A) = \cN(S^{-1}A)$, ovvero $N(A) = 0 \sse N(A)_\kp = N(A_\kp) = 0 \quad \forall \kp$ primo
+		\item ({\bf Essere ridotto è una proprietà locale}) Un anello infatti è ridotto se $\cN(A) = 0$ e abbiamo mostrato che $S^{-1}\cN(A) = \cN(S^{-1}A)$, ovvero $\cN(A) = 0 \sse \cN(A)_\kp = \cN(A_\kp) = 0 \quad \forall \kp$ primo
 		\item ({\bf Dominio NON è una proprietà locale})
 		\item ({\bf L'esattezza è una proprietà locale e massimale}) $M \rar N \rar P$ è esatta in $N$ se e solo se lo solo le sequenze localizzate ai primi o ai massimali [Questo ci viene detto da D.A. ma non è stato fatto a lezione]
 	\end{itemize}
@@ -479,7 +487,7 @@
 		\item ({\bf Implicazioni varie})
 			\begin{itemize}
 				\item Libero $\implies$ Proiettivo (Il viceversa vale se $A$ è PID oppure anche se $A$ è locale e $P$ f.g.)
-				\item Proiettivo $\implies$ Piatto (Viene da Libero $\implies$ Piatto, piuttosto semplice da mostrare usando che $L = \oplus_\ni R^{(\ni)}$ se $L$ è libero ed utilizzando il fatto che un modulo proiettivo è un sommando diretto di un modulo libero). \\ Il viceversa non vale. Ad esempio $\bbQ$ come $\bbZ$-modulo
+				\item Proiettivo $\implies$ Piatto (Viene da Libero $\implies$ Piatto, piuttosto semplice da mostrare usando che $L = \oplus_\nu R^{(\nu)}$ se $L$ è libero ed utilizzando il fatto che un modulo proiettivo è un sommando diretto di un modulo libero). \\ Il viceversa non vale. Ad esempio $\bbQ$ come $\bbZ$-modulo
 			\end{itemize}
 %		\item ({\bf Lemma del Serpente}) %TODO
 %		\item ({\bf Lemma dei cinque}) %TODO
