@@ -23,9 +23,10 @@
 		\item $I \subseteq A$ ideale, $B \subseteq A$ sottoanello allora vale $\frac{I+B}{I} \cong \frac{B}{I\cap B}$
 		\item $I, J \subseteq A$ ideali e $I \subseteq J$. Allora vale $\frac{\frac{A}{I}}{\frac{J}{I}} \cong \frac{A}{J}$ \\
 			Si ha inoltre la corrispondenza tra gli ideali di $\frac{A}{I}$ e gli ideali $J \subseteq A$ tali che $I \subseteq J$. In questa corrispondenza i primi ed i massimali si corrispondono
-		\item $IJ \subseteq I \cap J$. Se vale $I + J = 1$ allora $IJ = I \cap J$. Inoltre vale che $(I \cap J)(I + J) \subseteq IJ$
+		\item $IJ \subseteq I \cap J$. Se vale $I + J = 1$ allora $IJ = I \cap J$. Inoltre vale sempre che $(I \cap J)(I + J) \subseteq IJ$
 		\item Sorprendentemente $I + J = 1 \implies \forall n, m \in \bbN \quad I^n + J^m = 1$
 		\item È FALSO che $I \cap (J + K) = (I \cap J) + (I \cap K)$. FALSO
+		\item Se $I + J = 1$ allora $(I \cap J) + K = (K + I) \cap (K + J)$
 		\item $I \subseteq \sqrt{I}$. $I \subseteq \sqrt{J} \implies \sqrt{I} \subseteq \sqrt{J}$
 		\item $I \subseteq J \implies \forall n \quad I^n \subseteq J^n$
 		\item ($A$ dominio) $a$ primo $\implies$ $a$ irriducibile
@@ -80,6 +81,7 @@
 		\item $A \tc$ ogni ideale primo è principale $\implies A$ è un anello ad ideali principali
 		\item $\sqrt{I}$ massimale $\implies I$ primario.
 		\item $I$ primario e radicale $\implies I$ primo.
+		\item $I$ irriducibile e $A$ Nötheriano $\implies I$ primario.
 		\item $I = (f_i)_i, J = (g_j)_j$ allora si ha $IJ = (f_ig_j)_{i,j}$
 		\item $P$ primo $\sse \forall I, J \subseteq A$ ideali si ha $IJ \subseteq P, I \not\subseteq P \implies J \subseteq P$
 		\item $P$ primario $\sse$ [$\forall I, J \subseteq A$ ideali finitamente generati si ha $IJ \subseteq P, I \not\subseteq P \implies \exists n \quad J^n \subseteq P$] $\sse$ [$\forall I, J \subseteq A \quad IJ \subseteq P, I \not\subseteq P \implies J \subseteq \sqrt{P}$]
@@ -87,6 +89,7 @@
 		\item $I = \sqrt{I}$ e $h \notin I \implies I:h$ è radicale
 		\item ({\bf Teorema della base di Hilbert}) Se $A$ è un anello Nötheriano, allora $A[x]$ è Nötheriano
 		\item Se $A$ è locale, $\km$ il suo ideale massimale e $Q$ è $\km$-primario, allora si ha $(\frac{A}{Q})_{\frac{\km}{Q}} \cong \frac{A}{Q}$
+		\item Prodotto o intersezione di ideali primi è radicale
 	\end{itemize}
 	
 	\section*{Basi di Gröbner}
@@ -561,6 +564,10 @@
 				\item Dimostriamo prima che $I \subseteq A$ ideale, con $A$ Nötheriano, allora $I = \cap_i I_i$ dove gli $I_i$ sono ideali irriducibili (ovvero tali che $I_i = J \cap K \implies I = J$ oppure $I = K$)
 				\item Ogni irriducibile in un Nötheriano è primario
 			\end{itemize}
+		\item ({\bf Uguaglianze per i conti}) Valgono le seguenti proposizioni:
+			\item Se $I + H + K = 1$ allora $(I, K) (I, H) = (I, KH)$
+			\item Vale sempre che $\sqrt{(I, KH)} = \sqrt{(I, K)} \cap \sqrt{(I, H)}$
+			\item $(I, K)(I, H) \subseteq (I, KH) \subseteq (I, K) \cap (I, H)$
 	\end{itemize}
 	
 	\clearpage
