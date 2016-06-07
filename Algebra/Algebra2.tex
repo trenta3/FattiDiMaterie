@@ -96,7 +96,7 @@
 	\subsection*{Ideali Monomiali}
 	Un ideale monomiale in $K[x_1, \ldots, x_n]$ è un ideale generato dai monomi
 	\begin{itemize}
-		\item ({\bf Criterio di appartenenza}) Sia $I$ un ideale monomiale e $f \in K[x_1, \ldots, x_n]$, $f = \sum_\beta c_\beta x^\beta$ con $c_\beta \in K$. Allora $f \in K \sse \forall \beta x^\beta \in I$
+		\item ({\bf Criterio di appartenenza}) Sia $I$ un ideale monomiale e $f \in K[x_1, \ldots, x_n]$, $f = \sum_\beta c_\beta x^\beta$ con $c_\beta \in K$. Allora $f \in I \sse \forall \beta \quad x^\beta \in I$
 		\item ({\bf Lemma di Dickson}) Ogni ideale monomiale è finitamente generato. (La frontiera minimale di un ideale monomiale è unica, e viene detta Escalièr)
 		\item ({\bf Operazioni con ideali monomiali}) Siano $I_1 = (m_1, \ldots, m_k)$ e $I_2 = (n_1, \ldots, n_s)$ con $m_i, n_j$ monomi. Allora si ha
 			\begin{itemize}
@@ -124,7 +124,7 @@
 
 	\subsection*{Basi di Gröbner e Algoritmo di Divisione}
 	\begin{itemize}
-		\item ({\bf Algoritmo di Divisione}) Siano $f_1, \ldots, f_k, f \in K[x_1, \ldots, x_n]$ allora $\exists a_1, \ldots, x_k, r \in K[x_1, \ldots, x_n]$ tali che $f = \sum_i a_i f_i + r$ e $\Deg (a_i f_i) \le \Deg(f)$. Inoltre se $r = \sum_\alpha r_\alpha x^\alpha$ si ha che se $r_\alpha \neq 0$ allora $x^\alpha \in (\Lt(f_1), \ldots, \Lt(f_k))$ \\
+		\item ({\bf Algoritmo di Divisione}) Siano $f_1, \ldots, f_k, f \in K[x_1, \ldots, x_n]$ allora $\exists a_1, \ldots, a_k, r \in K[x_1, \ldots, x_n]$ tali che $f = \sum_i a_i f_i + r$ e $\Deg (a_i f_i) \le \Deg(f)$. Inoltre se $r = \sum_\alpha r_\alpha x^\alpha$ si ha che se $r_\alpha \neq 0$ allora $x^\alpha \notin (\Lt(f_1), \ldots, \Lt(f_k))$ \\
 		Notiamo che posso fare dei passaggi "a mano" prima di partire con l'algoritmo di divisione e lui funzionerà comunque. La cosa importante è ricordarsi di soddisfare la condizione $\Deg (a_i f_i) \le \Deg(f)$ ad ogni passaggio.
 		\item ({\bf Base di Gröbner}) Un insieme di polinomi $g_1, \ldots, g_k$ generatori di un ideale $I$ i cui leading term generano $\Lt(I)$ si dicono base di Gröbner. Sono equivalenti inoltre:
 			\begin{itemize}
@@ -187,7 +187,7 @@
 	\end{itemize}
 	Valgono inoltre i seguenti fatti:
 	\begin{itemize}
-		\item $V$ è irriducibile $\implies \exists \kp \text{primo} \tc V = \cV(\kp)$ (il viceversa è vero se $K$ è algebricamente chiuso)
+		\item $V$ è irriducibile $\implies \exists \kp \quad \text{primo} \tc V = \cV(\kp)$ (il viceversa è vero se $K$ è algebricamente chiuso)
 		\item Ogni varietà affine si decompone come unione di un numero finito di varietà irriducibili. Tale decomposizione si può minimizzare nel modo seguente: se compaiono due varietà irriducibili una contenuta dentro l'altra si toglie dall'unione la più piccola. La decomposizione minimalizzata è unica a meno dell'ordine con cui compaiono i fattori irriducibili
 		\item $V = \{\alpha\}$ con $\alpha = (\alpha_1, \ldots, \alpha_n)$ allora $\cI(V) = (x_1 - \alpha_1, \ldots, x_n - \alpha_n)$ è un ideale massimale. (Se $K$ è algebricamente chiuso allora $I$ è massimale se e solo se è di quella forma)
 		\item ({\bf Nullstellensatz}) $K$ algebricamente chiuso. Allora $I \subseteq K[x_1, \ldots, x_n]$ e si ha:
@@ -338,7 +338,7 @@
 				\item $\frac{A}{I} \otimes_A \frac{A}{J} \cong \frac{A}{I+J}$
 				\item $\Hom_A(\frac{A}{I}, \frac{A}{J}) \cong \frac{(J : I)}{J}$ [Non fatta in classe]
 				\item $I \otimes_R \frac{R}{J} \cong \frac{I}{IJ}$
-				\item $I \otimes_R J \cong IJ$
+				\item Se $J$ è piatto allora $I \otimes_R J \cong IJ$
 			\end{itemize}
 		\item ({\bf Aggiunzione con $\Hom$}) $M, N, P$ tre $R$-moduli. Allora vale che $\Hom_R(M \otimes_R N, P) \cong \Hom_R(M, \Hom_R(N, P))$ dove l'isomorfismo è naturale (e vale in particolare anche a livello di $R$-moduli)
 		\item ({\bf Esattezza a destra}) Essendo aggiunto sinistro il funtore $\textunderscore \otimes_R M$ (o anche $M \otimes_R \textunderscore$, che è canonicamente equivalente al primo) è esatto a destra, cioè: \\
