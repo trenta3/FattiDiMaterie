@@ -337,6 +337,8 @@
 				\item $M_\kp \otimes_{A_\kp} N_\kp = (M \otimes_A N)_\kp$
 				\item $\frac{A}{I} \otimes_A \frac{A}{J} \cong \frac{A}{I+J}$
 				\item $\Hom_A(\frac{A}{I}, \frac{A}{J}) \cong \frac{(J : I)}{J}$ [Non fatta in classe]
+				\item $I \otimes_R \frac{R}{J} \cong \frac{I}{IJ}$
+				\item $I \otimes_R J \cong IJ$
 			\end{itemize}
 		\item ({\bf Aggiunzione con $\Hom$}) $M, N, P$ tre $R$-moduli. Allora vale che $\Hom_R(M \otimes_R N, P) \cong \Hom_R(M, \Hom_R(N, P))$ dove l'isomorfismo è naturale (e vale in particolare anche a livello di $R$-moduli)
 		\item ({\bf Esattezza a destra}) Essendo aggiunto sinistro il funtore $\textunderscore \otimes_R M$ (o anche $M \otimes_R \textunderscore$, che è canonicamente equivalente al primo) è esatto a destra, cioè: \\
@@ -413,6 +415,8 @@
 		\item ({\bf Definizione}) $A$ anello, $\kp \subseteq A$ ideale primo e consideriamo $S = A \setminus \kp$ che è moltiplicativamente chiuso. Allora $A_\kp := S^{-1}A$ si dice localizzazione a $\kp$. Si ha che $A_\kp$ è un anello locale, dove l'unico ideale massimale è $\kp_\kp = \{ \frac{a}{s} \mid a \in \kp, s \notin \kp \}$
 		\item ({\bf Proprietà locali}) $P$ è una proprietà per $A$ anello oppure per $M$ modulo si dice che è locale se \\
 			$P$ vale per $A$ (o per $M$) $\sse P$ vale per $A_\kp$ (o $M_\kp$) $\forall \kp$ primo
+		\item ({\bf Lemma utile}) Se abbiamo $x \in M$ tale che $\forall \km \subseteq A$ massimali si ha $\exists u_\km \notin \km$ tale che $u_\km x = 0$ allora si ha $x = 0$ in $M$. \\
+			Infatti se consideriamo $(0 : x)$ abbiamo che $I = (u_\km)_\km \subseteq (0 : x)$ ma $I$ non è contenuto in nessun massimale, quindi $1 \in I$ e $x = 1 x = 0$
 		\item ({\bf Essere nullo è una proprietà locale (e anche massimale)}) $M$ un $A$-modulo. TFAE:
 			\begin{itemize}
 				\item $M = 0$
