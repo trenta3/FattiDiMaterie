@@ -308,7 +308,7 @@
 		\item Se ho due catene di ideali $I_n \subseteq \ldots \subseteq I_1$, $J_m \subseteq \ldots \subseteq J_1$ con $n \ge m$, e supponiamo $M = \oplus_{k=1}^n \frac{A}{I_k} = \oplus_{i=1}^m \frac{A}{J_i}$ allora $J_1 = \ldots = J_{n-m} = A$ e $I_i = J_{n-m+i}$
 		\item Se $A$ è un dominio ed $M$ un $A$-modulo, allora chiamiamo sottomodulo di torsione $\tau(M) = \{ m \in M \mid \Ann(m) \neq 0 \} \subseteq M$.
 			\begin{itemize}
-				\item $f \in \Hom_A(M, N) \implies f(\tau(M)) \subseteq \tau(M)$
+				\item $f \in \Hom_A(M, N) \implies f(\tau(M)) \subseteq \tau(N)$
 				\item Data $0 \rar M \rar N \rar P \rar 0$ esatta $\implies 0 \rar \tau(M) \rar \tau(N) \rar \tau(P)$ è esatta ma non a destra
 				\item $M$ f.g. su $A$ PID. Allora $M \cong \tau(M) \oplus A^k$ per un qualche $k$
 			\end{itemize}
@@ -332,7 +332,7 @@
 				\item $R \otimes_R M \cong M$
 				\item $M \otimes_R N \cong N \otimes_R M$
 				\item $(M \otimes_R N) \otimes_R P \cong M \otimes_R (N \otimes_R P)$
-				\item $(M \oplus N) \otimes_R P \cong (M \otimes_R P) \oplus (M \otimes_R P)$ (vale anche per somme dirette infinite)
+				\item $(M \oplus N) \otimes_R P \cong (M \otimes_R P) \oplus (N \otimes_R P)$ (vale anche per somme dirette infinite)
 				\item $\frac{R}{I} \otimes_R M \cong \frac{M}{IM}$
 				\item $M_\kp \otimes_{A_\kp} N_\kp = (M \otimes_A N)_\kp$
 				\item $\frac{A}{I} \otimes_A \frac{A}{J} \cong \frac{A}{I+J}$
@@ -400,7 +400,7 @@
 			Inoltre abbiamo anche dimostrato che $S^{-1}A$ è un $A$-modulo piatto, ovvero $0 \rar M \rar^f N$ rimane iniettiva tensorizzando per il piatto, cioè $0 \rar S^{-1}A \otimes_A M \rar^{S^{-1}A \otimes_A f} S^{-1}A \otimes_A N$ per l'osservazione precedente.
 		\item ({\bf Altri fatti})
 			\begin{itemize}
-				\item $f: A \rar B$ omomorfismo di anelli, $S \subseteq A$ motliplicativamente chiuso e $T = f(S)$. Allora $S^{-1}B \cong T^{-1}B$ come $S^{-1}A$-moduli
+				\item $f: A \rar B$ omomorfismo di anelli, $S \subseteq A$ motiplicativamente chiuso e $T = f(S)$. Allora $S^{-1}B \cong T^{-1}B$ come $S^{-1}A$-moduli
 				\item $S \subseteq A$ molt. chiuso. Diciamo che $S$ è saturato se $xy \in S \implies x \in S, y \in S$. Si ha allora che:
 					\begin{itemize}
 						\item $S$ saturato $\sse S = A \setminus \cup_{\kp \cap S = \emptyset} \kp$
@@ -556,7 +556,7 @@
 				\item Se $a \notin P$ allora $(Q : a) = Q$
 			\end{itemize}
 			Notare che se dovessi avere un ideale $J$ finitamente generato al posto di $a$, basta ricordare che $(Q : \sum_i J_i) = \cap_i (Q : J_i)$ per ricavarne le relative proposizioni
-		\item ({\bf Unicità dei primi associati}) Sia $I = \cap_{i=1}^n Q_i$ con $\sqrt{Q_i} = P_i$ e supponiamo la scrittura minimale. Allora i $P_i$ sono indipendenti dalla decomposizione ed inoltre vale che $\{P_1, \ldots, P_n\} = \{ \sqrt{I:a} \text{ primi} \mid a \in A \}$ (Ovvero $\forall a \in A$ faccio $\sqrt{I:a}$. Se $\sqrt{I:a}$ è primo allora lo prendo.
+		\item ({\bf Unicità dei primi associati}) Sia $I = \cap_{i=1}^n Q_i$ con $\sqrt{Q_i} = P_i$ e supponiamo la scrittura minimale. Allora i $P_i$ sono indipendenti dalla decomposizione ed inoltre vale che $\{P_1, \ldots, P_n\} = \{ \sqrt{I:a} \text{ primi} \mid a \in A \}$ (Ovvero $\forall a \in A$ faccio $\sqrt{I:a}$. Se $\sqrt{I:a}$ è primo allora lo prendo.)
 		\item ({\bf Primi minimali}) Data una decomposizione minimale di $I$, considero i primi associati $P_i$. Tra questi posso considerare i primi minimali per inclusione (detti primi minimali). In particolare i primi minimali associati ad $I$ sono quelli tali che $\forall P$ primo tale che $I \subseteq P$ allora si ha $\exists i$ tale che $P_i \subseteq P$ dove $P_i$ è un primo minimale.
 		\item ({\bf Nilradicale}) In particolare se $(0)$ è decomponibile allora $\cN(A) = \cap_{P_i \text{ minimali di } (0)} P_i$
 		\item ({\bf Caratterizzazione dell'unione dei primi associati}) $I = \cap_i Q_i$ minimale con $P_i = \sqrt{Q_i}$ allora $\{ a \in A \mid (I:a) \neq I \} = \cup_i P_i$
