@@ -1,0 +1,58 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\newcommand{\card}[1]{\text{card }({#1})}
+\newcommand{\Set}{\text{Set}}
+\newcommand{\ON}{\text{ON}}
+
+\begin{document}
+	\title{ETI}
+	
+	Questo file, a differenza degli altri, vuole essere un luogo dove raccolgo tutti i trucchetti vari di Teoria Degli Insiemi. Ciò viene reso necessario dal fatto che al corso si definiscono solo delle cose, e gli esercizi c'entrano poco con tutto quanto.
+	
+	\section*{Teoremi Importanti}
+	\subsection{Teorema di König}
+	Per $i \in I$ sia $\alpha_i$ un cardinale. Definiamo la somma $\sum_{i \in I} \alpha_i$ come la cardinalità di $\cup_{i \in I} A_i$ dove gli $A_i$ sono insiemi disgiunti tali che $\card{A_i} = \alpha_i$. \\
+	{\bf König}: Per ogni $i \in I$ siano $\alpha_i$ e $\beta_i$ cardinali tali che $\alpha_i < \beta_i$. Allora $\sum_{i \in I} \alpha_i < \prod_{i \in I} \beta_i$. \\
+	{\it Da notare che è praticamente l'unico teorema sui cardinali che prende disuguaglianze strette e ci dà una disuguaglianza stretta. Può quindi essere molto utile nei ragionamenti per assurdo}
+	
+	\section*{Definizioni Vuote}
+	\begin{itemize}
+		\item ({\bf Rango di un insieme}) Assumendo BF definiamo il concetto di rango di un insieme per ricorsione sulla relazione ben fondata $\in$: $$ \rho(X) = \sup \{ \rho(y) + 1 \mid y \in X \} $$. Notiamo che il rango è una funzione $\rho: \Set \rar \ON$
+		\item ({\bf ${}^{+}$}) Per ogni cardinale $\alpha$ esiste un cardinale $\alpha^{+}$ con la proprietà che: $\alpha^+$ è più grande di $\alpha$ e non esiste nessun cardinale tra $\alpha$ ed $\alpha^+$.
+		\item ({\bf Aleph}) $\aleph_0 = \card{\bbN}$, $\aleph_{\alpha + 1} = \aleph_\alpha^{+}$, $\aleph_\lambda = \sup_{\beta < \alpha} \aleph_\beta$ se $\lambda$ è ordinale limite.
+		\item ({\bf Beth}) $\beth_0 = \aleph_0$, $\beth_{\alpha + 1} = 2^{\beth_\alpha}$, $\beth_\lambda = \sup_{\alpha < \lambda} \beth_\alpha$ per $\lambda$ limite.
+	\end{itemize}
+	
+	\section*{Cardinali, Aleph, Beth}
+	\begin{itemize}
+		\item ({\bf Sup di Cardinali}) Se $X$ è un insieme di ordinali iniziali (cardinali) allora $\sup X$ è un ordinale iniziale (cardinale)
+		\item ({\bf Crescenza degli Aleph}) $\alpha < \beta \implies \aleph_\alpha < \aleph_\beta$
+		\item ({\bf Biggezione Ordinali-Cardinali}) La funzione $\alpha \mapsto \aleph_\alpha$ è una biggezione dalla classe $\ON$ degli ordinali verso la classe dei cardinali infiniti
+		\item ({\bf Operazioni tra cardinali}) Dati due cardinali infiniti $\alpha, \beta$ vale che $$ \alpha + \beta = \alpha \cdot \beta = \max \{ \alpha, \beta \} $$ dove le operazioni sono tra cardinali.
+	\end{itemize}
+	
+	\section*{Gerarchia di Von Neumann}
+	Viene definita per ricorsione transfinita la seguente famiglia di (? insiemi) indicizzata da ordinali:
+	\begin{itemize}
+		\item $V_0 = \emptyset$
+		\item $V_{\alpha + 1} = \cP(V_\alpha)$
+		\item $V_\lambda = \cup_{\alpha < \lambda} V_\alpha$ per $\lambda$ ordinale limite.
+	\end{itemize}
+	Valgono i seguenti fatti:
+	\begin{itemize}
+		\item Ogni $V_\alpha$ è transitivo
+		\item $\beta < \alpha \implies V_\beta \subseteq V_\alpha$
+		\item $x \in V_\alpha \sse \rho(x) < \alpha$
+		\item BF equivale all'affermazione che $\forall X \quad \exists \alpha \quad x \in V_\alpha$, ovvero che $V = \cup_{\alpha \in \ON} V_\alpha$ ($V$ è l'universo degli insiemi)
+		\item $x \subseteq y \in V_\alpha \implies x \in V_\alpha$
+		\item (Assumendo BF) Una classe $X \subseteq V$ è un insieme $\sse \exists \alpha \in \ON \tc X \in V_\alpha$
+		\item $\forall \alpha$ si ha $\card{V_{\omega + \alpha}} = \beth_\alpha \ge \alph_\alpha$
+	\end{itemize}
+	
+	\section*{Cofinalità}
+	
+	\section*{Assiomi Utilizzati}
+	Viene di seguito riportata una tabella con i principali teoremi di Insiemi, e gli assiomi necessari per dimostrarli.
+	
+	
+\end{document}
