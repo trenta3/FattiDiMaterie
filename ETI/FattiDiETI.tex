@@ -82,7 +82,7 @@
 		\item BF equivale all'affermazione che $\forall X \quad \exists \alpha \quad x \in V_\alpha$, ovvero che $V = \cup_{\alpha \in \ON} V_\alpha$ ($V$ è l'universo degli insiemi)
 		\item $x \subseteq y \in V_\alpha \implies x \in V_\alpha$
 		\item (Assumendo BF) Una classe $X \subseteq V$ è un insieme $\sse \exists \alpha \in \ON \tc X \in V_\alpha$
-		\item $\forall \alpha$ si ha $\card{V_{\omega + \alpha}} = \beth_\alpha \ge \alph_\alpha$
+		\item $\forall \alpha$ si ha $\card{V_{\omega + \alpha}} = \beth_\alpha \ge \aleph_\alpha$
 	\end{itemize}
 	
 	\section*{Cofinalità}
@@ -102,12 +102,21 @@
 	\section*{Aritmetica Cardinale}
 	Nel seguito diamo qualche risultato sull'esponenziazione di cardinali
 	\begin{itemize}
-		\item $2 \le \kappa \le \lambda$ e $\lamda$ infinito $\implies \kappa^\lambda = 2^\lambda$
+		\item $2 \le \kappa \le \lambda$ e $\lambda$ infinito $\implies \kappa^\lambda = 2^\lambda$
 		\item Inoltre si ha $2^\lambda \ge \kappa \implies \kappa^\lambda = 2^\lambda$
 		\item $\lambda \ge \cof{\kappa} \implies \kappa < \kappa^\lambda$
 		\item Definiamo ora detto $\lambda$ cardinale e $\card{A} \ge \lambda$ l'insieme $[A]^\lambda = \{ X \subseteq A : \card{X} = \lambda \}$.
 		\item $\card{A} = \kappa \ge \lambda$ implica che $[A]^\lambda$ ha cardinalità $\kappa^\lambda$
 		\item $\lambda$ cardinale infinito e $\kappa_i > 0 \quad \forall i < \lambda$, allora $$ \sum_{i < \lambda} \kappa_i = \lambda \cdot \sup_{i < \lambda} \kappa_i $$ 
+	\end{itemize}
+	
+	\section*{Calcoli pronti}
+	Diamo ora delle regole di calcolo per fare conti con prodotti di cose in forma normale di Cantor
+	\begin{itemize}
+		\item Se $\alpha > \beta$ si ha $\omega^\beta b + \omega^\alpha a = \omega^\alpha a$
+		\item Se $0 < \alpha = \omega^{\alpha_1} c_1 + \ldots + \omega^{\alpha_k} c_k$ in CNF e $0 < \beta$ allora si ha
+			$$ \alpha \omega^\beta = \omega^{\alpha_1 + \beta} $$ ed anche, per ogni $n \in \bbN$, $n \neq 0$
+			$$ \alpha n = \omega^{\alpha_1} c_1 n + \omega^{\alpha_2} c_2 + \ldots + \omega^{\alpha_k} c_k $$
 	\end{itemize}
 	
 	\section*{Assiomi Utilizzati}
