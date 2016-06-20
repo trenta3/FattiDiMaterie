@@ -3,13 +3,42 @@
 \newcommand{\card}[1]{\text{card }({#1})}
 \newcommand{\Set}{\text{Set}}
 \newcommand{\ON}{\text{ON}}
+\newcommand{\cof}{\text{cof}}
 
 \begin{document}
 	\title{ETI}
 	
 	Questo file, a differenza degli altri, vuole essere un luogo dove raccolgo tutti i trucchetti vari di Teoria Degli Insiemi. Ciò viene reso necessario dal fatto che al corso si definiscono solo delle cose, e gli esercizi c'entrano poco con tutto quanto.
 	
+	\section*{Assiomi}
+	\begin{itemize}
+		\item ({\bf Estensionalità}) Due classi sono uguali se hanno gli stessi elementi
+		\item ({\bf Di Astrazione}) Data una proprietà ben definita $P$, esiste una classe i cui elementi sono gli oggetti che verificano $P$.
+		\item ({\bf Di Comprensione}) Una sottoclasse di un insieme è un insieme
+		\item ({\bf Insieme Vuoto}) La classe vuota è un insieme
+		\item ({\bf Coppia}) Dati due insiemi $a, b$ la coppia $\{ a, b \}$ è un insieme
+		\item ({\bf Unione}) Se $X$ è un insieme, allora $\cup X = \{ z \mid z \in y \in X \}$ è un insieme
+		\item ({\bf Dell'Infinito}) $\exists X$ insieme tale che $\emptyset \in X$ e $a \in X \implies {a} \cup a \in X$
+		\item ({\bf Potenza}) Se $X$ è un insieme, allora $\cP(X) = \{ Y \mid Y \subseteq X \}$ è un insieme
+		\item ({\bf Di Rimpiazzamento}) Se $F: X \rar Y$ è una funzione tra classi ed il suo dominio $X$ è un insieme, allora la sua immagine $\Img F$ è un insieme.
+		\item ({\bf Scelta}) Ne diamo un po' di formulazioni equivalenti:
+			\begin{enumerate}
+				\item Dato un insieme $X$ i cui elementi sono insiemi non vuoti a due a due disgiunti, esiste un insieme $S$ che interseca ciascuno degli elementi di $X$ in un singolo elemento.
+				\item Data una famiglia $(X_i : i \in I)$ di insiemi non vuoti $X_i$, esiste una funzione $f$ che associa a ciascun $i \in I$ un elemento $f(i) \in X_i$.
+				\item Data una famiglia $\cF$ di insiemi non vuoti, esiste una funzione $g$ che associa a ciascun $X \in \cF$ un elemento $g(X) \in X$. In particolare, fissato un insieme non vuoto $A$, possiamo considerare la famiglia $\cF = \cP(A) \setminus \{ \emptyset \}$ di tutti i sottoinsiemi non vuoti di $X$ ottenendo una funzione $g : \cP(A) \setminus \{ \emptyset \} \rar A$ che associa a ciascun sottoinsieme non vuoto $X \subseteq A$ un elemento $g(A) \in A$
+				\item Siano $X, Y$ due insiemi e sia $R \subseteq X \times Y$ una relazione tra $X$ ed $Y$. Supponiamo che $(\forall x \in X)(\exists y \in Y) \quad R(x, y)$. Allora esiste $f: X \rar Y$ tale che $(\forall x \in X) \quad R(x, f(x))$
+				\item Per ogni famiglia $(X_i : i \in I)$ non vuota di insiemi non vuoti, il prodotto cartesiano $\prod_{i \in I} X_i$ è non vuoto.
+				\item Data una funzione surgettiva $f: X \rar Y$ tra due insiemi, esiste una funzione iniettiva $g: Y \rar X$ tale che $f(g(y)) = y \quad \forall y \in Y$
+			\end{enumerate}
+	\end{itemize}
+	
 	\section*{Teoremi Importanti}
+	\subsection{Scrittura in base di ordinali}
+	Dato un ordinale $\gamma \neq 0$ possiamo rappresentare ogni ordinale $\alpha \neq 0$ in modo unico nella forma $\alpha = \gamma^{\alpha_1} t_1 + \ldots + \gamma^{\alpha_k} t_k$ con $k \in \omega$, $t_1, \ldots, t_k < \gamma$ e $\alpha_1 > \ldots > \alpha_k$.
+	
+	\subsection{Ordinali fissi}
+	Sia $f: \ON \rar \ON$ una funzione crescente e continua, ovvero tale che $f(\lambda) = \sup_{\alpha < \lambda} f(\alpha)$ per ogni ordinale limite $\lambda$. Allora esistono ordinali $x$ arbitrariamente grandi tali che $f(x) = x$.
+	
 	\subsection{Teorema di König}
 	Per $i \in I$ sia $\alpha_i$ un cardinale. Definiamo la somma $\sum_{i \in I} \alpha_i$ come la cardinalità di $\cup_{i \in I} A_i$ dove gli $A_i$ sono insiemi disgiunti tali che $\card{A_i} = \alpha_i$. \\
 	{\bf König}: Per ogni $i \in I$ siano $\alpha_i$ e $\beta_i$ cardinali tali che $\alpha_i < \beta_i$. Allora $\sum_{i \in I} \alpha_i < \prod_{i \in I} \beta_i$. \\
@@ -21,6 +50,7 @@
 		\item ({\bf ${}^{+}$}) Per ogni cardinale $\alpha$ esiste un cardinale $\alpha^{+}$ con la proprietà che: $\alpha^+$ è più grande di $\alpha$ e non esiste nessun cardinale tra $\alpha$ ed $\alpha^+$.
 		\item ({\bf Aleph}) $\aleph_0 = \card{\bbN}$, $\aleph_{\alpha + 1} = \aleph_\alpha^{+}$, $\aleph_\lambda = \sup_{\beta < \alpha} \aleph_\beta$ se $\lambda$ è ordinale limite.
 		\item ({\bf Beth}) $\beth_0 = \aleph_0$, $\beth_{\alpha + 1} = 2^{\beth_\alpha}$, $\beth_\lambda = \sup_{\alpha < \lambda} \beth_\alpha$ per $\lambda$ limite.
+		\item ({\bf Funzione di Hartogs}) Dato un insieme $X$ sia $H(X)$ la classe degli ordinali $\alpha$ di cardinalità $\le \card{X}$
 	\end{itemize}
 	
 	\section*{Cardinali, Aleph, Beth}
@@ -29,6 +59,12 @@
 		\item ({\bf Crescenza degli Aleph}) $\alpha < \beta \implies \aleph_\alpha < \aleph_\beta$
 		\item ({\bf Biggezione Ordinali-Cardinali}) La funzione $\alpha \mapsto \aleph_\alpha$ è una biggezione dalla classe $\ON$ degli ordinali verso la classe dei cardinali infiniti
 		\item ({\bf Operazioni tra cardinali}) Dati due cardinali infiniti $\alpha, \beta$ vale che $$ \alpha + \beta = \alpha \cdot \beta = \max \{ \alpha, \beta \} $$ dove le operazioni sono tra cardinali.
+	\end{itemize}
+	
+	\section*{Funzione di Hartogs}
+	\begin{itemize}
+		\item $H(X)$ è un ordinale.
+		\item $\card{H(X)} \not\le \card{X}$
 	\end{itemize}
 	
 	\section*{Gerarchia di Von Neumann}
@@ -50,6 +86,29 @@
 	\end{itemize}
 	
 	\section*{Cofinalità}
+	Una funzione $f: A \rar B$ tra due insiemi ordinati si dice cofinale o illimitata se l'immagine di $f$ non ha maggioranti stretti in $B$. La cofinalità di $B$ è il minimo ordinale $\alpha$ tale che esiste una funzione cofinale $f: \alpha \rar B$
+	\begin{itemize}
+		\item Se $\beta$ è un ordinale successore si ha $\cof{\beta} = 1$
+		\item $\beta \ge \cof{\alpha} \sse \exists f: \beta \rar \alpha$ cofinale.
+		\item Per ogni ordinale $\alpha$ vale $\cof{\alpha} \le \card{\alpha} \le \alpha$
+		\item $\cof{\beta} = \beta \implies \beta$ è un cardinale (ordinale iniziale)
+		\item Ogni cardinale successore $\kappa^{+}$ (ovvero il minimo cardinale maggiore di $\kappa$) è tale che $\cof{\kappa^{+}} = \kappa^{+}$
+		\item Vale $\cof{\kappa} = \kappa \sse $ per ogni famiglia $(A_i : i \in I)$ di insiemi $A_i$ tali che $\card{A_i} < \kappa$ e $\card{I} < \kappa$ si ha $\card{\cup_{i \in I} A_i} < \kappa$
+		\item Per ogni ordinale $\alpha$ si ha $\cof{2^{\aleph_\alpha}} > \aleph_\alpha$
+		\item Se un ordinale limite $\alpha$ NON è un cardinale si ha $\cof{\alpha} < \alpha$
+		\item Per ogni ordinale limite $\cof{\cof{\alpha}} = \cof{\alpha}$
+	\end{itemize}
+	
+	\section*{Aritmetica Cardinale}
+	Nel seguito diamo qualche risultato sull'esponenziazione di cardinali
+	\begin{itemize}
+		\item $2 \le \kappa \le \lambda$ e $\lamda$ infinito $\implies \kappa^\lambda = 2^\lambda$
+		\item Inoltre si ha $2^\lambda \ge \kappa \implies \kappa^\lambda = 2^\lambda$
+		\item $\lambda \ge \cof{\kappa} \implies \kappa < \kappa^\lambda$
+		\item Definiamo ora detto $\lambda$ cardinale e $\card{A} \ge \lambda$ l'insieme $[A]^\lambda = \{ X \subseteq A : \card{X} = \lambda \}$.
+		\item $\card{A} = \kappa \ge \lambda$ implica che $[A]^\lambda$ ha cardinalità $\kappa^\lambda$
+		\item $\lambda$ cardinale infinito e $\kappa_i > 0 \quad \forall i < \lambda$, allora $$ \sum_{i < \lambda} \kappa_i = \lambda \cdot \sup_{i < \lambda} \kappa_i $$ 
+	\end{itemize}
 	
 	\section*{Assiomi Utilizzati}
 	Viene di seguito riportata una tabella con i principali teoremi di Insiemi, e gli assiomi necessari per dimostrarli.
