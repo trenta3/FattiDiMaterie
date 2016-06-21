@@ -113,7 +113,8 @@
 	\section*{Calcoli pronti}
 	Diamo ora delle regole di calcolo per fare conti con prodotti di cose in forma normale di Cantor
 	\begin{itemize}
-		\item Se $\alpha > \beta$ si ha $\omega^\beta b + \omega^\alpha a = \omega^\alpha a$
+		\item Se $\alpha > \beta$ si ha $\omega^\beta b + \omega^\alpha a = \omega^\alpha a$ \\
+			Dim: Visto che $\alpha > \beta$ si ha $\exists \gamma \neq 0 \quad \alpha = \beta + \gamma$. Allora $\omega^\beta b + \omega^\alpha a = \omega^\beta (b + \omega^\gamma a)$ Mostrando che $b + \omega^\gamma a = \omega^\gamma a \quad \forall \gamma \neq 0$ si avrebbe la tesi. Siccome $b \in \omega$ si può definire in maniera piuttosto semplice la biggezione di ordinamenti in questione: mandiamo un elemento $n \in b$ nella $\gamma$-upla $(n, 0, 0, \ldots)$ e data una $\gamma$-upla $(U_i)_{i \in \gamma}$ la si può mandare in $(U_0 + b, U_i)$.
 		\item Se $0 < \alpha = \omega^{\alpha_1} c_1 + \ldots + \omega^{\alpha_k} c_k$ in CNF e $0 < \beta$ allora si ha
 			$$ \alpha \omega^\beta = \omega^{\alpha_1 + \beta} $$ ed anche, per ogni $n \in \bbN$, $n \neq 0$
 			$$ \alpha n = \omega^{\alpha_1} c_1 n + \omega^{\alpha_2} c_2 + \ldots + \omega^{\alpha_k} c_k $$
