@@ -114,10 +114,48 @@
 	\subsection*{Calcoli con le forme normali di Cantor}
 	Diamo ora delle regole di calcolo per fare conti con prodotti di cose in forma normale di Cantor
 	\begin{itemize}
-		\item Se $\alpha > \beta$ si ha $\omega^\beta b + \omega^\alpha a = \omega^\alpha a$
+		\item Se $\alpha > \beta$ si ha $\omega^\beta b + \omega^\alpha a = \omega^\alpha a$ \\
+			Dim: Visto che $\alpha > \beta$ si ha $\exists \gamma \neq 0 \quad \alpha = \beta + \gamma$. Allora $\omega^\beta b + \omega^\alpha a = \omega^\beta (b + \omega^\gamma a)$ Mostrando che $b + \omega^\gamma a = \omega^\gamma a \quad \forall \gamma \neq 0$ si avrebbe la tesi. Siccome $b \in \omega$ si può definire in maniera piuttosto semplice la biggezione di ordinamenti in questione: mandiamo un elemento $n \in b$ nella $\gamma$-upla $(n, 0, 0, \ldots)$ e data una $\gamma$-upla $(U_i)_{i \in \gamma}$ la si può mandare in $(U_0 + b, U_i)$.
 		\item Se $0 < \alpha = \omega^{\alpha_1} c_1 + \ldots + \omega^{\alpha_k} c_k$ in CNF e $0 < \beta$ allora si ha
 			$$ \alpha \omega^\beta = \omega^{\alpha_1 + \beta} $$ ed anche, per ogni $n \in \bbN$, $n \neq 0$
 			$$ \alpha n = \omega^{\alpha_1} c_1 n + \omega^{\alpha_2} c_2 + \ldots + \omega^{\alpha_k} c_k $$
+	\end{itemize}
+	\subsection*{Fatti da Tenere a Mente}
+	\begin{itemize}
+		\item $A \subseteq \bbR$ bene ordinato $\implies \card{A} \le \aleph_0$ (Infatti dato un insieme bene ordinato dentro $\bbR$ riesco a trovarne un'immersione che preserva l'ordine di $A$ in $\bbQ$ e quindi si ha la tesi) (Basta mandare $\alpha$ in un razionale tra $f(\alpha)$ e $f(\alpha + 1)$)
+		\item Dato $\alpha > 0$ sono proprietà equivalenti:
+			\begin{enumerate}
+				\item $\forall \beta < \alpha \quad \beta + \alpha = \alpha$
+				\item $\forall \beta, \gamma < \alpha \quad \beta + \gamma < \alpha$
+				\item $\alpha = \omega ^ \delta$ per un qualche $\delta$
+			\end{enumerate}
+		\item Dato $\alpha > 0$ sono proprietà equivalenti:
+			\begin{enumerate}
+				\item $\forall \beta < \alpha \quad \beta \alpha = \alpha$
+				\item $\forall \beta, \gamma < \alpha \quad \beta \gamma < \alpha$
+				\item $\exists \delta \quad \alpha = \omega^{\omega^\delta}$
+			\end{enumerate}
+		\item $\lambda$ è limite $\sse \lambda = \cup_{\gamma < \lambda} \gamma$ $\sse$ è della forma $\lambda = \omega \gamma$ per un qualche $\gamma$
+		\item Se $\beta$ è un successore allora $\exists \lambda$ limite oppure $\lambda = 0$ ed $\exists k \in \omega$ tali che $\beta = \lambda + k$ (Si dimostra poiché non esistono catene discendenti infinite di ordinali, e sapendo che $\beta$ è successore si può scrivere $\beta = \alpha + 1$ e per induzione su $\alpha$)
+	\end{itemize}
+	
+	\section*{Successore o Limite?}
+	Elenchiamo di seguito, a seconda se $\alpha$ e $\beta$ sono limiti o successori, che cosa sono quelli ottenuti dalle operazioni elementari
+	\begin{tabular}{ccccc}
+	\alpha             & S & S & L & L \\
+	\beta              & S & L & S & L \\ \hrule
+	\alpha + \beta     & S & L & S & L \\
+	\alpha \cdot \beta & S & L & L & L \\
+	\alpha ^ \beta     &   & L & L & L \\
+	\end{tabular}
+	Inoltre $\alpha^\beta$ è successore $\sse$ $\alpha$ è successore e $\beta$ è finito.
+	
+	\section*{Disuguaglianze stupide ma da dimostrare}
+	Con gli ordinali dovrebbero valere (devo ancora verificarle) le seguenti disuguaglianze stupide
+	\begin{itemize}
+		\item $\forall \alpha \neq 0, \beta \ge 2 \quad \alpha \beta > \alpha + 1$
+		\item $\forall \chi > \alpha, \gamma \neq 0 \quad \gamma^\chi > \alpha$
+		\item $\forall \alpha \ge 2, \beta \ge 2 \quad \alpha^\beta > \alpha \beta$ (con uguaglianza solo nel caso $\alpha = \beta = 2$)
 	\end{itemize}
 	
 	\subsection*{Punti fissi di funzioni}
