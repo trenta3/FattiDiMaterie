@@ -3,7 +3,7 @@
 \newcommand{\card}[1]{\text{card }({#1})}
 \newcommand{\Set}{\text{Set}}
 \newcommand{\ON}{\text{ON}}
-\newcommand{\cof}{\text{cof}}
+\newcommand{\cof}[1]{\text{cof}({#1})}
 
 \begin{document}
 	\title{ETI}
@@ -89,6 +89,7 @@
 	Una funzione $f: A \rar B$ tra due insiemi ordinati si dice cofinale o illimitata se l'immagine di $f$ non ha maggioranti stretti in $B$. La cofinalità di $B$ è il minimo ordinale $\alpha$ tale che esiste una funzione cofinale $f: \alpha \rar B$
 	\begin{itemize}
 		\item Se $\beta$ è un ordinale successore si ha $\cof{\beta} = 1$
+		\item $\cof{\alpha + \beta} = \cof{\beta}$
 		\item $\beta \ge \cof{\alpha} \sse \exists f: \beta \rar \alpha$ cofinale.
 		\item Per ogni ordinale $\alpha$ vale $\cof{\alpha} \le \card{\alpha} \le \alpha$
 		\item $\cof{\beta} = \beta \implies \beta$ è un cardinale (ordinale iniziale)
@@ -120,6 +121,7 @@
 			$$ \alpha \omega^\beta = \omega^{\alpha_1 + \beta} $$ ed anche, per ogni $n \in \bbN$, $n \neq 0$
 			$$ \alpha n = \omega^{\alpha_1} c_1 n + \omega^{\alpha_2} c_2 + \ldots + \omega^{\alpha_k} c_k $$
 	\end{itemize}
+
 	\subsection*{Fatti da Tenere a Mente}
 	\begin{itemize}
 		\item $A \subseteq \bbR$ bene ordinato $\implies \card{A} \le \aleph_0$ (Infatti dato un insieme bene ordinato dentro $\bbR$ riesco a trovarne un'immersione che preserva l'ordine di $A$ in $\bbQ$ e quindi si ha la tesi) (Basta mandare $\alpha$ in un razionale tra $f(\alpha)$ e $f(\alpha + 1)$)
@@ -135,19 +137,60 @@
 				\item $\forall \beta, \gamma < \alpha \quad \beta \gamma < \alpha$
 				\item $\exists \delta \quad \alpha = \omega^{\omega^\delta}$
 			\end{enumerate}
+		\item Dato $\alpha > 0$ sono proprietà equivalenti:
+			\begin{enumerate}
+				\item $\forall \beta < \alpha \quad \beta^\alpha = \alpha$
+				\item $\forall \beta, \gamma < \alpha \quad \beta^\gamma < \alpha$
+			\end{enumerate}
 		\item $\lambda$ è limite $\sse \lambda = \cup_{\gamma < \lambda} \gamma$ $\sse$ è della forma $\lambda = \omega \gamma$ per un qualche $\gamma$
 		\item Se $\beta$ è un successore allora $\exists \lambda$ limite oppure $\lambda = 0$ ed $\exists k \in \omega$ tali che $\beta = \lambda + k$ (Si dimostra poiché non esistono catene discendenti infinite di ordinali, e sapendo che $\beta$ è successore si può scrivere $\beta = \alpha + 1$ e per induzione su $\alpha$)
+		\item Gli ordinali $\alpha$ con la proprietà che $\forall X \subseteq \alpha$ si ha $X$ ha il tipo d'ordine di $\alpha$ oppure $\alpha \setminus X$ ha il tipo d'ordine di $\alpha$ dovrebbero essere soltanto $\alpha = 0$ e tutti gli ordinali limite. [Ancora da controllare]
+	\end{itemize}
+	
+	\subsection*{Punti fissi di funzioni}
+	\begin{itemize}
+		\item Data $f: \ON \rar \ON$ strettamente crescente e continua ai limiti, esistono punti fissi arbitrariamente grandi
+		\item Supponiamo che $\kappa$ sia [Qualche ipotesi ancora da determinare per bene] allora si ha che, data una qualunque famiglia $\cF$ [massima cardinalità da esplicitare] di funzioni $f_i: \kappa \rar \kappa$ esistono punti fissi comuni a tutte le $f_i$ arbitrariamente grandi. \\
+			Diamo un'idea della dimostrazione: Sia $\lambda$ un ordinale iniziale tale che $\lambda = \card{\cF}$. Allora definiamo per ricorsione ordinale le seguenti funzioni: $\Phi_0 = f_0$, $\Phi_{\alpha + 1} = f_{\alpha + 1} \circ \Fix(\Phi_\alpha)$, $\Phi_\lambda (\delta) = \sup_{\gamma < \lambda} \Phi_{\gamma}(\delta) $ se $\lambda$ è limite, dove $\Fix$ è la funzione che enumera i punti fissi. \\
+			Controllando bene quando esistono punti fissi e quando si possono unire tutti per gli ordinali limite si ottengono le ipotesi, che prima o poi scriverò. \\
+			Ci chiediamo inoltre quanti sono i punti fissi della funzione... E claimiamo che siano come $\kappa$
+	\end{itemize}
+	
+	\subsection*{Gerarchia di Von Neumann}
+	\begin{itemize}
+		\item $X \subseteq V_\alpha \sse X \in V_{\alpha + 1}$
+		\item Sia $A \subseteq V_\lambda$, con $A$ finito e $\lambda$ limite. Allora $A \in V_\lambda$ (Infatti $X \in A \implies X \in V_\lambda \implies \exists \alpha < \lambda \quad X \in V_\alpha$. Sfruttando il fatti che gli $X$ sono in numero finito allora si ha che, chiamato $\gamma$ il massimo degli $\alpha$ così ottenuti si ha $\gamma < \lambda$ e $\forall X \in A \quad X \in V_\gamma$, ovvero $A \in V_{\gamma + 1} \subseteq V_\lambda$, tesi)
+		\item Se $\alpha$ NON è limite, allora si ha $\exists A \subseteq V_{\alpha}$ finito e non vuoto tale che $V_\alpha \setminus A$ è ancora transitivo. Infatti $\alpha = \lambda + k$ con $\lambda$ limite (oppure zero) e $k \in \omega$. Allora si prenda $A = \{V_\lambda, V_{\lambda + 1}, V_{\lambda + 2}, \ldots, V_{\lambda + (k - 1)} \}$ e si verifichi la transitività
+	\end{itemize}
+	
+	\subsection*{Aleph}
+	\begin{itemize}
+		\item $X \subseteq \aleph_{\alpha + 1}$ è illimitato se e solo se $\card{X} = \aleph_{\alpha + 1}$
+	\end{itemize}
+	
+	\subsection*{Cardinalità Note}
+	\begin{itemize}
+		\item $\card{\bbN} = \aleph_0$ (e sono la più piccola cardinalità infinita)
+		\item $\card{\bbN^\bbN} = \card{\bbR} = \card{\bbR^\bbN} = \kc$ (cardinalità del continuo)
+		\item $\forall \alpha, \beta \ge \omega$ ordinali vale che $\card{\alpha^\beta} = \max{\card{\alpha}, \card{\beta}}$ dove l'esponenziazione è ordinale
+		\item $X = \{ A \subseteq \omega_k \mid \card{A} = \aleph_n \}$ con $n \le k \in \bbN$. Allora possiamo calcolare la cardinalità di $X$, assumendo GCH: $[\omega_k]^{\aleph_n} = \omega_k ^ {\aleph_n}$ con esponenziazione cardinale. $ \card{X} = \aleph_k ^ {\aleph_n} = \aleph_k \cdot \aleph_0^{\aleph_n} = \aleph_k \cdot 2^{\aleph_n} = \aleph_k \cdot \aleph_{n + 1} = \aleph_{\max{k, n+1}}$
+		\item $X = \{ f: \omega_k \rar \omega_n \mid f \text{ è illimitata } \}$. Allora, sempre assumendo GCH si ha: Supponiamo $k > n$. Allora $\card{X} \le (\aleph_n)^{\aleph_k} = \aleph_{k + 1}$. Per la disuguaglianza opposta si può considerare la seguente funzione: per ogni $A \in \cP (\omega_k \setminus \omega_n)$ sia $f_A: \omega_k \rar \omega_n$ la funzione così definita:
+			$$ f_A(\alpha) = \left\{ \begin{array}{cc} \alpha & \text{ se } \alpha \in \omega_n \\ 
+				\chi_A(\alpha) & \text{ se } \alpha \in \omega_k \setminus \omega_n \\ \end{array} \right.$$
+			dove $\chi_A$ è la funzione caratteristica di $A$. Allora si ha che $f_A$ è suriettiva visto che $f\mid_{\omega_n}$ è l'identità, quindi $f_A \in X$. Ponendo $\Phi(A) = f_A$ allora si ottiene una funzione iniettiva $\Phi: \cP (\omega_k \setminus \omega_n) \rar X$. Poiché $\card{\omega_k \setminus \omega_n} = \aleph_k$ segue che $\aleph_{k + 1} = \card{\cP(\omega_k \setminus \omega_n)} \le \card{X}$. Allora concludiamo che $\card{X} = \aleph_{k + 1}$
+		\item $X = \{ f: \omega_k \rar \omega_n \mid f \text{ è strettamente crescente} \}$ con $k < n$. Assumiamo GCH e si ha che, visto che $X$ è sottoinsieme di tutte le funzioni, $\card{X} \le (\aleph_n)^{\aleph_k} = \aleph_{\max(n, k + 1)} = \aleph_n$. Notiamo ora che $\forall \alpha \in \omega_n$ e $\forall \beta \in \omega_k$ si ha che $\alpha + \beta \in \omega_n$ (per verificarlo basta notare ad esempio che la cardinalità dell'ordinale $\alpha + \beta$ è $\max{\card{\alpha}, \card{\beta}} < \omega_n$. \\
+			Dunque per ogni $\alpha \in \omega_n$ possiamo definire la funzione $f_\alpha: \omega_k \rar \omega_n$ ponendo $f_\alpha (\beta) = \alpha + \beta$. È semplice verificare che $f_\alpha$ è strettamente crescente. Ponendo $\Phi(\alpha) = f_\alpha$ si ottiene una funzione iniettiva $\Phi: \omega_n \rar X$ ed otteniamo così anche la disuguaglianza inversa $\aleph_n \le \card{X}$
 	\end{itemize}
 	
 	\section*{Successore o Limite?}
 	Elenchiamo di seguito, a seconda se $\alpha$ e $\beta$ sono limiti o successori, che cosa sono quelli ottenuti dalle operazioni elementari
-	\begin{tabular}{ccccc}
-	\alpha             & S & S & L & L \\
-	\beta              & S & L & S & L \\ \hrule
-	\alpha + \beta     & S & L & S & L \\
-	\alpha \cdot \beta & S & L & L & L \\
-	\alpha ^ \beta     &   & L & L & L \\
-	\end{tabular}
+	\vskip 0.5cm \begin{tabular}{ccccc}
+	$\alpha$             & S & S & L & L \\
+	$\beta$              & S & L & S & L \\
+	$\alpha + \beta$     & S & L & S & L \\
+	$\alpha \cdot \beta$ & S & L & L & L \\
+	$\alpha ^ \beta$     &   & L & L & L \\
+	\end{tabular} \vskip 0.5cm
 	Inoltre $\alpha^\beta$ è successore $\sse$ $\alpha$ è successore e $\beta$ è finito.
 	
 	\section*{Disuguaglianze stupide ma da dimostrare}
@@ -157,12 +200,7 @@
 		\item $\forall \chi > \alpha, \gamma \neq 0 \quad \gamma^\chi > \alpha$
 		\item $\forall \alpha \ge 2, \beta \ge 2 \quad \alpha^\beta > \alpha \beta$ (con uguaglianza solo nel caso $\alpha = \beta = 2$)
 	\end{itemize}
-	
-	\subsection*{Punti fissi di funzioni}
-	\begin{itemize}
-		\item Data $f: \ON \rar \ON$ strettamente crescente e continua ai limiti, esistono punti fissi arbitrariamente grandi
-		\item (Inserire l'enunciato per i punti fissi comuni di una certa famiglia di funzioni da un insieme a se stesso)
-	\end{itemize}
+
 	
 	\section*{Assiomi Utilizzati}
 	Viene di seguito riportata una tabella con i principali teoremi di Insiemi, e gli assiomi necessari per dimostrarli.

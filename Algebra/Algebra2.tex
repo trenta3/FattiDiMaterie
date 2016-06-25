@@ -1,7 +1,7 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 \usepackage{pgf}
-\usepackage{tikz}
-\usetikzlibrary{arrows,automata}
+\usepackage{tikz-cd}
+\usetikzlibrary{cd,arrows,automata}
 \newcommand{\MCD}{\text{MCD }}
 \newcommand{\Lt}{\text{lt }}
 \newcommand{\Lc}{\text{lc }}
@@ -498,7 +498,12 @@
 				\item Proiettivo $\implies$ Piatto (Viene da Libero $\implies$ Piatto, piuttosto semplice da mostrare usando che $L = \oplus_\nu R^{(\nu)}$ se $L$ è libero ed utilizzando il fatto che un modulo proiettivo è un sommando diretto di un modulo libero). \\ Il viceversa non vale. Ad esempio $\bbQ$ come $\bbZ$-modulo
 			\end{itemize}
 %		\item ({\bf Lemma del Serpente}) %TODO
-%		\item ({\bf Lemma dei cinque}) %TODO
+		\item ({\bf Lemma dei cinque}) Sia dato il seguente diagramma commutativo di $R$-moduli: \\
+			\begin{tikzcd}
+				A \arrow[r, "\alpha"] \arrow[d, "\cA"] & B \arrow[r, "\beta"] \arrow[d, "\cB"] & C \arrow[r, "\gamma"] \arrow[d, "\cC"] & D \arrow[r, "\delta"] \arrow[d, "\cD"] & E \arrow[d, "\cE"] \\
+				A' \arrow[r, "\alpha'"] & B' \arrow[r, "\beta'"] & C' \arrow[r, "\gamma'"] & D' \arrow[r, "\delta'"] & E' \\
+			\end{tikzcd} \vskip 0.1cm
+			Allora se $\cA, \cB, \cD, \cE$ sono isomorfismi e tutti i quadrati commutano, si ha che anche $\cC$ è un isomorfismo.
 	\end{itemize}
 	
 	\section*{Moduli Nötheriani ed Artiniani}
