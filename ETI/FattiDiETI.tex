@@ -1,9 +1,11 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+\usepackage{tikz}
 
 \newcommand{\card}[1]{\text{card }({#1})}
 \newcommand{\Set}{\text{Set}}
 \newcommand{\ON}{\text{ON}}
 \newcommand{\cof}[1]{\text{cof}({#1})}
+\newcommand{\Fun}{\text{Fun}}
 
 \begin{document}
 	\title{ETI}
@@ -89,15 +91,19 @@
 	Una funzione $f: A \rar B$ tra due insiemi ordinati si dice cofinale o illimitata se l'immagine di $f$ non ha maggioranti stretti in $B$. La cofinalità di $B$ è il minimo ordinale $\alpha$ tale che esiste una funzione cofinale $f: \alpha \rar B$
 	\begin{itemize}
 		\item Se $\beta$ è un ordinale successore si ha $\cof{\beta} = 1$
-		\item $\cof{\alpha + \beta} = \cof{\beta}$
+		\item (La somma è intesa ordinale) $\cof{\alpha + \beta} = \cof{\beta}$ (Basta accorgersi che è sufficiente mandare gli ordinali nella parte che contiene solo $\beta$ affinché siano cofinali)
+		\item (Il prodotto è ordinale) Se $\beta$ è limite si ha $\cof{\alpha \cdot \beta} = \cof{\beta}$ (Come sopra, basta mandare gli ordinali in cose del tipo $(0, \gamma) \in \alpha\beta$). Se $\beta$ non fosse limite si può spezzare $\alpha \cdot \beta$ ed utilizzare la formula di sopra.
+		\item (L'esponenziazione è ordinale) Se $\beta$ è limite allora si ha $\cof{\alpha^\beta} = \cof{\beta}$ (Mandando gli ordinali in cose del tipo $f_\gamma: \beta \rar \alpha$ definita da $f_\gamma(\varepsilon) = 1$ se $\varepsilon = \gamma$ oppure $ = 0$ se $\varepsilon \neq \gamma$). Se $\beta$ non fosse limite, si può spezzare $\alpha^\beta$ in cose più semplici ed utilizzare la formula di sopra.
 		\item $\beta \ge \cof{\alpha} \sse \exists f: \beta \rar \alpha$ cofinale.
 		\item Per ogni ordinale $\alpha$ vale $\cof{\alpha} \le \card{\alpha} \le \alpha$
 		\item $\cof{\beta} = \beta \implies \beta$ è un cardinale (ordinale iniziale)
 		\item Ogni cardinale successore $\kappa^{+}$ (ovvero il minimo cardinale maggiore di $\kappa$) è tale che $\cof{\kappa^{+}} = \kappa^{+}$
 		\item Vale $\cof{\kappa} = \kappa \sse $ per ogni famiglia $(A_i : i \in I)$ di insiemi $A_i$ tali che $\card{A_i} < \kappa$ e $\card{I} < \kappa$ si ha $\card{\cup_{i \in I} A_i} < \kappa$
-		\item Per ogni ordinale $\alpha$ si ha $\cof{2^{\aleph_\alpha}} > \aleph_\alpha$
+		\item Per ogni ordinale $\alpha$ si ha $\cof{2^{\aleph_\alpha}} > \aleph_\alpha$ (Esponenziazione cardinale, non ordinale)
 		\item Se un ordinale limite $\alpha$ NON è un cardinale si ha $\cof{\alpha} < \alpha$
 		\item Per ogni ordinale limite $\cof{\cof{\alpha}} = \cof{\alpha}$
+		\item Se $\lambda$ è limite vale che $\cof{\aleph_\lambda} = \cof{\lambda}$
+		\item Se $\nu$ è successore allora vale che $\cof{\aleph_\nu} = \aleph_\nu$
 	\end{itemize}
 	
 	\section*{Aritmetica Cardinale}
@@ -145,6 +151,7 @@
 		\item $\lambda$ è limite $\sse \lambda = \cup_{\gamma < \lambda} \gamma$ $\sse$ è della forma $\lambda = \omega \gamma$ per un qualche $\gamma$
 		\item Se $\beta$ è un successore allora $\exists \lambda$ limite oppure $\lambda = 0$ ed $\exists k \in \omega$ tali che $\beta = \lambda + k$ (Si dimostra poiché non esistono catene discendenti infinite di ordinali, e sapendo che $\beta$ è successore si può scrivere $\beta = \alpha + 1$ e per induzione su $\alpha$)
 		\item Gli ordinali $\alpha$ con la proprietà che $\forall X \subseteq \alpha$ si ha $X$ ha il tipo d'ordine di $\alpha$ oppure $\alpha \setminus X$ ha il tipo d'ordine di $\alpha$ dovrebbero essere soltanto $\alpha = 0$ e tutti gli ordinali limite. [Ancora da controllare]
+		\item Se $f: \nu \rar \kappa$ è iniettiva e illimitata, allora $\kappa = \sum_{\alpha < \nu} \card{f(\alpha)}$ dove $\nu$ e $\kappa$ sono cardinali infiniti
 	\end{itemize}
 	
 	\subsection*{Punti fissi di funzioni}
@@ -161,6 +168,7 @@
 		\item $X \subseteq V_\alpha \sse X \in V_{\alpha + 1}$
 		\item Sia $A \subseteq V_\lambda$, con $A$ finito e $\lambda$ limite. Allora $A \in V_\lambda$ (Infatti $X \in A \implies X \in V_\lambda \implies \exists \alpha < \lambda \quad X \in V_\alpha$. Sfruttando il fatti che gli $X$ sono in numero finito allora si ha che, chiamato $\gamma$ il massimo degli $\alpha$ così ottenuti si ha $\gamma < \lambda$ e $\forall X \in A \quad X \in V_\gamma$, ovvero $A \in V_{\gamma + 1} \subseteq V_\lambda$, tesi)
 		\item Se $\alpha$ NON è limite, allora si ha $\exists A \subseteq V_{\alpha}$ finito e non vuoto tale che $V_\alpha \setminus A$ è ancora transitivo. Infatti $\alpha = \lambda + k$ con $\lambda$ limite (oppure zero) e $k \in \omega$. Allora si prenda $A = \{V_\lambda, V_{\lambda + 1}, V_{\lambda + 2}, \ldots, V_{\lambda + (k - 1)} \}$ e si verifichi la transitività
+		\item $\Fun(\omega, \omega) \subseteq V_\omega$ (e anche $\omega \times \omega \subseteq V_\omega$)
 	\end{itemize}
 	
 	\subsection*{Aleph}
@@ -182,6 +190,30 @@
 			Dunque per ogni $\alpha \in \omega_n$ possiamo definire la funzione $f_\alpha: \omega_k \rar \omega_n$ ponendo $f_\alpha (\beta) = \alpha + \beta$. È semplice verificare che $f_\alpha$ è strettamente crescente. Ponendo $\Phi(\alpha) = f_\alpha$ si ottiene una funzione iniettiva $\Phi: \omega_n \rar X$ ed otteniamo così anche la disuguaglianza inversa $\aleph_n \le \card{X}$
 	\end{itemize}
 	
+	\subsection*{Aritmetica Cardinale}
+	\begin{itemize}
+		\item Se $\kappa$ è infinito e $\cof{\kappa} \le \lambda$ allora $\kappa^\lambda > \kappa$
+		\item Per $\lambda$ infinito abbiamo $\cof{2^\lambda} > \lambda$ (dove l'esponenziazione è cardinale)
+		\item Se $\kappa$ è un cardinale limite e $\lambda \ge \cof{\kappa}$ allora $\kappa^\lambda = {\left( \cup_{\mu < \kappa} \mu^\lambda \right)}^\cof{\kappa}$ dove $\mu$ scorre sui cardinali
+		\item ({\bf Hausdorff}) Se $\kappa$ e $\lambda$ sono cardinali infiniti, allora $(\kappa^+)^\lambda = \kappa^\lambda \cdot \kappa^+$
+		\item Siano $\kappa$ e $\lambda$ cardinali con $2 \le \kappa$ e $\lambda \ge \omega$. Allora si ha
+			\begin{enumerate}
+				\item Se $\kappa \le \lambda$ allora $\kappa^\lambda = 2^\lambda$
+				\item Se $\kappa$ è infinito ed $\exists \mu < \kappa$ tale che $\mu^\lambda \ge \kappa$ allora $\kappa^\lambda = \mu^\lambda$
+				\item Assumiamo che $\kappa$ sia infinito e $\mu^\lambda < \kappa$ per tutti i $\mu < \kappa$. Allora $\lambda < \kappa$ e:
+					\begin{itemize}
+						\item Se $\cof{\kappa} > \lambda$ allora $\kappa^\lambda = \kappa$
+						\item Se $\cof{\kappa} \le \lambda$ allora $\kappa^\lambda = \kappa^\cof{\kappa}$
+					\end{itemize}
+			\end{enumerate}
+		\item Se assumiamo GCH e supponiamo che $\kappa$ e $\lambda$ siano cardinali con $2 \le \kappa$ e $\lambda$ infinito allora si ha:
+			\begin{enumerate}
+				\item Se $\kappa \le \lambda$ allora $\kappa^\lambda = \lambda^+$
+				\item Se $\cof{\kappa} \le \lambda < \kappa$ allora $\kappa^\lambda = \kappa^+$
+				\item Se $\lambda < \cof{\kappa}$ allora $\kappa^\lambda = \kappa$
+			\end{enumerate}
+	\end{itemize}
+	
 	\section*{Successore o Limite?}
 	Elenchiamo di seguito, a seconda se $\alpha$ e $\beta$ sono limiti o successori, che cosa sono quelli ottenuti dalle operazioni elementari
 	\vskip 0.5cm \begin{tabular}{ccccc}
@@ -200,10 +232,13 @@
 		\item $\forall \chi > \alpha, \gamma \neq 0 \quad \gamma^\chi > \alpha$
 		\item $\forall \alpha \ge 2, \beta \ge 2 \quad \alpha^\beta > \alpha \beta$ (con uguaglianza solo nel caso $\alpha = \beta = 2$)
 	\end{itemize}
-
 	
 	\section*{Assiomi Utilizzati}
-	Viene di seguito riportata una tabella con i principali teoremi di Insiemi, e gli assiomi necessari per dimostrarli.
-	
+	Viene di seguito riportata una tabella con i principali teoremi di Insiemi, e gli assiomi necessari per dimostrarli (per come li abbiamo dimostrati in classe)
+	\vskip 0.5cm
+	\begin{tabular}{cccc}
+	Teorema                    & Scelta     & Parti      & Infinito   \\
+	Cantor-Bernstein           & \crossmark & \crossmark & \checkmark \\
+	\end{tabular} \vskip 0.5cm
 	
 \end{document}
