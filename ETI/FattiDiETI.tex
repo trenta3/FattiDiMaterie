@@ -6,6 +6,9 @@
 \newcommand{\ON}{\text{ON}}
 \newcommand{\cof}[1]{\text{cof}({#1})}
 \newcommand{\Fun}{\text{Fun}}
+\newcommand{\TC}{\text{TC}}
+\newcommand{\Dom}{\text{Dom}}
+\newcommand{\Imm}{\text{Imm}}
 
 \begin{document}
 	\title{ETI}
@@ -166,9 +169,22 @@
 	\subsection*{Gerarchia di Von Neumann}
 	\begin{itemize}
 		\item $X \subseteq V_\alpha \sse X \in V_{\alpha + 1}$
+		\item $a \in A \in V_\alpha \implies \exists \beta < \alpha \quad a \in V_\beta$
+		\item $\alpha < \beta \implies V_\alpha \in V_\beta$
+		\item $B \subseteq A \in V_\alpha \implies B \in V_\alpha$
+		\item $A \in V_\alpha \sse \TC(A) \in V_\alpha$ dove $\TC$ è la chiusura transitiva di $A$
+		\item $A \in V_\omega \sse \card{\TC(A)} < \aleph_0$
+		\item $\forall \alpha$ si ha $\card{V_{\omega + \alpha}} = \beth_\alpha$
+		\item $A \in V_\alpha \implies \card{A} < \card{V_\alpha}$
+		\item $\lambda$ limite. Allora si ha $f \in V_{\lambda + 1} \sse \Dom f, \Imm f \in V_{\lambda + 1}$
+		\item Se $\alpha$ è limite allora si ha $V_\alpha \times V_\alpha \subseteq V_\alpha$ e $\alpha \times \alpha \subseteq V_\alpha$
+		\item $\kappa$ cardinale infinito, $\alpha$ ordinale. Allora $\cof{\alpha} > k \sse \forall X \subseteq V_\alpha \tc \card{X} \le \kappa$ si ha che $X \in V_\alpha$
+		\item $\kappa$ cardinale infinito, allora vale che $\kappa < \cof{\alpha} \sse \Fun(\kappa, V_\alpha) \subseteq V_\alpha$
+		\item 
 		\item Sia $A \subseteq V_\lambda$, con $A$ finito e $\lambda$ limite. Allora $A \in V_\lambda$ (Infatti $X \in A \implies X \in V_\lambda \implies \exists \alpha < \lambda \quad X \in V_\alpha$. Sfruttando il fatti che gli $X$ sono in numero finito allora si ha che, chiamato $\gamma$ il massimo degli $\alpha$ così ottenuti si ha $\gamma < \lambda$ e $\forall X \in A \quad X \in V_\gamma$, ovvero $A \in V_{\gamma + 1} \subseteq V_\lambda$, tesi)
 		\item Se $\alpha$ NON è limite, allora si ha $\exists A \subseteq V_{\alpha}$ finito e non vuoto tale che $V_\alpha \setminus A$ è ancora transitivo. Infatti $\alpha = \lambda + k$ con $\lambda$ limite (oppure zero) e $k \in \omega$. Allora si prenda $A = \{V_\lambda, V_{\lambda + 1}, V_{\lambda + 2}, \ldots, V_{\lambda + (k - 1)} \}$ e si verifichi la transitività
 		\item $\Fun(\omega, \omega) \subseteq V_\omega$ (e anche $\omega \times \omega \subseteq V_\omega$)
+		\item $cF \in V_\alpha \implies \cup_{F \in \cF} F \in V_\alpha$
 	\end{itemize}
 	
 	\subsection*{Aleph}
@@ -212,6 +228,11 @@
 				\item Se $\cof{\kappa} \le \lambda < \kappa$ allora $\kappa^\lambda = \kappa^+$
 				\item Se $\lambda < \cof{\kappa}$ allora $\kappa^\lambda = \kappa$
 			\end{enumerate}
+	\end{itemize}
+	
+	\subsection*{Falsità}
+	\begin{itemize}
+		\item Non è vero che se $\cof{\kappa} \le \nu \le \kappa$ allora $\exists f: \nu \rar \kappa$ crescente ed illimitata. (Mentre invece esiste se parte da $\cof{\kappa}$)
 	\end{itemize}
 	
 	\section*{Successore o Limite?}
