@@ -1,0 +1,42 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\newcommand{\intpie}{\int_{-\pi}^\pi }
+\newcommand{\fracpie}{\frac{1}{\pi}}
+\newcommand{\fractopie}{\frac{1}{2\pi}}
+\newcommand{\CT}[1]{\cC^{#1}(\bbT)}
+\newcommand{\LT}[1]{\cL^{#1}(\bbT)}
+
+\begin{document}
+	\title{Analisi 3}
+	
+	\section*{Serie e Trasformata di Fourier}
+	\subsection*{Serie di Fourier}
+	\begin{itemize}
+		\item ({\bf Relazioni di ortogonalità}) Valgono le seguenti formule:
+			\begin{enumerate}
+				\item Se $m + n > 0$ allora $\intpie \cos(mx) \cos(nx) \de{x} = \pi \delta_{mn}$
+				\item Se $m + n > 0$ allora $\intpie \sin(mx) \sin(nx) \de{x} = \pi \delta_{mn}$
+				\item $\forall m, n \in \bbN$ si ha $\intpie \cos(mx) \sin(nx) \de{x} = 0$
+			\end{enumerate}
+			Ovvero seni e coseni (interi) sono ortogonali sull'intervallo $[-\pi, \pi]$
+		\item ({\bf Serie di Fourier}) Data una funzione $f$ definiamo Serie di Fourier la serie formale seguente
+			$$ \frac{a_0}{2} + \sum_{k = 1}^\infty a_k \cos(kx) + \sum_{k = 1}^\infty b_k \sin(kx) = \sum_{k \in \bbZ} c_k e^{ikx} $$
+			dove si ha $a_k = \fracpie \intpie \cos(kx) f(x) \de{x}$, $b_k = \fracpie \intpie \sin(kx) f(x) \de{x}$, $c_n = \fractopie \intpie f(x) e^{-ikx} \de{x}$. Ovvero gli $a_k, b_k, c_n$ sono legati dalle seguenti relazioni: \\
+			$c_k = \frac{a_k - i b_k}{2}$ e $c_{-k} = \frac{a_k + i b_k}{2}$ $\forall k > 0$
+	\end{itemize}
+	
+	\subsection*{Nucleo di Dirichlet}
+	\begin{itemize}
+		\item ({\bf Nucleo di Dirichlet}) $D_n(z) = \sum_{k = -n}^n e^{ikz} = \frac{\sin((n + \frac{1}{2}) z)}{\sin(\frac{z}{2})}$ [Raccogliere $e^{-inz}$ e sommare la geometrica]
+		\item ({\bf Parità ed integrale}) $D_n(z)$ è pari e si ha $\int_{-\pi}^\pi D_n(z) = 2 \pi$ [Scambiare somma con integrale]
+		
+	\end{itemize}
+	
+	\begin{itemize}
+		\item ({\bf Riemann-Lebesgue per i coefficienti}) Se $f \in \LT{2}$ allora si ha $\hat{f_n} \rar 0$ per $\abs{n} \rar \infty$ [Considerare la norma $\cL^2$ delle code]
+		\item ({\bf Più regolarità più decrescenza}) Se $f \in \CT{k}$ allora $\abs{n}^k \hat{f_n} \in \ell^2(\bbZ)$. In particolare $\hat{f_n} = o(\abs{n}^{-k})$ quando $\abs{n} \rar \infty$ [Integrare per parti la precedente]
+		\item ({\bf $f \cC^1$ convergenza assoluta}) Se $f \in \CT{1}$ allora la Serie di Fourier converge assolutamente [Usare GM-QM sulla precedente]
+		\item ({\bf $f \cC^1$ convergenza delle parziali}) Se $f \in \CT{1}$ allora $S_n(f, x) \rar f(x)$ per $n \rar \infty$ e $\forall x \in \bbT$ [Scrivere $S_n$ come convoluzione tra $f$ e $D_n$ e moltiplicare per uno. Poi stimare la differenza con RL]
+		\item ({\bf $f \cC^1$ a tratti, convergenza delle parziali}) Se $f \in CT{0}$ e la derivata esiste ovunque tranne al più in un numero finito di punti, nei quali $\exists f_{\pm}'(x_0) \in \bbR$ derivate sinistre e destre, allora si ha $S_n(f, x) \rar f(x)$ quando $n \rar \infty$ [Usare la parità di $D_n$ e spezzare in due pezzi per la stima con le derivate da un lato]
+	\end{itemize}
+\end{document}

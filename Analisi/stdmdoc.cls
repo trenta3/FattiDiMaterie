@@ -218,7 +218,7 @@
 	\newcommand{\oc}[1]{\widehat{#1}}
 	\newcommand{\tc}{\mbox{ t.c. }}
 
-	\newcommand{\norma}[1]{\mid\mid #1 \mid\mid}
+	\newcommand{\norm}[1]{\| {#1} \|}
 	\newcommand{\abs}[1]{\mid #1 \mid}
 	\newcommand{\scal}[2]{\langle #1 \mid #2 \rangle}
 	\newcommand{\floor}[1]{\lfloor #1 \rfloor}
