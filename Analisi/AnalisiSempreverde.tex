@@ -1,0 +1,36 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\renewcommand{\norma}[1]{\| {#1} \|}
+
+\begin{document}
+	\title{Lemmi sempreverdi di Analisi}
+	
+	\section*{Scambio di limite con integrale e/o successione}
+	\subsection*{Derivabilità del limite di una successione}
+	Sia $(f_n)_{n \in \bbN}$ una successione di funzioni derivabili sull'intervallo $I = [a, b]$. Si supponga che:
+	\begin{enumerate}
+		\item Le derivate $f_n'$ convergano uniformemente su $I$ ad una funzione $g$
+		\item $\exists x_0 \in I$ tale che $\lim_{n \rar \infty} f_n(x_0) = l \in \bbR$
+	\end{enumerate}
+	Allora le funzioni $f_n$ convergono uniformemente su $I$ alla funzione $f$ che soddisfa le condizioni:
+	$$ \left\{ \begin{array}{cc} f'(x) = g(x) & \forall x \in I \\ f(x_0) = l & \\ \end{array} \right. $$
+	
+	\subsection*{Convergenza totale}
+	Sia $(V, \norma{})$ uno spazio vettoriale normato. Sono allora equivalenti le seguenti due condizioni:
+	\begin{enumerate}
+		\item Rispetto alla distanza $d(v, v') = \norma{v - v'}$ indotta dalla norma $\norma{\cdot}$, $(V, d)$ è completo
+		\item Data comunque una successione $(v_n)_{n \in \bbN}$ di elementi di $V$ tali che $\sum_0^\infty \norma{v_n} < +\infty$, le serie $\sum_0^\infty v_n$ converge ad un elemento di $V$
+	\end{enumerate}
+	
+	\subsection*{Convergenza normale e criterio di Weierstrass}
+	Sia $(f_n)_{n \in \bbN}$ una successione di funzioni a valori reali definite su un insieme $E$, e si supponga che:
+	\begin{enumerate}
+		\item $\forall n \in \bbN$ esiste una costante $M_n > 0$ tale che $\abs{f_n(x)} \le M_n \quad \forall x \in E$
+		\item $sum_{n = 0}^\infty M_n < +\infty$
+	\end{enumerate}
+	Allora la serie $\sum_0^\infty f_n$ converge uniformemente su $E$. In particolare, se $(E, d)$ è uno spazio metrico e le funzioni $f_n$ sono continue, anche la somma della serie $\sum_0^\infty f_n$ è continua.
+	
+	\subsection*{Derivazione sotto il segno d'integrale}
+	Sia $L : [a, b] \times (c, d) \rar \bbR$ $\cC^0$ e tale che $\de{L(t, s)}{s}$ è continua in $[a, b] \times (c, d)$. Allora vale
+	$$ \dde{s} \int_a^b L(t, s) \de{t} = \int_a^b \dde{s} L(t,s) \de{t} \qquad \forall s \in (c, d) $$
+\end{document}
