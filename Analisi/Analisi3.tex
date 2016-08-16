@@ -5,11 +5,23 @@
 \newcommand{\fractopie}{\frac{1}{2\pi}}
 \newcommand{\CT}[1]{\cC^{#1}(\bbT)}
 \newcommand{\LT}[1]{\cL^{#1}(\bbT)}
+\newcommand{\cl}{\mathcal{l}}
 
 \begin{document}
 	\title{Analisi 3}
 	
 	\section*{Serie e Trasformata di Fourier}
+        \subsection*{Definizioni e Remarks}
+        \begin{itemize}
+          \item ({\bf $f \in \CT{1}$ a tratti}) Diciamo che $f \in \CT{1}$ a tratti quando $f \in \CT{0}$ e la derivata esiste dovunque tranne che in un numero finito di punti, nei quali esiste $f'_\pm (x_0) \in \bbR$ derivate destre e sinistre.
+        \end{itemize}
+
+        \subsection*{Teoremi utili}
+        \begin{itemize}
+          \item ({\bf Densità in norma $\cL^1$ delle $\cC^\infty_0$ nelle $\cL^1$}) Sia $f \in \cL^1(a, b)$. Allora $\forall \varepsilon > 0, \exists f_\varepsilon \in \cC^\infty_0(a,b)$ tale che $$ \norm{f - f_\varepsilon}_{\cL^1} = \int_a^b \abs{f - f_\varepsilon} \de x  < \varepsilon $$
+          \item ({\bf Lemma di Riemann-Lebesgue}) $f \in \cL^1(a, b)$. Allora $\int_a^b f(x) \sin(n x) \de x \rar 0$ quando $\abs{n} \rar \infty$ (e per il coseno si ha un enunciato analogo) [Si usi il teorema di densità precedente con qualche stima]
+        \end{itemize}
+        
 	\subsection*{Serie di Fourier}
 	\begin{itemize}
 		\item ({\bf Relazioni di ortogonalità}) Valgono le seguenti formule:
@@ -28,8 +40,7 @@
 	\subsection*{Nucleo di Dirichlet}
 	\begin{itemize}
 		\item ({\bf Nucleo di Dirichlet}) $D_n(z) = \sum_{k = -n}^n e^{ikz} = \frac{\sin((n + \frac{1}{2}) z)}{\sin(\frac{z}{2})}$ [Raccogliere $e^{-inz}$ e sommare la geometrica]
-		\item ({\bf Parità ed integrale}) $D_n(z)$ è pari e si ha $\int_{-\pi}^\pi D_n(z) = 2 \pi$ [Scambiare somma con integrale]
-		
+		\item ({\bf Parità ed integrale}) $D_n(z)$ è pari e si ha $\int_{-\pi}^\pi D_n(z) = 2 \pi$ [Scambiare somma con integrale]		
 	\end{itemize}
 	
 	\begin{itemize}
@@ -37,6 +48,82 @@
 		\item ({\bf Più regolarità più decrescenza}) Se $f \in \CT{k}$ allora $\abs{n}^k \hat{f_n} \in \ell^2(\bbZ)$. In particolare $\hat{f_n} = o(\abs{n}^{-k})$ quando $\abs{n} \rar \infty$ [Integrare per parti la precedente]
 		\item ({\bf $f \cC^1$ convergenza assoluta}) Se $f \in \CT{1}$ allora la Serie di Fourier converge assolutamente [Usare GM-QM sulla precedente]
 		\item ({\bf $f \cC^1$ convergenza delle parziali}) Se $f \in \CT{1}$ allora $S_n(f, x) \rar f(x)$ per $n \rar \infty$ e $\forall x \in \bbT$ [Scrivere $S_n$ come convoluzione tra $f$ e $D_n$ e moltiplicare per uno. Poi stimare la differenza con RL]
-		\item ({\bf $f \cC^1$ a tratti, convergenza delle parziali}) Se $f \in CT{0}$ e la derivata esiste ovunque tranne al più in un numero finito di punti, nei quali $\exists f_{\pm}'(x_0) \in \bbR$ derivate sinistre e destre, allora si ha $S_n(f, x) \rar f(x)$ quando $n \rar \infty$ [Usare la parità di $D_n$ e spezzare in due pezzi per la stima con le derivate da un lato]
+		\item ({\bf $f \cC^1$ a tratti convergenza delle parziali}) Se $f \in CT{0}$ e la derivata esiste ovunque tranne al più in un numero finito di punti, nei quali $\exists f_{\pm}'(x_0) \in \bbR$ derivate sinistre e destre, allora si ha $S_n(f, x) \rar f(x)$ quando $n \rar \infty$ [Usare la parità di $D_n$ e spezzare in due pezzi per la stima con le derivate da un lato]
+                \item ({\bf $f \cC^1$ a tratti, comportamento nei punti di salto}) Siano $x_1, \ldots, x_n$ i punti di salto. In questi definiamo $\tilde{f}(x) = \left\{ \begin{array}{cc} f(x) & \text{se } x \in [-\pi, \pi] \setminus \{ x_i \}_{i=1,\ldots,n} \\ \frac{f(x^+) + f(x^-)}{2} & \text{se } x \in \{x_i\}_{i=1,\ldots, n} \\ \end{array} \right.$, dove $f(x^\pm) = \lim_{h \rar 0^\pm} f(x + h)$, allora $S_n(f, x) \rar \tilde{f}(x)$ quando $n \rar \infty$ [Basta stimare come già precedentemente fatto solo nei punti di salto]
+                \item ({\bf Dini per la convergenza delle parziali}) Sia $f \in \CT{0}$ tale che $\exists \delta$ per cui si abbia $$ \int_{-\delta}^\delta \frac{\abs{f(x + z) - f(x)}}{\abs{z}} \de z < + \infty $$ Allora si ha $S_n(f, x) \rar f(x)$ (o eventualmente a $\tilde{f}(x)$ come sopra) [Usare Riemann-Lebesgue sulla funzione $g(z)$]
 	\end{itemize}
+
+        \subsection*{Stime}
+        \begin{itemize}
+        \item ({\bf Stime sui coefficienti di Fourier}) Siano $f, g \in \LT{1}$. Allora si ha:
+          \begin{enumerate}
+          \item $\abs{\hat{f}_k - \hat{g}_k} \le \fractopie \intpie \abs{f(x) - g(x)} \de x$
+          \item $\abs{S_n(f, x) - S_n(g, x)} \le \frac{2n+1}{2\pi} \intpie \abs{f(x) - g(x)} \de x$
+          \end{enumerate}
+        \item ({\bf serie dei coefficienti in $\cl^1(\bbZ)$}) Se $\{c_n\} \in \cl^1(\bbZ)$, allora la serie $\sum_{n \in \bbZ} c_n e^{inx}$ converge ad un certo $g(x) \in \CT{0}$ tale che $c_n = \hat{g}_n \quad \forall n$.
+          \item ({\bf Sommabilità secondo Cesaro}) $\{a_n\} \in \bbR$ successione. Se $a_n \rar L$ allora $b_n = \frac{1}{n} \sum_{k=0}^{n-1} a_k \rar L$ (e $a_n$ si dice sommabile secondo Cesaro)
+        \end{itemize}
+
+        \subsection*{Nucleo di Fejer}
+        \begin{itemize}
+        \item ({\bf Nucleo di Fejer}) $\phi_n(z) = \frac{1}{n} \sum_{k=0}^{n-1} D_k(z) = \frac{1}{2\pi n} \left( \frac{\sin(\frac{n}{2} z)}{\sin(\frac{z}{2})} \right)^2 $
+        \item ({\bf Serie di Fourier alla Cesaro}) $\sigma_n(f, x) = \frac{1}{n} \sum_{k=0}^{n-1} S_k(f, x)$
+        \item ({\bf Proprietà del Nucleo di Fejer}) Si hanno le seguenti proprietà:
+          \begin{enumerate}
+          \item ({\bf Normalizzazione}) $\intpie \phi_n(z) \de z = 1$
+          \item ({\bf Parità}) $\phi_n(z) = \phi_n(-z)$
+          \item ({\bf Positività}) $\phi_n(z) \ge 0$
+          \item ({\bf Rapida decrescenza}) $\forall \varepsilon, \delta > 0 \quad \exists N \tc \forall z \notin [-\delta, \delta] \quad \forall n > N \qquad \phi_n(z) < \varepsilon$. [Stime]
+          \item ({\bf Velocità di decrescenza}) $\phi_n(0) = O(n)$
+          \end{enumerate}
+        \item ({\bf Convergenza uniforme della Serie ``di Fejer'' per funzioni continue}) $f \in \CT{0}$. Allora $\sigma_n(f, x) \rar f(x)$ uniformemente quando $n \rar \infty$, cioè $\sup_{x \in [-\pi, \pi]} \abs{\sigma_n(f, x) - f(x)} \rar 0$ [Spezzare l'integrale nella parte interna ed esterna, e stimare in norma $\cL^1$. Notare che la maggiorazione non dipende da $x$]
+        \end{itemize}
+
+        \subsection*{Successione di Dirac}
+        \begin{itemize}
+        \item ({\bf Successione di Dirac}) Una successione di funzioni $\{ Q_n: [-\pi, \pi] \rar \bbR \}$ si dice successione di Dirac se soddisfa le proprietà:
+          \begin{enumerate}
+          \item ({\bf Normalizzazione}) $\intpie Q_n(x) \de x = 1$
+          \item ({\bf Parità}) $Q_n(-x) = Q_n(x)$
+          \item ({\bf Positività}) $Q_n(x) \ge 0$
+          \item ({\bf Quasi-nullità integrale esterna}) $\int_{\delta \le \abs{x}} Q_n(x) \de x \rar 0$ se $n \rar \infty \quad \forall \delta > 0$
+          \end{enumerate}
+        \item ({\bf Convergenza uniforme delle convolute}) Se $Q_n$ è una successione di Dirac, allora si ha $$ f \star Q_n (x) = \intpie f(x - z)Q_n(z) \de z \rar f(x) \quad \text{per } n \rar \infty $$
+        \item ({\bf Coefficienti di Fourier della convoluzione}) $ \hat{(f \star g)}_n = \hat{f}_n \cdot \hat{g}_n $
+        \item ({\bf Commutatività della convoluzione}) $f \star g = g \star f$
+        \item ({\bf Disuguaglianza di convoluzione in norma $\cL^1$}) Si ha $\norm{f \star g}_{\cL^1} \le \norm{f}_{\cL^1} \cdot \norm{g}_{\cL^1}$
+        \item ({\bf Disuguaglianza di convoluzione}) $f \in \cL^1, g \in \cL^p, 1 \le p \le \infty$. Allora si ha $\norm{f \star g}_{\cL^p} \le \norm{f}_{\cL^1} \norm{g}_{\cL^p}$. [Per $p = \infty$ è evidente. Per gli altri utilizare la disuguaglianza di Holder]
+        \item ({\bf Coefficienti di Fourier della moltiplicazione}) $\hat{fg}_n = \hat{f}_k \star \hat{g}_k (n)$
+        \item ({\bf Derivabilità della Convoluta}) $f \in \cC_0^k(\bbR^n), g \in \cL^1_{\text{loc}}(\bbR^n)$. Allora $f \star g \in \cC^k(\bbR^n)$ e si ha $D^\alpha (f \star g) (x) = (D^\alpha f \star g) (x)$
+        \item ({\bf Formula per le $\sigma_n$}) $\sigma_n(f, x) = \sum_{k = -n+1}^{n-1} \left( 1 - \frac{\abs{k}}{n} \right) \hat{f}_k e^{ikx}$
+        \item ({\bf ``Completezza'' dei coefficienti di fourier}) Sia $f \in \CT{0} \tc \hat{f}_k = 0 \forall k$. Allora $f \cong 0$
+        \item ({\bf Convergenza assoluta in norma della successione di Dirac}) $f \in \LT{1}$. Allora $\intpie \abs{\sigma_n(f, x) - f(x)} \de x \rar 0$ per $n \rar \infty$
+        \item $f \in \LT{1}$ tale che $\hat{f}_k = 0 \forall k$ allora si ha $f \cong 0$ quasi ovunque
+        \item ({\bf Identità di Parseval}) Sia $f(x) = \sum_{n \in \bbZ} \hat{f}_n e^{inx}$ con $\{\hat{f}_n\} \in \cl^2(\bbZ)$. Allora vale l'uguaglianza $\norm{f}^2_{\cL^2} = \sum_{n \in \bbZ} \abs{\hat{f}_n}^2$.
+          \item ({\bf Massimalità della Circonferenza}) $C$ curva chiusa, semplice e $\cC^1$. Allora l'area della zona interna a $C$ è massima quando $C$ è la circonferenza. [Scrivere ``$x(t), y(t)$'' in serie di fourier e calcolarne l'area per poi usare parseval]
+        \end{itemize}
+
+        \subsection*{Controesempi}
+        \begin{itemize}
+        \item ({\bf Du Bois-Raymond}) Si può costruire una funzione $f \in \CT{0}$ tale che $S_n(f, x)$ NON converge a $f$ per qualche $x$. Ovvero, non tutte le serie di fourier di funzioni continue convergono alla funzione di partenza.
+        \end{itemize}
+
+
+        \section*{Fisica}
+        Cerchiamo in questa sezione di utilizzare i precedenti teoremi sulla serie di Fourier per risolvere problemi classici di Fisica.
+
+        \subsection*{Equazione della corda vibrante}
+        L'equazione è $u_{tt} = c^2 u_{xx}$. Vogliamo capire per quali condizioni iniziali $u(0, x) = f(x)$ la soluzione esiste ed è unica.
+        \begin{enumerate}
+        \item ({\bf Alcune soluzioni}) Ci accorgiamo che le funzioni $u_n(t, x) = \sin(nx) \cos(cnt)$ risolvono l'equazione, dunque ogni serie ottenuta sommandole con coefficienti risolve (per linearità dell'equazione).
+        \item ({\bf Separazione delle variabili}) Proviamo a risolvere l'equazione separando le variabili. Scriviamo dunque $u(t, x) = T(t) X(x)$ e sostituendo nell'equazione principale si ha $\frac{T''(t)}{T(t)} = c^2 \frac{X''(x)}{X(x)}$. Le due funzioni sono uguali, ma in variabili diverse. Ciò significa che sono costanti. Ovvero ci siamo ricondotti allo studio del sistema $$\left\{ \begin{array}{c} X''(x) + \frac{\lambda}{c^2} X(x) = 0 \\ X(-\pi) = X(\pi) = 0 \\ \end{array} \right.$$ visto che vogliamo la corda fissata alle estremità. (D'ora in poi mettiamo $c = 1$)
+          %% TODO: Non ne ho voglia, fa troppo schifo
+        \end{enumerate}
+
+        %%\subsection*{Equazione del calore}
+        %% TODO: Fa cagare
+
+        %%\section*{Spazi di Hilbert}
+        
+        
 \end{document}
