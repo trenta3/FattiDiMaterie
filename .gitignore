@@ -2,3 +2,7 @@
 *~
 *#
 *.save
+*.aux
+*.log
+*.out
+*.pdf

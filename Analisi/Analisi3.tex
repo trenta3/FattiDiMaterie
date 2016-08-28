@@ -123,7 +123,24 @@
         %%\subsection*{Equazione del calore}
         %% TODO: Fa cagare
 
-        %%\section*{Spazi di Hilbert}
-        
+        \section*{Spazi di Hilbert}
+        \subsection*{Definizioni e Prime Proprietà}
+        \begin{itemize}
+        \item ({\bf Definizione}) Sia $X$ spazio vettoriale su $\bbR$ (oppure su $\bbC$) si dice spazio euclideo se esiste un prodotto interno $\langle \cdot \rangle : X \times X \rar \bbR$ simmetrico (rispettivamente hermitiano) che induce una norma $\norm{x} = \sqrt{\scal{x}{x}}$
+        \item ({\bf Disuguaglianza di Cauchy-Schwarz}) $\forall x, y \in X \quad \abs{\scal{x}{y}} \le \norm{x} \norm{y}$
+        \item ({\bf Identità del Parallelogramma}) $\forall x, y \in X$ si ha $\norm{\frac{x+y}{2}}^2 + \norm{\frac{x-y}{2}}^2 = \frac{1}{2} \left( \norm{x}^2 + \norm{y}^2 \right)$
+        \item ({\bf $\cl^p(\bbZ)$ euclideo per $p = 2$}) $\cl^p(\bbZ)$ euclideo $\sse p = 2$. Infatti, per $p \neq 2$ i vettori della base canonica non soddifano l'identità del parallelogramma
+        \item ({\bf Completezza di $\cl^2(\bbZ)$}) [è completo]
+        \item ({\bf Cubo di Hilbert}) Definiamo cubo di Hilbert $Q = \{ \{c_k\} \in \cl^2(\bbZ) \mid \abs{c_k} \le \frac{1}{k} \}$
+        \item ({\bf Compattezza del cubo di Hilbert}) Data una successione $\{ c^n \}_{n \in \bbN} \in Q$, esiste una sottosuccessione $\{ c^{n_m} \} \subseteq \{ c^n \}$ che converge ad un $c \in \cl^2(\bbZ)$
+        \item ({\bf Di compattezza relativa}) Sia $\{ c^j \} \in \cl^2(\bbZ)$ tale che $c_n^j \le a_n \quad \forall j$, con $\norm{a}_{\cL^2} < +\infty$. Allora $\exists \{ c^{j^*} \} \subseteq \{ c^j \}$ che converge ad un elemento $c \in \cl^2(\bbZ)$
+        \item ({\bf Base Hilbertiana}) Una successione $\{e_n\}$ di vettori indipendenti di uno spazio di Hilbert $H$ si dice base hilbertiana se $\forall x \in H, \exists \varepsilon > 0, \text{ e } \exists \sum_{n=1}^N c_n e_n$ tale che: $\norm{\sum_{n=1}^N c_n e_n - x} < \varepsilon$
+        \item ({\bf Sistema completo}) $B = \{ x_\alpha \}$ si dice sistema completo per $X$ se la chiusura delle combinazioni lineari di elementi di $B$ è tutto $X$.
+        \item ({\bf Base Ortogonale/Ortonormale}) $\{x_\alpha\}$ sistema competo, $\scal{x_\alpha}{x_\beta} = 0 \quad \forall \alpha \neq \beta$. Allora $\{x_\alpha\}$ si dice base ortogonale. Inoltre, se vale anche che $\scal{x_\alpha}{x_\beta} = \delta_{\alpha\beta}$, allora il sistema viene detto base ortonormale.
+        \item ({\bf Separabilità}) $X$ si dice separabile se esiste un sottoinsieme denso (al più) numerabile.
+        \item ({\bf Cardinalità di una base ortonormale}) Sia $X$ separabile ed $\{x_\alpha\}$ ortonormale. Allora $\{x_\alpha\}$ è al più numerabile.
+        \item ({\bf Ortonormalizzazione di Gram-Schmidt}) $\{f_j\}_{j \in \bbN} \subseteq X$ linearmente indipendenti. Allora $\exists \{\phi_j\}_{j \in \bbN}$ ortonormale con $\Span(\varphi_1, \ldots, \varphi_n) = \Span(f_1, \ldots, f_n) \quad \forall n \in \bbN$. Da ciò deriva in particolare che se $X$ è separabile, allora esiste una base ortonormale numerabile
+          
+        \end{itemize}
         
 \end{document}
