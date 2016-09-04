@@ -7,7 +7,7 @@
 \newcommand{\LT}[1]{\cL^{#1}(\bbT)}
 \newcommand{\cl}{\ell}
 \newcommand{\Lincont}{\text{Lincont}}
-
+\newcommand{\codim}{\text{codim }}
 
 \begin{document}
 	\title{Analisi 3}
@@ -186,6 +186,35 @@
         \item $\forall w \in K$ con $K$ convesso chiuso, si ha $\scal{x - P(x), w - P(x)} \le 0$ [Dimostrare prima che data $f: \bbR^d \supseteq K \rar \bbR$ è $\cC^1$ e $\phi(t) = f(x_0 + t (x - x_0))$ con $t \in [0, 1]$ allora si ha che $\phi '(0) \ge 0$] \\
           Si può inoltre vedere che questa condizione è caratterizzante, ovvero se il punto $P(x)$ rispetta quella proprietà allora è il punto che minimizza la distanza con $x$. \\
           Come corollario se ne deriva che se $X$ è Hilbert, e $M \subseteq X$ è un sottospazio chiuso, allora si ha $X = M \oplus M^\bot$
+        \item ({\bf Norma della proiezione}) La proiezione $P$ su un sottospazio lineare chiuso $M$ è lineare e $\norm{P} = 1$ [Linearità banale, osservare poi che $\norm{x}\norm{P(x)} \ge \scal{x, P(x)}$ ]
+        \item ({\bf $\cL^2(a,b)$ è Hilbert}) Consideriamo una successione di Cauchy $\{ f_n \}$ che, a meno di estrarre sottosuccessioni, possiamo supporre $\norm{f_{n+1} - f_n}_{\cL^2} \le \frac{1}{2^n}$ %TODO: da finire
+        \item ({\bf Riesz-Fisher}) $f \in \Lincont(X, \bbR)$ continuo e limitato, $X$ Hilbert. Allora $\exists ! y \in X$ tale che $f(x) = \scal{x, y} \quad \forall x \in X$
+        \end{itemize}
+
+        \section*{Trasformata di Fourier}
+        Scrivo di seguito i risultati più utili
+        \begin{itemize}
+        \item ({\bf Definizione della trasformata}) $\hat{f}(\lambda) = \int_\bbR f(t) e^{-i \lambda t} \de t$
+        \item Se $f \in \cL^1 \bbR$ allora si ha $\hat{f} \in \cL^\infty \bbR \cap \cC^0 \bbR$ e $\abs{\hat{f}(\lambda)} \rar 0$ per $\lambda \rar \infty$ (e quindi in realtà uniformemente continua visto che ha limite finito all'infinito)
+        \item $\norm{\hat{f}}_{\cL^\infty} \le \norm{f}_{\cL^1}$
+        \item ({\bf Per risolvere le differenziali}) Ci aiuta a risolvere le differenziali. Possiamo ad esempio supporre la soluzione analitica, scriverla come sua serie di Taylor, dove ora le derivate le sappiamo calcolare.
+        \item Se $f \in \cL^1 \bbR \cap \cC^1 \bbR$ allora si ha l'uguaglianza $f(x) = \fractopie \int_\bbR \hat{f}(\xi) e^{ix\xi} \de \xi$
+        \item Data $f \in \cL^1(-T, T)$, se $I(T) = \int_{-T}^T f(t) \de t \rar a$ quando $T \rar +\infty$ allora si ha $J(T) = \int_{-T}^T (1 - \frac{\abs{t}}{T}) f(t) \de t \rar a$
+        \item ({\bf Quando vale l'uguaglianza sperata?}) Se $f \in \cC^0 \bbR$ allora vale che $f(x) = \cF^{-1}(\cF(f)) (x)$. Più nello specifico se $f$ è $\cC^0$ in $x$ allora vale la relazione in $x$.
+        \item ({\bf Trasmissione della convergenza}) Se $f_n \rar f$ in $\cL^1$ allora si ha che $\hat{f}_n \rar \hat{f}$ in $\cL^\infty$
+        \item ({\bf Trasformata delle traslazioni}) Definiamo $\tau_h(f)(x) = f(x - h)$ allora si ha $\hat{\tau_h f} = e^{ih\xi} \hat{f}(\xi)$
+        \item ({\bf Trasformata delle dilatazioni}) Definiamo $\sigma_\delta f(x) = \frac{1}{\delta} f(\frac{x}{\delta})$ allora si ha $\hat{\sigma_\delta f(x)}(\xi) = \hat{f}(\delta \xi)$
+        \item Se $f \in \cC^1 \bbR \cap \cL^1 \bbR$ e si ha $f' \in \cL^1$ allora $\hat{f'}(\xi) = i \xi \hat{f}(\xi)$
+        \item Siano $f, g \in \cL^1$ allora $\hat{f \star g}(\xi) = \hat{f}(\xi) \cdot \hat{g}(\xi)$
+        \item Sia $A \in \O(n)$ (matrice ortogonale) allora si ha $\hat{f \circ A}(\xi) = \hat{f}(A \xi)$
+        \item Data $f \in \cL^1 \bbR \cap \cC^1 \bbR$ allora valgono le seguenti formule:
+          $$ \hat{\de{}{x_k}f}(\xi) = i \xi_k \hat{f}(\xi) $$
+          $$ \de{}{\xi_k} \hat{f}(\xi) = -i \hat{x_k f(x)} $$
+        \item Siano $f, g \in \cL^1$ allora si ha $\scal{\hat{f}, g} = \scal{f, \check{g}}$ dove $\check{g}(\xi) = \int_\bbR g(x) e^{ix\xi} \de x$ (l'antitrasformata)
+        \item $f \in \cL^p \bbR$ con $1 \le p < +\infty$. Allora $f \star G_\delta \rar f$ in $\cL^p$ quando $\delta \rar 0$ dove le $G_\delta$ sono una successione di Dirac di gaussiane
+        \item ({\bf Plancherel}) $f \in \cL^1 \bbR \cap \cL^2 \bbR$ allora si ha $\norm{\hat{f}}_{\cL^2}^2 = 2 \pi \norm{f}_{\cL^2}^2$
+        \item Se $f \in \cL^2 \bbR$ e si ha $\hat{f}(\xi) = 0$ per $\abs{\xi} > \Omega$ e sono assegnati i valori $f(\frac{n\pi}{\Omega})$ per $n \in \bbZ$ allora si conosce la funzione $f$ su tto l'asse reale e vale la formula $$f(t) = \sum_{n \in \bbZ} \frac{f(\frac{n\pi}{\Omega}) \sin(\Omega t - n \pi)}{\Omega t - n \pi} $$
+        \item Per ogni funzione in $\cL^2 \bbR$ si può definire la norma secondo $\cH^1$ data da $\norm{f}_{\cH^1} = \int_\bbR (1 + \abs{\xi}^2) \abs{\hat{f}(\xi)}^2 \de \xi$ e si definisce $\cH^1(\bbR) = \{ f \in \cL^2 \bbR \mid \norm{f}_{\cH^1} < \infty \}$
           
         \end{itemize}
         
