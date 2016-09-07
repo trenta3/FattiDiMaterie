@@ -1,0 +1,108 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\newcommand{\intpie}{\int_{-\pi}^\pi }
+\newcommand{\fracpie}{\frac{1}{\pi}}
+\newcommand{\fractopie}{\frac{1}{2\pi}}
+\newcommand{\CT}[1]{\cC^{#1}(\bbT)}
+\newcommand{\LT}[1]{\cL^{#1}(\bbT)}
+\newcommand{\cl}{\ell}
+\newcommand{\Lincont}{\text{Lincont }}
+\newcommand{\codim}{\text{codim }}
+
+\begin{document}
+	\title{Trucchi di Analisi 3}
+	
+	\section*{Teoremi di Convergenza Integrale}
+	\subsection*{Convergenza Monotona}
+	\subsection*{Convergenza Dominata}
+	
+	\section*{Equazioni Differenziali Classiche}
+	\subsection*{Equazione della Corda Vibrante}
+	\subsection*{Equazione del Calore}
+	\subsection*{Equazione di Poisson / Laplace}
+	
+	\section*{Proiezione su un convesso}
+	Sia $H$ uno spazio di Hilbert e $K \subset H$ un convesso chiuso. Allora si ha che:
+	\begin{itemize}
+		\item $\exists ! P_K: H \rar K$, chiamata mappa di proiezione, tale che $\forall x \in H$ si ha $\norm{x - P_K(x)} = \min_{y \in K} \norm{x - y}$.
+		\item Il proiettato è "sul bordo" del convesso, ovvero $\forall w \in K$ si ha $\scal{x - P_K x}{w - P_K x} \le 0$
+		\item La mappa di proiezione è lipschitziana, ovvero $\forall f, g \in X$ si ha $\norm{P_K f - P_K g} \le \norm{f - g}$
+	\end{itemize}
+	Inoltre, supponendo che $K$ sia un sottospazio vettoriale chiuso si ha che:
+	\begin{itemize}
+		\item "La congiungente $x$ e $P_K(x)$ è ortogonale a $K$", ovvero $\forall w \in K \quad \scal{x - P_K(x)}{w} = 0$
+		\item $H = K \oplus K^\bot$
+		\item La proiezione $P_K$ è lineare ed inoltre vale $\norm{P} = 1$ (dove la norma è quella operatoriale)
+		\item Definendo $Q = I - P$ si ha, $\forall x \in H$ la decomposizione seguente:
+			\begin{itemize}
+				\item $x = P(x) + Q(x)$
+				\item $\scal{P(x), Q(x)} = 0$
+				\item $\norm{x}^2 = \norm{P(x)}^2 + \norm{Q(x)}^2$
+			\end{itemize}
+	\end{itemize}
+	
+	\subsection*{Esistenza}
+	Ad $x$ fissato si prenda una successione di $y_n \in K$ che tendono all'$\inf_{y \in K} \norm{y - x}$. Vogliamo mostrare che è una successione di Cauchy: in questo modo, per completezza dell'Hilbert, avremmo che $y_n \rar y_\infty \in H$ e per chiusura di $K$ si ha $y_\infty \in K$, da cui potremmo definire $P(x) = y_\infty$. \\
+    Chiamiamo ora $d_n = \norm{x - y_n}$ ed abbiamo che $d_n \rar d = \inf_n \norm{x - y_n}$. Utilizzando l'identità del parallelogramma si ha, se $n, m > N$ che vale:
+    $$ \norm{\frac{(x - y_n) + (x - y_m)}{2}}^2 + \norm{\frac{(x - y_n) - (x - y_m)}{2}}^2 = \frac{1}{2} ( \norm{x - y_n}^2 + \norm{x - y_m}^2) $$
+    ovvero, riscrivendo che:
+    $$ \norm{x - \frac{y_n + y_m}{2}}^2 + \norm{\frac{y_n - y_m}{2}}^2 = \frac{1}{2}(d_n^2 + d_m^2) $$
+    Ma sappiamo che per convessità si ha $\frac{y_n + y_m}{2} \in K$ e quindi, per definizione di estremo inferiore si ha $\norm{x - \frac{y_n + y_m}{2}}^2 \ge d^2$ e quindi $\norm{\frac{y_n - y_m}{2}} \le \frac{1}{2}(d_n^2 + d_m^2) - d^2 = \frac{1}{2}(d_n^2 - d^2) + \frac{1}{2}(d_m^2 - d^2) \le \varepsilon$ \\
+    Ciò significa che la successione $y_n$ è di cauchy in $H$ da cui segue la tesi.
+    
+    \subsection*{Unicità}
+    Supponiamo per assurdo che esistano due punti che realizzano il minimo, e li denotiamo con $p$ e $q$. (ovviamente dipendono da $x$, ma qui li stiamo pensando ad $x$ fissato). Allora dall'identità del parallelogramma si ha
+    $$ \norm{x - \frac{p + q}{2}}^2 + \norm{\frac{p - q}{2}}^2 = \frac{1}{2} (\norm{x - p}^2 + \norm{x - q}^2) = d^2 $$
+    Allora siccome, come prima, $\frac{p + q}{2} \in K$ per convessità, si ha che $\norm{\frac{p - q}{2}}^2 \le d^2 - d^2 = 0$, da cui segue $p = q$.
+    
+    \subsection*{Proiettato sul Bordo}
+    Diciamo che il proiettato sta "sul bordo" (non in maniera propria) del convesso (come è abbastanza intuitivo che sia facendo un disegno in $\bbR^2$) e lo esprimiamo dicendo che il segmento che congiunge $x$ a $P_K x$ è "dalla parte opposta" (ovvero ha prodotto scalare negativo) rispetto ad ogni segmento che congiunge un qualunque punto $w$ del compatto a $P_K x$. \\
+    Lemma preliminare: Sia $f: [a, b] \rar \bbR$ derivabile e supponiamo che in $a$ vi sia un minimo. Allora $f'(a) \ge 0$ (Dove il limite è inteso sulla parte che sta dentro al dominio di definizione). Dunque, se $f: K \subseteq \bbR^d \rar \bbR$ è $\cC^1$ e definiamo $\phi(t) = f(x_0 + t(x - x_0))$ per $t \in [0, 1]$, allora si ha che $\phi'(0) = \scal{\nabla f(x_0)}{x - x_0} \ge 0$. \\
+    Definiamo ora $\Psi(t) = \norm{x - ((1 - t) P_K(x) + t w)}^2$. Per il lemma precedente si ha $\Psi'(0) \ge 0 \quad \forall w \in K$. Ma sappiamo che $\Psi(t) = \norm{x - P_K(x) + t(P_K(x) - w)}^2 = \norm{x - P_K(x)}^2 + 2t \scal{x - P_K(x)}{P_K(x) - w} + t^2 \norm{P_K(x) - w}^2$ e quindi $\Psi'(0) = 2 \scal{x - P_K(x)}{P_K(x) - w} \le 0 \quad \forall w \in K$ \\
+    (In realtà, ma non lo dimostriamo, vale anche il viceversa: se il punto $P_K(x)$ gode della proprietà precedente, allora è il punto di proiezione)
+    
+    \subsection*{Lipschitzianità}
+    Sappiamo che $\scal{x - P_K(x)}{w - P_K(x)} \le 0$ e ci giochiamo la disuguaglianza con $(x, w) = (f, P_K(g)) = (g, P_K(f))$, ovvero si ottiene:
+    $$ 0 \ge \scal{f - P_K(f)}{P_K(g) - P_K(f)} + \scal{g - P_K(g)}{P_K(f) - P_K(g)} = \scal{f - P_K(f)}{P_K(g) - P_K(f)} - \scal{g - P_K(g)}{P_K(g) - P_K(f)} = \newline
+    \scal{f - P_K(f) - g + P_K(g)}{P_K(g) - P_K(f)} = \scal{f - g}{P_K(g) - P_K(f)} + \scal{P_K(g) - P_K(f)}{P_K(g) - P_K(f)} $$
+    Allora si ha
+    $$ \norm{P_K(g) - P_K(f)}^2 = \scal{P_K(g) - P_K(f)}{P_K(g) - P_K(f)} \le \scal{g - f}{P_K(g) - P_K(f)} \le \norm{g - f} \norm{P_K(g) - P_K(f)} $$
+    E si ottiene la disuguaglianza cercata dividendo per $\norm{P_K(g) - P_K(f)}$
+	
+	\subsection*{Ortogonalità della congiungente}
+	Supponendo ora che $K$ sia un sottospazio vettoriale chiuso possiamo sostituire nella disuguaglianza precedente $w = 0$ e $w = 2 P_K(x)$ ottenendo che $\scal{x - P_K(x)}{P_K(x)} \ge 0$ e $\scal{x - P_K(x)}{P_K(x)} \le 0$, ovvero $\scal{x - P_K(x)}{P_K(x)} = 0$, ma allora otteniamo $\scal{x - P_K(x)}{w} = \scal{x - P_K(x)}{w - P_K(x)} \le 0$. \\
+	Inoltre, valendo la disuguaglianza sia per $w$ che per $-w$, si ottiene facilmente che $\scal{x - P_K(x)}{w} = 0$, che è la tesi.
+	
+	\subsection*{Decomposizione in somma diretta}
+	Dato $x \in H$, si ha $x = x - P_K(x) + P_K(x)$. Notiamo ora che $P_K(x) \in K$ e che, per quanto detto prima, $x - P_K(x) \in K^\bot$
+	
+	\subsection*{La proiezione è lineare e di norma unitaria}
+	Per vedere che è lineare, basta osservare che:
+	$$ \left\{ \begin{array}{cc} \scal{\alpha x + \beta y - P_K(\alpha x + \beta y), w} = 0 & \forall w \in K \\
+	\scal{\alpha x + \beta y - \alpha P_K(x) - \beta P_K(y)}{w} = 0 & \forall w \in K \\ \end{array} \right. $$
+	Allora $\scal{P_K(\alpha x + \beta y) - \alpha P_K(x) - \beta P_K(y)}{w} = 0 \quad \forall w \in K$ ma poiché $P_K(\alpha x + \beta y) - \alpha P_K(x) - \beta P_K(y) \in K$ si ha $\norm{P_K(\alpha x + \beta y) - \alpha P_K(x) - \beta P_K(y)} = 0$ e quindi $P_K(\alpha x + \beta y) = \alpha P_K(x) + \beta P_K(y)$. \\
+	Si ha inoltre che $\norm{x} \norm{P_K(x)} \ge \scal{x}{P_K(x)} = \scal{P_K(x)}{P_K(x)} = \norm{P_K(x)}^2$ e quindi $\norm{P} \le 1$, ma preso $k \in K$ si ha che $P_K(k) = k$ e quindi $\norm{P} \ge 1$, ovvero $\norm{P} = 1$.
+	
+	\section*{Riesz-Fisher}
+	Sia $f \in \Lincont(H, \bbR)$ continuo e limitato e lineare, con $H$ spazio di Hilbert. Allora $\exists ! y \in H$ tale che $f(x) = \scal{x, y} \quad \forall x \in H$ \\
+	
+	\subsection*{Lemma della codimensione}
+	Dato $H$ spazio di Hilbert e $f \in \Lincont(H, \bbR)$ continuo e limitato e lineare non nullo si ha che $\codim \Ker f = 1$ \\
+	
+	Sia $y \in H$ tale che $f(y) \neq 0$. Allora definiamo $\lambda = \frac{1}{f(y)}$ in modo che $f(\lambda y) = 1$. Sia ora $y_0 = \lambda y$. Dato un qualunque $x \in H$ si ha $x = x - f(x)y_0 + f(x)y_0$, con $x - f(x)y_0 \in \Ker f$. Inoltre tale decomposizione è unica, in quanto se $x = x' + \alpha y_0 = x'' + \beta y_0$ con $x', x'' \in \Ker f$ allora si ha $f(x) = \alpha = \beta$ e dunque $x' = x''$. Concludiamo quindi che $H = \Ker f \oplus \Span(y_0)$, che è la tesi.
+	
+	\subsection*{Esistenza}
+	Supponiamo $f \neq 0$ e chiamiamo $K = \Ker f$. Allora $K$ è un sottospazio lineare chiuso di codimensione $1$. Chiamiamo quindi $P$ la proiezione su $K$. Visto che $H = K \oplus K^\bot$ e $K^\bot = Span(y_0)$ con $f(y_0) = 1$, allora dato $h \in H$ si può scomporre come $x = \lambda y_0 + z$ con $z \in \Ker f = K$. \\
+	Allora $f(x) = \lambda f(y_0) = \lambda$ e si ha $\scal{x}{y_0} = \lambda \scal{y_0}{y_0} = \lambda \norm{y_0}^2$ dunque ponendo $y = \frac{y_0}{\norm{y_0}^2}$ si ha l'esistenza. \\
+	
+	\subsection*{Unicità}
+	Supponiamo ora che esistano due elementi $y, w$ che rappresentano $f$. Allora $\scal{x, y - w} = 0 \quad \forall x \in H$ e quindi in particolare $\norm{y - w}^2 = 0 \implies y = w$
+	
+	\section*{Funzioni Armoniche}
+	
+	\section*{Serie e Trasformata di Fourier}
+	\subsection*{Definizioni e Proprietà}
+	\subsection*{Approssimanti}
+	
+	\section*{Riemann-Lebesgue}
+\end{document}

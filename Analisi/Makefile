@@ -6,9 +6,15 @@
 alldocuments: 
 	wget https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls -O stdmdoc.cls
 	pdflatex --shell-escape Analisi3.tex
+	pdflatex --shell-escape TrucchiAnalisi3.tex
 	pdflatex --shell-escape AnalisiSempreverde.tex
 	pdflatex --shell-escape FattiDiAnalisi.tex
 	pdflatex --shell-escape FunzioniOmogeneeEDifferenziabilita.tex
+	rm -f *.aux *.log *.out
+
+TrucchiAnalisi3:
+	wget https://github.com/trenta3/stdmdoc/raw/master/stdmdoc.cls -O stdmdoc.cls
+	pdflatex --shell-escape TrucchiAnalisi3.tex
 	rm -f *.aux *.log *.out
 
 Analisi3:
