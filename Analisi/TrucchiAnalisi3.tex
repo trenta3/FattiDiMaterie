@@ -8,16 +8,93 @@
 \newcommand{\cl}{\ell}
 \newcommand{\Lincont}{\text{Lincont }}
 \newcommand{\codim}{\text{codim }}
+\DeclareMathOperator{\supess}{supess}
 
 \begin{document}
 	\title{Trucchi di Analisi 3}
+	Questo file cerca di raccogliere alcuni teoremi, con dimostrazione, molto utili (non solo in Analisi 3). In particolare sono state esplicitate tecniche che si è viste utilizzare più volte negli esami.
 	
 	\section*{Teoremi di Convergenza Integrale}
 	\subsection*{Convergenza Monotona}
+	Sia $(X, \Sigma, \mu)$ uno spazio di misura. Siano inoltre $f_0, f_1, f_2, \ldots$ una sequenza non decrescente di funzioni $\Sigma$-misurabili e positive, ovvero $\forall k \in \bbN$ si ha $0 \le f_k \le f_{k + 1}$ quasi ovunque. \\
+	Allora possiamo definire quasi ovunque il limite $f = \supess_{k \in \bbN} f_k$ e si ha che $f$ è $\Sigma$-misurabile e vale inoltre che
+	$$ \lim_{k \rar \infty} \int_X f_k \de \mu = \int_X f $$
+	dove l'integrazione è alla Lebesgue.
+	
+	\subsubsection*{Dimostrazione}
+	Per induzione si può mostrare che per $n \le m$ si ha che $f_n \le f_m$ quasi ovunque. Allora sull'intersezione degli insiemi dove vale $f_k \le f_{k + 1}$ si può definire $f$ prendendo il $\sup$ delle $f_k$. Il complementare è ovviamente di misura nulla. \\
+	Mostriamo ora che $f$ è misurabile: l'insieme $F_a = \{ f \ge a \}$ (in notazione da probabilisti) è l'unione degli insiemi $E_{k, a} = \{ f_k \ge a \} \cap \{ f_{k + 1} - f_k \ge 0 \}$ che sono quindi misurabili. Chiamiamo $E = \cap_{k \in \bbN} \{ f_{k + 1} - f_k \ge 0 \}$ \\
+	Ovviamente $ \int_X f \ge \int_X f_k \quad \forall k \in \bbN $, per la monotonia dell'integrale (eventualmente spezzando sull'insieme dove non vale $f \ge f_k$, che però ha misura nulla). Allora, passando al limite (che esiste per monotonia) si ha $ \int_X f \ge \lim_{k \rar \infty} \int_X f_k$. \\
+	Per la disuguaglianza opposta consideriamo una sequenza non decrescente di funzioni semplici positive $g_k$ tali che $g_k \le f$ e che $ \lim_k \int_X g_k \de \mu = \int_X f \de \mu$ che esiste per definizione di integrale. Basta ora dimostrare che $\forall k \in \bbN$ si ha $\int_X g_k \de \mu \le \lim_j \int_X f_j \de \mu$. \\
+	Sia $c \in (0, 1)$, si fissi $k \in \bbN$ e siano $E_r = \{ f_r \le c g_k \} \cap E$. Allora si ha $L = \cap_{r \in \bbN} E_r$ ha misura nulla (altrimenti si avrebbe che $f_s \mid_L \le c g_k \quad \forall s$ e quindi anche $\sup_s f_s \mid_L \le c g_k < f$ assurdo). Inoltre $E_{r + 1} \subseteq E_r$, ovvero $\mu(E_{r + 1}) \le \mu(E_r)$. Quindi si ha che
+	$$ \int_X c g_k \de \mu \le \int_X f_s \de \mu + \int_X c g_k \chi_{E_s} \de \mu $$
+	Ora, prima di tutto si ha che, a $k$ fissato, facendo il limite in $s$, $\abs{\int_X c g_k \chi_{E_s} \de \mu} \le \mu(E_s) \max(g_k)$ ed il massimo di $g_k$ esiste perché $g_k$ è semplice. Allora si ha che il limite in $s$ di $\mu(E_s)$ tende a zero (per monotonia degli insiemi). A questo punto abbiamo la disuguaglianza
+	$$ \int_X c g_k \de \mu \le \lim_{s \rar \infty} \int_X f_s \de \mu $$
+	Ora facendo prima il limite per $c \rar 1$ (visto che la disuguaglianza vale per $c \in (0, 1)$) e successivamente prendendo il limite in $k$ si ha che
+	$$ \int_X f \de \mu = \lim_{k \rar \infty} \int_X g_k \de \mu \le \lim_{s \rar \infty} \int_X f_s \de \mu $$
+	che era la nostra tesi originaria.
+	
+	\subsection*{Lemma di Fatou}
+	Sia $(X, \Sigma, \mu)$ uno spazio di misura. Siano inoltre $f_0, f_1, f_2, \ldots$ una sequenza di funzioni $\Sigma$-misurabili e positive q.o. Definiamo $f(x) = \liminf_{n \rar \infty} f_n(x)$ quasi ovunque. Allora $f$ è misurabile e si ha $\int_X f \de \mu \le \liminf_{n \rar \infty} \int_X f_n \de \mu$
+	
+	\subsubsection*{Dimostrazione}
+	Lo dimostriamo usando convergenza monotona: Definiamo le funzioni $g_k = \inf_{n \ge k} f_n$ q.o. Allora la sequenza $g_0, g_1, \ldots$ è non decrescente e positiva di funzioni misurabili e converge puntualmente q.o. a $f = \liminf_{n \rar \infty} f_n$. \\
+	Per ogni $k \le n$ si ha $g_k \le f_n$ e per monotonia dell'integrale che $\int_X g_k \de \mu \le \int_X f_n \de \mu$ e quindi segue che $\int_X g_k \de \mu \le \inf_{n \ge k} \int_X f_n \de \mu$. \\
+	Usando il teorema di convergenza monotona segue che $$\int_X f \de \mu = \lim_{k \rar \infty} \int_X g_k \de \mu \le \newline
+	\lim_{k \rar \infty} \inf_{n \ge k} \int_X f_n \de \mu = \liminf_{n \rar \infty} \int_X f_n \de \mu$$
+	
 	\subsection*{Convergenza Dominata}
+	Sia $(X, \Sigma, \mu)$ uno spazio di misura. Siano inoltre $f_0, f_1, f_2, \ldots$ una sequenza di funzioni $\Sigma$-misurabili, tutte dominate da una funzione integrabile $g$, ovvero $\abs{f_n} \le g$ quasi ovunque. Se la sequenza di funzioni converge puntualmente quasi ovunque (ovvero per quasi ogni $x$ si ha $\exists \lim_{n \rar \infty} f_n(x)$) allora le $f_n$ sono integrabili, e si può definire quasi ovunque la funzione $f = \lim_{n \rar \infty} f_n$ e si ha che $\lim_{n \rar \infty} \int_X f_n \de \mu = \int_X f \de \mu$. (Per $g$ integrabile si intende $\int_X \abs{g} \de \mu < \infty$
+	
+	\subsubsection*{Dimostrazione}
+	Notiamo che $\abs{f - f_n} \le \abs{f} + \abs{f_n} \le 2 g$ q.o. Inoltre sappiamo che, per ipotesi $\limsup_{n \rar \infty} \abs{f - f_n} = 0$ q.o. Usando ora la linearità e la monotonia dell'integrale si ha che:
+	$$ \abs{\int_X f \de \mu - \int_X f_n \de \mu} = \abs{\int_X (f - f_n) \de \mu} \le \int_X \abs{f - f_n} \de \mu $$
+	Usando il lemma di Fatou "inverso" (ovvero quello con i limsup, che discende banalmente da quello con i liminf) si ha che
+	$$ \limsup_{n \rar \infty} \int_X \abs{f - f_n} \de \mu \le \int_X \limsup{n \rar \infty} \abs{f - f_n} \de \mu = 0 $$
+	(dove abbiamo usato che $\abs{f - f_n}$ sia limitata da una funzione integrabile). Ciò implica che il limite esiste ed è
+	$$ \lim_{n \rar \infty} \int_X \abs{f - f_n} \de \mu = 0 $$
+	Ora togliendo il valore assoluto e per linearità si ottiene la tesi.
+	
+	\section*{Stime sugli $\cL^p$}
+	\subsection*{Inclusione degli $\cL^p$ sui limitati}
+	Se $\mu(\Omega) < \infty$ allora si ha che per $1 \le p \le q \le \infty$, $\cL^q \subseteq \cL^p$. \\
+	Infatti, $\forall x \in \bbR$ (o anche in $\bbC$) si ha $\abs{x}^p \le 1 + \abs{x}^q$ (basta dividere in casi a seconda se $x < 1$ oppure $x \ge 1$). E quindi $\norm{f}_{\cL^p} = \int_\Omega \abs{f(x)}^p \de x \le \int_\Omega 1 \de x + \int_\Omega \abs{f(x)}^q \de x = \newline \mu(\Omega) + \norm{f}_{\cL^q} < \infty$ se $f \in \cL^q$, da cui $f \in \cL^p$.
+	
+	%\subsection*{Densità delle $\cC^\infty$}
+	%Sia $f \in \cL^1$ e si prenda una sequenza di mollificatori $\Psi_n$. Allora si ha che
+	%$$ \norm{\Psi_n \star f}_{\cL^1} \le \norm{\Psi_n}_{\cL^1} \norm{f}_{\cL^1} $$
+	%ma adesso le $\Psi_n \star f$ sono $\cC^\infty$ perché posso scaricare le derivate sulla $\Psi_n$
+	
+	\subsection*{Continuità Integrale}
+	Supponiamo che $f \in \cL^1(a, b)$ (prolungata per periodicità fuori). Allora si ha che $\lim_{h \rar 0} \int_a^b \abs{f(t + h) - f(t)} \de t = 0$.
+	
+	\subsubsection*{Dimostrazione}
+	Per densità delle $\cC^\infty$ in $\cL^1$ posso prendere una sequenza di funzioni $f_n \in \cC^\infty$ che tendono ad $f$. Allora si ha che
+	$$ \int_a^b \abs{f(t + h) - f(t)} \de t \le \int_a^b \abs{f(t + h) - f_n(t + h)} \de t + \int_a^b \abs{f_n(t + h) - f_n(t)} \de t + \int_a^b \abs{f_n(t) - f(t)} \de t $$
+	Ora il primo e l'ultimo termine si stimano dicendo che $\lim_n \abs{f(t) - f_n(t)} = 0$ ed inoltre si ha che, considerando gli opportuni mollificatori, si ha $\abs{f - f_n} \le 3 \abs{f}$ ovvero sono limitate. Applicando quindi convergenza dominata essi tendono a zero in $n$. \\
+	Rimane da stimare $\lim_{h \rar 0} \lim_{n \rar infty} \int_a^b \abs{f_n(t + h) - f_n(t)} \de t$
+	
+	% TODO: Il teorema della media integrale
 	
 	\section*{Equazioni Differenziali Classiche}
 	\subsection*{Equazione della Corda Vibrante}
+	L'Equazione della corda vibrante è $u_{tt} = c^2 u_{xx}$. Ci interessa capire per quali condizioni iniziali $u(0, x) = f(x)$ la soluzione esiste e se è unica. \\
+	
+	\subsubsection*{Separazione delle variabili}
+	Notiamo che l'equazione è lineare in $u$, quindi la somma di soluzioni è soluzione. Proviamo separando le variabili, ovvero cerchiamo soluzioni della forma $u(t, x) = T(t) X(x)$. Allora si ha $T''(t) X(x) = c^2 T(t) X''(x)$ e quindi $\frac{T''(t)}{T(t)} = c^2 \frac{X''(x)}{X(x)} = - \lambda$ poiché sono due funzioni di varibili diverse che devono essere uguali, allora sono costanti. \\
+	D'ora in poi mettiamo $c = 1$, dobbiamo quindi risolvere $X''(x) + \lambda X(x) = 0$, sapendo che $X(-\pi) = X(\pi) = 0$ (poiché la corda è fissata alle estremità). Mostriamo prima che $\lambda > 0$: si ha $X'' X + \lambda X^2 = 0 \implies \int X'' X + \lambda \int X^2 = 0$ e, integrando per parti si ha $- \int {X'}^2 + \lambda \int X^2 = 0$ da cui $\lambda$ è rapporto di due numeri positivi. \\
+	Allora l'equazione ha come soluzioni $X(x) = c_1 \sin(\sqrt{\lambda} x) + c_2 \cos(\sqrt{\lambda} x)$. Inoltre, per soddisfare le condizioni iniziali otteniamo $X(x) = c_1 \sin(\sqrt{\lambda} x)$ e, affinché si abbia $\sin(\sqrt{\lambda} \pi) = 0$ deve essere $\lambda = k^2$, con $k \in \bbZ$. \\
+	Otteniamo quindi le funzioni $\sin(nx)\cos(cnt)$ che soddisfano l'equazione e quindi ogni loro somma soddisfa.
+	
+	\subsubsection*{Serie di Fourier}
+	% Da controllare se è vero che la soluzione si esprime come sua serie di Fourier con le ipotesi fornite
+	Supponiamo che la soluzione sia esprimibile come la sua serie di Fourier (cosa che sappiamo essere vera se $u \in \cC^1 \cap \cL^1$), ovvero $u(t, x) = \sum_{n \in \bbZ} c_n(t) e^{inx}$. Allora, sostituendo nell'equazione si ha:
+	$$ \sum_{n \in \bbZ} (c_n''(t) + c^2 n^2 c_n(t)) e^{inx} = 0 $$
+	da cui si ottiene (visto che $e^{inx}$ è una base di $\cC^0$) il seguente problema:
+	$$ \left\{ \begin{array}{c} c_n''(t) + c^2 n^2 c_n(t) = 0 \\ c_n(0) = c_n \\ c_n'(0) = d_n \\ \end{array} \right. $$
+	dove $c_n$ e $d_n$ sono i coefficienti della serie di fourier di $u(0, x)$ e di $u_t(0, x)$. \\
+	La soluzione del sistema è $c_n(t)  = \frac{1}{2} (c_n + \frac{d_n}{icn}) e^{icnt} + \frac{1}{2} (c_n - \frac{d_n}{icn}) e^{-icnt}$ per $n \neq 0$, mentre per $n = 0$ sappiamo che la soluzione è banalmente $c_0(t) = c_0 + d_0 t$
+	
 	\subsection*{Equazione del Calore}
 	\subsection*{Equazione di Poisson / Laplace}
 	
