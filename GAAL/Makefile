@@ -16,6 +16,8 @@ dvi: download
 
 pdf: download
 	pdflatex --shell-escape FattiDiGAAL.tex
+	pdflatex --shell-escape Compito.tex
+	pdflatex --shell-escape EsercizioDifficile.tex
 
 # Dovremmo controllare che sia la versione più recente
 download:

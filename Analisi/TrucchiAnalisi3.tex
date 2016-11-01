@@ -177,8 +177,25 @@
 	
 	\section*{Funzioni Armoniche}
 	
-	\section*{Serie e Trasformata di Fourier}
+	\section*{Serie di Fourier}
+	
+	\section*{Trasformata di Fourier}
 	\subsection*{Definizioni e Proprietà}
+	Data $f \in \cL^1 \bbR$ definisco la trasformata di Fourier di $f$ come
+	$$ \hat{f} = \cF(f)(x) = \int_\bbR f(t) e^{-i\lambda t} \de t $$
+	Notiamo subito che se $f \in \cL^1 \bbR$ allora si ha $\hat{f} \in \cL^\infty \bbR$. \\
+	Inoltre mostriamo che se $f \in \cL^1 \bbR$ allora la trasformata è continua e va a zero all'infinito, ovvero $\hat{f} \in \cC^0_0 \bbR$. Infatti è sicuramente continua: $ \int_\bbR f(x) ( e^{-i\xi_n x} - e^{-i\xi x} ) \de x < \varepsilon \norm{f}_{\cL^1} $ visto che per $\xi_n \rar \xi$ si ha $e^{-i\xi_n x} - e^{-i\xi x} \rar 0$. \\
+	Ed è facile vedere che la trasformata va a zero all'infinito quando $f = \chi_{[a,b]}$:
+	$$ \int_\bbR \chi_{[a,b]} e^{-i\xi x} \de x = \int_a^b e^{-i\xi x} \de x = \frac{e^{-ib\xi} - e^{-ia\xi}}{i\xi} \rar 0 \quad \text{per } \abs{\xi} \rar \infty $$
+	Se ho una qualunque $f \in \cL^1$, allora la approssimo con funzioni semplici e concludo grazie a Beppo-Levi.
+	
+	\subsection*{Formula fondamentale}
+	Se $f \in \cC^0 \bbR$ allora si ha $f(x) = \cF^{-1}(\cF(f))(x) = \fractopie \int_\bbR \hat{f}(\xi) e^{ix\xi} \de\xi$. \\
+	Lo dimostriamo prima per $f \in \cL^1 \cap \cC^1$. Si ha infatti che
+	$$ \fractopie \int_\bbR \de\xi \int_\bbR f(t) e^{-it\xi} e^{ix\xi} \de t = \fractopie \int_\bbR f(t) \int_\bbR e^{-i(t-x)\xi} \de\xi \de t $$
+	(abbiamo usato fubini-tonelli). Sfruttando il fatto che $\int_\bbR e^{-ia\xi} \de\xi = 2\pi \delta(a)$ si ha che
+	$$ \fractopie \int_\bbR \de\xi \int_\bbR f(t) e^{-it\xi} e^{ix\xi} \de t = \int_\bbR f(t) \delta(t-x) \de t = f(x) $$
+	
 	\subsection*{Approssimanti}
 	
 	\section*{Riemann-Lebesgue}

@@ -250,7 +250,7 @@
 	Sono fatti equivalenti:
 	\begin{itemize}
 		\item $f \in \Ort(V, \varphi)$
-		\item $f \in \End(V)$ e $\norma{f(v)} = \norma{v} \forall v \in V$
+		\item $f \in \End(V)$ e $\norm{f(v)} = \norm{v} \forall v \in V$
 		\item $f(0)=0$ e $d(f(x), f(y)) = d(x, y) \forall x, y \in V$
 		\item $f \in \End(V)$ e $\forall \{v_1, \ldots, v_n\}$ base ortonormale di $V$, $\{f(v_1), \ldots, f(v_n)\}$ è base ortonormale di $V$
 		\item $f \in \End(V)$ e $\exists \{v_1, \ldots, v_n\}$ base ortonormale di $V \tc \{f(v_1), \ldots, f(v_n)\}$ è base ortonormale di $V$
@@ -285,7 +285,7 @@
 	\Altro{Distanza tra Sottospazi Affini}
 	\begin{itemize}
 		\item {\bf Definizione}: $P \in \bbR^n$. $d(P, S) = \inf \{d(P,X) \mid X \in S \}$
-		\item ({\bf Distanza Punto - Iperpiano}) $H$ iperpiano di equazione $B \cdot X + d = 0$, $P \in \bbR^n$. Allora $d(P, H) = \frac{\mid B \cdot P + d \mid}{\norma{B}}$
+		\item ({\bf Distanza Punto - Iperpiano}) $H$ iperpiano di equazione $B \cdot X + d = 0$, $P \in \bbR^n$. Allora $d(P, H) = \frac{\mid B \cdot P + d \mid}{\norm{B}}$
 		\item ({\bf Distanza tra due Rette}) \\ Se $r_1 \cap r_2 \neq \emptyset$ allora $d(r_1, r_2) = 0$ \\ Se $r_1 \parallel r_2$ allora $d(r_1, r_2) = d(P, r_2) \quad \forall P \in r_1$ \\ Se le due rette sono sghembe $r_1 = \{X \mid X = A_1t+C_1, t \in \bbR\}$, $r_2 = \{X \mid X = A_2t+C_2, t \in \bbR\}$. Voglio trovare una retta $l$ perpendicolare sia ad $r_1$ che ad $r_2$ e tale che le intersechi entrambe. Voglio quindi due punti $t_0$ e $\theta_0$ che risolvano $$\left( \begin{array}{cc} A_1\cdot A_1 & -A_2\cdot A_1 \\ A_1\cdot A_2 & -A_2\cdot A_2 \end{array} \right)\left(\begin{array}{c} t_0 \\ \theta_0 \end{array}\right) = \left( \begin{array}{c} C_2\cdot A_2 -C_1\cdot A_1 \\ C_2 \cdot A_2 - C_1 \cdot A_2 \end{array}\right)$$ Questo sistema ha sempre soluzione, poichè se le rette $r_1$ e $r_2$ sono sghembe la matrice è invertibile.
 	\end{itemize}
 
@@ -414,7 +414,7 @@
 
 	\section*{Forme Canoniche di Matrici Speciali}
 	\Altro{Forma canonica delle Matrici Ortogonali in $(\bbR^n, \langle \cdot \mid \cdot \rangle)$} \\
-	Ogni matrice ortogonale $R \in O(V, \langle \cdot \mid \cdot \rangle)$ è tale che ${}^tRR = I$ e per ogni $\lambda$ autovettore si ha $\norma{\lambda} = 1$. Inoltre, una matrice $M$ è ortogonale $\sse$ le righe (e le colonne) di $M$ formano una base ortonormale di $\bbR^n$. $\Det M = \pm 1$ \\
+	Ogni matrice ortogonale $R \in O(V, \langle \cdot \mid \cdot \rangle)$ è tale che ${}^tRR = I$ e per ogni $\lambda$ autovettore si ha $\norm{\lambda} = 1$. Inoltre, una matrice $M$ è ortogonale $\sse$ le righe (e le colonne) di $M$ formano una base ortonormale di $\bbR^n$. $\Det M = \pm 1$ \\
 	La forma canonica è $R = \left( \begin{array}{ccccccccc} 1 & & & & & & & & \\ & \ddots & & & & & & & \\ & & 1 & & & & & & \\ & & & -1 & & & & & \\ & & & & \ddots & & & & \\ & & & & & -1 & & & \\ & & & & & & R_{\theta_1} & & \\ & & & & & & & \ddots & \\ & & & & & & & & R_{\theta_k} \\ \end{array} \right)$, dove gli $R_\theta$ sono matrici $2 \times 2$ che si scrivono come $R_{\theta_i} = \left( \begin{array}{cc} \cos \theta_i & \sin \theta_i \\ - \sin \theta_i & \cos \theta_i \\ \end{array} \right)$
 
 	\section*{Come trasformano le Cose?}
