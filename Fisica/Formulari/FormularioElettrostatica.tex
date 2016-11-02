@@ -1,0 +1,597 @@
+\documentclass[a4paper,10pt]{article}
+\setlength{\columnseprule}{0.1pt}
+\setlength{\columnsep}{1cm}
+\usepackage{CommandsAndStyle}
+
+\author{Idea originaria di Federico Glaudo e Giada Franz \\ Piccole aggiunte di Dario Balboni}
+\title{Formulario di Fisica II}
+
+\begin{document}
+\maketitle
+
+\begin{multicols}{2}
+\section{Costanti fisiche}
+\formula{Costante dielettrica nel vuoto}{
+  \begin{equation*}
+    \ez=8.854\cdot 10^{-12}\frac Fm
+  \end{equation*}
+  \begin{equation*}
+    k=\frac 1{4\pi\ez}=8.987 \cdot 10^9
+  \end{equation*}
+}
+\formula{Permeabilità magnetica nel vuoto}{
+  \begin{equation*}
+    \muz=4\pi\cdot 10^{-7}=1.256 \cdot 10^{-6} \frac Hm
+  \end{equation*}
+}
+
+\formula{Velocità della luce nel vuoto}{
+  \begin{equation*}
+    c=2.997\cdot 10^8\frac ms=\frac 1{\sqrt{\muz\ez}}
+  \end{equation*}
+}
+
+\section{Leggi fondamentali del campo elettrico}
+\formula{Legge di Coulomb}{
+  Chiamando $\epsilon=\ez$ se siamo nel vuoto e $\epsilon=\ez\epsilon_r$ se siamo in un mezzo:
+  \begin{equation*}
+    \vec F=\frac 1{4\pi\epsilon}\frac{q_1q_2}{r^2}\hat r
+  \end{equation*}
+}
+
+\formula{Campo elettrico}{
+  \begin{equation*}
+    \vec E(\vec r)=\frac 1{4\pi\ez}\int \rho(\vec r')\frac{\vec r-\vec r'}{\abs{\vec r-\vec r'}^3}\de \vec r'
+  \end{equation*}
+}
+
+\formula{Potenziale}{
+  \begin{equation*}
+    V(\vec r)=\frac 1{4\pi\ez}\int \frac{\rho(\vec r')}{\abs{\vec r-\vec r'}}\de \vec r' 
+  \end{equation*}
+  
+  \begin{equation*}
+    \vec E=-\grad V
+  \end{equation*}
+}
+
+\formula{Legge di Gauss}{
+  \begin{equation*}
+    \frac{Q_{int}}{\ez}=\frac 1\ez\int_\Omega \rho =\int_{\partial \Omega}\vec E\cdot \hat n
+  \end{equation*}
+}
+
+\formula{I equazione di Maxwell}{
+  \begin{equation*}
+    \div \vec E=\frac\rho\ez
+  \end{equation*}
+}
+
+\formula{II equazione di Maxwell (Elettrostatica)}{
+  \begin{equation*}
+    \rot \vec E=0
+  \end{equation*}
+}
+
+\formula{Equazione di Poisson}{
+  \begin{equation*}
+    \lapl V=-\frac \rho \ez
+  \end{equation*}
+}
+
+\formula{Energia elettrostatica}{
+  \begin{equation*}
+    U_E=\frac 12\int \int \frac 1{4\pi\ez}\cdot\frac{\rho(\vec r)\rho(\vec r')}{\abs{\vec r-\vec r'}}=\frac 12\int\rho V=\frac \ez 2\int \vec E^2 
+  \end{equation*}
+}
+
+\formula{Forza agente su una carica}{
+  La forza di Lorentz agente su una carica {\bf in assenza di campo magnetico} è
+  \begin{equation*}
+    \vec F = q \vec E
+  \end{equation*}
+}
+
+\section{Primi termini dello sviluppo del potenziale}
+Nel caso in cui la distribuzione di carica sia sufficientemente localizzata, si può sviluppare il potenziale ai primi ordini con le formule:
+\formula{Termine di monopolo}{
+  \begin{equation*}
+    V(\vec r)\approx\frac 1{4\pi\ez r}\left(\int \rho\right)
+  \end{equation*}
+}
+\formula{Termine di dipolo}{
+  \begin{equation*}
+    V(\vec r)\approx\frac {\vec r}{4\pi\ez r^3}\cdot\left(\int \rho\left(\vec r'\right)\vec r'\de \vec r'\right)
+  \end{equation*}
+}
+
+
+\section{Conduttori}
+
+\formula{Pressione elettrostatica}{
+  \begin{equation*}
+    p=\frac{\de F^\perp}{\de S}=\frac{\de q}{\de S} \cdot\frac{E^\perp_{in}+E^\perp_{out}}2=\sigma \cdot\frac{E^\perp_{in}+E^\perp_{out}}2
+  \end{equation*}
+}
+
+\formula{Campo e pressione sulla superficie di un conduttore}{
+  \begin{equation*}
+    E^\perp=\frac \sigma\ez
+  \end{equation*}
+  \begin{equation*}
+    p=\sigma\frac {E^\perp}2=\frac{\sigma^2}{2\ez}
+  \end{equation*}
+  
+}
+
+\formula{Sistema di conduttori}{
+  Chiamiamo $\vec Q=(Q_1,\dots,Q_n)$ il vettore delle cariche e $\vec V=(V_1,\dots,V_n)$ il vettore dei potenziali degli $n$ conduttori, allora esiste una matrice $C$ tale che $\vec Q=C\vec V$. Inoltre:
+  \begin{equation*}
+    U=\frac 12\sum Q_iV_i
+  \end{equation*}
+}
+
+\section{Configurazioni speciali di carica}
+\formula{Campi e potenziali particolari}{
+  \begin{description}
+  \item[Carica puntiforme]\begin{equation*}
+      \vec E(r)=\frac1{4\pi\ez}\cdot \frac Q{r^2}
+    \end{equation*}
+    \begin{equation*}
+      V(r)=\frac1{4\pi\ez}\cdot \frac Qr
+    \end{equation*}
+    
+    
+  \item[Filo]\begin{equation*}
+      \vec E(r)=\frac 1{2\pi\ez}\cdot\frac \lambda r
+    \end{equation*}
+    \begin{equation*}
+      V(r)=-\frac\lambda{2\pi\ez}\ln(r)
+    \end{equation*}
+    
+  \item[Piano]\begin{equation*}
+      \vec E=\frac \sigma{2\ez}
+    \end{equation*}
+    \begin{equation*}
+      V(r)=-\frac{\sigma r}{2\ez}
+    \end{equation*}
+  \end{description}
+}
+
+\formula{Dipolo}{
+  \begin{equation*}
+    V(\vec r)=\frac 1{4\pi\ez}\cdot \frac{\vec p\dotp \vec r}{r^3}
+  \end{equation*}
+  \begin{equation*}
+    \vec E(\vec r)=\frac 1{4\pi\ez}\left(\frac{3(\vec p\dotp \hat r)\hat r-\vec p}{r^3} \right)
+  \end{equation*}
+  \begin{equation*}
+    \tau=\vec p\times \vec E
+  \end{equation*}
+  \begin{equation*}
+    \vec F=\Diff \vec E\dotp \vec p
+  \end{equation*}
+}
+
+\formula{Carica immagine}{
+  \begin{description}
+  \item [Piano] Nel simmetrico rispetto al piano una carica $-q$.
+  \item [Sfera a terra] Nell'inverso rispetto alla sfera, cioè in $x'=\frac{R^2}{x}$, una carica $q'=-\frac{qR}x$.
+  \item [Sfera isolata] Se c'è una carica $q$ all'esterno della sfera, le cariche immagine (per risolvere il problema all'esterno della sfera) sono due: una nell'inverso rispetto alla sfera di carica $q'=-\frac{qR}x$ e una nel centro della sfera di carica $-q'$ (in modo che la carica totale nella sfera sia 0).
+  \end{description}
+}
+
+\section{Condensatori}
+\formula{Relazione tra carica e capacità}{
+  \begin{equation*}
+    Q = CV
+  \end{equation*}
+}
+
+\formula{Relazione tra corrente e tensione}{
+  \begin{equation*}
+    I = C \ded{V}{t}
+  \end{equation*}
+}
+  
+\formula{Energia di un condensatore}{
+  \begin{equation*}
+    U=\frac 12QV=\frac 12CV^2=\frac12\frac {Q^2}C
+  \end{equation*}
+}
+
+\formula{Capacità di vari condensatori}{
+  Nota: la presenza di un materiale fra le armature di un condensatore ne aumenta la capacità di un fattore $\epsilon_r$ (numero puro) detto costante
+  dielettrica relativa che dipende dalle caratteristiche del materiale. (Tutte le formule della capacità vengono moltiplicate per $\epsilon_r$)
+  \begin{description}
+  \item[Condensatore piano] \begin{equation*} 
+      C=\frac{\ez S}d
+    \end{equation*}
+    dove $S$ è la superficie del condesatore e $d$ è la distanza fra le due piastre.
+  \item[Condensatore cilindrico] \begin{equation*}
+      C=\frac{2\pi\ez h}{\ln(\frac Rr)}
+    \end{equation*}
+    dove $h$ è l'altezza del cilindro e $R,r$ sono rispettivamente il raggio della piastra esterna e quello della piastra interna.
+  \item[Condensatore sferico] \begin{equation*}
+      C=4\pi\ez\frac{Rr}{R-r}
+    \end{equation*}
+    dove $R$ ed $r$ sono rispettivamente il raggio della piastra esterna e quello della piastra interna.
+  \item[Conduttore sferico isolato] \begin{equation*}
+      C=4\pi\ez r
+    \end{equation*}
+    
+  \item[Condensatori in parallelo] \begin{equation*}
+      C_{eq}=C_1+C_2
+    \end{equation*}
+  \item[Condensatori in serie]\begin{equation*}
+      C_{eq}=\frac 1{\frac 1{C_1}+\frac 1{C_2}}
+    \end{equation*}
+  \end{description}
+}
+
+\section{Correnti}
+
+\formula{Equazione di continuità}{
+  Indichiamo con $\vec J$ la densità di corrente.
+  \begin{equation*}
+    \frac {\partial \rho}{\partial t}+\div \vec J=0
+  \end{equation*}
+  \begin{equation*}
+    \frac{\de Q}{\de t}=-\int_S \vec J\dotp \hat n
+  \end{equation*}
+}
+
+\formula {Legge di Ohm (conducibilità e resistività)} {
+  La resistività $\rho$ è tale che
+  \begin{equation*}
+    \vec J=\frac{\vec E}\rho
+  \end{equation*}
+  e la conducibilità è $\sigma=\frac 1\rho$.
+}
+
+\formula{Effetto Joule}{
+  La potenza dissipata da un certo materiale in un certo istante è
+  \begin{equation*}
+    P=\int \vec E\dotp \vec J=\int \frac{\vec E^2}\rho
+  \end{equation*}
+  dove per l'ultima uguaglianza abbiamo utilizzato la legge di Ohm.
+}
+
+\formula{Tempo di scarica}{
+  Se la carica rispetta un'equazione del tipo
+  \begin{equation*}
+    \frac{\de Q}{\de t}=-\frac{Q}{\tau}
+  \end{equation*}
+  allora chiamiamo $\tau$ il tempo di scarica.
+  La soluzione di una tale equazione è
+  \begin{equation*}
+    Q(t) = Q(0) e^{-\frac{t}{\tau}}
+  \end{equation*}
+
+  Per circuiti che si scaricano si ha
+  \begin{equation*}
+    I=- \ded{Q}{t}
+  \end{equation*}
+}
+
+\section{Resistenze}
+\begin{description}
+  \item[Legge di Ohm]
+    \begin{equation*}
+      V=RI
+    \end{equation*}
+  \item[Relazione con Lunghezza e Sezione]
+    \begin{equation*}
+      R=\frac dA \rho
+    \end{equation*}
+  \item[Potenza dissipata]
+    \begin{equation*}
+      P=VI=RI^2
+    \end{equation*}
+  \item[Resistenze in serie]
+    \begin{equation*}
+      R_{eq} = R_1 + R_2
+    \end{equation*}
+  \item[Resistenze in parallelo]
+    \begin{equation*}
+      R_{eq} = \frac{1}{\frac{1}{R_1} + \frac{1}{R_2}}
+    \end{equation*}
+\end{description}
+
+\section{Leggi fondamentali del campo magnetico}
+\formula{Forza di Lorentz}{
+  Il campo magnetico $\vec B$ è uno pseudovettore che genera su una carica in movimento la forza
+  \begin{equation*}
+    \vec F=q\vec v \times \vec B
+  \end{equation*}
+}
+
+\formula{III legge di Maxwell (assenza di monopolo magnetico)}{
+  \begin{equation*}
+    \div \vec B=0
+  \end{equation*}
+}
+
+\formula{Legge di Ampère}{
+  \begin{equation*}
+    \rot\vec B=\muz\vec J
+  \end{equation*}
+}
+
+\formula{Legge della circuitazione}{
+  \begin{equation*}
+    \oint_\gamma \vec B\dotp\de\vec l=\muz \int_{S_\gamma} \vec J\dotp \de\vec S=\muz I_{\text{concatenata}}
+  \end{equation*}
+}
+
+\formula{Biot-Savart}{
+  Nel caso di una distribuzione di carica localizzata:
+  \begin{equation*}
+    \vec B(\vec r)=\frac{\muz}{4\pi}\int \frac{\vec J(\vec r')\times(\vec r-\vec r')}{\abs{\vec r-\vec r'}^3}\de\vec r'
+  \end{equation*}
+  e nel caso di fili:
+  \begin{equation*}
+    \vec B(\vec r)=\frac{\muz}{4\pi}\int_{\gamma} \frac{I\de \vec l\times(\vec r-\vec r')}{\abs{\vec r-\vec r'}^3}
+  \end{equation*}
+}
+
+\formula{Densità di energia magnetica}{
+  \begin{equation*}
+    u_B=\frac{\vec B^2}{2\muz}
+  \end{equation*}
+}
+
+\formula{Pressione magnetica}{
+  \begin{equation*}
+    \abs p=u_B=\frac{\vec B^2}{2\muz}
+  \end{equation*}
+}
+
+\formula{Energia magnetica}{
+  \begin{equation*}
+    U_B=\int u_B=\frac 1{2\muz}\int \vec B^2
+  \end{equation*}
+}
+
+\section{Potenziale vettore}
+\formula{Relazioni fondamentali con $\vec B$}{
+  \begin{align*}
+    \div \vec A&=0 \\
+    \rot\vec A &=\vec B
+  \end{align*}
+}
+\formula{Biot-Savart per $\vec A$}{
+  \begin{equation*}
+    \vec A(\vec r)=\frac{\muz}{4\pi}\int \frac{\vec J(\vec r')}{\abs{\vec r-\vec r'}}\de\vec r'
+  \end{equation*}
+}
+
+\section{Momento di dipolo magnetico}
+\formula{Definizione di momento di dipolo}{
+  \begin{equation*}
+    \vec m=\frac 12\int \vec r\times\vec J
+  \end{equation*}
+}
+
+\formula{Caso di filo chiuso planare}{
+  Nel caso di un filo percorso da corrente $I$ che racchiude una regione di piano con area (orientata) $\vec S$, vale
+  \begin{equation*}
+    \vec m=I\vec S
+  \end{equation*}
+}
+
+\formula{Termine di dipolo nel potenziale vettore}{
+  \begin{equation*}
+    \vec A(\vec r)=\frac{\muz}{4\pi}\frac{\vec m\times\vec r}{r^3}
+  \end{equation*}
+}
+
+\formula{Termine di dipolo nel campo magnetico}{
+  \begin{equation*}
+    \vec B(\vec r)=\frac{\muz}{4\pi}\left(\frac{3\vec r\left(\vec m\dotp\vec r\right)}{r^5}-\frac{\vec m}{r^3}\right)
+  \end{equation*}
+}
+
+\formula{Costante giromagnetica}{
+  Un corpo di massa $m$ e carica $q$, ammette una costante $g$ che lega il momento di dipolo al momento angolare:
+  \begin{equation*}
+    \vec m=g\frac{q}{2m}\vec L
+  \end{equation*}
+  
+  Nel caso di una carica puntiforme o una sfera uniformemente carica $g=1$; per una sfera carica superficialmente $g=\frac 53$; per un elettrone $g=2.002$.
+}
+
+\section{Forza e momento generati dal campo magnetico}
+\formula{Forza del campo magnetico}{
+  Data una distribuzione di correnti $\vec J$, ed un campo magnetico \emph{esterno} $\vec B$, la forza agente sulla distribuzione è:
+  \begin{equation*}
+    \vec F=\int \vec J\times \vec B
+  \end{equation*}
+}
+
+\formula{Forza di un campo costante}{
+  \begin{equation*}
+    \vec F=0
+  \end{equation*}
+}
+
+\formula{Coppia torcente del campo magnetico}{
+  Data una distribuzione di correnti $\vec J$, ed un campo magnetico \emph{esterno} $\vec B$, la coppia torcente, rispetto all'origine, agente sulla distribuzione è:
+  \begin{equation*}
+    \vec\tau=\int \vec r\times\left(\vec J\times \vec B\right)
+  \end{equation*}
+}
+
+\formula{Coppia torcente di un campo costante}{
+  \begin{equation*}
+    \vec\tau=\vec m\times \vec B_0
+  \end{equation*}
+}
+
+\section{Distribuzioni di corrente particolari}
+\formula{Filo}{
+  Un filo lungo l'asse $\hat z$ percorso da corrente $I$ genera
+  \begin{equation*}
+    \vec B(\vec r)=\hat\varphi \frac{\muz I}{2\pi\rho}
+  \end{equation*}
+  dove $\hat\varphi$ è orientato in modo che se il pollice della mano destra è $\hat z$, le restanti dita ne descrivono il verso.
+}
+
+\formula{Solenoide}{
+  Un solenoide di raggio $a$, con $n$ spire per unità di lunghezza percorse da corrente $I$, disposto lungo l'asse $\hat z$ genera
+  \begin{equation*}
+    \vec B(\vec r)=\hat z\muz nI
+  \end{equation*}
+  che è diretto in modo che se le dita della mano destra seguono $I$, allora il pollice detta il verso di $\vec B$.
+}
+
+\formula{Spira}{
+  Una spira di raggio $a$ percorsa da corrente $I$ con asse lungo $\hat z$, genera sull'asse $\hat z$
+  \begin{equation*}
+    \vec B(z)=\hat z\frac{\muz a^2I}{2\left(z^2+a^2\right)^{\frac 32}}
+  \end{equation*}
+  dove anche questa volta $\vec B$ è il pollice della mano destra e le altre dita seguono $I$.
+}
+
+\section{Elettrodinamica}
+Ora tratteremo i casi, finora non considerati, di campo elettrico non costante e come questo incida sul campo magnetico.
+Questo farà sì che il campo elettrico non sia più conservativo e perciò non esista più un potenziale.
+
+\formula{II equazione di Maxwell}{
+  \begin{equation*}
+    \rot\vec E=-\frac{\partial \vec B}{\partial t}
+  \end{equation*}
+}
+
+\formula{Legge di Lenz}{
+  Nel caso di un circuito, la forma integrale della II equazione di Maxwell diventa:
+  \begin{equation*}
+    \mathcal E=-\frac \de{\de t}\int_S \vec B\dotp\de\vec S=-\frac {\de\Phi_B}{\de t}
+  \end{equation*}
+  dove $\mathcal E$ è la forza elettromotrice (f.e.m.) indotta sul circuito e $\Phi_B$ è il flusso di campo magnetico attraverso la superficie racchiusa dal circuito.
+  Il segno della f.e.m. indotta è tale da opporsi sempre alla variazione di corrente.
+}
+
+\formula{IV equazione di Maxwell}{
+  Questa legge generalizza sia l'equazione di continuità sia la legge di Ampère al caso elettrodinamico:
+  \begin{equation*}
+    \frac 1{c^2}\frac{\partial \vec E}{\partial t}-\rot\vec B+\muz\vec J=0
+  \end{equation*}
+}
+
+\section{Induzione magnetica}
+
+\formula{Induttanza}{
+  L'induttanza è una costante $L$ dipendente dalla geometria del circuito, tale che
+  \begin{equation*}
+    \Phi_B=LI
+  \end{equation*}
+  dove $\Phi_B$ è il flusso di campo magnetico generato dal circuito stesso.
+}
+
+\formula{Induttore}{
+  Un induttore è una componente di un circuito la cui induttanza non è trascurabile. L'esempio tipico è un solenoide.
+}
+
+\formula{Mutua induzione}{
+  Chiamando $\vec{\mathcal E}$ il vettore delle f.e.m. indotte e $\vec I$ il vettore delle correnti di $n$ circuiti, esiste una matrice $L$ simmetrica, che sulla diagonale ha le autoinduttanze dei singoli circuiti, tale che:
+  \begin{equation*}
+    \vec {\mathcal E}=-L\frac{\de \vec I}{\de t}
+  \end{equation*}
+  e il valore $L_{ij}=L_{ji}$ si calcola con
+  \begin{equation*}
+    L_{ij}=L_{ji}=\frac {\muz}{4\pi}\oint_{\gamma_i}\oint_{\gamma_j}\frac{\de \vec l_i\dotp\de\vec l_j}{r}
+  \end{equation*}
+  dove con $r$ indichiamo la distanza tra i punti in cui stiamo integrando.
+}
+
+\formula{Energia di un induttore}{
+  \begin{equation*}
+    U=\frac 12LI^2
+  \end{equation*}
+  e nel caso di un sistema di induttori:
+  \begin{equation*}
+    U=\frac 12 \vec I^{\,T}L\vec I
+  \end{equation*}
+}
+
+\formula{Circuiti RLC}{
+  \begin{equation*}
+    \mathcal E=RI+\frac QC + L\frac{\de I}{\de t}=\frac QC+R\frac{\de Q}{\de t}+L\frac{\de^2Q}{\de t^2}
+  \end{equation*}
+}
+
+\section{Integrali ``Noti''}
+\begin{equation*}
+  \int \frac{r \de r}{(r^2+1)^{\frac{3}{2}}} = - \frac{1}{\sqrt{r^2 + 1}}
+\end{equation*}
+
+\begin{equation*}
+  \int e^{\alpha t} \de t = \frac{1}{\alpha} e^{\alpha t}
+\end{equation*}
+
+\section{Operatori differenziali}
+
+  \formula{Gradiente in cartesiane}
+  \begin{equation*}
+    \grad f = \dep{f}{x} \hat{x} +
+    \dep{f}{y} \hat{y} +
+    \dep{f}{z} \hat{z}
+  \end{equation*}
+  
+  \formula{Gradiente in cilindriche}
+  \begin{equation*}
+    \grad f = \dep{f}{\rho} \hat{\rho} +
+    \frac{1}{\rho} \dep{f}{\phi} \hat{\phi} +
+    \dep{f}{z} \hat{z}
+  \end{equation*}
+  
+  \formula{Gradiente in sferiche}
+  \begin{equation*}
+    \grad f = \dep{f}{r} \hat{r} +
+    \frac{1}{r} \dep{f}{\theta} \hat{\theta} +
+    \frac{1}{r \sin \theta} \dep{f}{\phi} \hat{\phi}
+  \end{equation*}
+  
+  \formula{Divergenza in cartesiane}
+  \begin{equation*}
+    \div A = \dep{A_x}{x} + \dep{A_y}{y} + \dep{A_z}{z}
+  \end{equation*}
+  
+  \formula{Divergenza in cilindriche}
+  \begin{equation*}
+    \div A = \frac{1}{\rho} \dep{(\rho A_\rho)}{\rho} +
+    \frac{1}{\rho} \dep{A_\phi}{\phi} +
+    \dep{A_z}{z}
+  \end{equation*}
+  
+  \formula{Divergenza in sferiche}
+  \begin{equation*}
+    \div A = \frac{1}{r^2} \dep{(r^2 A_r)}{r} +
+    \frac{1}{r \sin \theta} \dep{(A_\theta \sin\theta)}{\theta} +
+    \frac{1}{r \sin\theta} \dep{A_\phi}{\phi}
+  \end{equation*}
+
+\formula{Rotore in cartesiane}
+\begin{align*}
+  \rot A = \lrb{\dep{A_z}{y} - \dep{A_y}{z}} \hat{x} + \\
+  \lrb{\dep{A_x}{z} - \dep{A_z}{x}} \hat{y} + \\
+  \lrb{\dep{A_y}{x} - \dep{A_x}{y}} \hat{z}
+\end{align*}
+
+\formula{Rotore in cilindriche}
+\begin{align*}
+  \rot A = \lrb{\frac{1}{\rho} \dep{A_z}{\phi} - \dep{A_\phi}{z}} \hat{\rho} + \\
+  \lrb{\dep{A_\rho}{z} - \dep{A_z}{\rho}} \hat{\phi} + \\
+  \frac{1}{\rho} \lrb{\dep{(\rho A_\phi)}{\rho} - \dep{A_\rho}{\phi}} \hat{z}
+\end{align*}
+
+\formula{Rotore in sferiche}
+\begin{align*}
+  \rot A = \frac{1}{r \sin\theta} \lrb{\dep{(A_\phi \sin\theta)}{\phi} - \dep{A_\theta}{\phi}} \hat{r} + \\
+  \frac{1}{r} \lrb{\frac{1}{\sin\theta} \dep{A_r}{\phi} - \dep{(r A_\phi)}{r}} \hat{\theta} + \\
+  \frac{1}{r} \lrb{\dep{(r A_\theta)}{r} - \dep{A_r}{\theta}} \hat{\phi}
+\end{align*}
+\end{multicols}
+\end{document}
+

@@ -1,0 +1,205 @@
+\ProvidesPackage{CommandsAndStyle}
+
+\pagenumbering{gobble}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[a4paper,twoside,top=0.5in, bottom=0.5in, left=0.5in, right=0.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    linkcolor = {blue},
+	urlcolor = {red}
+}
+
+\hypersetup{
+	pageanchor=false
+}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{esint} % For the average integral
+\usepackage{color}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{enumitem}
+\usepackage{mathrsfs} %Just for cool sigma-algebra
+\usepackage{imakeidx}
+\usepackage{xparse} %In order to use ExplSyntax
+\usepackage{mathtools}
+\usepackage[nameinlink]{cleveref}
+\newcommand{\crefpairconjunction}{ e }
+\newcommand{\crefrangepreconjunction}{da }
+\newcommand{\crefrangeconjunction}{ a }
+\newcommand{\creflastconjunction}{ e }
+\let\oldvec\vec
+\renewcommand{\vec}[1]{\oldvec{#1}\mkern 2mu\vphantom{#1}}
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{#1}\mkern 2mu\vphantom{#1}}
+% \newcommand{\creflastgroupconjunction}{ e }
+% \newcommand{\crefrangepostconjunction}{ e }
+% \newcommand{\crefmiddleconjunction}{ e }
+% \newcommand{\crefpairgroupconjunction}{ e }
+\usepackage{fancyhdr} %Header and footer of pages
+% \setlength{\headheight}{16pt} 
+% \pagestyle{fancy}
+% \fancyhead{}
+% \fancyhead[LE,RO]{\slshape\nouppercase{\leftmark}}
+
+
+\newcounter{Results}[section]
+\renewcommand{\theResults}{\thesection.\arabic{Results}}
+
+\newtheorem{theorem}[Results]{Teorema}
+\newtheorem{lemma}[Results]{Lemma}
+\newtheorem{proposition}[Results]{Proposizione}
+\newtheorem{corollary}[Results]{Corollario}
+\newtheorem{exercise}[Results]{Esercizio}
+
+\theoremstyle{remark}
+\newtheorem{remark}[Results]{Nota}
+
+\theoremstyle{definition}
+\newtheorem{definition}[Results]{Definizione}
+\newtheorem*{example}{Esempio}
+
+\crefname{equation}{Equazione}{Equazioni}
+\crefname{theorem}{Teorema}{Teoremi}
+\crefname{lemma}{Lemma}{Lemmi}
+\crefname{proposition}{Proposizione}{Proposizioni}
+\crefname{corollary}{Corollario}{Corollari}
+\crefname{exercise}{Esercizio}{Esercizi}
+\crefname{remark}{Nota}{Note}
+\crefname{definition}{Definizione}{Definizioni}
+\crefname{section}{Sezione}{Sezioni}
+
+\newcommand{\ImplicationProof}[2]{$\text{\ref{#1}}\implies\text{\ref{#2}}$}% ref speciale per implicazioni X => Y
+
+%Qui di seguito ridefiniamo il comando cref per piazzare pure i nomi dei teoremi quando presenti.
+\makeatletter
+\ExplSyntaxOn
+\usepackage{ifthen}
+\usepackage{xstring}
+\let\@tempcref\cref
+\newcommand{\myref}[1]{
+	\IfSubStr{#1}{,}{
+		\@tempcref{#1}%
+	}
+	{
+		\ifcsname r@#1\endcsname%La reference è definita?
+			\edef\@RefInfo{\csname r@#1\endcsname}%Contiene tutte le informazioni sulla reference
+			\edef\@CompleteCounter{\expandafter\@fourthoffive\@RefInfo}%Contiene il nome espanso del contatore
+			
+			\expandafter\IfBeginWith{\@CompleteCounter}{equation}{%La reference è un'equazione?
+				\@tempcref{#1}%
+			}
+			{
+				\edef\@RefName{\expandafter\@thirdoffive\@RefInfo}%Contiene, se definito, il nome della reference
+				\StrLen{\@RefName}[\@RefNameLen]
+				
+				\ifthenelse{\@RefNameLen<2}{%Il nome è vuoto o di un solo carattere? (tocca lasciare la possibilità che sia di un solo carattere sennò al carducci non va)
+					\@tempcref{#1}%
+				}
+				{
+					\@tempcref{#1}~(\nameref*{#1})%
+				}
+			}
+% 			\begin{itemize}
+% 				\item \expandafter\@firstoffive\@mytxt
+% 				\item \expandafter\@secondoffive\@mytxt
+% 				\item \expandafter\@thirdoffive\@mytxt
+% 				\item \expandafter\@fourthoffive\@mytxt
+% 				\item \expandafter\@fifthoffive\@mytxt
+% 			\end{itemize}
+		\else
+			\@tempcref{#1}
+		\fi
+	}
+}
+% \renewcommand{\cref}{\myref}
+\ExplSyntaxOff
+\makeatother
+
+\numberwithin{equation}{section}
+
+\newcommand{\sigalg}[1][a]{$\sigma$-algebr#1}
+\DeclareRobustCommand{\semiring}[1][o]{semianell#1}
+\DeclareRobustCommand{\Semiring}[1][o]{Semianell#1}
+\DeclareRobustCommand{\sigadd}[1][a]{$\sigma$-additiv#1}
+\DeclareRobustCommand{\sigfin}[1][a]{$\sigma$-finit#1}
+\newcommand{\sigsubadd}[1][a]{$\sigma$-subadditiv#1}
+\DeclareRobustCommand{\carat}{Carathéodory}
+\newcommand{\Rpiu}{\ensuremath{[0,+\infty]}}
+\newcommand{\M}{\ensuremath{\mathcal M}}%Misurabili
+\renewcommand{\L}{\ensuremath{\mathcal L^1}}%Integrabili
+\newcommand{\A}{\ensuremath{\mathscr A}}%Sigma-algebra
+\newcommand{\B}{\ensuremath{\mathscr B}}%Altro nome da sigma-algebra
+\newcommand{\N}{\ensuremath{\mathbb N}}%Naturali
+\newcommand{\Z}{\ensuremath{\mathbb Z}}%Interi
+\newcommand{\Q}{\ensuremath{\mathbb Q}}%Razionali
+\newcommand{\R}{\ensuremath{\mathbb R}}%Reali
+\newcommand{\Rbar}{\overline{\R}}%Reali U +- infinito
+\renewcommand{\S}{\ensuremath{\mathcal S}}%Semianello
+\newcommand{\simp}{\ensuremath{\varphi}}%Funzione semplice
+\newcommand{\Borel}{\ensuremath{\mathcal B}}%Boreliani
+
+
+\newcommand{\de}{\ensuremath{\,\mathrm d}}%Il de degli integrali
+\newcommand{\Diff}{\ensuremath{\mathrm D}}%Simbolo del differenziale
+\newcommand{\LNorm}[1]{\ensuremath{\Vert #1\Vert_1}}%Norma L^1
+\newcommand{\aint}{\ensuremath{\fint}}%Integrale mediato
+% \newcommand{\div}{\mathop{\mathrm{div}}\nolimits}
+\let\divsymb\div
+\let\div\undefined
+% \DeclareMathOperator{\div}{div}
+\makeatletter
+\newcommand*\dotp{\mathpalette\dotp@{.4}}
+\newcommand*\dotp@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+\newcommand{\div}{\ensuremath{\vec{\nabla} \dotp}}
+\DeclareMathOperator{\tr}{tr}
+% \DeclareMathOperator{\grad}{\nabla}
+\newcommand{\grad}{\ensuremath{\nabla}}
+\DeclareMathOperator{\graf}{graf}
+\DeclareMathOperator{\supp}{supp}
+
+\newcommand{\bigO}{\ensuremath{\mathcal{O}}}
+\newcommand{\smallO}{\ensuremath{\mathrm{o}}}
+
+%Definiamo gli intervalli semiaperti, aperti, chiusi.
+\newcommand{\co}[2]{\ensuremath{\left[\,#1,\,#2\,\right)}}
+\newcommand{\oo}[2]{\ensuremath{\left(\,#1,\,#2\,\right)}}
+\newcommand{\cc}[2]{\ensuremath{\left[\,#1,\,#2\,\right]}}
+\newcommand{\oc}[2]{\ensuremath{\left(\,#1,\,#2\,\right]}}
+
+% Definiamo le parentesi left( e right) per metterci dentro cose
+\newcommand{\lrb}[1]{\ensuremath{\left({#1}\right)}}
+
+%Punteggiatura nelle formule
+\ifdefined\virgola 
+	\renewcommand{\virgola}{\ensuremath{\, \text{, }}}
+\else 
+	\newcommand{\virgola}{\ensuremath{\, \text{, }}}
+\fi
+\newcommand{\puntovirgola}{\ensuremath{\, \text{; }}}
+\newcommand{\punto}{\ensuremath{\, \text{. }}}
+
+\newcommand \formula[2]{
+	\subsection*{#1}
+	#2
+}
+
+\newcommand \ez{\ensuremath{\epsilon_0}}
+\newcommand \muz{\ensuremath{\mu_0}}
+\newcommand \lapl{\ensuremath{\grad^2}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+% Aggiunte ad-hoc
+\newcommand \rot{\ensuremath{\nabla\times}}
+
+\newcommand{\dep}[2]{\ensuremath{\frac{\partial {#1}}{\partial {#2}}}}
+\newcommand{\ded}[2]{\ensuremath{\frac{\de {#1}}{\de {#2}}}}
+
