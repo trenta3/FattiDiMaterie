@@ -298,6 +298,27 @@ Nel caso in cui la distribuzione di carica sia sufficientemente localizzata, si 
     \end{equation*}
 \end{description}
 
+\section{Sviluppo in multipoli (cartesiane)}
+Data una funzione $v(\vec R + \vec r)$ essa può essere sviluppata in un
+intorno dell'origine $\vec r = 0$ e si ha
+\begin{align*}
+  v(\vec R - \vec r) = v(\vec R) + \sum_{\alpha = x,y,z} r_\alpha v_\alpha(\vec R) + \\
+  + \frac{1}{2} \sum_{\alpha = x,y,z} \sum_{\beta = x,y,z} r_\alpha r_\beta v_{\alpha \beta}(\vec R) + \ldots
+\end{align*}
+dove $v_\alpha(\vec R) = \dep{v(\vec r - \vec R)}{r_\alpha}\mid_{\vec r = 0}$
+e $v_{\alpha\beta}(\vec R) = \frac{\partial^2 v(\vec r - \vec R)}{\partial r_\alpha \partial r_\beta} \mid_{\vec r = 0}$
+
+In elettromagnetismo viene frequentemente considerata l'espressione $v(\vec r - \vec R) = \frac{1}{\abs{\vec r - \vec R}}$,
+da cui differenziando si ottiene $v(\vec R) = \frac{1}{R}$, $v_\alpha(\vec R) = -\frac{R_\alpha}{R^3}$,
+$v_{\alpha\beta}(\vec R) = \frac{3 R_\alpha R_\beta - \delta_{\alpha\beta} R^2}{R^5}$ e quindi i rispettivi termini di monopolo,
+dipolo e quadrupolo elettrico sono definiti da $q_\text{tot} = \sum_i q_i$, $P_\alpha = \sum_i q_i r_{i\alpha}$ e
+$Q_{\alpha\beta} = \sum_i q_i (3r_{i\alpha}r_{i\beta} - \delta_{\alpha\beta} r_i^2)$ da cui si ottiene l'espansione del potenziale
+elettrico nel seguente modo:
+\begin{align*}
+  4\pi\epsilon_0 V(\vec R) = \frac{q_\text{tot}}{R} + \frac{1}{R^3} \sum_{\alpha = x,y,z} P_\alpha R_\alpha + \\
+  + \frac{1}{6 R^5} \sum_{\alpha, \beta = x,y,z} Q_{\alpha\beta} (3R_\alpha R_\beta - \delta_{\alpha\beta} R^2)
+\end{align*}
+
 \section{Leggi fondamentali del campo magnetico}
 \formula{Forza di Lorentz}{
   Il campo magnetico $\vec B$ è uno pseudovettore che genera su una carica in movimento la forza
@@ -528,6 +549,10 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
 
 \begin{equation*}
   \int e^{\alpha t} \de t = \frac{1}{\alpha} e^{\alpha t}
+\end{equation*}
+
+\begin{equation*}
+  \int t e^{\alpha t} \de t = \frac{\alpha t - 1}{\alpha^2} e^{\alpha t}
 \end{equation*}
 
 \section{Operatori differenziali}

@@ -1,0 +1,160 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+\usepackage{pgf}
+\usepackage{tikz-cd}
+\usepackage{xfrac}
+\usetikzlibrary{cd,arrows,automata}
+\newcommand{\MCD}{\text{MCD }}
+\newcommand{\Lt}{\text{lt }}
+\newcommand{\Lc}{\text{lc }}
+\newcommand{\BdG}{\text{BdG }}
+\newcommand{\Ris}{\text{Ris }}
+\newcommand{\srar}{\twoheadrightarrow}
+\newcommand{\hrar}{\hookrightarrow}
+\newcommand{\Hom}{\text{Hom }}
+\newcommand{\coKer}{\text{coKer }}
+\newcommand{\gen}[1]{\langle {#1} \rangle}
+\newcommand{\lbr}[1]{\ensuremath{{\left( {#1} \right)}}}
+\newcommand{\intclos}[2]{\ensuremath{\overline{#1}^{#2}}}
+\newcommand{\Frac}{\text{Frac }}
+\newcommand{\Spec}{\text{Spec }}
+\newcommand{\Max}{\text{Max }}
+\newcommand{\Gal}{\text{Gal }}
+
+\begin{document}
+\title{Istituzioni di Algebra}
+
+\section*{Estensioni Intere}
+\begin{itemize}
+\item ({\bf Equivalenze di Intero}) Sia $A \subseteq B$ un'estensione di
+  anelli e sia $b \in B$. Allora le seguenti sono equivalenti:
+  \begin{enumerate}
+  \item $b$ è intero su $A$
+  \item $A[b]$ (come sottoanello) è un $A$-modulo finito
+  \item $\exists C \subseteq B$ sottoanello tale che $A[b] \subseteq
+    C$ e $C$ è un $A$-modulo finito
+  \item $\exists M$, $A[b]$-modulo fedele (ovvero $\Ann(M) = 0$) che
+    sia finito come $A$-modulo.
+  \end{enumerate}
+\item ({\bf Hamilton-Cayley}) Se $M$ è un $A$-modulo finito e
+  $I \subseteq A$ ideale, $\phi: M \rar M$ mappa di $A$-moduli tale che
+  $\phi(M) \subseteq IM$, allora $\exists a_1, \ldots, a_n \in I$ tali
+  che $\phi^n + a_1 \phi^{n-1} + \ldots + a_n \Id = 0$ (in
+  $\Hom_A(M, M)$)
+\item Valgono quindi le seguenti cose:
+  \begin{enumerate}
+  \item Se $b_1, \ldots, b_n$ sono interi su $A$, allora
+    $A[b_1, \ldots, b_n]$ è un $A$-modulo finito
+  \item $\intclos{A}{B} = \{ b \in B | b \text{ intero su } A \}$ è un
+    sottoanello di $B$.
+  \item ({\bf Transitività Integrale}) Se $B$ è intero su $A$ e $C$ è
+    intero su $B$, allora $C$ è intero su $A$
+  \item ({\bf Transitività Finita}) Se $B$ è finito su $A$ e $C$ è
+    finito su $B$, allora $C$ è finito su $A$
+  \item ({\bf Idempotenza della Chiusura Integrale}) Sia $A \subseteq
+    B$ e $C = \intclos{A}{B}$. Allora $\intclos{C}{B} = C$
+  \end{enumerate}
+\item ({\bf Stabilità per Localizzazione e Quoziente}) Sia
+  $A \subseteq B$ intera, $S$ parte moltiplicativa di $A$ e
+  $I \subseteq B$ ideale. Allora si ha che:
+  \begin{enumerate}
+  \item $S^{-1}A \rar S^{-1}B$ è intera
+  \item $\sfrac{A}{I^c} \rar \sfrac{B}{I}$ è intera
+  \end{enumerate}
+\item ({\bf Relazioni con estensioni di campi}) Supponiamo $A$ dominio e
+  $K = \Frac(A)$ suo campo delle frazioni e consideriamo
+  $A \subseteq K \subseteq L$ dove $\sfrac{L}{K}$ è algebrica. Definiamo
+  $B = \intclos{A}{L}$.
+  \begin{enumerate}
+  \item Sia $x \in L$ e $\mu_x$ suo polinomio minimo su $K$. Se
+    $\mu_x \in A[t]$ allora $x$ è intero su $A$.
+  \item Se $A$ è normale vale anche il viceversa, ovvero si ha $x$ è
+    intero su $A$ $\sse$ $\mu_x \in A[t]$.
+  \end{enumerate}
+\item ({\bf UFD $\implies$ normale}) Se $A$ è un UFD allora è normale.
+\item ({\bf estensioni intere di campi}) Sia $A \subseteq B$
+  un'estensione intera di domini. Allora $A$ è un campo $\sse$ $B$ è un
+  campo. Ne segue che:
+  \begin{enumerate}
+  \item Sia $\kq \subseteq B$ un ideale. Allora $\kq$ è massimale $\sse$
+    $\kq^c$ è massimale
+  \item Se prendo $\kp$ primo di $A$ e $\kq_1, \kq_2 \in \Spec B$ tali
+    che $\kq_1^c = \kq_2^c = \kq$ e $\kq_1 \subseteq \kq_2$ allora vale
+    che $\kq_1 = \kq_2$.
+  \end{enumerate}
+\item ({\bf Lying Over}) Se $A \subseteq B$ è intera, allora $\forall
+  \kp \in \Spec A \quad \exists \kq \in \Spec B$ tale che $\kq^c = \kp$,
+  ovvero $f^*: \Spec B \rar \Spec A$ è surgettiva.
+\item ({\bf Going Up}) Se $A \subseteq B$ è intera, allora ha la
+  proprietà del going up, ovvero se
+  $\forall \kp_1 \subseteq \kp_2 \subseteq A$ primi e
+  $\forall \kq_1 \subseteq B$ primo tale che $\kq_1^c = \kp_1$ allora
+  $\exists \kq_2 \supseteq \kq_1$ primo tale che $\kq_2^c = \kp_2$
+\item ({\bf Going Down}) $A \subseteq B$ estensione intera di domini,
+  con $A$ normale allora vale la proprietà del going down, ovvero
+  $\forall \kp_1 \subseteq \kp_2 \subseteq A$ primi e
+  $\forall \kq_2 \subseteq B$ primo tale che $\kq_2 \cap A = \kp_2$ si
+  ha che $\exists \kq_1 \subseteq \kq_2$ primo tale che
+  $\kq_1 \cap A = \kp_1$. \newline
+  Da notare che serve sia la condizione di dominio che la normalità di
+  $A$ per far funzionare tutto ciò.
+\item Se $A$ è un dominio normale, $K = \Frac A$ ed $\sfrac{L}{K}$ è
+  un'estensione algebrica di campi, $B = \intclos{A}{L}$,
+  $I \subseteq A$ ideale, ed $x \in L$ allora $x$ è intero su $I$ $\sse$
+  $\mu_{\sfrac{L}{K}, x} \in \sqrt{I}[t]$
+\item ({\bf Simil-Galois}) Sia $A$ normale e $K = \Frac A \subseteq L$
+  con $\sfrac{L}{K}$ estensione di Galois finita e $B = \intclos{A}{L}$
+  e sia $G = \Gal \sfrac{L}{K}$. Allora si ha che:
+  \begin{enumerate}
+  \item $g(B) \subseteq B \quad \forall g \in G$
+  \item Fissato un primo $\kp \in \Spec A$ si ha
+    $\cF_\kp = \{ \kq \in \Spec B | \kq \cap A = \kp \}$
+    Allora $G$ agisce transitivamente su $\cF_\kp$
+  \end{enumerate}
+\item ({\bf Chiusura integrale di $A[x]$}) Sia $A \subseteq B$ e sia
+  $C = \intclos{A}{B}$. Allora la chiusura integrale di $A[x]$ in $B[x]$
+  è $C[x]$.
+\item ({\bf Interezza e Nötherianità}) $A \subseteq B$ con $A$
+  Nötheriano e $B$ finito su $A$. Allora $B$ è Nötheriano come
+  anello. \newline
+  Attenzione che $A \subseteq B$ con $A$ Nötheriano ed estensione intera
+  NON implica che $B$ sia Nötheriano.
+\item Sia $A$ dominio, $K = \Frac A$, $\sfrac{L}{K}$ un'estensione
+  finita di campi e sia $B = \intclos{A}{L}$. Allora si ha:
+  \begin{enumerate}
+  \item È FALSO che se $A$ è Nötheriano allora $B$ lo sia.
+  \item Se $A$ è normale ed $\sfrac{L}{K}$ è un'estensione separabile
+    allora si ha che se $A$ è Nötheriano allora $B$ diventa un
+    $A$-modulo finito e quindi è Nötheriano.
+  \end{enumerate}
+\item $A$ noetheriano e dominio, con $K = \Frac A \subseteq L$ campi e
+  vorremmo poter dire qualcosa anche se $A$ non è normale. Ci sono due
+  casi significativi nei quali si ha che in queste ipotesi
+  $\intclos{A}{K}$ (la normalizzazione di $A$) è Nötheriana:
+  \begin{enumerate}
+  \item $\Dim A = 1$
+  \item $A$ è una $K$-algebra finitamente generata
+  \end{enumerate}
+\item ({\bf Normalizzazione di Nöther}) $A$ $K$-algebra f.g. allora
+  $\exists x_1, \ldots, x_n \in A$ algebricamente indipendenti tali che
+  $A$ è finita (come modulo) su $K[x_1, \ldots, x_n]$
+  
+
+\item ({\bf Lemmi generici e fatti vari}) Le seguenti cose valgono:
+  \begin{enumerate}
+  \item $E$ campo e sia $A$ una $E$-algebra finitamente generata. Allora
+    $\forall I \subseteq A$ si ha che
+    $$\sqrt{I} = \bigcap_{\km \text{ massimali } \quad \km \supseteq I} \km$$
+  \item $A$ e $B$ due $K$-algebre finitamente generate con $K$ campo
+    algebricamente chiuso ed $A$ dominio. Se $f^*: \Max B \rar \Max A$ è
+    suriettiva allora $f$ è iniettiva.
+  \item Per un modulo sono proprietà locali (e massimali) essere
+    piatto, essere normale, essere nullo.
+  \item Per un modulo NON sono proprietà locali essere Noetheriano,
+    essere dominio.
+  \item Per una sequenza di moduli essere esatta in un punto è una
+    proprietà locale (e massimale)
+  \end{enumerate}
+\end{itemize}
+
+\end{document}
+
