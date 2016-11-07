@@ -130,17 +130,21 @@ Nel caso in cui la distribuzione di carica sia sufficientemente localizzata, si 
     U=\frac 12\sum Q_iV_i
   \end{equation*}
 }
+\end{multicols}
 
 \section{Configurazioni speciali di carica}
+% TODO: Scrivere anche l'energia elettrostatica per tutte le configurazioni
 \formula{Campi e potenziali particolari}{
   \begin{description}
-  \item[Carica puntiforme]\begin{equation*}
+  \item[Carica puntiforme]
+    \begin{equation*}
       \vec E(r)=\frac1{4\pi\ez}\cdot \frac Q{r^2}
     \end{equation*}
     \begin{equation*}
       V(r)=\frac1{4\pi\ez}\cdot \frac Qr
     \end{equation*}
-    
+    Non se ne può calcolare l'energia elettrostatica poiché diverge. I fisici la chiamano autoenergia e viene
+    solitamente tolta negli altri conti per trovare l'energia elettrostatica.
     
   \item[Filo]\begin{equation*}
       \vec E(r)=\frac 1{2\pi\ez}\cdot\frac \lambda r
@@ -155,8 +159,48 @@ Nel caso in cui la distribuzione di carica sia sufficientemente localizzata, si 
     \begin{equation*}
       V(r)=-\frac{\sigma r}{2\ez}
     \end{equation*}
+
+  \item[Sfera uniformemente carica]
+    Si suppone, ovviamente che $R$ sia il raggio della sfera, $Q = \frac{4}{3} \pi R^3 \rho$ la sua carica totale.
+    \begin{equation*}
+      \vec E(r) = \left\{ \begin{array}{lr}
+                            \qpeo \frac{Q}{R^2} \frac{r}{R} \hat{r}
+                            & \text{ dentro alla sfera } \\
+                            \qpeo \frac{Q}{r^2} \hat{r}
+                            & \text{ fuori dalla sfera } \\
+                          \end{array} \right.
+    \end{equation*}
+    \begin{equation*}
+      V(r) = \left\{ \begin{array}{lr}
+                       \qpeo Q \left( - \frac{r^2}{2 R^3} + \frac{3}{2 R} \right)
+                       & \text{ dentro alla sfera } \\
+                       \qpeo \frac{Q}{r}
+                       & \text{ fuori dalla sfera } \\
+                     \end{array} \right.
+    \end{equation*}
+    \begin{equation*}
+      U_E = \qpeo \frac{Q^2}{R} \frac{6}{5}
+    \end{equation*}
+
+  \item[Guscio sferico con carica superficiale] %TODO
+
+  \item[Filo ciccione] %TODO
+    
+  \item[Due cariche uguali a distanza fissata]
+    Si suppone che vi siano due cariche $Q$ (dello stesso valore e segno) a distanza $2D$. Useremo le coordinate
+    cilindriche $\rho, z, \phi$.
+    \vskip 0.5em
+    \begin{tabular}{cc}
+      $\vec E(z, \rho) = \qpeo \frac{2 Q}{(\rho^2 + (z - D)^2)(\rho^2 + (z + D)^2)} (z(\rho^2 + z^2 - D^2) \hat{z} + \rho
+      (\rho^2 + z^2 + D^2) \hat{\rho})$
+      & % TODO inserire il potenziale
+    \end{tabular}
+
+  \item[Due cariche diverse a distanza fissata] %TODO
   \end{description}
 }
+
+\begin{multicols}{2}
 
 \formula{Dipolo}{
   \begin{equation*}
@@ -172,6 +216,8 @@ Nel caso in cui la distribuzione di carica sia sufficientemente localizzata, si 
     \vec F=\Diff \vec E\dotp \vec p
   \end{equation*}
 }
+
+% TODO: formula quadrupolo
 
 \formula{Carica immagine}{
   \begin{description}
@@ -619,4 +665,7 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
 \end{align*}
 \end{multicols}
 \end{document}
+
+% TODO: Scrivere anche i cambi per i sistemi di coordinate polari
+% cartesiane e cilindriche.
 
