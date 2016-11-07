@@ -5,9 +5,14 @@
 \usetikzlibrary{cd,arrows,automata}
 \newcommand{\MCD}{\text{MCD }}
 \newcommand{\Lt}{\text{lt }}
+\newcommand{\Ass}{\text{Ass }}
+\newcommand{\cl}{\ell}
 \newcommand{\Lc}{\text{lc }}
+\newcommand{\pipe}{\,|\,}
 \newcommand{\BdG}{\text{BdG }}
 \newcommand{\Ris}{\text{Ris }}
+\newcommand{\Ht}{\text{ht }}
+\newcommand{\Coht}{\text{coht }}
 \newcommand{\srar}{\twoheadrightarrow}
 \newcommand{\hrar}{\hookrightarrow}
 \newcommand{\Hom}{\text{Hom }}
@@ -19,6 +24,7 @@
 \newcommand{\Spec}{\text{Spec }}
 \newcommand{\Max}{\text{Max }}
 \newcommand{\Gal}{\text{Gal }}
+\newcommand{\trdeg}{\text{trdeg }}
 
 \begin{document}
 \title{Istituzioni di Algebra}
@@ -44,7 +50,7 @@
   \begin{enumerate}
   \item Se $b_1, \ldots, b_n$ sono interi su $A$, allora
     $A[b_1, \ldots, b_n]$ è un $A$-modulo finito
-  \item $\intclos{A}{B} = \{ b \in B | b \text{ intero su } A \}$ è un
+  \item $\intclos{A}{B} = \{ b \in B \pipe b \text{ intero su } A \}$ è un
     sottoanello di $B$.
   \item ({\bf Transitività Integrale}) Se $B$ è intero su $A$ e $C$ è
     intero su $B$, allora $C$ è intero su $A$
@@ -107,7 +113,7 @@
   \begin{enumerate}
   \item $g(B) \subseteq B \quad \forall g \in G$
   \item Fissato un primo $\kp \in \Spec A$ si ha
-    $\cF_\kp = \{ \kq \in \Spec B | \kq \cap A = \kp \}$
+    $\cF_\kp = \{ \kq \in \Spec B \pipe \kq \cap A = \kp \}$
     Allora $G$ agisce transitivamente su $\cF_\kp$
   \end{enumerate}
 \item ({\bf Chiusura integrale di $A[x]$}) Sia $A \subseteq B$ e sia
@@ -137,8 +143,6 @@
 \item ({\bf Normalizzazione di Nöther}) $A$ $K$-algebra f.g. allora
   $\exists x_1, \ldots, x_n \in A$ algebricamente indipendenti tali che
   $A$ è finita (come modulo) su $K[x_1, \ldots, x_n]$
-  
-
 \item ({\bf Lemmi generici e fatti vari}) Le seguenti cose valgono:
   \begin{enumerate}
   \item $E$ campo e sia $A$ una $E$-algebra finitamente generata. Allora
@@ -154,6 +158,123 @@
   \item Per una sequenza di moduli essere esatta in un punto è una
     proprietà locale (e massimale)
   \end{enumerate}
+\end{itemize}
+
+\section*{Teoria della Dimensione e Grado di Trascendenza}
+\begin{itemize}
+\item ({\bf Dimensione in estensioni intere}) Se $A \subseteq B$ è
+  intera allora $\Dim A = \Dim B$ (è compreso il caso in cui entrambe le
+  dimensione siano infinite)
+\item ({\bf Dimensione delle $K$-algebre f.g.}) Sia $K$ un campo e
+  $f \in K[x_1, \ldots, x_n]$ con $f \neq 0$. Allora si ha
+  $\Dim K[x_1, \ldots, x_n]_f = n$
+\item ({\bf Relazione con il grado di trascendenza}) Sia $A$ $K$-algebra
+  f.g. e $A$ dominio. Allora $\Dim A = \trdeg_K A$
+\item ({\bf Cardinalità di una base di trascendenza}) $A$ dominio e
+  $K$-algebra f.g. Allora tutte le basi di trascendenza hanno la stessa
+  cardinalità. \newline
+  Inoltre, se $A$ è un dominio, $E$ una $K$-algebra e sia $L = \Frac A$
+  \begin{enumerate}
+  \item $x_i \in A$ è una base di trascendenza di $A$ $\sse$ lo è di $L$
+  \item Se $y_1, \ldots, y_n$ è base di trascendenza di $L$ su $K$
+    allora $\exists b \in A$ tali che $by_1, \ldots, by_n$ è una base di
+    trascendenza di $A$.
+  \end{enumerate}
+\item ({\bf Particolarità delle $K$-algebre}) Per le $K$-algebre
+  f.g. valgono le seguenti cose:
+  \begin{enumerate}
+  \item Sono anelli catenari.
+  \item Se $A$ è dominio, preso un primo $\kp$ di altezza uno si ha
+    $\Dim \sfrac{A}{\kp} = \Dim A - 1$
+  \item $\kp \in \Spec A \implies $ $\Ht \kp, \Coht p < + \infty$
+  \item Se $A$ è dominio si ha $\forall \kp \in \Spec A$ vale che
+    $\Dim A = \Ht \kp + \Coht \kp$
+  \end{enumerate}
+\item ({\bf Artinianità e Nötherianità}) $A$ artiniano se e solo se $A$
+  Nötheriano e di dimensione zero.
+\item ({\bf Richiami di Decomposizione Primaria}) Sia $I \subseteq A$ un
+  ideale. Una decomposizione primaria di $I$ è una scrittura
+  $I = \cap_i Q_i$ dove i $Q_i$ sono un numero finito di ideali
+  primari. Se $A$ è Nötheriano valgono:
+  \begin{enumerate}
+  \item Primi associati ad $I$: $\Ass I = \{ \kp \in \Spec A \pipe \exists x
+    \in A \tc \kp = (I : x) \}$
+  \item Gli zero divisori di $A$ sono l'unione dei primi associati a
+    zero: $$\cD(A) = \cup_{\kp \in \Ass 0} \kp$$
+  \item $\Ass_{S^{-1}A} S^{-1}I = \Ass_{A} I \cap \Spec S^{-1}A$
+  \item $\Ass I$ è finito
+  \item Se $\kp$ è minimale sopra $I$, allora $\kp$ è associato ad $I$.
+  \end{enumerate}
+
+\item ({\bf Esercizi e Lemmi vari}) Valgono le seguenti cose:
+  \begin{enumerate}
+  \item $\prod_{n = 0}^\infty \bbZ$ NON è uno $\bbZ$-modulo libero
+  \item $\prod_{n = 0}^\infty \rar^f \bbZ$ tale che $f(e_i) = 0 \quad
+    \forall i$ allora deve essere che $f = 0$
+  \item $X = \Spec A$ e
+    $X_f := \{ \kp \subseteq A \pipe f \notin \kp \} = X \setminus V(f)$ è
+    un aperto di $X$. Questi sono un sistema fondamentale di aperti di
+    $X$ e si ha $X_f \cong \Spec A_f$
+  \item $K((t))$ NON è algebrico su $K(t)$
+  \item $X = \Spec A$ è compatto, qualunque sia $A$.
+  \item $A \subseteq B$ intera $\implies f^*$ chiusa
+  \item $f^*$ chiusa $\implies$ vale il Going Up.
+  \end{enumerate}
+\end{itemize}
+
+\section*{Dimensione e Anelli Graduati}
+\begin{itemize}
+\item ({\bf Serie di Jordan-Hölder}) $A$ anello c.u., $M$ un
+  $A$-modulo. Una serie di Jordan-Hölder per $M$ è una successione
+  crescente di sottomoduli
+  $0 = M_1 \subsetneq \ldots \subsetneq M_n = M$ tali che
+  $\sfrac{M_i}{M_{i-1}}$ è un $A$-modulo semplice (ovvero è diverso dal
+  modulo nullo e non ha sottomoduli propri)
+\item ({\bf Lunghezza di un Modulo}) Se $M$ ha una serie di JH, diciamo
+  che la lunghezza di $M$ è finita e definiamo
+  $\cl(M) = \min \{ n \pipe \exists \text{ serie di JH con } n+1 \text{
+    termini } \}$
+\item ({\bf Lunghezza delle serie di JH}) Tutte le serie di JH di uno
+  stesso modulo hanno la stessa lunghezza ed inoltre i fattori
+  $\sfrac{M_i}{M_{i-1}}$ sono uguali per ogni serie, a meno di
+  permutazioni.
+\item ({\bf Comportamento per sequenze esatte}) Sia data una sequenza
+  esatta corta di $A$-moduli $0 \rar X \rar Y \rar Z \rar 0$. Allora
+  vale che:
+  \begin{enumerate}
+  \item $\cl(X), \cl(Z) < +\infty \sse \cl(Y) < +\infty$
+  \item $\cl(Y) = \cl(X) + \cl(Z)$
+  \end{enumerate}
+  Inoltre si ha che per un generico modulo $M$ vale $\cl(M) < \infty
+  \sse M$ è artiniano e Nötheriano.
+\item ({\bf Anelli graduati noetheriani}) $A$ anello graduato, allora
+  $A$ è noetheriano se e solo se $A_0$ è noetheriano ed $A$ è f.g. come
+  $A_0$-algebra.
+\item ({\bf Funzione e Serie di Hilbert}) Preso $A$ graduato, $A_0$
+  artiniato, $A$ noetheriano, $M$ graduato e f.g. (ovvero $M$
+  noetheriano) definiamo:
+  \begin{enumerate}
+  \item $n \mapsto \cl_{A_0}(M_n)$ funzione di Hilbert
+  \item $P_M(t) := \sum_n t^n \cl_{A_0}(M_n)$ serie di Hilbert
+  \end{enumerate}
+  Inoltre in queste ipotesi se si ha una sequenza esatta corta con
+  morfismi graduati di grado zero:
+  $0 \rar X \rar^\phi Y \rar^\psi Z \rar 0$ allora sono definiti i
+  polinomi di hilbert e vale che $P_Y = P_X + P_Z$
+\item ({\bf Teorema di Hilbert}) $A$ graduato, $M$ graduato, $A_0$
+  artiniano e $A$ noetheriano, $M$ f.g. e si chiamino $a_1, \ldots, a_k$
+  i generatori omogenei di $A$ come $A_0$-algebra e $d_i := \Deg
+  a_i$. Allora $\exists f \in \bbZ[t, t^{-1}]$ polinomio di Laurent tale
+  che
+  $$P_M(t) = \frac{f(t)}{\prod_{i=1}^k (1 - t^{d_i})}$$
+\item ({\bf funzione di Hilbert e grado}) Se $A$ è generato in grado $1$
+  allora la funzione di Hilbert (nelle ipotesi precedenti) per $n$
+  grandi coincide con i valori assundi da un polinomio di grado $d(M) -
+  1$ (dove $d(M)$ è l'ordine di polo in $1$ della funzione razionale
+  $P_M$)
+\item ({\bf Analogo di Nakyama}) $A$ graduato, $M$ graduato f.g. e
+  supponiamo che $A_+ M = M$ allora $M = 0$
+
 \end{itemize}
 
 \end{document}
