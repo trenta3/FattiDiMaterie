@@ -25,6 +25,9 @@
 \newcommand{\Max}{\text{Max }}
 \newcommand{\Gal}{\text{Gal }}
 \newcommand{\trdeg}{\text{trdeg }}
+\newcommand{\Gr}{\text{Gr }}
+\newcommand{\Bl}{\text{Bl }}
+\newcommand{\ov}{\overline}
 
 \begin{document}
 \title{Istituzioni di Algebra}
@@ -274,8 +277,322 @@
   $P_M$)
 \item ({\bf Analogo di Nakyama}) $A$ graduato, $M$ graduato f.g. e
   supponiamo che $A_+ M = M$ allora $M = 0$
-
+% TODO: Mi sono fermato all'inizio del pdf del 19/10
 \end{itemize}
 
+\section*{Filtrazioni, Graduato Associato e Scoppiamento}
+\begin{itemize}
+\item ({\bf Filtrazione}) Sia $A$ un anello e supponiamo di avere
+  $A = I_0 \supseteq I_1 \supseteq \ldots \supseteq I_n \supseteq
+  \ldots$ (che viene detta una filtrazione $\cF$) con
+  $I_k I_h \subseteq I_{h + k}$. Il graduato associato allora è
+  $\tilde{A} = \Gr_\cF (A) = \oplus_{k=0}^\infty \sfrac{I_k}{I_{k+1}} =
+  \oplus \tilde{A_k}$ e viene indotto un prodotto.
+
+  Se $I$ è un ideale di $A$ possiamo considerare $I_h = I^h$, dove la
+  potenza è intesa come moltiplicazione di ideali. Allora si ha
+  $\Gr_I (A) = \oplus_{k \ge 0} \sfrac{I^k}{I^{k+1}}$ e lo scoppiamento
+  di $A$ in $I$ è $\Bl_I (A) = A \oplus I \oplus I^2 \oplus \ldots$,
+  dove si ha $B_k = I^k$ ($B_0 = A$). Allora per definizione il prodotto
+  verifica $B_h B_k \subseteq B_{h+k}$
+\item ({\bf Noetherianità dei graduati}) Se $A$ è Nötheriano allora
+  $\Gr_I (A)$ e $\Bl_I (A)$ sono a loro volta noetheriani e sono
+  finitamente generati in grado $1$ come $B_0$-algebra.
+\item ({\bf Esempio}) Sia $A = \frac{\bbC[x_1, \ldots, x_n]}{(f)}$ con
+  $f$ irriducibile e sia $f = \sum_i f_i$ con $f_i$ omogenei. Sia
+  $k = \min \{i \mid f_i \neq 0 \}$. Allora considerando
+  $\km = \frac{(x_1, \ldots, x_n)}{(f)}$ che è un massimale di $A$ si ha
+  che $\Gr_\km (A) = \frac{\bbC[y_1, \ldots, y_n]}{(f_k)}$
+\item ({\bf Filtrazioni di Moduli}) Sia $A$ un anello ed $I$ un ideale
+  di $A$, $M$ un $A$-modulo. Allora una $I$-filtrazione $\cF$ di $M$ è
+  $$ M = M_0 \supseteq M_1 \supseteq M_2 \supseteq \ldots $$ tale che si
+  abbia $I^k M_h \subseteq M_{h + k}$.
+
+  Ad essa posso allora associare un graduato $\Gr_\cF (M) = \oplus_i
+  \sfrac{M_i}{M_{i+1}}$ ed uno scoppiamento $\Bl_\cF (M) = \oplus_{i \ge
+    0} M_i$ e di $M_i$ si dice che è ``di grado $i$''
+
+  Si nota inoltre che $\Gr_\cF M$ è un $\Gr_I A$-modulo e che $\Bl_\cF
+  M$ è un $\Bl_I A$-modulo.
+\item ({\bf $I$-stabilità}) Diciamo che una filtrazione $\cF$
+  $M_0 \supseteq M_1 \supseteq \ldots$ è $I$-stabile se $\exists k$ tale
+  che $M_{n + k} = I^n M_k$.
+\item ({\bf Esistenza di una filtrazione $I$-stabile}) Una filtrazione
+  $I$-stabile esiste sempre:
+  $$ M \supseteq IM \supseteq I^2 M \supseteq \ldots $$
+  Ed è inoltre la più piccola $I$-filtrazione.
+\item ({\bf Lemma delle filtrazioni $I$-stabili}) Se $\cF$ e $\cF '$
+  sono due $I$-filtrazioni $I$-stabili di $M$, date da:
+  $$ \cF: M = M_0 \supseteq M_1 \supseteq \ldots  \hfill  \cF': M_0'
+  \supseteq M_1' \supseteq \ldots $$ allora $\exists k > 0$ tale che
+  $M_n \supseteq M_{n-k}'$ e $M_n' \supseteq M_{n-k}$ $\forall n >> 0$
+  (abbastanza grandi)
+\item ({\bf Delle $I$-filtrazioni sui Noetheriani}) Sia $A$ noetheriano,
+  $M$ un $A$-modulo f.g., $\cF$ una $I$-filtrazione. Allora valgono i
+  seguenti:
+  \begin{enumerate}
+  \item Se $\cF$ è $I$-stabile si ha $\Gr_\cF M$ è Noetheriano, anzi è
+    f.g. come $\Gr_I A$-modulo
+  \item $\cF$ è $I$-stabile se e solo se $\Bl_\cF M$ è f.g. come $\Bl_I
+    A$-modulo.
+  \end{enumerate}
+\item ({\bf Lemma di Artin-Rees}) $A$ noetheriano, $I$ ideale di $A$,
+  $M$ un $A$-modulo f.g., $\cF$ una $I$-filtrazione $I$-stabile
+  $$ \cF: M_0 \supseteq M_1 \supseteq \ldots \supseteq M_n \supseteq
+  \ldots $$ e sia $N \subseteq M$ sottomodulo.
+
+  Allora $\cF \cap N$ è ancora una filtrazione $I$-stabile.
+\item ({\bf ``Limite'' della filtrazione}) Sia $M$ un $A$-modulo f.g.,
+  con $A$ noetheriano ed $I$ un ideale di $A$. Allora si ha
+  $$ \cap_n I^n M = \{ x \in M \mid \exists y \in I \tc (1 - y)x = 0
+  \} $$
+
+  Come corollari otteniamo immediatamente che se $A$ è locale e
+  noetheriano allora si ha $\cap_n \km^n = 0$.
+
+  Se invece $A$ è un dominio noetheriano ed $I$ è un suo qualunque
+  ideale allora $\cap_n I^n = 0$.
+\item ({\bf Passaggio di dominio}) Sia $A$ noetheriano. Se $\Gr_\km A$ è
+  un dominio allora $A$ è un dominio.
+\item ({\bf Rapporto tra un po' di cose}) Sia $(A, \km)$ un anello
+  locale e noetheriano, $I$ un ideale $\km$-primario e $M$ un $A$-modulo
+  f.g. e $\cF$ una $I$-filtrazione stabile di $M$.
+
+  Siano $\tilde{A} = \Gr_I A$ e $\tilde{M} = \Gr_\cF M$. Risulta allora
+  definita una serie di Hilbert, ed un polinomio di Hilbert:
+  $$ P(\tilde{M}, t) = \sum_n t^n \cl_{A_0} (\tilde{M_n}) =
+  \frac{f(t)}{(1-t)^d} $$ e si ha $\phi_{\tilde{M}} (n) = \cl_{A_0}
+  (\tilde{M_n})$ ha grado $d - 1$.
+
+  Infine indichiamo con $S_I$ il minimo numero di generatori di $I$. In
+  particolare $\tilde{A}$ come $\tilde{A_0}$-algebra è generata da al
+  più $S_I$ generatori. Vale allora il seguente lemma:
+  \begin{enumerate}
+  \item $d \le S_I$
+  \item $\cl_A (\sfrac{M}{M_n}) < \infty$
+  \item Per $n >> 0$ vale che $\cl_A (\sfrac{M}{M_n})$ è un polinomio di
+    grado $d$
+  \item Il grado ed il coefficiente direttivo del polinomio NON
+    dipendono dalla filtrazione scelta
+  \item Inoltre anche il grado di $n \mapsto \cl_A (\sfrac{M}{I^n M})$
+    non dipende da $I$.
+  \end{enumerate}
+\item ({\bf Equivalenza tra le dimensioni}) Sia $(A, \km)$ noetheriano
+  locale e consideriamo $M = A$. Allora abbiamo che la dimensione di
+  Krull di $A$, il minimo numero di generatori di un ideale
+  $\km$-primario ed il grado del polinomio di Hilbert di $A$ come
+  $A$-modulo coincidono.
+\item ({\bf Corollario}) Per anelli $A$ noetheriani vale che:
+  \begin{enumerate}
+  \item Se $A$ è locale, $\Dim A < \infty$
+  \item $\forall \kp$ primo si ha $\Ht \kp = \Dim A_\kp < \infty$
+  \item $\{\kp\}_{\kp \subseteq A}$ soddisfa la condizione della catena
+    discendente
+  \item Se $A$ è locale si ha $\Dim A \le \Dim_\bbK \sfrac{\km}{\km^2}$
+    con $\bbK = \sfrac{A}{\km}$
+  \end{enumerate}
+\item ({\bf Teorema dell'ideale principale di Krull}) Se $A$ è
+  noetheriano ed $x \in A$ un non divisore di zero e $\kp$ è un primo
+  minimale tra quelli contenenti $x$. Allora vale che $\Ht \kp = 1$.
+
+  Una semplice generalizzazione dice che se $A$ è noetheriano e $x_1,
+  \ldots, x_k \in A$ e si ha $\kp \supseteq (x_1, \ldots, x_k)$ minimale
+  tra gli ideali che li contengono tutti allora vale che $\Ht \kp \le k$
+
+  Ancora, se $A$ è locale e noetheriano e $x \notin \cD (A)$ vale che
+  $\Dim \frac{A}{(x)} = \Dim A - 1$
+\item ({\bf Anelli regolari}) Sia $(A, \km)$ un anello locale e
+  noetheriano. $\bbK = \frac{A}{\km}$. Allora $A$ si dice regolare se
+  $\Dim A = \Dim_\bbK \frac{\km}{\km^2}$, ovvero se $\km$ è generato
+  come ideale da $\Dim A$ elementi.
+
+  Più in generale un anello $A$ si dice regolare se è regolare $A_\km$
+  $\forall \km$ massimale (è equivalente a chiederlo $\forall \kp$ con
+  $\kp$ primo, ma è piuttosto difficile da mostrare)
+\item ({\bf Teorema dello Jacobiano}) Sia $A$ una $\bbK$-algebra, $A =
+  \lbr{\frac{\bbK[x_1, \ldots, x_n]}{I}}_\km$ con $I = (f_1, \ldots,
+  f_k)$ e tale che $I \subseteq (x_1, \ldots, x_n) = \km$.
+
+  Facciamo allora la matrice Jacobiana dei polinomi in zero
+  $J = \lbr{\dpar{f_i}{x_j}\mid_0}_{\substack{i = 1, \ldots, k \\ j = 1,
+    \ldots, n}}$ e supponiamo $d = \Dim A$ e $r = \Rk J$.
+
+  Allora $A$ è regolare se e solo se $n = d + r$ e vale inoltre che
+  $I_\km = (f_1, \ldots, f_r)$ a meno di riordinamenti (ovvero è
+  generato da un qualunque insieme i cui gradienti siano linearmente
+  indipendenti)
+\item ({\bf Regolarità per locali noetheriani}) Sia $(A, \km)$ un anello
+  locale noetheriano e $\bbK = \frac{A}{\km}$ e $\Dim A = d$. Allora $A$
+  è regolare se e solo se $\Gr_\km A \cong \bbK[t_1, \ldots, t_d]$, dove
+  l'isomorfismo è da intendersi come anelli graduati.
+
+  Come corollario si ottiene che un anello locale noetheriano e regolare
+  è un dominio.
+\end{itemize}
+
+\section*{Dimensioni basse}
+\begin{itemize}
+\item ({\bf Discrete Valuation Ring}) Sia $K$ un campo e si abbia
+  $v: K \setminus \{ 0 \} \rar \bbQ$ una funzione ``di valutazione'',
+  ovvero che soddisfi le seguenti proprietà:
+  \begin{enumerate}
+  \item $v(xy) = v(x) + v(y)$
+  \item $v(x + y) \ge \min \{ v(x), v(y) \}$
+  \end{enumerate}
+
+  Un dominio $A$ si dice ``di valutazione discreta'' se $\exists v:
+  \Frac(A) \setminus \{ 0 \} \rar \bbQ$ con $\Im v = q \bbZ$, con $q \in
+  \bbQ^*$ e $A = A_v = \{ x \in K \mid v(x) \ge 0 \} \cup \{ 0 \}$
+\item ({\bf Esempio}) Se $A$ è UFD, $p$ un elemento primo allora si ha
+  $v_p (x) = \max {n \mid \quad p^n | x }$ ha le due proprietà di sopra
+  e si può estendere a tutto $K = \Frac A$ nel seguente modo:
+  $$ v_p (\frac{x}{y}) = v_p(x) - v_p(y) $$.
+
+  In questo caso $A$ è un DVR con la valutazione data da $v_p$.
+\item ({\bf Proprietà dei DVR}) Se $A$ è DVR allora si ha:
+  \begin{enumerate}
+  \item $A$ è Noetheriano
+  \item $A$ è PID
+  \item $A$ è locale con $\km = \{ x \mid v(x) > 0 \}$
+  \item $\km = (t)$
+  \item $\Dim A = 1$
+  \item $A$ è regolare
+  \item $A$ è UFD ed anche Normale
+  \end{enumerate}
+\item ({\bf Lemma di equivalenze}) Sia $A$ dominio noetheriano normale,
+  $\Dim A = 1$. Allora le seguenti sono equivalenti:
+  \begin{enumerate}
+  \item $A$ è regolare
+  \item $A$ è normale
+  \item $A$ è DVR
+  \item $A$ è UFD
+  \end{enumerate}
+\item ({\bf Dominio di Dedekind}) Sia $A$ dominio noetheriano di
+  dimensione uno. $A$ si dice dominio di Dedekind se è normale, ovvero
+  se la localizzazione in tutti gli ideali massimali è normale, ovvero
+  $A_\km$ è DVR $\forall \km$ massimale.
+\item Se $A$ è un dominio Noetheriano normale, e $\kp \subseteq A$ è un
+  ideale primo di altezza uno ($\Ht \kp = 1$) allora si ha che $A_\kp$ è
+  regolare.
+\item ({\bf Regolare in codimensione uno}) $A$ dominio noetheriano si
+  dice regolare in codimensione uno se $\forall \kp \subseteq A$ primo
+  di altezza uno si ha che $A_\kp$ è regolare.
+\item ({\bf Cosa non dimostrata}) Sia $A$ una $\bbK$-algebra dominio e
+  $A = \frac{\bbK[x_1, \ldots, x_n]}{(f_1, \ldots, f_k)}$ e sia $\kp =
+  (f_1, \ldots, f_k)$, $d = \Dim A$, $\bbK$ algebricamente chiuso e $r =
+  n - d$. Allora vale che:
+  \begin{enumerate}
+  \item Tutti i determinanti dei minori $(r + 1) \times (r + 1)$ della
+    matrice Jacobiana $Jac = \lbr{\dpar{f_i}{x_j}}$ sono elementi di
+    $\kp$
+  \item Sia $J$ l'ideale generato dai determinanti dei minori
+    $r \times r$. Allora, preso $\ov{\kq}$ primo di $A$ con $\ov{\kq} =
+    \sfrac{\kq}{\kp}$ si ha che $A_{\ov\kq}$ NON è regolare se e solo se
+    $\kq \supseteq J$
+
+    Se pongo $\ov{J} = \frac{J + \kp}{\kp} \subseteq A$ allora $\ov\kq$
+    NON è regolare se e solo se $\ov\kq \supseteq \ov{J}$, ovvero
+    $\ov\kq \in V(\ov{J}) \subseteq \Spec A$, o ancora $v(\ov{\kq})
+    \subseteq v(\ov{J}) \subseteq \bbK^n$
+  \end{enumerate}
+\item ({\bf Regolarità in codimensione per le $K$-algebre}) Se $A$ è una
+  $\bbK$-algebra allora essa è regolare in codimensione uno se si ha
+  $\Dim \sfrac{A}{\ov{J}} \le \Dim A - 2$ (Con le notazioni precedenti)
+\item ({\bf Criterio di Serre}) Sia $A$ dominio noetheriano. Allora $A$
+  è normale se e solo se vale uno dei seguenti:
+  \begin{enumerate}
+  \item $\forall x \neq 0$ e $\forall \kp \in \Ass (x)$ si ha $\kp_\kp$
+    è principale ovvero $A_\kp$ è regolare
+  \item $\forall x \neq 0$ e $\forall \kp \in \Ass(x)$ si ha
+    $\Ht \kp = 1$. Inoltre vale che $\forall \kp$ tale che $\Ht \kp = 1$
+    si ha $A_\kp$ è regolare.
+  \end{enumerate}
+\item ({\bf Caratterizzazione di UFD}) $A$ dominio noetheriano. Allora
+  $A$ è UFD se e soltanto se vale una delle seguenti:
+  \begin{enumerate}
+  \item $\forall x \neq 0 \quad \forall \kp \in \Ass (x)$ si ha $\kp$ è
+    principale
+  \item $\forall x \neq 0 \quad \forall \kp \supseteq (x)$ minimale tra
+    quelli che contengono $(x)$ vale che $\kp$ è principale.
+  \end{enumerate}
+\item $A$ dominio noetheriano e sia $\kq$ un ideale $\kp$-primario e $S
+  \subseteq A$ una parte moltiplicativa tale che $S \cap \kp =
+  \emptyset$. Allora valgono che:
+  \begin{enumerate}
+  \item $S^{-1}\kq$ è $S^{-1}\kp$-primario
+  \item $S^{-1}A \cap S^{-1}\kq = \kq$
+  \item $(S^{-1}\kp)^n = S^{-1} \kp^n$
+  \item $S^{-1} \kp^n \cap A = \kp^n$
+  \end{enumerate}
+\item $N \subseteq M$. Allora $x \in N \sse x \in N_\kp \quad \forall
+  \kp$ primo.
+\item $A$ dominio noetheriano e $I \subseteq A$ ideale allora si ha
+  $x \in I \sse x \in I_\kp = I A_\kp \quad \forall \kp$ primo associato
+  ad $I$.
+\item $A$ dominio noetheriano e $K = \Frac(A)$. Allora dato un $x \in K$
+  si ha che $x \in A \sse x \in A_\kp \quad \forall \kp \in \cA$, dove
+  $\cA = \{ \kp \subseteq A \text{ primi } \mid \exists y \neq 0 \tc \kp
+  \in \Ass (y) \}$
+\item ({\bf Teorema di Hartogs}) Sia $A$ dominio noetheriano
+  normale. Allora si ha $A = \cap_{\kp \tc \Ht \kp = 1} A_\kp$
+\end{itemize}
+
+\section*{Fibrati vettoriali e moduli localmente liberi}
+In questa sezione assumeremo l'ipotesi di $A$ dominio noetheriano
+
+\begin{itemize}
+\item ({\bf Modulo localmente libero}) $M$ $A$-modulo f.g. si dice
+  localmente libero se $\forall \kp \subseteq A$ primo $M_\kp$ è libero
+  ($M_\kp \cong A_\kp^r$)
+\item ({\bf Caratterizzazione}) Se $M$ è un $A$-modulo f.g. allora sono
+  equivalenti:
+  \begin{enumerate}
+  \item $M$ è localmente libero di rango $r$
+  \item $\exists f_1, \ldots, f_k \in A$ tali che $(f_1, \ldots, f_k) =
+    A$ e $M_{f_i} \cong A_{f_i}^r$
+  \item $M$ è proiettivo e $M \otimes_A K(A) \cong K(A)^r$
+  \end{enumerate}
+
+  Osserviamo che se $M$ è localmente libero e si ha
+  $M_\kp \cong A_\kp^r$ allora
+  $M \otimes_A K = S^{-1}M = M \otimes_{A_\kp} K \cong A_\kp^r
+  \otimes_{A_\kp} K \cong K^r$ e quindi se in un primo ha rango $r$
+  allora è uguale per tutti poiché
+  $r = \Dim_K K^r \cong \Dim_K (M \otimes_A K)$ e viene detto rango.
+\item ({\bf Fibrato lineare}) Un fibrato lineare è un modulo localmente
+  libero di rango uno.
+\item ({\bf Lemma di isomorfismo}) $A$ noetheriano, $S$ parte
+  moltiplicativa e $M$ f.g. allora si ha
+  $$ S^{-1} \Hom_A (M, N) \rar \Hom_{S^{-1}A} (S^{-1}M, S^{-1}N) $$
+  definita da
+  $\frac{\phi}{s} \mapsto \frac{\phi}{s} (\frac{m}{t}) =
+  \frac{\phi(m)}{st}$ è un isomorfismo.
+\item $M$ un $A$-modulo, $M^* = \Hom_A (M, A)$ ed osservo che
+  $\mu: M^* \otimes_A M \rar A$ definita da $\phi \otimes m \mapsto
+  \phi(m)$ è una mappa. Allora si trova che $M$ è f.g. e localmente
+  libero di rango uno $\sse$ $\mu$ è un isomorfismo
+
+  Come corollario, se $M$ è localmente libero di rango uno allora $M^*$
+  è f.g. ed è anch'esso un modulo localmente libero di rango uno.
+\item $M, N$ moduli localmente liberi di rango uno. Allora si ha:
+  \begin{enumerate}
+  \item $M \otimes N$ è localmente libero di rango uno e vale che
+    $(M \otimes N)^* \cong M^* \otimes N^*$
+  \item $M \otimes N \cong A \implies N \cong M^*$
+  \item $\Hom_A (M, N) \cong M^* \otimes_A N$
+  \end{enumerate}
+\item ({\bf Ideali frazionari}) $A$ dominio noetheriano e $K = \Frac
+  A$. Un ideale frazionario è un $A$-sottomodulo f.g. di $K$.
+
+  Se $I$ è frazionario allora
+  $I^{-1} = \{ x \in K \mid xI \subseteq A \}$ e dico che $I$ è
+  invertibile se $I^{-1} I = A$
+\item ({\bf Proprietà base}) Per gli ideali frazionari valgono le
+  seguenti proprietà:
+  \begin{enumerate}
+  \item Se $I$ e $J$ sono invertibili allora $IJ$ è invertibile
+  \item Se $I$ è invertibile allora $I^{-1}$ è invertibile
+  \end{enumerate}
+\end{itemize}
 \end{document}
 
