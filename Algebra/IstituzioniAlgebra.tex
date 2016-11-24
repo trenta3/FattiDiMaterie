@@ -2,6 +2,7 @@
 \usepackage{pgf}
 \usepackage{tikz-cd}
 \usepackage{xfrac}
+\usepackage{mathtools}
 \usetikzlibrary{cd,arrows,automata}
 \newcommand{\MCD}{\text{MCD }}
 \newcommand{\Lt}{\text{lt }}
@@ -593,6 +594,107 @@ In questa sezione assumeremo l'ipotesi di $A$ dominio noetheriano
   \item Se $I$ e $J$ sono invertibili allora $IJ$ è invertibile
   \item Se $I$ è invertibile allora $I^{-1}$ è invertibile
   \end{enumerate}
+\item ({\bf Divisori di Cartier}) Possiamo introdurre il gruppo delle
+  classi dei divisori di Cartier:
+  $$ \Cacl (A) = \sfrac{\{\text{ ideali invertibili }\}, \cdot}{~} $$
+  dove la relazione è $I ~ J$ se e solo se $I = aJ$ con $a \in K^*$
+\item ({\bf Lemma}) $A$ dominio noetheriano. Allora si ha
+  \begin{enumerate}
+  \item $I$ e $J$ ideali frazionari che siano anche moduli localmente
+    liberi di rango uno $I \otimes_A J \cong IJ$ e
+    $\Hom_A(I, J) \cong I^{-1}J$, inoltre $I^{-1} \cong I^*$
+  \item Se $I$ è un ideale frazionario, allora $I$ è un modulo
+    localmente libero di rango uno se e solo se $I$ è invertibile
+  \item $\forall M$ modulo localmente libero di rango uno $\exists I$
+    ideale invertibile tale che $I \cong M$
+  \end{enumerate}
+\item ({\bf Teorema interessante}) $A$ dominio noetheriano allora $\Cacl
+  (A) \cong \Pic (A)$ attraverso la mappa $[I] \mapsto \{\text{ classe
+    di isomorfismo di } I \text{ come } A \text{ modulo }\}$
+\item ({\bf Divisori di Weil}) Definiamo
+  $\Div A = \oplus_{\Ht \kp = 1} \bbZ \kp$ su $A$ dominio noetheriano e
+  $\forall \kp$ tale che $\Ht \kp = 1$ assumiamo $A_\kp$ regolare (ad
+  esempio $A$ normale va bene). In queste ipotesi $A_\kp$ è DVR e
+  $v_\kp: K^* \rar \bbZ$ in modo che $A_\kp = K_{v_\kp}$.
+
+  Allora dato $f \in K^*$ posso definire
+  $$ \div f = \sum_\substack{\kp \text{ primi } \\ \Ht \kp = 1} v_\kp(f)
+  \kp $$ Si verifica che la somma è sempre finita e quindi si può
+  definire $\Cl A = \sfrac{\Div A}{\{ \div f \mid f \in K^*\}}$ ovvero
+  tutti i divisori quozientati per quelli principali.
+\item ({\bf Cose vere}) $A$ normale. Allora $A$ è UFD se e solo se
+  $\Cl A = 1$
+
+  Con qualche ipotesi si ha $\Cl (A) = \Pic (A)$
+\end{itemize}
+
+\section*{Moduli semplici e semisemplici}
+In questa sezione $A$ è un anello unitario (non necessariamente
+commutativo)
+
+\begin{itemize}
+\item ({\bf Moduli semplici}) Sia $M$ un $A$-modulo, $M \neq 0$, allora
+  $M$ si dice semisemplice se non ha sottomoduli non banali.
+\item ({\bf Lemma di Schur}) Se $S$ e $T$ sono moduli semplici e
+  $\phi: S \rar T$ è un morfismo, allora $\phi = 0$ oppure $\phi$ è un
+  isomorfismo
+
+  In particolare $\End_A (M) = D$ se $M$ è semplice allora $D$ è un
+  corpo.
+\item ({\bf Moduli semisemplici}) Le seguenti sono equivalenti:
+  \begin{enumerate}
+  \item $M$ è somma di moduli semplici (anche NON diretta, anche
+    infinita)
+  \item $M = \oplus_j M_j$ con gli $M_j$ semplici
+  \item $\forall N \subseteq M$ si ha $\exists P \subseteq M$ tale che
+    $N \oplus P = M$
+  \end{enumerate}
+  In questi casi $M$ si dice semisemplice.
+\item ({\bf Proprietà dei semisemplici}) Se $M$ è semisemplice e $N
+  \subseteq M$ allora anche $N$ è semisemplice.
+
+  Inoltre se $M$ è semisemplice, $N \subseteq M$ si ha $\sfrac{M}{N}$ è
+  semisemplice.
+
+  Se invece $N \subseteq M$ è s.s. e $\sfrac{M}{N}$ è s.s. allora NON è
+  detto che $M$ lo sia.
+\item ({\bf Tutti gli $A$-moduli s.s.?}) Le seguenti sono equivalenti:
+  \begin{enumerate}
+  \item Tutti gli $A$-moduli sono s.s.
+  \item $\prescript{}{A}{A}$ è s.s. (ovvero $A$ come $A$-modulo sinistro
+    è s.s.)
+  \item Tutti gli $A$-moduli sono proiettivi
+  \end{enumerate}
+\item ({\bf Esempi}) Sia $D$ un corpo.
+
+  Allora $A = \kM_{n\times n}(D)$ è s.s.
+
+  $D^n$ è un $A$-modulo semplice.
+\item ({\bf Teorema di Wedderburn}) Sia $A$ anello s.s. Allora è
+  prodotto diretto di anelli di matrici su corpi, ovvero vale che
+  $$ A \cong \prod_i \kM_{a_i \times a_i}(D_i') $$
+  con $D_i' = \End_A (S_i, S_i)^{\text{op}}$ dove $S_i$ sono i moduli
+  semplici tali che $A = \oplus_i S_i$ (che sono in numero finito)
+\end{itemize}
+
+\section*{Categorie Abeliane}
+\begin{itemize}
+\item ({\bf Categoria}) Una categoria $\cC$ è una classe di oggetti
+  $\Ob \cC$ e $\forall x, y \in \Ob \cC$ si ha un insieme
+  $\Hom_\cC (x, y) = \cC(x, y)$ in modo che si possano comporre ed
+  esista l'identità di ogni oggetto.
+\item ({\bf Categoria additiva}) È una categoria $\cA$ in cui valgono:
+  \begin{enumerate}
+  \item[A1] $\Hom(x, y)$ è un gruppo abeliano e $\circ$ è bilineare
+  \item[A2] $\exists o \in \cA$ tale che $\Hom (o, o) = 0$ e quindi
+    anche $\Hom (o, x) = 0 \quad \forall x \in \cA$
+  \item[A3] Esistono il prodotto ed il coprodotto finito.
+
+    Questo assioma si può in realtà rimpiazzare con la sola esistenza
+    del prodotto. In questo caso si può dimostrare che il coprodotto
+    (assumendo A1 e A2) è isomorfo al prodotto.
+  \end{enumerate}
+\item ({\bf })
 \end{itemize}
 \end{document}
 
