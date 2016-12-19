@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 \usepackage[a4paper,twoside,top=0.5in, bottom=0.5in, left=0.5in, right=0.5in]{geometry}
+\usepackage{float}
 \usepackage{graphicx}
 \usepackage{titlesec}
 \usepackage{multicol}
@@ -199,8 +200,21 @@
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 
 % Aggiunte ad-hoc
-\newcommand \rot{\ensuremath{\nabla\times}}
+\newcommand \rot{\ensuremath{{\vec \nabla}\times}}
 
 \newcommand{\dep}[2]{\ensuremath{\frac{\partial {#1}}{\partial {#2}}}}
 \newcommand{\ded}[2]{\ensuremath{\frac{\de {#1}}{\de {#2}}}}
+
+% Definiamo un environment per i sistemi di equazioni
+\newenvironment{eqsystem}[1]
+{
+  \begin{displaymath}
+    \left\{
+      \begin{array}{#1}
+}{
+      \end{array}
+    \right.
+  \end{displaymath}
+}
+
 

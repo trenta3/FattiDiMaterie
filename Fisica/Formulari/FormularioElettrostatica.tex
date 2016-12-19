@@ -433,6 +433,20 @@ elettrico nel seguente modo:
   \end{equation*}
 }
 
+\section{Potenziali e Gauge}
+Si deve avere:
+\begin{eqsystem}{c}
+  \vec E = - \grad V - \dep{\vec A}{t} \\
+  \vec B = \rot {\vec A} \\
+\end{eqsystem}
+
+Nella Gauge di Lorentz, ovvero
+$\div {\vec A} + \mu_0 \epsilon_0 \dep{V}{t} = 0$, si ha
+\begin{eqsystem}{c}
+  - \nabla^2 V + \frac{1}{c^2} \dep{V}{t} = \frac{\rho}{\epsilon_0} \\
+  - \nabla^2 {\vec A} + \frac{1}{c^2} \dep{\vec A}{t} = \mu_0 \vec J \\
+\end{eqsystem}
+
 \section{Momento di dipolo magnetico}
 \formula{Definizione di momento di dipolo}{
   \begin{equation*}
@@ -496,7 +510,24 @@ elettrico nel seguente modo:
 }
 
 \section{Distribuzioni di corrente particolari}
-\formula{Filo}{
+
+\formula{Segmento di Filo}{
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \includegraphics[width=0.95\linewidth]{SegmentoFilo}
+    \end{center}
+  \end{minipage}%
+  \begin{minipage}{0.5\linewidth}
+    Il campo magnetico in un qualunque punto dello spazio è dato da
+    \begin{equation*}
+      \vec B = \hat\varphi \frac{\mu_0 I}{4 \pi r} \int_{\theta_1}^{\theta_2} \sin \theta \de \theta
+    \end{equation*}
+    dove $\theta_1$ e $\theta_2$ sono l'angolo iniziale e l'angolo finale
+    che la congiungente al filo forma con il filo stesso.
+  \end{minipage}
+}
+
+\formula{Filo infinito}{
   Un filo lungo l'asse $\hat z$ percorso da corrente $I$ genera
   \begin{equation*}
     \vec B(\vec r)=\hat\varphi \frac{\muz I}{2\pi\rho}
@@ -504,12 +535,17 @@ elettrico nel seguente modo:
   dove $\hat\varphi$ è orientato in modo che se il pollice della mano destra è $\hat z$, le restanti dita ne descrivono il verso.
 }
 
-\formula{Solenoide}{
+\formula{Solenoide cilindrico}{
   Un solenoide di raggio $a$, con $n$ spire per unità di lunghezza percorse da corrente $I$, disposto lungo l'asse $\hat z$ genera
   \begin{equation*}
     \vec B(\vec r)=\hat z\muz nI
   \end{equation*}
-  che è diretto in modo che se le dita della mano destra seguono $I$, allora il pollice detta il verso di $\vec B$.
+  che è diretto in modo che se le dita della mano destra seguono $I$,
+  allora il pollice detta il verso di $\vec B$.
+
+  Inoltre, la sua autoinduttanza vale $L = \mu_0 \frac{N^2 a^2 \pi}{l}$,
+  con $l$ la sua lunghezza, $N$ il numero di spire totali
+  ($n = \frac{N}{l}$)
 }
 
 \formula{Spira}{
@@ -551,6 +587,20 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
   \end{equation*}
 }
 
+\section{Formule di M. Complete}
+\begin{equation*}
+  \div {\vec E} = \frac{\rho}{\epsilon_0}
+\end{equation*}
+\begin{equation*}
+  \div {\vec B} = 0
+\end{equation*}
+\begin{equation*}
+  \rot {\vec E} = - \dep{\vec B}{t}
+\end{equation*}
+\begin{equation*}
+  \rot {\vec B} = \epsilon_0 \mu_0 \dep{\vec E}{t} + \mu_0 \vec J
+\end{equation*}
+
 \section{Induzione magnetica}
 
 \formula{Induttanza}{
@@ -577,6 +627,20 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
   dove con $r$ indichiamo la distanza tra i punti in cui stiamo integrando.
 }
 
+\formula{Mutua induzione tra due circuiti}{
+  \begin{center}
+    \includegraphics[width=0.9\linewidth]{MutuaInduzioneCircuiti}
+  \end{center}
+    
+  Nel caso di due circuiti come in figura con mutua induzione tra di
+  essi si hanno le seguenti formule:
+
+  \begin{eqsystem}{c}
+    f_1 = I_1 R_1 + L_1 \dot{I_1} + L_{12} \dot{I_2} \\
+    f_2 = I_2 R_2 + L_2 \dot{I_2} + L_{21} \dot{I_1} \\
+  \end{eqsystem}
+}
+
 \formula{Energia di un induttore}{
   \begin{equation*}
     U=\frac 12LI^2
@@ -593,6 +657,16 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
   \end{equation*}
 }
 
+\section{Alcune induttanze}
+\formula{Induttanza cavo coassiale}{
+  \begin{center}
+    \includegraphics[width=0.9\linewidth]{CavoCoassiale}
+  \end{center}
+    
+  dove supponiamo che $b > a$, $h >> b \simeq a$. Allora l'induttanza è
+  data da $L = \frac{\mu_0 h}{2 \pi} \log(\frac{b}{a})$
+}
+
 \section{Formule nei materiali}
 \formula{Formula fondamentale}{
   $$\vec{D} = \epsilon_0 \epsilon_r \vec{E} = \epsilon_0 \vec{E} + \vec{P}$$
@@ -600,8 +674,8 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
 
 \formula{Densità di carica}{
   $$\rho_\text{TOT} = \rho_\text{EXT} + \rho_\text{IND}$$
-  $$\div{P} = - \rho_\text{IND}$$
-  $$\div{D} = \rho_\text{EXT}$$
+  $$\div{\vec P} = - \rho_\text{IND}$$
+  $$\div{\vec D} = \rho_\text{EXT}$$
   $$\vec{P} \cdot \hat{n} = \sigma_\text{IND}$$
 }
 
