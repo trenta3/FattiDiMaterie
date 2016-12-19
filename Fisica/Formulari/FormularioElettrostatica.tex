@@ -3,7 +3,9 @@
 \setlength{\columnsep}{1cm}
 \usepackage{CommandsAndStyle}
 
-\author{Idea originaria di Federico Glaudo e Giada Franz \\ Piccole aggiunte di Dario Balboni}
+\author{Idea originaria di Federico Glaudo e Giada Franz \\
+  Piccole aggiunte di Dario Balboni \\
+  Contributo Fisico di Federico Franceschini}
 \title{Formulario di Fisica II}
 
 \begin{document}
@@ -587,6 +589,15 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
   \end{equation*}
 }
 
+\formula{Circuito RLC}{
+  \begin{equation*}
+    \ddot{Q} + \frac{R}{L} \dot{Q} + \frac{1}{LC} Q = 0
+  \end{equation*}
+
+  Sono quindi esponenziali smorzati con
+  $$\alpha_{1,2} = \frac{- R \pm \sqrt{R^2 - 4 \frac{L}{C}}}{2 L}$$
+}
+
 \section{Formule di M. Complete}
 \begin{equation*}
   \div {\vec E} = \frac{\rho}{\epsilon_0}
@@ -670,6 +681,7 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
 \section{Formule nei materiali}
 \formula{Formula fondamentale}{
   $$\vec{D} = \epsilon_0 \epsilon_r \vec{E} = \epsilon_0 \vec{E} + \vec{P}$$
+  $\vec P$ viene chiamata densità di dipolo
 }
 
 \formula{Densità di carica}{
@@ -678,6 +690,167 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
   $$\div{\vec D} = \rho_\text{EXT}$$
   $$\vec{P} \cdot \hat{n} = \sigma_\text{IND}$$
 }
+
+\formula{Condizioni superficiali campi elettrici}{
+  \begin{minipage}{0.35\linewidth}
+    \includegraphics[width=0.95\linewidth]{SaltiCampiElettrici}
+  \end{minipage}%
+  \begin{minipage}{0.6\linewidth}
+    Come si relazionano i salti dei campi nel passare da una parte della
+    superficie all'altra?
+
+    \begin{eqsystem}{c}
+      \vec{D_{\bot_1}} - \vec{D_{\bot_2}} = \sigma_\text{EXT} \\
+      \vec{E_{\parl_1}} = \vec{E_{\parl_2}}                   \\
+    \end{eqsystem}
+  \end{minipage}
+}
+
+\formula{Energia elettrica in presenza di dielettrici}{
+  $$U = \frac{1}{2} \int \vec{D} \dotp \vec{E}$$
+
+  E la densità di energia è
+  $u = \frac{{\vec D}^2}{2 \epsilon_0 \epsilon_r}$
+}
+
+\formula{Campi magnetici nella materia}{
+  $\vec \mu$ è la densità di momento magnetico
+  
+  \begin{displaymath}
+    \begin{array}{cr}
+      \vec{J_\IND} = \rot {\vec \mu}            &                       \\
+      \vec{k_\IND} = {\vec \mu} \times {\hat n} & \text{(superficiale)} \\
+    \end{array}
+  \end{displaymath}
+
+  Se inoltre definiamo $\vec H = \frac{\vec B}{\mu_0} - {\vec \mu} =
+  \frac{1}{\mu_0} (1 - \chi_m) {\vec B}$ valgono le equazioni:
+  \begin{displaymath}
+    \begin{array}{c}
+      \rot {\vec H} = {\vec J_\EXT} \\
+      \div {\vec B} = 0             \\
+    \end{array}
+  \end{displaymath}
+
+  $$\frac{1}{\mu_0 \mu_r} = \frac{1}{\mu_0} (1 - \chi_m)$$
+  $$\vec H = \frac{1}{\mu_0 \mu_r} {\vec B}$$
+}
+
+\formula{Condizioni superficiali campo magnetico}{
+  \begin{minipage}{0.35\linewidth}
+    \includegraphics[width=0.95\linewidth]{SaltiCampiMagnetici}
+  \end{minipage}%
+  \begin{minipage}{0.6\linewidth}
+    Come si relazionano i salti dei campi nel passare da una parte della
+    superficie all'altra?
+
+    \begin{eqsystem}{c}
+      \vec{B_{\bot_1}} = \vec{B_{\bot_2}} \\
+      \vec{H_{\parl_1}} - \vec{H_{\parl_2}} = \vec{k_\EXT} \\
+    \end{eqsystem}
+  \end{minipage}
+}
+
+
+\section{Esempi particolari}
+\formula{Sfera uniformemente polarizzata}{
+  Il problema è dato in termini della densità di dipolo:
+  \begin{eqsystem}{cr}
+    \vec P = p \hat{z} & \text{se } r \le a \\
+    \vec P = 0         & \text{se } r > a   \\
+  \end{eqsystem}
+
+  Allora, se non c'è $\rho_\text{EXT}$, si ha $\rho_\text{IND} = 0$,
+  $\sigma_\text{IND} = \vec P \dotp \hat{n} = p \cos \theta$, con
+  $r = a$.
+
+  Il campo è
+  \begin{eqsystem}{rl}
+    \vec E (r < a) = & \frac{p}{3 \epsilon_0} \hat{z} \\
+    \vec E (r > a) = & \frac{\vec{P_\text{TOT}} \dotp \vec{r}}{4 \pi \epsilon_0 r^2} \\
+  \end{eqsystem}
+  dove $\vec{P_\text{TOT}} = \frac{4}{3} \pi a^3 p \hat{z}$
+}
+
+\section{Onde Elettromagnetiche}
+\formula{Equazioni nel vuoto}{
+  Definiamo
+  $\square = \nabla^2 - \frac{1}{c^2} \frac{\partial^2}{\partial t^2}$
+
+  Allora le equazioni nel vuoto diventano $\square {\vec B} = 0$ e
+  $\square {\vec E} = 0$.
+}
+
+\formula{Formula Onda Piana nel vuoto}{
+  Un'onda piana nel vuoto ha la seguente forma:
+  \begin{eqsystem}{rl}
+    \vec E = & \vec{E_0} \cos (\vec{k} \dotp \vec{r} - \omega t + \varphi_0) \\
+    \vec B = & \vec{B_0} \cos (\vec{K} \dotp \vec{r} - \omega t + \varphi_0) \\
+  \end{eqsystem}
+  con $\vec{B_0} = \frac{1}{c} \hat{k} \times \vec{E}$ e $\omega = ck$.
+  Esse hanno polarizzazione lineare.
+
+  Abbiamo invece anche quelle con polarizzazione circolare:
+  \begin{eqsystem}{rl}
+    \vec E = & (\vec{a_0} \pm i \hat{k} \times \vec{a_0}) e^{i (\vec{k} \dotp \vec{r} - \omega t + \varphi_0)}             \\
+    \vec B = & \frac{1}{c} (\hat{k} \times \vec{a_0} \mp i \vec{a_0}) e^{i (\vec{k} \dotp \vec{r} - \omega t + \varphi_0)} \\
+  \end{eqsystem}
+
+  Chiamiamo vettore di Poynting
+  $\vec{I} = \frac{1}{\mu_0} (\vec{E} \times \vec{B})$, siccome si ha,
+  fissato un volume $V$, e detta $\Sigma = \partial V$ il suo bordo:
+  $$\frac{\de}{\de t} \lrt{\int_{V_\epsilon} u_E + u_B} = -
+  \frac{1}{\mu_0} \int_\Sigma (\vec{E} \times \vec{B}) \dotp \de{\vec{s}}$$
+}
+
+\formula{Riflessione di un onda}{
+  $\vec E = \vec{E_+} + \vec{E_-}$ ed
+  anche $\vec B = \vec{B_+} + \vec{B_-}$, dove con il $+$ indichiamo i
+  campi incidenti e con il $-$ indichiamo i campi riflessi.
+
+  % TODO: Da finire
+}
+
+\formula{Dipolo oscillante}{
+}
+
+\formula{Velocità della luce in un mezzo}{
+  $v = \frac{c}{\sqrt{\epsilon_r \mu_r}}$ è la velocità della luce.
+
+  Inoltre $n_r = \frac{v}{c}$ si dice indice di rifrazione
+}
+
+\formula{Onde incidenti, rifratte, riflesse}{
+  \begin{center}
+    \includegraphics[width=0.95\linewidth]{OndeRiflesseRifratte}
+  \end{center}
+
+  Imponendo la continuità dei campi nei materiali si ottiene $\omega =
+  \omega' = \omega''$, $\alpha = \alpha'$, ovvero che l'angolo di
+  riflessione è uguale all'angolo di incidenza.
+
+  Inoltre per la relazione di snell
+  $n_2 \sin \alpha'' = n_1 \sin \alpha$
+
+  Se la polarizzazione è ortogonale sia a $\hat{k}$ sia a $\hat{n}$,
+  vale che
+  \begin{displaymath}
+    \begin{array}{c}
+      E_0' = \frac{n_1 \cos \alpha - n_2 \cos \alpha'}{n_1 \cos \alpha + n_2 \cos \alpha''} \\
+      E_0'' = E_0 \frac{2 n_1 \cos \alpha}{n_1 \cos \alpha + n_2 \cos \alpha'}              \\
+    \end{array}
+  \end{displaymath}
+}
+
+\formula{Potenziali ritardati}{
+  \begin{eqsystem}{rl}
+    V =       & \frac{1}{4 \pi \epsilon_0} \int \frac{\rho(\vec{r}', t - \frac{\abs{\vec{r} - \vec{r}'}}{c})}{\abs{\vec{r} - \vec{r}'}} \de^3 r' \\
+    \vec{A} = & \frac{\mu_0}{4 \pi} \int \frac{\vec{J}(\vec{r}', t - \frac{\abs{\vec{r} - \vec{r}'}}{c})}{\abs{\vec{r} - \vec{r}'}} \de^3 r'     \\
+  \end{eqsystem}
+  Ed è soddisfatta la Gauge di Lorentz: $\div {\vec A} + \frac{1}{c^2}
+  \frac{\partial^2 V}{\partial t^2} = 0$.
+}
+
 
 \section{Integrali ``Noti''}
 \begin{equation*}
