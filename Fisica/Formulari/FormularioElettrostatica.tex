@@ -107,6 +107,15 @@ Nel caso in cui la distribuzione di carica sia sufficientemente localizzata, si 
   \end{equation*}
 }
 
+\formula{Potenziale a simmetria cilindrica}{
+  Attenzione che la formula seguente è scritta in coordinate sferiche e non in cilindriche: $r$ è il raggio e $\theta$ è l'angolo azimutale (quello che non fa un giro intero)
+
+  \begin{equation*}
+    V(r, \theta) = \sum_{l=0}^\infty \lrb{\frac{A_l}{r^{l+1}} + B_l r^l} P_l(\cos \theta)
+  \end{equation*}
+
+  I $P_l(\cos \theta)$ sono polinomi e si chiamano ``di Legendre''. Sono tra loro ortogonali, $\deg P_l = l$ e normalizzati in modo che $P_l(1) = 1$. I primi sono: $P_0(x) = 1, P_1(x) = x, P_2(x) = \frac{3x^2 - 1}{2}$
+}
 
 \section{Conduttori}
 
@@ -217,6 +226,19 @@ Nel caso in cui la distribuzione di carica sia sufficientemente localizzata, si 
   \begin{equation*}
     \vec F=\Diff \vec E\dotp \vec p
   \end{equation*}
+
+  \formula{Energia di un dipolo elettrico in un campo}{
+    \begin{equation*}
+      U = - \vec p \cdot \vec E (\vec r)    
+    \end{equation*}
+  }
+  
+  \formula{Momento forze del dipolo}{
+    \begin{equation*}
+      \vec M = \vec p \times \vec E
+    \end{equation*}
+  }
+  
 }
 
 % TODO: formula quadrupolo
@@ -422,6 +444,12 @@ elettrico nel seguente modo:
   \end{equation*}
 }
 
+\formula{Energia potenziale del dipolo magnetico}{
+  \begin{equation*}
+    U = - \vec{m} \cdot \vec{B}
+  \end{equation*}
+}
+
 \section{Potenziale vettore}
 \formula{Relazioni fondamentali con $\vec B$}{
   \begin{align*}
@@ -448,6 +476,12 @@ $\div {\vec A} + \mu_0 \epsilon_0 \dep{V}{t} = 0$, si ha
   - \nabla^2 V + \frac{1}{c^2} \dep{V}{t} = \frac{\rho}{\epsilon_0} \\
   - \nabla^2 {\vec A} + \frac{1}{c^2} \dep{\vec A}{t} = \mu_0 \vec J \\
 \end{eqsystem}
+
+\section{Tensore di Maxwell}
+\begin{equation*}
+  T_{ij} = \epsilon_0 (E_i E_j - \frac{1}{2} \delta_{ij} E^2) +
+  + \frac{1}{\mu_0} (B_i B_j - \frac{1}{2} \delta_{ij} B^2)
+\end{equation*}
 
 \section{Momento di dipolo magnetico}
 \formula{Definizione di momento di dipolo}{
@@ -801,6 +835,8 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
   fissato un volume $V$, e detta $\Sigma = \partial V$ il suo bordo:
   $$\frac{\de}{\de t} \lrt{\int_{V_\epsilon} u_E + u_B} = -
   \frac{1}{\mu_0} \int_\Sigma (\vec{E} \times \vec{B}) \dotp \de{\vec{s}}$$
+
+  E la densità di quantità di moto $\vec P = \frac{1}{c} \vec S$. Densità di momento angolare $\vec{m_\Omega} = (\vec r - \vec \Omega) \times \vec{P}(\vec r)$
 }
 
 \formula{Riflessione di un onda}{
@@ -809,6 +845,8 @@ Questo farà sì che il campo elettrico non sia più conservativo e perciò non 
   campi incidenti e con il $-$ indichiamo i campi riflessi.
 
   % TODO: Da finire
+
+  Ricordiamo che per le onde piane si ha $\vec{\nabla} = i \vec{k}$, ovvero $\rot (e^{\vec k \cdot \vec r} \vec u) = (i \vec{k} \times u) e^{\vec k \cdot \vec r}$ e simili.
 }
 
 \formula{Dipolo oscillante}{
