@@ -3,7 +3,7 @@
 	url = https://github.com/frame95/Rappresentazioni.git
 [submodule "ETI/AscariMigliorini"]
 	path = ETI/AscariMigliorini
-	url = http://github.com/auron95/eti.git
+	url = https://github.com/auron95/eti.git
 [submodule "SoluzioniMantegazzario"]
 	path = SoluzioniMantegazzario
-	url = http://github.com/birba/SoluzioniMantegazzario.git
+	url = https://github.com/birba/SoluzioniMantegazzario.git
