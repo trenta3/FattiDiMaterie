@@ -1,6 +1,21 @@
 # FattiDiMaterie
 Vari fatti e piccole dispense (stile riassunti) di alcune materie della facoltà di Matematica.
 
+Molte sono incomplete o praticamente neanche iniziate.
+Quelle che forse vale la pena guardare sono:
+
+* GAAL/FattiDiGaal
+  
+* ETI/ETI_AscariMigliorini
+
+* ETI/FattiDiEti
+
+* RappresentazioniGruppi/TrucchiTabellaCaratteri
+
+* Fisica/Formulari/FormularioFisica2
+
+* SoluzioniMantegazzario/SoluzioniMantegazzario
+
 Chiunque voglia dare una mano e contribuire è il benvenuto!!
 
 ## Importante!!!
