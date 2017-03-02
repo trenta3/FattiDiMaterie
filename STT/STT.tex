@@ -1,0 +1,61 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\newcommand{\sle}{\sqsubseteq}
+\newcommand{\dom}{\mbox{dom}}
+\newcommand{\leftcurly}[1]{{\left\{{#1}\right.}}
+
+\begin{document}
+\title{Semantica e Teoria dei Tipi}
+
+\section*{Teoria dei Domini}
+Per introdurre la semantica operazionale abbiamo bisogno di un po' di
+questa teoria.
+
+\subsection*{Definizioni di domini e cpo}
+\begin{itemize}
+\item ({\bf Poset}) Dato un insieme $D$, una relazione $\sle$ su di esso si dice un ordine parziale se valgono:
+  \begin{enumerate}
+  \item ({\bf Riflessiva}) $\forall d \in D \quad d \sle d$
+  \item ({\bf Transitiva}) $\forall d, e, f \in D \quad d \sle e \sle f \implies d \sle f$
+  \item ({\bf Antisimmetrica}) $\forall d, e \in D \quad d \sle e, e \sle d \implies d = e$
+  \end{enumerate}
+\item ({\bf Minimo di un sottoinsieme}) Dato un sottoinsieme $S \subseteq D$ di un poset, si dice che $s \in S$ è un elemento minimo se $\forall d \in D \quad s \sle d$.
+  Un elemento minimo, se esiste, è unico per l'assioma di antisimmetria, e lo denotiamo con il simbolo $\bot$
+\item ({\bf Estremo superiore di una catena}) Una catena numerabile crescente (CIC - Countable Increasing Chain) è una sequenza $\{ d_n \}_{n \in \bbN}$ di elementi di un poset $D$ tale che
+  $$ d_0 \sle d_1 \sle d_2 \sle \ldots $$
+  Un maggiorante per la catena è un qualunque $d \in D$ tale che $\forall n \in \bbN \quad d_n \sle d$.
+  
+  Se esiste il minimo degli elementi maggioranti, esso viene chiamato sup, e verrà indicato con $\sqcup_{n \ge 0} d_n$, o anche con $\sup_n d_n$.
+  Per definizione vale quindi che un elemento $d \in D$ è il sup della catena se:
+  \begin{enumerate}
+  \item $\forall n \in \bbN \quad d_n \sle \sup_n d_n$
+  \item $\forall d \in D \quad (\forall m \in \bbN \quad d_m \sle d) \implies \sup_n d_n \sle d$
+  \end{enumerate}
+  
+  Notiamo inoltre che togliendo un numero finito di elementi alla catena, non alteriamo l'insieme dei suoi maggioranti, e quindi non cambia nemmeno il suo sup.
+\item ({\bf cpo - Chain Complete Poset}) Un cpo è un poset $D$ in cui tutte le CIC hanno un sup.
+\item ({\bf Dominio}) Un dominio è un cpo con un elemento minimo $\bot$
+\item ({\bf Dominio delle funzioni parziali}) L'insieme delle funzioni parziali $X \rar Y$ può essere dotato della struttura di dominio:
+  \begin{enumerate}
+  \item $f \sle g$ sse $\dom f \subseteq \dom g$ e vale $\forall x \in \dom f \quad f(x) = g(x)$
+  \item Data una CIC $f_0 \sle f_1 \sle \ldots$ il suo sup è la funzione $f$ con $\dom f = \cup_{n \ge 0} \dom(f_n)$ definita da:
+    $$f(x) = \leftcurly{\begin{array}{cc}
+                          f_n(x) & \mbox{se } x \in \dom(f_n) \mbox{ per qualche } n \\
+                          \mbox{undefined} & \mbox{otherwise} \\
+                        \end{array}{cc}}$$
+  \item $\bot$ è la funzione totalmente non definita, ovvero $\dom f = \emptyset$
+  \end{enumerate}
+\end{itemize}
+
+\subsection*{Funzioni continue e monotone}
+\begin{itemize}
+\item ({\bf Funzioni monotone}) Una funzione $f: D \rar E$ tra poset è monotona sse $\forall x, y \in D \quad x \sle y \implies f(x) \sle f(y)$
+\item ({\bf Funzioni continue}) Se entrambi i poset sono cpo ha senso parlare di funzioni continue: $f: D \rar E$ si dice continua sse è monotona e preserva i sup delle CIC, ovvero se $\forall \mbox{catena} d_0 \sle d_1 \sle \ldots$ in $D$ si ha che $f(\sup_n d_n) = sup_n f(d_n)$ dentro ad $E$.
+\item ({\bf Funzioni rigide}) Se $D$ ed $E$ hanno un minimo, si dice che $f$ è rigida se $f(\bot_D) = \bot_E$
+\item ({\bf Criterio per la continuità}) Notiamo che, data una cic in $D$: $d_0 \sle d_1 \sle \ldots$ ed $f$ monotona, si ha sempre che $f(d_0) \sle f(d_1) \sle \ldots$, ovvero $f(d_n)$ è una catena in $E$. Inoltre se $d$ è un maggiorante della catena in $D$ deve essere che $f(d)$ è un maggiorante della catena in $E$: ovvero se $f$ è monotona tra cpo si ha sempre che:
+  $$\sup_n f(d_n) \sle f(\sup_n d_n)$$
+  Quindi per controllare se una funzione è continua tra cpo basterà controllare solo l'inclusione opposta.
+\item ({\bf Funzioni costanti}) Dati due cpo $D$ ed $E$ ed $e \in E$, la funzione costante $c_e: D \rar E$ data da $c_e(d) = e$ $\forall d \in D$ è continua
+\end{itemize}
+\end{document}
+  
