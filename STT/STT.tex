@@ -3,6 +3,7 @@
 \newcommand{\sle}{\sqsubseteq}
 \newcommand{\dom}{\mbox{dom}}
 \newcommand{\leftcurly}[1]{{\left\{{#1}\right.}}
+\newcommand{\fix}{\mbox{fix}}
 
 \begin{document}
 \title{Semantica e Teoria dei Tipi}
@@ -57,5 +58,32 @@ questa teoria.
   Quindi per controllare se una funzione è continua tra cpo basterà controllare solo l'inclusione opposta.
 \item ({\bf Funzioni costanti}) Dati due cpo $D$ ed $E$ ed $e \in E$, la funzione costante $c_e: D \rar E$ data da $c_e(d) = e$ $\forall d \in D$ è continua
 \end{itemize}
+
+\subsection*{Teorema del punto fisso di Tarski}
+\begin{itemize}
+\item ({\bf Punto fisso}) Un punto fisso per una funzione $f: D \rar D$ è un elemento $d \in D$ tale che $f(d) = d$
+\item ({\bf Punto prefisso}) Se $D$ è un poset, un punto $d$ si dice prefisso di $f$ se $f(d) \sle d$
+  Il punto prefisso più piccolo (pppp) di $f$, se esiste, verrà scritto $\fix f$. Esso è quindi univocamente specificato dalle due proprietà:
+  \begin{enumerate}
+  \item $f(\fix f) \sle \fix f$
+  \item $\forall d \in D \quad f(d) \sle d \implies \fix f \sle d$
+  \end{enumerate}
+
+  Il motivo per cui ci interessano è che, se $f$ è monotona, ed ha un pppp $\fix f$ allora $\fix f$ è in particolare anche un punto fisso.
+\item ({\bf Punto fisso di Tarski}) Sia $f: D \rar D$ una funzione continua su un dominio $D$. Allora $f$ ha un pppp, dato da $\fix f = \sup_n f^n(\bot)$. Inoltre $\fix f$ è un punto fisso di $f$, ed è quindi il più piccolo punto fisso di $f$.
+\end{itemize}
+
+\subsection*{Costruzioni sui Domini}
+\begin{itemize}
+\item ({\bf Prodotto di domini}) Dati due cpo $D_1$ e $D_2$, definiamo $D_1 \times D_2$ il cpo che ha come insieme il prodotto cartesiano degli insiemi, con la relazione d'ordine $(d_1, d_2) \sle (d_1', d_2') \sse d_1 \sle_1 d_1', d_2 \sle_2 d_2'$.
+
+  Il sup di una catena si può vedere essere fatto componente per componente: $sup_n (d_{1,n}, d_{2,n}) = (sup_i d_{1,i}, sup_j d_{1,j})$.
+
+  Inoltre se $D_1$ e $D_2$ sono domini, lo è anche $D_1 \times D_2$ con $\bot_{D_1 \times D_2} = (\bot_{D_1}, \bot_{D_2})$
+\item ({\bf Proiezioni}) Dati $D$ ed $E$ cpo, la proiezione $\pi: D \times E \rar E$ definita da $\pi(d, e) = e$ è una funzione continua.
+\item ({\bf Pairing}) Dati $C, D, E$ cpo e funzioni $f: C \rar D$ e $g: C \rar E$ continue, allora si ha che $\langle f, g \rangle : C \rar D \times E$ definita da $\langle f, g \rangle (c) = (f(c), g(c))$ è una funzione continua.
+\item ({\bf Prodotto arbitrario}) Siano $(D_i, \sle_i)_{i \in I}$ una famiglia di cpo. Il prodotto di questa famiglia ha come insieme il prodotto cartesiano degli insiemi $\prod_i D_i = \{ f: I \rar D\}$, e come ordine parziale si ha $p \sle q \sse \forall i \in I \quad p(i) \sle_i q(i)$.
+\end{itemize}
+
 \end{document}
-  
+
