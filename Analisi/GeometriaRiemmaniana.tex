@@ -1,0 +1,56 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+
+\newcommand{\Dde}[1]{\ensuremath{\text{D} {#1}}{\de t}}
+\newcommand{\todo}{{\scshape Da capire}}
+\newcommand{\lra}[1]{\ensuremath{\langle {#1} \rangle}}
+
+\begin{document}
+\title{Geometria Riemmaniana}
+
+\section*{Flusso di coscienza}
+\begin{itemize}
+\item ({\bf Metrica Riemmaniana}) Una metrica riemmaniana su $M$ è un campo tensoriale $g$ di tipo $(0, 2)$ simmetrico e definito positivo
+\item ({\bf Distanza indotta}) Ogni metrica $g$ induce una distanza $d_g (x, y) = \inf \{ l_g (c) | c: [a, b] \rar M \tc c(a) = x, c(b) = y\}$, dove $l_g(c)$ è la ``lunghezza'' della curva: $l_g(c) = \int_a^b g(\dde{c}{t}, \dde{c}{t})^\frac{1}{2} \de t$.
+\item ({\bf Ogni varietà ha una metrica}) Ogni varietà differenziale (ed N2) $M$ ha una metrica $g$: L'idea è che localmente (in aperti con una carta sopra) possiamo fare il pullback della metrica euclidea. Per incollarle bene, prendiamo una partizione dell'unità $\varphi_\alpha$ e definiamo $g = \sum_\alpha \varphi_\alpha g_\alpha$.
+\item ({\bf Forma di volume indotta}) \todo
+\item ({\bf Connessione affine}) Una connessione affine $\nabla$ su $M$ è una funzione $\nabla: \chi(M) \times \chi(M) \rar \chi(M)$, scritta come $(X, Y) \mapsto \nabla_X Y$ con le seguenti proprietà:
+  \begin{enumerate}
+  \item ({\bf $\cC^\infty$-lineare nella prima componente})
+  \item ({\bf Finitamente additiva nella seconda componente})
+  \item ({\bf ``Leibnitz'' sulle $\cC^\infty$ nella seconda componente}) $\nabla_X (fY) = f \nabla_X Y + X(f) Y$
+  \end{enumerate}
+\item ({\bf Derivata di campi lungo curve}) Data una varietà con una connessione $\nabla$, ed una curva $c: [0, 1] \rar M$ $\cC^1$, esiste un'unica funzione $\Dde{}{t} : \chi_{M, c} \rar \chi_{M, c}$ dove $\chi_{M, c}$ sono ``i campi vettoriali lungo $c$'' (che non so che voglia dire) con le proprietà:
+  \begin{enumerate}
+  \item ({\bf Finita additività}) $\Dde{(V + W)} = \Dde{V} + \Dde{W}$
+  \item ({\bf ``Leibnitz'' sulle $\cC^\infty$}) $\Dde{(fV)} = \dde{f}{t} V + f \Dde{V}$
+  \item ({\bf Coincide con la connessione}) Se $V$ è indotto da $Y \in \chi(M)$, allora $\Dde{V} = \nabla_{\dde{c}{t}} Y$ (dove non si capisce che campo sia $\dde{c}{t}$ e dove - se mai - sia definito)
+  \end{enumerate}
+
+  In particolare, utilizzando le proprietà si mostra l'unicità ottenendo anche la formula in coordinate $\Dde{V} = \dde{V^j}{t} \dpar{}{x^j} + \dde{x^i}{t} V^j \dpar{}{x^i} \dpar{}{x^j}$. A questo punto si definisce $\Dde{V}$ attraverso la formula appena trovata, si verifica che abbia le proprietà di cui sopra (tutte locali) e si mostra l'invarianza della forma della scrittura di $\Dde{V}$ per cambi di coordinate.
+\item ({\bf Simboli di Christoffel}) Facendo il conto in coordinate di $\nabla_X Y$ usando le proprietà delle connessioni, saltano fuori dei coefficienti a cui non abbiamo ancora dato un nome e quindi $\nabla_{\dpar{}{x^i}} \dpar{}{x^j} = \Gamma_{ij}^k \dpar{}{x^k}$. In questo modo la formula diventa ``semplicissima'': $\nabla_X Y = (X^i Y^j \Gamma_{ij}^k + X(Y^k)) \dpar{}{x^k}$. I $\Gamma_{ij}^k$ si dicono simboli di Christoffel ma attenti perché non sono tensori! (Sono solo una manciata di numeri)
+\item ({\bf Campi vettoriali paralleli}) Un campo vettoriale $V$ ``lungo la curva $c$'' si dice parallelo se $\Dde{V} = 0 \quad \forall t$.
+\item ({\bf Campi paralleli $\simeq \bbR^n$}) Dato $t_0 \in I$ e $V_0 \in T_{c(t_0)}M$ si ha $\exists! V$ ``lungo $c$'' parallelo e tale che $V(c_0) = V_0$. In pratica i campi paralleli sono univocamente determinati dal loro valore in un punto della curva.
+  Per mostrarlo basta farlo in una carta (notare che se sull'intersezione coincidono in un punto...) e quindi passiamo in coordinate ed usiamo il fatto che $\Dde{V} = 0$ sono un po' di ODE, per cui si ha esistenza ed unicità per Cauchy-Lipschitz.
+\item ({\bf Connessioni compatibili}) Una connessione $\nabla$ si dice compatibile con la metrica $g$ se $\forall c$ curve $\cC^1$ e per ogni coppia $V, V'$ di campi vettoriali paralleli ``lungo $c$'' si ha $g(V, V') \equiv \text{costante}$.
+\item $\nabla$ è compatibile con $g$ se e solo se $\dde{}{t} g(V, W) = \lra{\Dde{V}, W} + \lra{V, \Dde{W}}$. Per mostrarlo prendere una base ortonormale del tangente in un punto, estenderla a base ortonormale lungo $c$ usando campi paralleli e poi fare il conto in queste coordinate.
+\item $\nabla$ è compatibile con $g$ se e solo se
+  \begin{equation}
+    \label{eq:cobordanza}
+    X g(Y, Z) = g(\nabla_X Y, Z) + g(Y, \nabla_X Z)
+  \end{equation}
+\item ({\bf Connessioni simmetriche}) $\nabla$ si dice simmetrica se $\nabla_X Y - \nabla_Y X = [X, Y]$ (il commutatore). Scrivendo questa cose per i campi coordinati si ottiene che se $\nabla$ è simmetrica $\Gamma_{ij}^k = \Gamma_{jk}^i$ (c'è chi dice che ``i campi trasportati non routano'')
+\item ({\bf Teorema di Levi-Civita}) Data una varietà riemmaniana $\exists! \nabla$ connessione simmetrica e compatibile con la metrica. Per mostrarlo usare la formula \ref{eq:cobordanza}, ciclarla e sommare a segni alterni, poi usare la simmetria e se siete fortunati trovate
+  \begin{equation}
+    \label{eq:levi_civita}
+    2 g(Z, \nabla_Y X) = X g(Y, Z) + Y g(Z, X) - Z g(X, Y) - g([X, Z], Y) - g([Y, Z], X) - g([X, Y], Z)
+  \end{equation}
+  che ci dà l'unicità. Definendo la $\nabla$ sulla base di questa abbiamo anche l'esistenza.
+
+  Dalla stessa formula si possono anche ottenere i simboli di Christoffel:
+  $$ \Gamma_{ij}^m = \frac{1}{2} g^{km} \left\{ \dpar{}{x^i} g_{jk} + \dpar{}{x^j} g_{ki} - \dpar{}{x^k} g^{km} \right\} $$
+
+  {\it D'ora in poi gli analisti intenderanno che ogni volta che compare o che viene menzionato $\nabla$, si fa riferimento a quello specialissimo del signor Civita}.
+\item ({\bf Geodetiche}) Una curva $\gamma: I \rar M$ di classe $\cC^2$ è detta geodetica se soddisfa $\Dde{\dde{\gamma}{t}} = 0$ lungo $gamma$: ``La velocità è parallela''.
+\end{itemize}
+\end{document}
+
