@@ -3,6 +3,7 @@
 \newcommand{\Dde}[1]{\ensuremath{\text{D} {#1}}{\de t}}
 \newcommand{\todo}{{\scshape Da capire}}
 \newcommand{\lra}[1]{\ensuremath{\langle {#1} \rangle}}
+\newcommand{\Exp}{\ensuremath{\text{Exp}}}
 
 \begin{document}
 \title{Geometria Riemmaniana}
@@ -50,7 +51,53 @@
   $$ \Gamma_{ij}^m = \frac{1}{2} g^{km} \left\{ \dpar{}{x^i} g_{jk} + \dpar{}{x^j} g_{ki} - \dpar{}{x^k} g^{km} \right\} $$
 
   {\it D'ora in poi gli analisti intenderanno che ogni volta che compare o che viene menzionato $\nabla$, si fa riferimento a quello specialissimo del signor Civita}.
-\item ({\bf Geodetiche}) Una curva $\gamma: I \rar M$ di classe $\cC^2$ è detta geodetica se soddisfa $\Dde{\dde{\gamma}{t}} = 0$ lungo $gamma$: ``La velocità è parallela''.
+\item ({\bf Geodetiche}) Una curva $\gamma: I \rar M$ di classe $\cC^2$ è detta geodetica se soddisfa $\Dde{\dde{\gamma}{t}} = 0$ lungo $gamma$: ``La velocità è parallela''. Andando a scrivere in coordinate questa cosa si ottengono le equazioni ordinarie $\frac{\de^2 x^k}{\de t^2} + \Gamma_{ij}^k \dde{x^i}{t} \dde{x^j}{t} = 0$ per $k = 1, \ldots, n$ e quindi segue da Cauchy-Lipschitz la loro esistenza locale.
+\item ({\bf Esistenza locale delle Geodetiche}) Dato $p \in M$, $\exists U$ intorno di $p$, $\delta, \varepsilon > 0$ tali che, definendo $\cU = \{ (q, v) \mid q \in U, v \in T_q M \tc g(v, v) < \varepsilon^2 \}$ si ha $\exists \gamma: (- \delta, \delta) \times \cU \rar M$ tale che $t \mapsto \gamma(t, q, v)$ è una geodetica (ed è l'unica) con $\gamma(0, q, v) = 0$ e $\dot{\gamma}(0, q, v) = v$.
+
+  Notiamo che se riparametrizziamo una geodetica con $t \mapsto t\lambda$ (e $\lambda > 0$), essa rimane una geodetica.
+\item ({\bf Mappa esponenziale}) La mappa esponenziale $\Exp : \Omega \subseteq TM \rar M$ è la mappa che manda $v \in T_p M$ in $\Exp_p(v) = \gamma_v(1)$, dove $\gamma_v$ è la geodetica che parte da $p$ ed è diretta lungo $v$: $\gamma_v(0) = p$, $\dot{\gamma}_v(0) = v$. Per il teorema precedente, questa mappa, per ogni $p \in M$ è ben definita in un intorno di $0 \in T_p M$ dentro $TM$ (che può cambiare col punto).
+
+  Inoltre considerata $\Exp_p: T_pM \rar M$ risulta che $\de \Exp_p (0) = \Id_{T_p M}$ (chissà in che senso???), e quindi $\Exp_p$ è un omeomorfismo da un intorno di $0 \in T_pM$ ad un intorno di $p \in M$
+\item ({\bf Coordinate Geodetiche}) Data una base ortonormale di $T_pM$ definiamo $\Psi(x^1, \ldots, x^n) := \Exp_p (x^i e_i)$. Allora sull'intorno spannato da $\Exp_p$ abbiamo una carta $\varphi = \Psi^{-1}$ sulla varietà. Queste coordinate sono speciali, poiché risulta che $g_{ij} = \delta_{ij} + O(\abs{x}^2)$ (O-grande su una varietà??? Forse significa $f = O(g)$ sse $\limsup_{q \rar p} \frac{\abs{f(q)}}{\abs{g(q)}}$). Da ciò segue che $\Gamma_{ij}^k (p) = 0$.
+\item ({\bf Geodetiche e distanza}) Dato $p \in M$, $\exists \varepsilon < 0$ tale che le geodetiche $\Exp_p (tv)$ con $g(v, v) < \varepsilon^2$ minimizzano la distanza tra $p$ ed $\Exp_p(v)$. (Ma è falso per tempi grandi, esempio della sfera).
+\item ({\bf Hopf-Rinon}) Sia $(M, g)$ una varietà Riemmaniana e $p \in M$. Allora sono equivalenti:
+  \begin{itemize}
+  \item $\Exp_p$ è definita su tutto $T_pM$
+  \item $(M, d_g)$ è uno spazio metrico completo
+  \item $\forall q \in M$ $\Exp_q$ è definita su tutto $T_qM$
+  \end{itemize}
+  Inoltre se valgono queste proprietà $\forall p, q \in M$ $\exists \gamma_{p, q}$ geodetica tale che $l(\gamma_{p,q}) = d_g(p, q)$, $\gamma(0) = p, \gamma(1) = q$.
+\item ({\bf Curvatura}) La curvatura è una corrispondenza che associa a $X, Y \in \chi(M)$, una mappa $R(X, Y): \chi(M) \rar \chi(M)$ data da $R(X, Y) Z = \nabla_Y \nabla_X Z - \nabla_X \nabla_Y Z + \nabla_{[X, Y]} Z$.
+
+  Notiamo che in $M = \bbR^n$ la forma è nulla. Inoltre $R$ è $\cC^\infty$-bilineare in $X, Y, Z$, ovvero si può identificare con un campo tensoriale di tipo $(1, 3)$. Vale inoltre l'identità di Bianchi $R(X, Y) Z + R(Y, Z) X + R(Z, X) Y = 0$.
+\item ({\bf Il Riemann}) Dato $T \in \chi(M)$, possiamo porre $R(X, Y, Z, T) = g(R(X, Y) Z, T)$. Troviamo allora le seguenti simpatiche relazioni:
+  \begin{enumerate}
+  \item $R(X, Y, Z, T) + R(Y, Z, X, T) + R(Z, X, Y, T) = 0$
+  \item $R(X, Y, Z, T) = - R(Y, X, Z, T)$
+  \item $R(X, Y, Z, T) = - R(X, Y, T, Z)$
+  \item $R(X, Y, Z, T) = R(Z, T, X, Y)$
+  \end{enumerate}
+
+  A questo punto in coordinate possiamo divertirci a definire $R(\dpar{}{x^i}, \dpar{}{x^j}) \dpar{}{x^k} = R_{ijk}^l \dpar{}{x^l}$. Ricordando la definizione dei simboli di Christoffel si ottiene $R_{ijk}^s = \Gamma_{ik}^l \Gamma_{jl}^s - \Gamma_{jk}^l \Gamma_{il}^s + \dpar{}{x^j} \Gamma_{ik}^s - \dpar{}{x^i} \Gamma_{jk}^s$.
+
+  Potete pure definire $R_{ikjs} = R(\dpar{}{x^i}, \dpar{}{x^j}, \dpar{}{x^k}, \dpar{}{x^s}) = R_{ijk}^l g_{ls}$ e riscrivere le uguaglianze di cui sopra.
+\item ({\bf Curvatura sezionale}) Dato un piano $2$-dimensionale $\sigma$ in $T_pM$, la curvatura sezionale di $\sigma$ viene definita da $K(X, Y) = \frac{R(X, Y, X, Y)}{g(X, X) g(Y, Y) - g(X, Y)^2}$, dove $X, Y$ è una base di $\sigma$. (La quantità è indipendente dalla scelta della base e coincide con la curvatura sezionale definita ``geometricamente'', come curvatura gaussiana dell'immagine di $\sigma$ attraverso la mappa esponenziale).
+\item ({\bf Curvatura e curvatura sezionale}) La curvatura sezionale determina univocamente la curvatura $R$. Ovvero supponiamo di avere due funzioni $R, R': V \times V \times V \rar V$ con $\dim V \ge 2$ e tali che valgono le uguaglianze di cui sopra. Se $\forall \sigma$ $2$-piani in $V$ vale $K(\sigma) = K'(\sigma)$ allora $R = R'$.
+\item ({\bf Tensore di Ricci}) Il tensore di Ricci è di tipo $(0, 2)$ definito da $R_{ik} = R_{ijks} g^{sj} = \sum_j R_{ijk}^j$. In particolare prendendo una base ortonormale di $T_pM$ $e_1, \ldots, e_n$ si ha $Ric(X, Y) := \sum_i R(X, e_i, Y, e_i)$.
+\item ({\bf Curvatura scalare}) La curvatura scalare (indovinate) $R$ è definita come $R_{ij}g^{ji}$, ovvero come $\sum_i Ric(e_i, e_i)$.
+\item ({\bf Derivata covariante di tensori}) Come prima avevamo il $\nabla$, ora lo vogliamo estendere ai tensori, ovvero $\nabla: \chi(M) \times \cT^r_s (M) \rar \cT^r_s (M)$ che soddisfa:
+  \begin{enumerate}
+  \item $\nabla_X (S \otimes T) = \nabla_X S \otimes T + S \otimes \nabla_X T$
+  \item $\nabla_X (T_1 + T_2) = \nabla_X T_1 + \nabla_X T_2$
+  \item $\nabla_{fX + gY} T = f \nabla_X T + g \nabla_Y T$
+  \item $\nabla_X f = X(f)$
+  \item $\nabla$ commuta con le contrazioni.
+  \end{enumerate}
+\item ({\bf Energia di una curva}) Data una curva $\gamma: [a, b] \rar M$, possiamo considerarne l'energia $E(\gamma) = \int_a^b g(\dot\gamma, \dot\gamma) \de t$. È quasi la stessa cosa della lunghezza, ma estremizzando l'energia si ottiene anche la velocità costante.
+\item ({\bf Bonet-Myers}) Supponiamo che $M$ sia completa e che $\exists r > 0$ tale che $Ric(p) \ge \frac{1}{r^2} g(p) \quad \forall p \in M$. Allora $M$ è compatta e $\text{diam}_g (M) \le \pi r$. Inoltre $\pi_1(M)$ è finito.
+\item ({\bf Hadamard}) $M$ completa, semplicemente connessa, $K_p (\sigma) \le 0 \quad \forall p \forall \sigma$ $2$-piano in $T_pM$. Allora $M$ è diffeomorfa ad $\bbR^n$ e $\forall p \quad \Exp_p : T_pM \rar M$ è un diffeomorfismo.
+\item ({\bf Rauch-Klingenberg-Berger-Brondle-Schoen}) $M$ semplicemente connessa, curvatura sezionale positiva. Supponiamo che $\forall p$ $\frac{\inf_\sigma K_p (\sigma)}{\sup_\sigma K_p (\sigma)} > \frac{1}{4}$. Allora $M$ è diffeomorfa alla sfera standard. (Vi sono controesempi con $=\frac{1}{4}$, $\bbP^n\bbC$ Fubini-Study)
+\item ({\bf Calcolo di Ricci}) Sistema di notazioni per le derivate covarianti di tensori solo per fare i calcoli. {\it Non aggiunge nulla a livello di teoria, se non ulteriori confusioni tra le notazioni}.
 \end{itemize}
 \end{document}
 
