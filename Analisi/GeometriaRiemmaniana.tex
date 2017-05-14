@@ -97,7 +97,30 @@
 \item ({\bf Bonet-Myers}) Supponiamo che $M$ sia completa e che $\exists r > 0$ tale che $Ric(p) \ge \frac{1}{r^2} g(p) \quad \forall p \in M$. Allora $M$ è compatta e $\text{diam}_g (M) \le \pi r$. Inoltre $\pi_1(M)$ è finito.
 \item ({\bf Hadamard}) $M$ completa, semplicemente connessa, $K_p (\sigma) \le 0 \quad \forall p \forall \sigma$ $2$-piano in $T_pM$. Allora $M$ è diffeomorfa ad $\bbR^n$ e $\forall p \quad \Exp_p : T_pM \rar M$ è un diffeomorfismo.
 \item ({\bf Rauch-Klingenberg-Berger-Brondle-Schoen}) $M$ semplicemente connessa, curvatura sezionale positiva. Supponiamo che $\forall p$ $\frac{\inf_\sigma K_p (\sigma)}{\sup_\sigma K_p (\sigma)} > \frac{1}{4}$. Allora $M$ è diffeomorfa alla sfera standard. (Vi sono controesempi con $=\frac{1}{4}$, $\bbP^n\bbC$ Fubini-Study)
-\item ({\bf Calcolo di Ricci}) Sistema di notazioni per le derivate covarianti di tensori solo per fare i calcoli. {\it Non aggiunge nulla a livello di teoria, se non ulteriori confusioni tra le notazioni}.
+\item ({\bf Calcolo di Ricci}) Sistema di notazioni per le derivate covarianti di tensori solo per fare i calcoli. {\it Non aggiunge nulla a livello di teoria, se non ulteriori confusioni tra le notazioni}. Forse prima o poi lo aggiungo.
+\item ({\bf Moving Frames}) Dato $U \subseteq M$, un moving frame è una $n$-upla di campi vettoriali in $U$ tali che $\forall p \in U \quad (X_1(p), \ldots, X_n(p))$ è una base di $T_pM$.
+
+  Di un moving frame ne prendiamo le forme duali $\theta^i$, tali che $\theta^i(X_j) = \delta^i_j$. Allora $X_q = \theta^l(X_q) X_l$.
+\item Dati $(X_i)_i$ e $(\theta^i)_i$ come sopra, $\exists!$ uno forme $\omega^i_j$ tali che
+  \begin{itemize}
+  \item $\omega^i_j = - \omega^j_i$
+  \item $\de \theta^i = \theta^k \wedge \omega^i_k$
+  \end{itemize}
+
+  Se il moving frame è ortonormale, le $1$-forme $\omega^i_j$ sono dette forme di connessione.
+  Possiamo poi definire anche le $2$-forme $\Omega^i_j$ attraverso $\Omega^i_j = \de \omega^i_j + \omega^i_k \wedge \omega^k_j$. Queste sono dette forme di curvatura del moving frame, e l'equazione attraverso cui si definiscono viene detta equazione di struttura.
+\item ({\bf Christoffel Falsi}) Definiamo i simboli di Christoffel falsi attraverso $\nabla_{X_i} X_j = \widetilde\Gamma_{ij}^k X_k$. Inoltre definiamo $R(X_i, X_j) X_k = \widetilde R_{kij}^l X_l$.
+\item ({\bf Formule per il moving frame}) Sia $(X_i)_i$ un moving frame ortonormale, con forme $\theta^l, \omega^i_j, \Omega^i_j$. Allora valgono
+  \begin{itemize}
+  \item $\de \theta^i = -\omega^i_k \wedge \theta^k$
+  \item $\de \omega^i_j = - \omega^i_k \wedge \omega^k_j + \Omega^i_j$
+  \end{itemize}
+  dove $\omega^i_j = \widetilde\Gamma_{kj}^i \theta^k$ e $\Omega^i_j = \frac{1}{2} \widetilde R_{jkl}^i \theta^k \wedge \theta^l$.
+
+  Osserviamo che allora vale $\nabla_{X_k} X_j = \omega^i_j (X_k) X_i$ e $R(X_k, X_l) X_j = \Omega^i_j (X_k, X_l) X_i$.
+\item ({\bf Curvatura nulla}) Sia $M$ una varietà $n$-dimensionale tale che il tensore di curvatura è zero. Allora $M$ è isometrica localmente ad $\bbR^n$.
+\item ({\bf $\cL(\Delta)$}) Data una distribuzione $\Delta$ $k$-dimensionale $\cL(\Delta)$ indica il sottoanello di $\Omega(M)$ generato dalle forme $\omega$ tali che $\omega(X_1, \ldots, X_l) = 0 \quad \forall X_1, \ldots, X_l \in \Delta$.
+\item ({\bf Integrabilità e $\cL(\Delta)$}) $\Delta$ è integrabile se e solo se $\de (\cL(\Delta)) \subseteq \cL(\Delta)$.
 \end{itemize}
 \end{document}
 
