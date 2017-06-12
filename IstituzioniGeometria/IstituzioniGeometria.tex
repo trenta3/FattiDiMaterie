@@ -1,0 +1,93 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+\newcommand{\xrar}[1]{\ensuremath{\xrightarrow{#1}}}
+\newcommand{\xlar}[1]{\ensuremath{\xleftarrow{#1}}}
+
+\begin{document}
+\title{Istituzioni di Geometria}
+
+\section{Varietà generali}
+\begin{itemize}
+\item ({\bf Orientabilità dei Proiettivi})
+\item ({\bf Embedding di Whitney})
+  \begin{itemize}
+  \item ({\bf Forma Forte}) Ogni varietà liscia reale di dimensione $m$ (supposta T2 ed N2) può essere immersa in maniera liscia in $R^{2m}$.
+  \item ({\bf Forma Debole}) Ogni funzione continua da una varietà di dimensione $n$ ad una di dimensione $m$ con $m > 2n$ può essere approssimata da un embedding liscio. Nel caso in cui $m > 2n - 1$ una tale mappa può essere approssimata da un'immersione liscia.
+  \end{itemize}
+\end{itemize}
+
+\section{Coomologia}
+\subsection{Coomologia di De Rham}
+Utilizzando il differenziale esterno come mappa di cocomplessi e come $k$-cocatene le $k$-forme differenziali, definiamo la coomologia di De Rham di una varietà, denotata con $H^\bullet (M)$.
+
+\begin{itemize}
+\item ({\bf Banalità in dimensione alta}) Se $\Dim M = n$ si ha $H^k (M) = 0$ per $k > n$ (perché le forme differenziali di dimensione troppo alta sono tutte nulle).
+\item ({\bf Coomologia e diffeomorfismi}) Si nota esplicitamente che due varietà diffeomorfe hanno coomologia isomorfa.
+\item ({\bf Coomologia delle unioni disgiunte}) Se $M = \coprod_\alpha M_\alpha$ con $\{M_\alpha\}_\alpha$ famiglia di aperti a due a due disgiunti, si ha che $H^\bullet (\coprod_\alpha M_\alpha) = \prod_\alpha H^\bullet(M_\alpha)$.
+\item ({\bf Coomologia $0$-dimensionale}) $H^0(M) = \bbR^A$ dove $A$ è la cardinalità delle componenti connesse di $M$ (che ricordiamo essere al più numerabile per l'ipotesi di N2).
+\item ({\bf Pullback di $k$-forme}) Se $F: M \rar N$ è una funzione differenziabile tra varietà, $F^*$ si può quozientare ad un morfismo tra i moduli di coomologia $F^*: H^\bullet(N) \rar H^\bullet(M)$ (notare la controvarianza).
+\item ({\bf Sequenza duale}) Data una sequenza di spazi vettoriali
+  $$ U \xrar{f} V \xrar{g} W $$
+  esatta, la successione di spazi duali
+  $$ W^* \xrar{g^*} V^* \xrar{f^*} U $$
+  è ancora esatta.
+\item ({\bf Sequenza esatta lunga in coomologia}) Data una successione esatta corta di morfismi di cocatene
+  $$ 0 \rar A^\bullet \xrar{F} B^\bullet \xrar{G} C^\bullet \rar 0 $$
+  Allora esiste un morfismo graduato $d^* : H^\bullet(C) \rar H^{\bullet + 1} (A)$ di grado $1$ tale che la successione
+  $$ \ldots \rar H^k(A) \xrar{F^*} H^k(B) \xrar{G^*} H^k(C) \xrar{d^*} H^{k+1}(A) \rar \ldots $$
+  è esatta.
+\item ({\bf Successione di Mayer-Vietoris}) Preso un ricoprimento aperto di una varietà $M$ formato da soli due aperti $U_0$ e $U_1$ si ha che, indicando con $U_0 \coprod U_1$ la loro unione disgiunta, con $i_j : U_0 \cap U_1 \rar U_0 \coprod U_1$ l'inclusione di $U_0 \cap U_1$ in $U_j$ (per $j = 0, 1$), e con $j: U_0 \coprod U_1 \rar M$ la mappa coprodotto. Abbiamo quindi una successione di mappe
+  $$ M \xlar{j} U_0 \coprod U_1 \stackrel{\xlar{i_0}}{\xlar{i_1}} U_0 \cap U_1 $$
+  che induce una successione di restrizioni di forme (passando ai pullback sulle forme) e prendendo la differenza tra gli ultimi due morfismi si ottiene una successione esatta, detta di {\it Mayer-Vietoris}:
+  $$ 0 \rar A^\bullet(M) \xrar{j^*} A^\bullet(U_0) \oplus A^\bullet(U_1) \xrar{i_1^* - i_0^*} A^\bullet(U_0 \cap U_1) \rar 0 $$
+  dove $j^*(\eta) = (\eta\mid_{U_0}, \eta\mid_{U_1}$ e $(i_1^* - i_0^*) (\omega, \tau) = (\tau - \omega) \mid_{U_0 \cap U_1}$
+
+  Essa induce quindi una successione esatta lunga in coomologia: dato quindi $\{U_0, U_1\}$ {\emph ricoprimento aperto} di $M$, si ha la successione esatta.
+  $$ \ldots \rar H^k(M) \rar H^k(U_0) \oplus H^k(U_1) \rar H^k(U_0 \cap U_1) \xrar{d^*} H^{k+1}(M) \rar \ldots $$
+\item ({\bf Coomologia del prodotto con una retta}) Sia $M$ una varietà, ed indichiamo con $\pi: M \times \bbR \rar M$ la proiezione sul primo fattore e con $\sigma: M \rar M \times \bbR$ la sezione $\sigma(p) = (p, t_0)$ con $t_0 \in \bbR$ fissato. Allora $\pi^*: H^\bullet(M) \rar H^\bullet(M \times \bbR)$ è un isomorfismo, con inversa data da $\sigma^*: H^\bullet(M \times \bbR) \rar H^\bullet(M)$.
+\item ({\bf Coomologia degli $\bbR^n$ / Lemma di Poincaré})
+  \begin{displaymath}
+    H^k(\bbR^n) =
+    \left\{
+      \begin{array}{cl}
+        \bbR & \text{ se } k = 0 \\
+        0    & \text{ se } k > 0 \\
+      \end{array}
+    \right.
+  \end{displaymath}
+\item ({\bf Coomologia delle sfere})
+  \begin{displaymath}
+    H^k(S^n) =
+    \left\{
+      \begin{array}{cl}
+      \bbR & \text{ se } k = 0, n \\
+      0    & \text{ altrimenti }  \\
+      \end{array}
+    \right.
+  \end{displaymath}
+\item ({\bf Coomologia dei proiettivi reali})
+  \begin{displaymath}
+    H^k(\bbP^n\bbR) =
+    \left\{
+      \begin{array}{cl}
+        \bbR & \text{ se } k = 0 \text{ oppure } k = n \text{ con } n \text{ dispari } \\
+        0    & \text{ altrimenti }                                                     \\
+      \end{array}
+    \right.
+  \end{displaymath}
+\item ({\bf Applicazioni omotope}) Si definisce, come nel caso delle mappe continue, un'omotopia $\cC^\infty$ tra funzioni. Se due applicazioni sono $\cC^\infty$-omotope inducono lo stesso morfismo in coomologia. Due varietà si dicono $\cC^\infty$-omotopicamente equivalenti se esistono due applicazioni differenziali $F: M \rar N$, $G: N \rar M$ tali che $F \circ G$ e $G \circ F$ siano $\cC^\infty$-omotope alle identità.
+\item ({\bf Coomologia dei fibrati}) Sia $\pi: E \rar M$ un fibrato vettoriale su una varietà $M$. Allora $\pi^*: H^\bullet(M) \rar H^\bullet(E)$ è un isomorfismo.
+\item ({\bf Teorema di De Rham}) Sue varietà {\bf omeomorfe} hanno coomologia di De Rham {\bf isomorfe}.
+\end{itemize}
+
+\subsection{Coomologia a supporto compatto}
+La coomologia a supporto compatto si fa utilizzando lo spazio differenziale delle forme a supporto compatto in $M$. Il differenziale esterno di una di queste è ancora a supporto compatto, ma una forma differenziale a supporto compatto che è un cobordo non è detto che sia un cobordo nella coomologia compatta (ovvero che essa sia il differenziale di una forma a supporto compatto).
+
+\begin{itemize}
+\item ({\bf Varietà Compatte}) Per varietà compatte ovviamente si ha $H^\bullet_c (M) = H^\bullet(M)$.
+\item ({\bf Coomologia compatta delle unioni disgiunte}) Se si ha $M = \coprod_\alpha M_\alpha$ famiglia di aperti a due a due disgiunti. Allora una forma a supporto compatto ha supporto contenuto solo in un numero finito di questi aperti e quindi
+  $$ H^\bullet_c (\coprod_\alpha M_\alpha) = \oplus_\alpha H^\bullet_c(M_\alpha) $$
+\item ({\bf Coomologia compatta zero dimensionale}) Sia $M = (\coprod_{\alpha \in A} M_\alpha) \coprod (\coprod_{\beta in B} M_\beta)$ decomposizione in componenti connesse, con le $M_\alpha$ compatte e le $M_\beta$ non compatte. Allora si ha che $H^0_c(M) = \oplus_{\alpha \in A} \bbR^{(\alpha)}$, ovvero è la somma diretta di tante copie di $\bbR$ quante sono le componenti connesse compatte.
+\end{itemize}
+
+\end{document}
+
