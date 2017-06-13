@@ -1,13 +1,16 @@
 \documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
 \newcommand{\xrar}[1]{\ensuremath{\xrightarrow{#1}}}
 \newcommand{\xlar}[1]{\ensuremath{\xleftarrow{#1}}}
+\newcommand{\supp}{\text{supp }}
 
 \begin{document}
 \title{Istituzioni di Geometria}
 
 \section{Varietà generali}
 \begin{itemize}
-\item ({\bf Orientabilità dei Proiettivi})
+\item ({\bf Orientabilità dei Proiettivi}) Gli spazi proiettivi $\bbP^n\bbR$ sono orientabili se e solo se $n$ è dispari.
+\item ({\bf Isotopie ambiente}) Si dice isotopia ambiente: dati due embedding $f: A \rar M$, $g: B \rar M$ essi si dicono isotopi se esiste un'omotopia tra $f$ e $g$ dentro $M$ tale che ad ogni tempo fissato essa è un embedding.
+  Ogni isotopia fra embedding con dominio compatto è estendibile ad una isotopia ambiente.
 \item ({\bf Embedding di Whitney})
   \begin{itemize}
   \item ({\bf Forma Forte}) Ogni varietà liscia reale di dimensione $m$ (supposta T2 ed N2) può essere immersa in maniera liscia in $R^{2m}$.
@@ -87,7 +90,72 @@ La coomologia a supporto compatto si fa utilizzando lo spazio differenziale dell
 \item ({\bf Coomologia compatta delle unioni disgiunte}) Se si ha $M = \coprod_\alpha M_\alpha$ famiglia di aperti a due a due disgiunti. Allora una forma a supporto compatto ha supporto contenuto solo in un numero finito di questi aperti e quindi
   $$ H^\bullet_c (\coprod_\alpha M_\alpha) = \oplus_\alpha H^\bullet_c(M_\alpha) $$
 \item ({\bf Coomologia compatta zero dimensionale}) Sia $M = (\coprod_{\alpha \in A} M_\alpha) \coprod (\coprod_{\beta in B} M_\beta)$ decomposizione in componenti connesse, con le $M_\alpha$ compatte e le $M_\beta$ non compatte. Allora si ha che $H^0_c(M) = \oplus_{\alpha \in A} \bbR^{(\alpha)}$, ovvero è la somma diretta di tante copie di $\bbR$ quante sono le componenti connesse compatte.
+\item ({\bf Estensione a zero di forme}) Al posto di considerare le inclusioni che per la coomologia compatta non si comportano bene, utilizzeremo l'operatore di estensione sulle forme $j_* : A^\bullet_c(U) \rar A^\bullet_c(M)$ che associa ad una forma $\omega$ a supporto compatto in $U$ la forma $j_* \omega$ definita estendendo $\omega$ a zero fuori da $U$, ovvero
+  \begin{displaymath}
+    (j_* \omega)_p =
+    \left\{
+      \begin{array}{cc}
+        \omega_p & \text{ se } p \in U               \\
+        0        & \text{ se } p \notin \supp \omega \\
+      \end{array}
+    \right.
+  \end{displaymath}
+\item ({\bf Mayer-Vietoris compatto}) Sia $U_0, U_1$ un ricoprimento aperto di una varietà $M$. Allora la successione a supporto compatto
+  $$ 0 \rar A^\bullet_c (U_0 \cap U_1) \xrar{\delta} A^\bullet_c(U_0) \oplus A^\bullet_c(U_1) \xrar{s} A^\bullet_c(M) \rar 0 $$
+  è esatta ed induce una successione esatta lunga in coomologia
+  $$ \ldots \rar H^{k-1}_c(M) \xrar{d_*} H^k_c(U_0 \cap U_1) \rar H^k_c(U_0) \oplus H^k_c(U_1) \rar H^k_c(M) \rar \ldots $$
+  ed inoltre anche la successione duale è esatta:
+  $$ \ldots \rar H^k_c(M)^* \rar H^k_c(U_0)^* \oplus H^k_c(U_1)^* \rar H^k_c(U_0 \cap U_1)^* \xrar{d_*^*} H^{k-1}_c(M)^* \rar \ldots $$
+\item ({\bf Prodotto con una retta}) Sia $\epsilon \in H^1_c(\bbR)$ il generatore naturale della coomologia a supporto compatto di $\bbR$. Se $M$ è una varietà possiamo definire la mappa $e_* : H^\bullet_c(M) \rar H^{\bullet + 1}_c(M \times \bbR)$ data da $e_*([\eta]) = [\eta] \wedge \epsilon$.
+
+  Per ogni varietà $M$, $e_*$ è un isomorfismo.
+\item ({\bf Coomologia compatta di $\bbR^n$ / Lemma di Poincaré compatto})
+  \begin{displaymath}
+    H^k_c(\bbR^n) =
+    \left\{
+      \begin{array}{cl}
+        \bbR & \text{ se } k = n    \\
+        0    & \text{ se } k \neq n \\
+      \end{array}
+    \right.
+  \end{displaymath}
 \end{itemize}
+
+\subsection{Dualità di Poincaré}
+La dualità di Poincaré lega la coomologia di De Rham con quella a supporto compatto.
+
+Il prodotto esterno definisce una applicazione $\wedge: H^h(M) \times H^k_c(M) \rar h^{h+k}_c(M)$. Supponiamo inoltre che $M$ sia orientata e senza bordo. Stokes ci assicura che ogni forma $\eta \in A^{n-1}_c(M)$ a supporto compatto si ha $\int_M \de\eta = 0$. Allora l'integrazione di $n$-forme a supporto compatto induce un operatore lineare $\int_M : H^n_c(M) \rar \bbR$.
+
+Data $M$ varietà $n$-dimensionale orientata (senza bordo) abbiamo l'applicazione
+$$ \int_M : H^k(M) \otimes H^{n-k}_c(M) \rar \bbR $$
+data da $(\omega, \eta) \mapsto \int_M \omega \wedge \eta$ ed è bilineare.
+Indichiamo con lo stesso simbolo anche il morfismo indotto
+$$ \int_M : H^k(M) \rar H^{n-k}_c(M)^* $$
+
+Il teorema è che l'ultimo morfismo scritto è in realtà un isomorfismo e si ha quindi
+$$ H^k(M) \cong H^{n-k}_c(M)^* $$
+
+Ovviamente se $M$ è compatta questo ci dice che le dimensioni delle sue coomologie sono una stringa palindroma di numeri.
+
+Inoltre se i gruppi di coomologia di una varietà $n$-dimensionale $M$ hanno dimensione finita (ad esempio se $M$ è compatta) prendendo i duali si ottiene anche
+$$ H^k_c(M) \cong H^{n-k}(M)^* $$
+
+\subsubsection{Coomologia in dimensione massima}
+Sia $M$ una varietà connessa di dimensione $n$. Allora
+\begin{itemize}
+\item Se $M$ è orientabile e compatta allora $H^n(M) = \bbR$
+\item Se $M$ è orientabile e non compatta allora $H^n(M) = 0$
+\item Se $M$ non è orientabile allora $H^n(M) = 0$
+\item Se $M$ è orientabile allora $H^n_c(M) = \bbR$
+\item Se $M$ non è orientabile allora $H^n_c(M) = 0$
+\end{itemize}
+
+\subsection{Teorema di Kunneth}
+Date $M$ ed $N$ due varietà, supponiamo che $N$ abbia coomologia di dimensione finita. Allora
+$$ H^\bullet(M \times N) = H^\bullet(M) \otimes H^\bullet(N) $$
+cioè
+$$ H^k(M \times N) = \oplus_{p + q = k} H^p(M) \otimes H^q(N) $$
+per $0 \le k \le \Dim M + \Dim N$.
 
 \end{document}
 
