@@ -17,6 +17,8 @@
 \newtheorem{corollario}{Corollario}
 \newtheorem{osservazione}{Osservazione}
 \newtheorem{proposizione}{Proposizione}
+\newtheorem{nota}{Nota}
+\newtheorem{notazione}{Notazione}
 
 \title{Corso di Arbarello}
 \author{Dario Balboni}
@@ -221,5 +223,100 @@ Per quanto notato, il pullback di questa forma differenziale attraverso le carte
 \begin{proposizione}
   Una varietà analitica $V$ è irriducibile se e solo se $V^*$ è connessa.
 \end{proposizione}
+
+\begin{definizione}[Dimensione di una varietà]
+  Definiamo la dimensione di una varietà analitica $V$ come la dimensione come manifolda complessa di $V^*$.
+\end{definizione}
+
+\begin{definizione}[Molteplicità di una varietà]
+  La molteplicità di una sottovarietà $V$ di dimensione $k$ in $M$ in un punto $p$, denotata $\mult_p (V)$, è il numero di fogli nella proiezione, in un piccolo polidisco coordinato su $M$ attorno a $p$, di $V$ su un generico polidisco $k$-dimensionale.
+  Notiamo che $p$ è un punto liscio di $V$ se e solo se $\mult_p(V) = 1$.
+
+  Se $W \subseteq M$ è una sottovarietà irrudicibile, definiamo la molteplicità $\mult_W(V)$ di $V$ lungo $W$ come la molteplicità di $V$ in un punto generico di $W$.
+\end{definizione}
+
+\section{Coomologia di De Rham e di Dolbeault}
+\begin{definizione}[Coomologia di De Rham]
+  Sia $M$ una manifolda differenziabile e denotiamo con $A^p(M, \bbR)$ lo spazio delle $p$-forme differenziali su $M$, e con $Z^p(M, \bbR)$ il sottospazio delle $p$-forme chiuse.
+  Il gruppo quoziente
+  $$ H^p_{DR} (M, \bbR) = \frac{Z^p(M, \bbR)}{\de A^{p-1}(M, \bbR)} $$
+  di forme chiuse modulo forme esatte è chiamato il gruppo di coomologia di De Rham di $M$.
+
+  Allo stesso modo possiamo definire $A^p(M)$ lo spazio delle $p$-forme differenziali a valori complessi, e con $Z^p(M)$ il sottospazio delle $p$-forme chiuse e chiamare $H^p_{DR}(M) = \frac{Z^p(M)}{\de A^{p-1}(M)}$ il corrispondente quoziente.
+\end{definizione}
+
+\begin{osservazione}
+  Ovviamente si ha $H^p_{DR}(M) = H^p_{DR}(M, \bbR) \otimes_\bbR \bbC$ e quindi, data una manifolda complessa $M$, la decomposizione dello spazio cotangente di $M$ in ogni punto in parte reale e parte immaginaria induce una decomposizione sullo spazio delle $n$-forme differenziali:
+  $$ A^n(M) = \sum_{p + q = n} A^{p, q}(M) $$
+  dove $A^{p, q}(M) = \lrg{\phi \in A^n(M) \mid \phi(z) \in \wedge^p T_z^{'*} (M) \otimes \wedge^q T_z^{''*} (M) \text{ for all } z \in M}$
+\end{osservazione}
+
+\begin{definizione}[Coomologia di Dolbeault]
+  Utilizzando la decomposizione $\de = \partial + \overline\partial$ e procedendo come prima possiamo definire
+  $$ H_{\overline\partial}^{p, q}(M) = \frac{Z^{p, q}_{\overline\partial}(M)}{\overline\partial A^{p, q-1}(M)} $$
+\end{definizione}
+
+\begin{lemma}[Poincaré $\partial$ and $\overline\partial$]
+  Per $\Delta = \Delta(r)$ un polidisco in $\bbC^n$ si ha
+  $$ H^{p, q}_{\overline\partial}(\Delta) = H^{p, q}_{DR}(\Delta) = 0, \hskip 1.5em q \ge 1 $$
+\end{lemma}
+
+\section{Calcolo sulle Manifolde Complesse}
+% TODO: Da aggiungere questa parte
+
+\begin{teorema}[Wirtinger]
+  Sia $S$ una sottomanifolda complessa di $M$ e $\omega$ la $(1, 1)$-forma associata alla metrica hermitiana.
+  Allora si ha $\vol(S) = \frac{1}{d!} \int_S \omega^d$.
+\end{teorema}
+
+\begin{definizione}[Integrale su una sottovarietà]
+  L'integrale di una forma su una sottovarietà $V$ è definito come l'integrale sulla sottomanifolda $V^*$.
+\end{definizione}
+
+\begin{lemma}
+  $V^*$ ha volume finito nelle regioni limitate.
+\end{lemma}
+
+\begin{teorema}[Stokes per le sottovarietà analitiche]
+  Sia $M$ una manifolda complessa, $V \subseteq M$ una sottovarietà analitica di dimensione $k$, e $\phi$ una $2k-1$-forma differenziale con supporto compatto in $M$. Allora vale
+  $$ \int_V \de \phi = 0 $$
+\end{teorema}
+
+Questo risultato centra con il fatto che le singolarità di una sottovarietà analitica complessa occorrono solo in codimensione reale $2$.
+Ci assicura che l'integrazione su varietà analitiche è più o meno la stessa che l'integrazione sulle sottomanifolde.
+Ancora più importante, ci permette di mostrare che una sottovarietà analitica di una manifolda complessa compatta definisce sempre una classe di omologia in $H_* (M, \bbR)$.
+
+\begin{teorema}[Mappe Proprie]
+  Se $M, N$ sono manifolde complesse, $f: M \rar N$ una mappa olomorfa, e $V \subseteq M$ è una varietà analitica tale che $f|_V$ è propria, allora $f(V)$ è una sottovarietà analitica di $N$.
+\end{teorema}
+
+\section{Fasci e Coomologia}
+% TODO: Aggiungere le cose di questa sezione
+
+\begin{nota}
+  Ricordare che le coomologie di un fascio $H^k(M, \cF)$ dipendono solo dal fascio e dallo spazio topologico.
+  Esse sono definite come la coomologia $k$-esima del complesso di cocatene di Čech
+  $$ \rvC^p (\cU, \cF) = \prod_{\alpha_0 \neq \ldots \neq \alpha_p} \cF(U_{\alpha_0} \cap \ldots \cap U_{\alpha_p}). $$
+\end{nota}
+
+\begin{notazione}
+  \begin{itemize}
+  \item $\cO^*$ è il fascio delle funzioni olomorfe {\emph mai nulle}
+  \item $\cM^*$ è il fascio delle funzioni meromorfe {\emph non nulle}
+  \end{itemize}
+\end{notazione}
+
+\begin{teorema}[Leray]
+  Se il ricoprimento $\cU$ è aciclico per il fascio $\cF$ nel senso che
+  $$ \rvH^q (U_{i_1} \cap \ldots \cap U_{i_p}, \cF) = 0, \hskip 1.5em q > 0 $$
+  per ogni $i_1, \ldots, i_p$ allora $\rvH^*(\cU, \cF) \simeq \rvH^*(M, \cF)$.
+\end{teorema}
+
+\begin{teorema}[LES per fasci]
+  Data una sequenza esatta corta di fasci
+  $$ 0 \rar \cF \rar^\alpha \cG \rar^\beta \cH \rar 0 $$
+  essa induce una sequenza esatta lunga di gruppi di coomologia
+  $$ 0 \rar \rvH^0(M, \cF) \rar \rvH^0(M, \cG) \rar \rvH^0(M, \cH) \rar \rvH^1(M, \cF) \rar \rvH^1(M, \cG) \rar \ldots $$
+\end{teorema}
 \end{document}
 
