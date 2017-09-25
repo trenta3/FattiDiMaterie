@@ -1,0 +1,225 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[left=1cm,top=2cm,right=1cm,bottom=2cm]{geometry}
+\input{Custom-Commands}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.35em}
+\newtheorem{teorema}{Teorema}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definizione}{Definizione}
+\newtheorem{ricordo}{Ricordo}
+\newtheorem{corollario}{Corollario}
+\newtheorem{osservazione}{Osservazione}
+\newtheorem{proposizione}{Proposizione}
+
+\title{Corso di Arbarello}
+\author{Dario Balboni}
+\date{}
+
+\begin{document}
+\maketitle
+
+Questo pdf si propone di raccogliere gli enunciati dei teoremi fatti nel corso di Arbarello (oppure presi dal Griffith-Harris).
+
+\section{Rudimenti di Varie Variabili Complesse}
+\begin{teorema}[Cauchy Integral Formula]
+  Sia $\Delta$ un disco in $\bbC$, $f \in \cC^\infty (\overline\Delta)$, $z \in \Delta$:
+  $$ f(z) = -\frac{1}{2\pi i} \int_{\partial\Delta} \frac{f(w) \de w}{w - z} + \frac{1}{2\pi i} \int_\Delta \frac{\dpar{f(w)}}{\overline{w}} \frac{\de w \wedge \de \overline{w}}{w - z} $$
+\end{teorema}
+
+% TODO: Aggiungere caratterizzazioni equivalenti dell'olomorfia in più variabili
+
+\begin{teorema}
+  Data $f \in \cC^\infty(U)$ essa è olomorfa se e solo se è analitica.
+\end{teorema}
+
+\begin{teorema}[Hartogs]
+  Sia $U$ il polidisco $\Delta(r) = \{ (z_1, z_2) \mid |z_1|, |z_2| < r \}$ e sia $V \subset U$ il polidisco più piccolo $\Delta(r')$ con $r' < r$.
+  Allora ogni funzione olomorfa in un intorno di $U \setminus V$ si estende ad una funzione olomorfa su tutto $U$.
+\end{teorema}
+
+\begin{definizione}[Polinomio di Weierstrass]
+  Un polinomio di Weierstrass in $w$ è un polinomio della forma
+  $$ w^d + a_1(z) w^{d-1} + \ldots + a_d(z) $$
+  con $a_i(0) = 0$ (gli $a_i$ sono olomorfe, non necessariamente polinomi).
+\end{definizione}
+
+\begin{teorema}[degli zeri di Weierstrass]
+  Se $f$ è olomorfa vicino all'origine in $\bbC^n$ e non è identicamente zero sull'asse $w$, allora in qualche intorno dell'origine $f$ può essere scritta unicamente come
+  $$ f = g \cdot h $$
+  dove $g \in \cO_{n-1}[w]$ è un polinomio di Weierstrass di grado $d$ in $w$ e $h(0) \neq 0$.
+\end{teorema}
+
+\begin{teorema}[Forma degli zeri]
+  Il luogo di zeri di una funzione analitica $f(z_1, \ldots, z_{n-1}, w)$ che non si annulla identicamente sull'asse $w$, si proietta localmente sull'iperpiano $w = 0$ come un rivestimento finito ramificato sul luogo di zeri di una funzione analitica (che è il discriminante del polinomio di Weierstrass con gli stessi zeri di $f$).
+\end{teorema}
+
+\begin{teorema}[di Estensione di Riemann]
+  Supponiamo che $f(z, w)$ sia olomorfa in un disco $\Delta \subseteq \bbC^n$ e $g(z, w)$ sia olomorfa su $\overline\Delta \setminus \{ f = 0 \}$ e limitata. Allora $g$ si estende ad una funzione olomorfa su tutto $\Delta$.
+\end{teorema}
+
+\begin{ricordo}[Sugli anelli a fattorizzazione unica]
+  Valgono i seguenti fatti:
+  \begin{itemize}
+  \item $R$ UFD $\implies$ $R[t]$ UFD (Lemma di Gauss)
+  \item Se $R$ è UFD e $u, v \in R[t]$ sono coprimi, allora esistono due elementi $\alpha, \beta \in R[t]$, $\gamma \neq 0 \in R$ tali che
+    $$ \alpha u + \beta v = \gamma. $$
+    $\gamma$ è detto risultante di $u$ e $v$ (Ma notare che non è detto che $(u, v) = (\gamma)$).
+  \end{itemize}
+\end{ricordo}
+
+\begin{definizione}
+  $\cO_n$ è l'anello delle funzioni olomorfe in un intorno dell'origine in $\bbC^n$.
+\end{definizione}
+
+\begin{osservazione}
+  $\cO_n$ è un dominio d'integrità per il principio di continuazione analitica.
+\end{osservazione}
+
+\begin{teorema}
+  $\cO_n$ è UFD
+\end{teorema}
+
+\begin{teorema}[Propagazione dei germi coprimi]
+  Se $f$ e $g$ sono coprimi in $\cO_{n, 0}$ allora $\exists \varepsilon > 0$ tale che $\forall \abs{z} < \varepsilon$, $f$ e $g$ sono coprimi in $\cO_{n, z}$.
+\end{teorema}
+
+\begin{teorema}[di divisione di Weierstrass]
+  Sia $g(z, w) \in \cO_{n-1}[w]$ un polinomio di Weierstrass di grado $k$ in $w$.
+  Allora per ogni $f \in \cO_n$, possiamo scrivere
+  $$ f = g \cdot h + r $$
+  dove $r(z, w)$ è un polinomio di grado $< k$ in $w$.
+\end{teorema}
+
+\begin{corollario}[Nullstellensatz debole]
+  Se $f(z, w) \in \cO_n$ è irriducibile e $h \in \cO_n$ si annulla sull'insieme $f(z, w) = 0$, allora $f$ divide $h$ in $\cO_n$.
+\end{corollario}
+
+\begin{definizione}[Varietà Analitica]
+  Un sottoinsieme $V$ di un aperto $U \subseteq \bbC^n$ è una varietà analitica in $U$ se, per ogni $p \in U$, esiste un intorno $U'$ di $p$ in $U$ tale che $U' \cap V$ è il luogo di zeri comune di una collezione finita di funzioni olomorfe $f_1, \ldots, f_k$ su $U'$.
+\end{definizione}
+
+\begin{osservazione}[Decomposizione locale in irriducibili]
+  Se $V \subseteq U \subseteq \bbC^n$ è ipersuperficie analitica (definita da $V = \{ f(z) = 0 \}$) in un intorno di $0$ allora decomponendo $f$ in irriducibili dentro $\cO_n$:
+  $$f = f_1 \cdot \ldots f_k$$
+  possiamo porre $V_i = \{ f_i(z) = 0 \}$.
+
+  Si ha quindi
+  $$ V = \cup_i V_i $$
+  e ciascun $V_i$ è una ipersuperficie irriducibile.
+\end{osservazione}
+
+\section{Manifolde Complesse}
+Viene utilizzato il termine Manifolde per differenziarle dalle Varietà: con Manifolde intendiamo che ammettono una struttura di varietà differenziale, mentre con varietà le intendiamo nel senso algebrico del termine (ovvero varietà analitiche).
+
+\subsection{Tangenti delle Manifolde}
+Vi sono tre più uno diversi tipi di spazi tangenti da prendere in considerazione:
+\begin{itemize}
+\item ({\bf Spazio Tangente Reale}) $T_{\bbR, p}(M)$ è l'usuale spazio tangente reale, considerando $M$ come manifolda reale di dimensione $2n$.
+  Si realizza come lo spazio delle derivazioni $\bbR$-lineari sullo spazio delle funzioni $\cC^\infty$ a valori reali in un intorno di $p$:
+  $$ T_{\bbR, p}(M) = \bbR \left\{ \dpar{}{x_i}, \dpar{}{y_i} \right\} $$
+  dove $z_i = x_i + i y_i$.
+\item ({\bf Spazio Tangente Complessificato}) $T_{\bbC, p}(M) = T_{\bbR, p}(M) \otimes_\bbR \bbC$ è il complessificato del tangente reale.
+  Si realizza come lo spazio delle derivazioni $\bbC$-lineari sullo spazio delle funzioni $\cC^\infty$ a valori complessi in un intorno di $p$:
+  $$ T_{\bbC, p}(M) = \bbC \left\{ \dpar{}{x_i}, \dpar{}{y_i} \right\} = \bbC \left\{ \dpar{}{z_i}, \dpar{}{\overline{z_i}} \right\} $$
+\item ({\bf Spazio Tangente Olomorfo}) $T'_p(M) = \bbC \left\{ \dpar{}{z_i} \right\} \subset T_{\bbC, p}(M)$ è lo spazio tangente olomorfo.
+  Si realizza come il sottospazio di $T_{\bbC, p}(M)$ delle derivazioni che si annullano su tutte le funzioni antiolomorfe, ed è quindi indipendente dal sistema di coordinate olomorfe scelto.
+\item ({\bf Spazio Tangente Antiolomorfo}) $T''_p(M) = \bbC \left\{ \dpar{}{\overline{z_i}} \right\}$ è lo spazio tangente antiolomorfo.
+\end{itemize}
+
+Chiaramente si ha $T_{\bbC, p}(M) = T'_p(M) \oplus T''_p(M)$.
+
+\subsection{Mappe indotte tra i tangenti}
+In generale, data una funzione $\cC^\infty$ $f: M \rar N$, essa induce una funzione lineare $f_*: T_{\bbR, p}(M) \rar T_{\bbR, f(p)}(N)$ e di conseguenza anche una mappa $f_*: T_{\bbC, p}(M) \rar T_{\bbC, f(p)}(N)$, ma non induce in generale una mappa da $T'_p(M)$ a $T'_{f(p)}(N)$.
+
+\begin{lemma}[Olomorfia dati i tangenti]
+  Una mappa $f: M \rar N$ è olomorfa se e solo se
+  $$ f_*(T'_p(M)) \subseteq T'_{f(p)}(N) $$
+  per ogni $p \in M$.
+\end{lemma}
+
+Visto che abbiamo diversi tangenti abbiamo anche diverse nozioni di Jacobiano di una mappa $f$:
+\begin{itemize}
+\item Se scriviamo $z_i = x_i + i y_i$ e $w_i = u_i + i v_i$ allora, in termini delle basi $\left\{ \dpar{}{x_i}, \dpar{}{y_i} \right\}$ e $\left\{ \dpar{}{u_j}, \dpar{}{v_j} \right\}$ per $T_{\bbR, p}(M)$ e $T_{\bbR, q}(N)$ la mappa lineare $f_*$ è data dalla matrice
+  \begin{displaymath}
+    \cF_\bbR (f) =
+    \left(
+      \begin{array}{cc}
+        \dpar{u_j}{x_i} & \dpar{u_j}{y_i} \\
+        \dpar{v_j}{x_i} & \dpar{v_j}{y_i} \\
+      \end{array}
+    \right)
+  \end{displaymath}
+
+\item In termini delle basi $\left\{ \dpar{}{z_i}, \dpar{}{\overline{z_i}} \right\}$ e $\left\{ \dpar{}{w_i}, \dpar{}{\overline{w_i}} \right\}$ per $T_{\bbC, p}(M)$ e per $T_{\bbC, q}(N)$, $f_*$ è data da
+  \begin{displaymath}
+    \cF_\bbC (f) =
+    \left(
+      \begin{array}{cc}
+        \cF(f) & 0 \\
+        0 & \overline{\cF(f)} \\
+      \end{array}
+    \right)
+  \end{displaymath}
+  dove $$ \cF(f) = \left( \dpar{w_i}{z_j} \right).$$
+\end{itemize}
+
+Notiamo in particolare che si ha $\Rk \cF_\bbR(f) = 2 \Rk \cF(f)$ e che se $m = n$ si ha $\Det \cF_\bbR(f) = \abs{\Det \cF(f)}^2 \ge 0$ e quindi le mappe olomorfe preservano l'orientazione.
+
+L'orientazione standard su $\bbC^n$ è definita dalla $2n$-forma
+$$ \lrt{\frac{i}{2}}^n (\de z_1 \wedge \de \overline{z_1}) \wedge \ldots \wedge (\de z_n \wedge \de \overline{z_n}) = \de x_1 \wedge \de y_1 \wedge \ldots \wedge \de x_n \wedge \de y_n $$
+Per quanto notato, il pullback di questa forma differenziale attraverso le carte che definiscono la manifolda $M$ è coerente e quindi ogni manifolda complessa è orientabile.
+
+\subsection{Sottomanifolde e sottovarietà}
+\begin{teorema}[Funzione Inversa]
+  Siano $U, V$ aperti di $\bbC^n$ con $0 \in U$ e $f: U \rar V$ una mappa olomorfa con $\cF(f) = \lrt{\dpar{f_i}{z_j}}$ nonsingolare in $0$.
+  Allora $f$ è uno-a-uno in un intorno di $0$, e $f^{-1}$ è olomorfa in $f(0)$.
+\end{teorema}
+
+\begin{teorema}[Funzione Implicita]
+  Date $f_1, \ldots, f_k \in \cO_n$ con
+  $$ \det \lrt{\dpar{f_i}{z_j} (0)}_{1 \le i, j \le k} \neq 0 $$
+  esistono delle funzioni $w_1, \ldots, w_k \in \cO_{n-k}$ tali che in un intorno di $0$ in $\bbC^n$,
+  $$ f_1(z) = \ldots = f_k(z) = 0 \sse z_i = w_i(z_{k+1}, \ldots, z_n), \hskip 1.5em 1 \le i \le k. $$
+\end{teorema}
+
+\begin{proposizione}
+  Se $f: U \rar V$ è olomorfa e uno-a-uno di aperti in $\bbC^n$ allora $\abs{\cF(f)} \neq 0$, ovvero $f^{-1}$ è olomorfa.
+\end{proposizione}
+
+\begin{definizione}[Sottomanifolda complessa]
+  Una sottomanifolda complessa $S$ di una manifolda complessa $M$ è un sottoinsieme $S \subseteq M$ dato localmente come zero di una collezione $f_1, \ldots, f_k$ di funzioni olomorfe con $\Rk \cF(f) = k$, oppure come l'immagine di un aperto $U \subseteq \bbC^{n-k}$ attraverso una mappa $f: U \rar M$ con $\Rk \cF(f) = n - k$.
+\end{definizione}
+
+\begin{definizione}[Sottovarietà analitica]
+  Una sottovarietà analitica $V$ di una manifolda complessa $M$ è un sottoinsieme dato localmente come il luogo di zeri di una collezione finita di funzioni olomorfe.
+  Un punto $p \in V$ è detto punto liscio se $V$ è una sottomanifolda di $M$ vicino $p$.
+  L'insieme dei punti lisci di $V$ è denotato con $V^*$.
+\end{definizione}
+
+\begin{definizione}[Molteplicità di un punto su una ipersuperficie]
+  Se $p$ è un punto di una ipersuperficie analitica $V \subseteq M$ data in termini di coordinate locali $z$ dalla funzione $f$, definiamo la molteplicità $\mult_p (V)$ come l'ordine di annullamento di $f$ in $p$, ovvero il più grande intero $m$ tale che tutte le derivate parziali
+  $$ \frac{\partial^k f}{\partial z_{i_1} \cdots \partial z_{i_k}} (p) = 0, \hskip 1.5em k \le m - 1 $$
+  svaniscono.
+\end{definizione}
+
+\begin{definizione}[Punto generico]
+  Diciamo che una proprietà vale per un punto generico di una manifolda o di una varietà analitica se l'insieme dei punti per i quali la proprietà non vale è contenuto in una varietà di dimensione strettamente più piccola.
+\end{definizione}
+
+\begin{proposizione}[Varietà dei punti singolari]
+  $V_s$ è contenuta in una sottovarietà analitica di $M$ diversa da $V$.
+  In realtà vale che $V_s$ è proprio una sottovarietà analitica.
+\end{proposizione}
+
+\begin{proposizione}
+  Una varietà analitica $V$ è irriducibile se e solo se $V^*$ è connessa.
+\end{proposizione}
+\end{document}
+

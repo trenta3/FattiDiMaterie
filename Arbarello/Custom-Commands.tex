@@ -1,0 +1,121 @@
+\usepackage{xifthen}
+\usepackage[linktoc=all]{hyperref}
+\usepackage{color}
+\usepackage{xparse}
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+
+% Definiamo i font da utilizzare per le varie sezioni
+\renewcommand*{\familydefault}{\rmdefault}
+\renewcommand*{\rmdefault}{ppl}
+\renewcommand*{\sfdefault}{cmss}
+\renewcommand*{\ttdefault}{lmtt}
+
+% Oggetti utili per dare spaziatura al corpo del testo e per aggiungere note a margine
+\newcommand{\Nextblock}{{\vskip 1.5ex}\noindent}
+\newcommand{\paragrafo}[1]{{\vskip 3ex}{\normalfont\large\bf\noindent{#1}}{\hskip 3ex}}
+\newcommand{\Nota}[1]{\marginpar{\footnotesize{\vskip 4ex}#1}}
+\newcommand{\Passo}[1]{\paragrafo{Passo {#1}}}
+\newcommand{\Freccia}[1]{\paragrafo{Freccia {#1}}}
+
+\NewDocumentCommand{\Altro}{g}{
+  \IfNoValueTF{#1}
+	{\paragrafo{}}
+	{\paragrafo{#1}}}
+
+\newcommand{\frdx}{ \framebox[\width]{ $\Rightarrow$ } }
+\newcommand{\frsx}{ \framebox[\width]{ $\Leftarrow$ } }
+\newcommand{\opp}{\text{ oppure }}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+\newcommand{\crossmark}{$\times$}
+
+
+%mathbb mathcal mathfrak e mathbm per le lettere dell'alfabeto e anche mathbb per quelle greche
+\def\mydeflett#1{\expandafter\def\csname bb#1\endcsname{\mathbb{#1}}
+		\expandafter\def\csname c#1\endcsname{\mathcal{#1}}
+		\expandafter\def\csname k#1\endcsname{\mathfrak{#1}}
+		\expandafter\def\csname bl#1\endcsname{\mathbf{#1}}}
+\def\mydefalllett#1{\ifx#1\mydefalllett\else\mydeflett#1\expandafter\mydefalllett\fi}
+\mydefalllett ABCDEFGHIJKLMNOPQRSTUVWXYZ\mydefalllett
+
+\def\mydeffrakmath#1{\expandafter\def\csname k#1\endcsname{\mathfrak{#1}}}
+\def\mydefallfrak#1{\ifx#1\mydefallfrak\else\mydeffrakmath#1\expandafter\mydefallfrak\fi}
+\mydefallfrak abcdefghijklmnopqrstuvwxyz\mydefallfrak
+
+\def\mydefgreek#1{\expandafter\def\csname bl#1\endcsname{\text{\boldmath$\mathbf{\csname #1\endcsname}$}}}
+\def\mydefallgreek#1{\ifx\mydefallgreek#1\else\mydefgreek{#1}%
+   \lowercase{\mydefgreek{#1}}\expandafter\mydefallgreek\fi}
+\mydefallgreek {Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{Upsilon}{Phi}{Varphi}{Psi}{Omega}{alpha}{beta}{gamma}{delta}{epsilon}{varepsilon}{zeta}{eta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{varphi}{chi}{psi}{omega}\mydefallgreek
+
+\NewDocumentCommand{\de}{gg}{
+	\IfNoValueTF{#1}
+		{\text{ d}}
+		{\IfNoValueTF{#2}	{\text{ d}#1}
+			{\frac{\text{d}#1}{\text{d}#2}}
+	}
+}
+
+\NewDocumentCommand{\dpar}{gg}{
+	\IfNoValueTF{#1}
+		{\partial}
+		{\IfNoValueTF{#2}	{\partial_{#1}}
+			{\frac{\partial {#1}}{\partial {#2}}}
+	}
+}
+
+\newcommand{\sse}{\Leftrightarrow}
+\newcommand{\Rar}{\Rightarrow}
+\newcommand{\rar}{\rightarrow}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\ot}[1]{\widetilde{#1}}
+\newcommand{\oc}[1]{\widehat{#1}}
+\newcommand{\tc}{\mbox{ t.c. }}
+
+\newcommand{\norma}[1]{\mid\mid #1 \mid\mid}
+\newcommand{\abs}[1]{\left|{#1}\right|}
+\newcommand{\scal}[2]{\langle #1 \mid #2 \rangle}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+\newcommand{\Ker}{\mbox{Ker } }
+\newcommand{\Deg}{\mbox{deg }}
+\newcommand{\Det}{\mbox{det }}
+\newcommand{\Dim}{\mbox{dim }}
+\newcommand{\End}{\mbox{End }}
+\newcommand{\Rad}{\mbox{Rad }}
+\newcommand{\Ann}{\mbox{Ann }}
+\newcommand{\Sp}{\mbox{Sp }}
+\newcommand{\Rk}{\mbox{rk }}
+\newcommand{\Tr}{\mbox{tr }}
+\newcommand{\GL}{\mbox{GL}}
+\newcommand{\Isom}{\mbox{Isom}}
+\newcommand{\Fix}{\mbox{Fix }}
+\newcommand{\Giac}{\mbox{Giac }}
+\newcommand{\Ort}{\mbox{O}}
+\newcommand{\Aff}{\mbox{Aff }}
+\newcommand{\Supp}{\mbox{Supp }}
+\newcommand{\Span}{\mbox{Span }}
+\newcommand{\Symm}{\mbox{Sym }}
+\newcommand{\Asymm}{\mbox{Asym }}
+\newcommand{\Img}{\mbox{Im }}
+\newcommand{\Id}{\mbox{id}}
+\newcommand{\PS}{\mbox{PS }}
+\newcommand{\Mtr}{\mathfrak{m}}
+\newcommand{\fucknullset}{\{0\}}
+
+% Definiamo lo stile degli ambienti theorem che andremo ad utilizzare
+\newtheoremstyle{nostrostile} % <name>
+{\baselineskip} % <Space above>
+{\baselineskip} % <Space below>
+{} % <Body font>
+{} % <Indent amount>
+{\bf\scshape} % <Theorem head font>
+{:} % <Punctation after theorem head>
+{1em} % <Space after theorem head>
+{} % <Theorem head spec>
+
+\theoremstyle{nostrostile}
+
+\newcommand{\lrt}[1]{\ensuremath{\left({#1}\right)}}
+\newcommand{\lrq}[1]{\ensuremath{\left[{#1}\right]}}
+\newcommand{\lrg}[1]{\ensuremath{\left\{{#1}\right\}}}
+
