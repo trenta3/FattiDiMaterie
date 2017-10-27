@@ -29,6 +29,11 @@
 \newcommand{\Gr}{\text{Gr }}
 \newcommand{\Bl}{\text{Bl }}
 \newcommand{\ov}{\overline}
+\newcommand{\Cacl}{\text{Cacl }}
+\newcommand{\Pic}{\text{Pic }}
+\newcommand{\Div}{\text{Div }}
+\newcommand{\Cl}{\text{Cl }}
+\newcommand{\Ob}{\text{Ob }}
 
 \begin{document}
 \title{Istituzioni di Algebra}
@@ -618,7 +623,7 @@ In questa sezione assumeremo l'ipotesi di $A$ dominio noetheriano
   $v_\kp: K^* \rar \bbZ$ in modo che $A_\kp = K_{v_\kp}$.
 
   Allora dato $f \in K^*$ posso definire
-  $$ \div f = \sum_\substack{\kp \text{ primi } \\ \Ht \kp = 1} v_\kp(f)
+  $$ \div f = \sum_{\substack{ \kp \text{ primi }; \Ht \kp = 1 }} v_\kp(f)
   \kp $$ Si verifica che la somma è sempre finita e quindi si può
   definire $\Cl A = \sfrac{\Div A}{\{ \div f \mid f \in K^*\}}$ ovvero
   tutti i divisori quozientati per quelli principali.
@@ -695,6 +700,12 @@ commutativo)
     (assumendo A1 e A2) è isomorfo al prodotto.
   \end{enumerate}
 \item ({\bf })
+\end{itemize}
+
+\section*{Controesempi}
+\begin{itemize}
+\item ({\bf Normale ma non UFD}) $\bbZ[\sqrt{-5}]$ è normale poiché è la chiusura integrale di $\bbZ$ dentro $\bbQ(\sqrt{-5})$ ma non è UFD: $6 = 2 \cdot 3 = (1 + sqrt{-5}) (1 - \sqrt{-5})$
+\item ({\bf Grado di una $K$-algebra}) Non è ben definito per le $K$ algebre che non sono un dominio: esempio prendere $A = K[X] \times K[Y, Z]$...
 \end{itemize}
 \end{document}
 
