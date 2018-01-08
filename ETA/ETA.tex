@@ -1,0 +1,283 @@
+\documentclass[a4paper,NoNotes,GeneralMath]{stdmdoc}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\title{ETA}
+\newcommand{\Top}{\textbf{Top}}
+\newcommand{\Grp}{\textbf{Grp}}
+\newcommand{\Set}{\textbf{Set}}
+\newcommand{\Cpx}{\textbf{Cpx}}
+\newcommand{\id}{\text{id}}
+\let\xrar\xrightarrow
+
+\begin{document}
+\section*{Omotopia}
+\begin{itemize}
+\item ({\bf Definizione 1}) $\pi_n (X, x_0) = \lrq{(I^n, \partial I^n), (X, x_0)}$ e $\pi_0 (X, x_0) = \lrg{\text{componenti connesse per archi di } X}$.
+
+  In maniera relativa si ha $\pi_n (X, A, x_0) = [(D^n, S^{n-1}, s), (X, A, x_0)]$.  
+\item ({\bf Definizione 2}) Poiché $I^n / \partial I^n \simeq S^n$ possiamo anche considerare $\pi_n (X, x_0) = \lrq{(S^n, s), (X, x_0)}$ con la mappa di passaggio al quoziente.
+\item ({\bf Definizione 3}) Dotando $\cC(I, X)$ della topologia compatta aperta si può definire lo ``spazio di lacci''
+  $$ \Omega (X, x_0) = \lrg{ f \in \cC(I, X) \mid f(0) = f(1) = x_0 } $$
+
+  Inoltre $\Omega^{k+1} (X, x_0) = \Omega (\Omega^k (X, x_0), c_k)$ con $c_k: I \rar \Omega^{k}(X, x_0)$ il laccio $c_k(t) = c_{k-1}$.
+  Allora si ha $\pi_n (X, x_0) \simeq \pi_1 (\Omega^{n-1}(X, x_0), c_{n-1})$.
+\item ({\bf Funtorialità}) $\pi_n$ è un funtore da $\Top_*$ a $\Grp$ e anche da $\Top_{*, H}$ a $\Grp$.
+\item ({\bf Pi-N bassi delle Sfere (Difficile)}) Per $n \ge 2$ e $1 \le k \le n - 1 \quad \pi_k (S^n, s) \simeq 0$.
+\item ({\bf Invarianza per rivestimento universale}) Dato il rivestimento universale $p: \tilde{X} \rar X$ si ha per $n \ge 2$ l'applicazione $p_*: \pi_n(\tilde{X}) \rar \pi_n(X)$.
+\item ({\bf Teorema di Hopf}) $\pi_n(S^n) = \bbZ$ ed è generato da $[\id_{S^n}]$.
+\end{itemize}
+
+\subsection*{Fatti}
+\begin{itemize}
+\item ({\bf Gruppi}) Si può definire un'operazione di gruppo su $\pi_n (X, x_0)$ come ``composizione di cammini sulla prima componente''.
+  Inoltre si può definire un'azione di $\pi_1 (X, x_0)$ sugli altri $\pi_n (X, x_0)$ come ``coniugare seguendo il cammino per cambiare il punto base''.
+
+  L'azione di gruppo nel caso della definizione 2 è data come $[f] \cdot [g] = [ (f \vee g) \circ c ]$ con $c$ applicazione di collasso dell'equatore ad un punto.
+\item ({\bf Abelianità}) $\forall n \ge 2 \quad \pi_n (X, x_0)$ è abeliano.
+\item ({\bf Successione Esatta della Coppia}) Data una tripla $(X, A, x_0)$ si hanno le due inclusioni $i: (A, x_0) \rar (X, x_0)$ e $j: (X, x_0, x_0) \rar (X, A, x_0)$ e l'omomorfismo di bordo $\partial [f] = [f\mid_{(S^{n-1}, s)}]$. Essi danno luogo alla seguente successione esatta:
+  $$ \ldots \rar \pi_n(A, x_0) \xrar{i_*} \pi_n(X, x_0) \xrar{j_*} \pi_n(X, A, x_0) \xrar{\partial} \pi_{n-1}(A, x_0) \rar \ldots $$
+\end{itemize}
+
+\section*{Simplessi}
+\subsection*{Simplessi}
+Dato $X \subseteq \bbR^m$ con $\abs{X} = n+1$ punti geometricamente indipendenti, si chiama $n$-simplesso geometrico
+$$ \Delta(X) = \left\{ Q = \sum_{P \in X} a_P P \middle| \sum_{P \in X} a_P = 1, \ a_P \ge 0 \quad \forall P \in X \right\} $$
+Si dice {\bf $n$-simplesso} un $n$-simplesso geometrico assieme ad un ordinamento dei punti.
+
+\subsection*{Simplessi Astratti}
+Si dice {\bf $n$-simplesso astratto} un qualunque insieme $Y = \lrg{P_0, \ldots, P_n}$.
+Esso si può realizzare come $n$-simplesso geometrico dentro a $\bbR^Y$ (come spazio vettoriale) e $\Delta^n = \Delta\lrq{E_0, \ldots, E_n}$ dove $E_i: Y \rar \bbR$ tale che $E_i(P_j) = \delta_{ij}$.
+
+\subsection*{Complessi simpliciali Finiti}
+Un {\bf complesso simpliciale finito} è una famiglia $\cF$ finita di simplessi geometrici in un qualche $\bbR^m$ che verifica le seguenti proprietà:
+\begin{itemize}
+\item Se $\sigma \in \cF$ allora ogni faccia (anche iterata) di $\sigma$ appartiene a $\cF$.
+\item Se $\sigma, \tau \in \cF$ con $\abs\sigma \cap \abs\tau \neq \emptyset$ allora si ha $\abs\sigma \cap \abs\tau$ è una faccia (possibilmente iterata) comune a $\sigma$ ed a $\tau$.
+\end{itemize}
+
+\subsection*{Complesso Simpliciale Finito Astratto}
+Un {\bf complesso simpliciale finito astratto} è una famiglia finita di insiemi finiti tale che $\forall Y \subseteq X$ con $X \in \cA$ si ha $Y \in \cA$.
+Un morfismo di complessi simpliciali astratti è una mappa di punti degli insiemi tale che rispetti anche gli insiemi stessi.
+
+Inoltre dato un complesso simpliciale finito gliene si può associare uno astratto prendendo i punti base dei simplessi geometrici.
+Questa corrispondenza tra complessi simpliciali geometrici e complessi simpliciali astratti è un isomorfismo di categorie.
+
+\subsection*{Poliedri Compatti}
+Un {\bf poliedro compatto} è un $P \subseteq \bbR^m$ per qualche $m$ tale che $\exists \cF$ complesso simpliciale finito geometrico tale che $P = \abs\cF$.
+Definiamo una mappa tra poliedri compatti (mappa PL) come applicazione simpliciale tra due qualunque complessi simpliciali finiti geometrici di cui i poliedri compatti sono il supporto.
+
+\subsection*{Complessi Simpliciali Astratti Arbitrari}
+È una famiglia di insiemi finiti tale che $\forall Y \subseteq X$ con $X \in \cA$ si ha $Y \in \cA$.
+
+Possiamo definire i complessi geometrici arbitrari come inviluppo convesso di funzioni in $\oplus_E \bbR$ con la topologia finale indotta dalle inclusioni di simplessi.
+Con questa topologia esso può non essere $N_1$ ma è sicuramente $T_4 + T_1$.
+
+\subsection*{Cose}
+\begin{itemize}
+\item ({\bf Suddivisione baricentrica}) Su ogni simplesso si aggiungono i punti baricentrici di ogni faccia e si congiungono questi ai punti medi di ciascuna faccia ed a tutti i vertici del simplesso piccolo. Si indica con $\cK^{(n)}$ l'$n$-esimo procedimento di suddivisione baricentrica.
+
+  Si ha che il più grande diametro di $\cK^{(1)}$ è più fine di $\frac{d}{d + 1}$ del più grande diametro di $\cK$ dove $d$ è la più alta dimensione di un simplesso.
+  Quindi vale che $\forall \varepsilon > 0 \quad \exists n \in \bbN$ tale che ogni simplesso di $\cK^{(n)}$ ha diametro $< \varepsilon$.
+\item ({\bf Approssimazione Simpliciale}) Data $f: P \rar Q$ continua con $P, Q$ poliedri compatti, $\forall \cK, \cH$ triangolazioni di $P$ e di $Q$, $\exists n$ tale che $f: \cK^{(n)} \rar \cH$ è omotopa ad una applicazione simpliciale.
+\end{itemize}
+
+\subsection*{$\Delta$-complessi}
+Dato $X$ uno spazio $T_2$, un $\Delta$-complesso su $X$ è una famiglia di simplessi singolari $\lrg{(\Delta^{n_\sigma}, \varphi_\sigma)}_\sigma$ tali che:
+\begin{itemize}
+\item La famiglia sia chiusa rispetto alle facce iterate
+\item $\forall \sigma \in \Lambda \quad \phi_\sigma \mid_{\mathring\Delta^{n_\sigma}}: \mathring\Delta^{n_\sigma} \rar X$ è un omeomorfismo sull'immagine
+\item $\forall x \in X$ esiste un unico $\sigma$ tale che $x \in \phi_\sigma(\mathring\Delta^{n_\sigma})$
+\item $X$ è dotato della topologia finale rispetto alla famiglia
+\end{itemize}
+In particolare $X$ è omeomorfo al colimite del diagramma consistente di tutte le mappe $\phi_\sigma$.
+
+Ogni complesso simpliciale è anche un $\Delta$-complesso in quanto possiamo prendere le $\phi_\sigma$ come composizione delle mappe di complessi simpliciali con le immersioni delle facce nel politopo $\cK$.
+
+Servono solo per descrivere gli spazi con meno triangoli, visto che una suddivisione baricentrica di un $\Delta$-complesso è un complesso simpliciale.
+Inoltre la struttura di $\Delta$-complesso facilmente si solleva al rivestimento universale di un dato spazio.
+
+\subsubsection*{Interpretazione categoriale dei $\Delta$-complessi}
+Sia $\cD$ la categoria i cui oggetti sono gli insiemi ordinati standard $\cD^n = \lrg{0, \ldots, n} \quad \forall n \ge 0$.
+Come morfismi consideriamo le mappe $\cD^m \rar \cD^n$ con $m \le n$ e strettamente crescenti.
+Dato un $\Delta$-complesso su $X$ poniamo $X(n) = \lrg{(\Delta^{n_\lambda}, \phi_\lambda) \mid n_\lambda = n}$ l'unione degli $n$-simplessi singolari di $X$.
+
+Si definisce il $\Delta$-complesso astratto su $X$ come il funtore contravariante $F: \cD \rar \Set$ dato da $F(\cD^n) = X(n)$ e $F(f) = f^*$ che associa ad ogni $n$-simplesso singolare la $m$-faccia corrispondente (utilizzando $f$ come corrispondenza).
+
+Questa non è un'equivalenza di categorie (tra i $\Delta$-complessi e la categoria di funtori contravarianti $\cD \rar \Set$, poiché le mappe simpliciali degeneri non sono rappresentabili come trasformazioni naturali) però gli oggetti si corrispondono biunivocamente.
+
+\subsection*{$K(G, n)$}
+Sia $G$ un gruppo (supposto abeliano se $n \ge 2$). Si dice che uno spazio connesso $X$ è un $K(G, n)$ se $\pi_k(X) = 0 \quad \forall k \neq n$ e $\pi_n(X) = G$.
+
+Possiamo costruire un $K(G, 1)$ costruendo esplicitamente un $\Delta$-complesso connesso $B(G)$ tale che $\pi_1(B(G)) \simeq G$ e il cui rivestimento universale sia contrattile, garantendoci così che $\pi_n(B(G)) = 0 \quad \forall n \ge 2$.
+
+Inoltre $K(\cdot, 1)$ è un funtore pienamente fedele da $\Grp$ a $\Delta-\Cpx$.
+È inoltre essenzialmente surgettivo quando considerato da $\Grp$ a $(\Delta-\Cpx)_H$.
+
+\subsection*{CW-complessi}
+Sono cose che si ottengono induttivamente specificando incollamenti di dischi, ovvero definiamo l'$n$-scheletro come un po' di $n$-celle $(D^n_\lambda, S^{n-1}_\lambda)$ e le rispettive mappe di incollamento $f_\lambda: S^{n-1}_\lambda \rar X^{n-1}$ e consideriamo infine $X = \cup_{n \in \bbN} X^n$ con la topologia finale rispetto alle inclusioni degli $n$-scheletri.
+
+Essi sono $T_1, T_4$, localmente contrattili e che se $(X, A)$ è una CW-coppia, allora $A$ è retratto per deformazione di $\cN_\varepsilon(A)$ in $X$.
+Ogni sotto-CW-complesso $\cK$ compatto è inoltre contenuto in un sottocomplesso finito.
+
+\subsubsection*{Estensione delle Omotopie}
+\begin{itemize}
+\item ({\bf Definizione di HEP}) Una coppia di spazi topologici $(X, A)$ verifica HEP se $\forall Y, \forall f_0: X \rar Y$ continua e per ogni omotopia $g_t: A \rar Y$ con $g_0 = f_0\mid_A$ si ha che $g_t$ si estende ad una omotopia $f_t: X \rar Y$.
+\item ({\bf Alternativa a HEP}) Una coppia verifica HEP se e solo se $(X \times \lrg{0}) \cup (A \times I)$ è un retratto per deformazione di $X \times I$.
+\item ({\bf CW coppie sono HEP}) Se $(X, A)$ è una CW-coppia, allora verifica HEP.
+\end{itemize}
+
+\subsubsection*{Applicazioni Cellulari}
+\begin{itemize}
+\item ({\bf Definizione di Cellulare}) Una applicazione $f: X \rar Y$ continua tra due CW-complessi si dice cellulare se manda gli $n$-scheletri negli $n$-scheletri.
+\item ({\bf Teorema di Approssimazione Cellulare}) Ogni applicazione $f: X \rar Y$ è omotopa ad una $g: X \rar Y$ cellulare.
+\item ({\bf Teorema di Whitehead}) Dati due CW-complessi $X, Y$ connessi, se $f: X \rar Y$ è continua e tale che $f_*: \pi_*(X) \rar \pi_*(Y)$ è un isomorfismo, allora $f$ è una equivalenza di omotopia.
+\end{itemize}
+
+\subsection*{Categorizzazione dei complessi simpliciali}
+Consideriamo la categoria $\tilde\cD$ data dagli stessi oggetti $\cD^n$ ma con frecce che siano tutte le applicazioni crescenti (non strettamente).
+Questa categoria (di funtori contravarianti tra $\tilde\cD$ e $\Set$) è una effettiva estensione della categoria dei complessi simpliciali.
+
+\section*{Tipi di omologia}
+Ad ETA ci sono tre diversi ``tipi'' di omologia:
+\begin{itemize}
+\item Singolare
+
+  $C_n(X)$ è lo $\bbZ$-modulo libero generato dall'insieme degli $n$-simplessi singolari su $X$.
+  Le applicazioni di bordo sono date da $\partial_n(\sigma) = \sum (-1)^j \sigma_j$ con $\sigma_j$ faccia $j$-esima di $\sigma$.
+\item Di $\Delta$-Complessi (Simpliciale)
+
+  $C_n^\Delta(X)$ è lo $\bbZ$-modulo libero generato da $\cK(n)$, gli $n$-simplessi che costituiscono $X$.
+  Le ovvie inclusioni $C_n^\Delta(X) \rar C_n(X)$ inducono isomorfismi in omologia $H_n^\Delta(X) \rar H_n(X)$.
+
+  Risulta quindi più comoda da calcolare, avendo una descrizione finitaria nel caso di $\Delta$-Complessi finiti.
+\item Di CW-Complessi (Cellulare)
+
+  Preso un CW-complesso $X$ qualsiasi e considerate le coppie $(X^n, X^{n-1})$ e $(X^{n-1}, X^{n-2})$ possiamo definire la mappa $d_n$ come la composizione tra $\delta_k: H_n(X^n, X^{n-1}) \rar H_{n-1}(X^{n-1})$ (operatore di bordo della successione esatta lunga in omologia della coppia) e $\bar j_k: H_{n-1}(X^{n-1}) \rar H_{n-1}(X^{n-1}, X^{n-2})$ (applicazione indotta dall'inclusione $X^{k-1} \rar (X^k, X^{k-1})$).
+
+  Quindi dato un qualsiasi CW-complesso possiamo definire il complesso di moduli $H_n(X^n, X^{n-1}), d_n$. L'omologia definita da questo complesso viene chiamata omologia cellulare $H^{CW}_n(X)$.
+
+  Tale omologia risulta uguale a quella singolare $H^{CW}_n(X) \simeq H_n(X)$.
+  Si hanno inoltre i seguenti risultati:
+  \begin{itemize}
+  \item $H_n(X^k, X^{k-1}) = 0$ se $n \neq k$ e $H_k(X^k, X^{k-1})$ è lo $\bbZ$-modulo libero generato dalle $n$-celle aperte di $X$
+  \item Se $k > n$, allora $H_k(X^n) = 0$
+  \item Se $k < n$, l'inclusione $i: X^n \rar X$ induce un isomorfismo in omologia
+  \end{itemize}
+\end{itemize}
+
+Oltre a qualche altra omologia minore:
+\begin{itemize}
+\item Omologia Singolare Cubica (Fatta con mappe da $I^n$ anziché da $\Delta^n$ quozientate per le applicazioni di $n$-cubi degeneri).
+\item Omologia Singolare Geometrica \dotfill
+\end{itemize}
+
+Tutte quante soddisfano gli {\bf Assiomi dell'Omologia}:
+\begin{itemize}
+\item ({\bf Teoria Relativa}) Esiste una teoria relativa di coppie $(X, A)$ tale che coincida con quella assoluta quando $A = \emptyset$.
+\item ({\bf LES}) Deve valere il teorema della successione esatta lunga in omologia.
+\item ({\bf Dimensione}) $H_n(\lrg{\text{pt}}) = \delta_{n,1} \bbZ$.
+\item ({\bf Componenti connesse per archi}) Se $X = \sqcup_\alpha X_\alpha$ partizione in componenti connesse per archi allora $H_n(X) = \oplus_\alpha H_n(X_\alpha)$.
+\item ({\bf Omotopia}) Applicazioni di coppie omotope inducono la stessa mappa in omologia. (Ovvero $H_n$ è un funtore da $\Top_H$ a $R-\Cpx$).
+\end{itemize}
+
+Inoltre valgono le seguenti cose:
+\begin{itemize}
+\item ({\bf Successione esatta lunga}) Data una sequenza esatta corta di moduli $0 \rar A \xrar{f} B \xrar{g} C \rar 0$ se ne ottiene una esatta lunga in omologia
+  $$ \ldots \xrar{\partial_{i+1}} H_i(A) \xrar{f^i_*} H_i(B) \xrar{g^i_*} H_i(C) \xrar{\partial_i} H_{i-1}(A) \rar \ldots $$
+\item ({\bf Escissione}) Data una tripla $(X, A, Z)$ l'applicazione $i: (X \setminus Z, A \setminus Z) \rar (X, A)$ si dice escissione se $i_*: H_n(X \setminus Z, A \setminus Z) \rar H_n(X, A)$ è un isomorfismo $\forall n$.
+
+  Vale il teorema che se $\overline{Z} \subseteq \mathring{A}$ allora si ha un'escissione.
+\item ({\bf Coppie Buone}) Una coppia $(X, A)$ si dice buona se $A$ è chiuso in $X$ ed esiste un intorno aperto $V$ di $A$ tale che $A$ è un retratto per deformazione di $V$.
+
+  Ogni CW-coppia è una coppia buona.
+
+  Data una coppia buona $(X, A)$, e detta $q: (X, A) \rar (X / A, A / A)$ la mappa che collassa $A$ ad un punto, $q_*: H_n(X, A) \rar H_n(X / A, A / A) \simeq \tilde H_n(X / A)$ è un isomorfismo.
+\item ({\bf Simplessi $\cU$-piccoli}) Un $n$-simplesso singolare si dice $\cU$-piccolo se $\exists j$ tale che $\sigma(\Delta^n) \subseteq U_j \in \cU$.
+  Definiamo inoltre l'omologia $\cU$-piccola, generata dalle catene di simplessi $\cU$-piccoli.
+
+  Vale che per ogni ricoprimento aperto $\cU$ di $X$, l'inclusione $i: C^{\cU}_n(X) \rar C_n(X)$ induce un isomorfismo nelle omologie $i_*: H^{\cU}_n(X) \rar H_n(X)$.
+\item ({\bf Terne di spazi}) Data una terna $(X, A, B)$ le inclusioni $(A, B) \rar (X, B)$ e $(X, B) \rar (X, A)$ inducono una successione esatta corta sui complessi di catene
+  $$ 0 \rar C_n(A, B) \rar C_n(X, B) \rar C_n(X, A) \rar 0 $$
+  che induce una successione esatta lunga in omologia.
+\item ({\bf Omologia del Wedge}) Dati $\lrg{(X_\alpha, x_\alpha)}$ spazi puntati e consideriamo il wedge $X = \vee_\alpha (X_\alpha, x_\alpha)$.
+  Se ogni coppia $(X_\alpha, x_\alpha)$ è buona allora $\oplus_\alpha i_{\alpha^*}: \oplus_\alpha \tilde H_n(X_\alpha) \rar \tilde H_n(\vee_\alpha X_\alpha)$ è un isomorfismo.
+
+  Quindi se $X$ è un CW-complesso allora $X^k / X^{k-1} \simeq \vee_\alpha S^k_\alpha$.
+\item ({\bf Omologia della superficie di genere $g$}) $X = \Sigma_g$ la superficie di genere $g$ con la struttura di CW-complesso: $X^0$ è un solo punto, $X^1 \ X^0$ sono $2g$ segmenti e $X^2 \ X^1$ ha una sola cella e non ci sono celle per $n > 2$.
+
+  Si trova quindi che $H_0(\Sigma_g) \simeq \bbZ$, $H_1(\Sigma_g) \simeq \bbZ^{2g}$, $H_2(\Sigma_g) \simeq \bbZ$ e gli altri sono tutti banali.
+\item ({\bf Omologia dei proiettivi})
+  $$ H_k(\bbP^n\bbR) = \left\{
+    \begin{array}{cr}
+      \bbZ          & \text{per } k = 0 \text{ o } k = n \text{ con } n \text{ dispari} \\
+      \bbZ / 2 \bbZ & \text{per } k \text{ dispari}, 0 < k < n                          \\
+      0             & \text{altrimenti}                                                 \\
+    \end{array}
+  \right. $$
+
+  $$ H_k(\bbP^n\bbC) = \left\{
+    \begin{array}{cr}
+      \bbZ & \text{per } k \text{ pari}, 0 \le k \le 2n \\
+      0    & \text{altrimenti}                          \\
+    \end{array}
+  \right. $$
+\end{itemize}
+
+\subsection*{Caratteristica di Eulero-Poincaré}
+\begin{itemize}
+\item ({\bf Definizione della Caratteristica}) Dato un CW-complesso $X$ finito di dimensione $n$ e fissato un campo $\bbF$ si può definire
+  $$ \chi_\bbF(X) = \sum_{j=0}^n (-1)^j \dim_\bbF H_j(X; \bbF) $$
+
+  Inoltre $\dim_\bbF H_j(X; \bbF) = $ numero di $j$-celle di $X$.
+  La caratteristica di Eulero non dipende quindi dalla scelta del campo $\bbF$.
+
+  Vale inoltre, per ogni coppia $(X, A)$ di CW-complessi finiti, che $\chi(X, A) = \chi(X) - \chi(A)$.
+\item ({\bf Di somma}) Siano $X, X_1, X_2, Y$ dei CW-complessi finiti tali che $X = X_1 \cup X_2$ e $Y = X_1 \cap X_2$.
+  Allora vale che $\chi(X) = \chi(X_1) + \chi(X_2) - \chi(Y)$.
+\item ({\bf Di prodotto}) Dati $X, Y$ CW-complessi finiti si ha che $\chi(X \times Y) = \chi(X) \cdot \chi(Y)$.
+\item ({\bf Formula di Künneth}) Dati $X, Y$ due CW-complessi ed $\bbF$ un campo si ha
+  $$ H_n(X \times Y; \bbF) \simeq \oplus_{i+j = n} H_i(X; \bbF) \otimes H_j(Y; \bbF) $$
+\end{itemize}
+
+\subsection*{Teoremi di sconnessione e corollari}
+\begin{itemize}
+\item Sia $H^k$ con $0 \le k \le n$ un $k$-disco topologico in $S^n$.
+  Allora $\tilde H_q(S^n \setminus H^k) = 0$ per ogni $q$.
+\item Sia $Z^k$ con $0 \le k < n$ una $k$-sfera topologica in $S^n$.
+  Allora $\tilde H_q(S^n \setminus Z^k) \simeq \bbZ$ se $q = n - k - 1$ e $0$ altrimenti.
+\item ({\bf Invarianza del dominio}) Sia $U \subseteq \bbR^n$ aperto, $\varphi: U \rar W$ un omeomorfismo con $W \subseteq \bbR^n$. Allora $W$ è aperto in $\bbR^n$.
+\item ({\bf Borsuk-Ulam}) Per ogni funzione continua $g: S^n \rar \bbR^n$ esiste un $x \in S^n$ tale che $g(x) = g(-x)$.
+\end{itemize}
+
+\subsection*{Teoria del Grado}
+\begin{itemize}
+\item ({\bf Definizione di Grado}) Data $f: S^n \rar S^m$, $\deg f = f_*(1) \in \bbZ$.
+  Inoltre si ha:
+  \begin{itemize}
+  \item $\deg \id = 1$
+  \item $f \sim_H g \implies \deg f = \deg g$
+  \item $\deg f \circ g = \deg f \cdot \deg g$
+  \item Se $f$ non è surgettiva allora $\deg f = 0$
+  \item Se $f$ è un omeomorfismo allora $\deg f = \pm 1$
+  \end{itemize}
+\item ({\bf Funzioni buone}) Una $f: S^n \rar S^n$ si dice buona se $\exists y \in S^n$ tale che $f^{-1}(y) = \lrg{x_1, \ldots, x_k}$ ed esiste un sistema di intorni aperti disgiunti $x_i \in U_i$ ed un intorno aperto $V$ di $y$ tale che $f\mid_{U_i}: U_i \rar V$ è un omeomorfismo.
+
+  Ogni $f: S^n \rar S^n$ è omotopa ad una funzione buona.
+\item ({\bf Mappa antipodale}) La mappa antipodale $a(x) = -x$ ha grado $\deg a = (-1)^{n+1}$.
+\item ({\bf Soliti lemmi delle sfere}) $S^n$ ammette un campo di vettori tangenti mai nullo se e solo se $n$ è dispari.
+  Inoltre non esiste alcuna retrazione $r: D^n \rar S^{n-1}$ continua tale che $r\mid_{S^{n-1}} = \id$.
+  Per ogni $f: D^n \rar D^n$ continua esiste $x \in D^n$ tale che $f(x) = x$.
+\end{itemize}
+
+\subsection*{Esempi e controesempi}
+\begin{itemize}
+\item ({\bf CW-complesso che non sia un complesso simpliciale}) Il piano proiettivo reale non è orientabile, quindi non può essere un complesso simpliciale, mentre ovviamente si costruisce come CW-complesso.
+
+  Gli spazi che ammettono struttura di $\Delta$-complesso invece coincidono con i complessi simpliciali applicando una semplice suddivisione baricentrica.
+\end{itemize}
+
+\end{document}
+
+
