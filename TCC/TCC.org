@@ -1,6 +1,7 @@
 #+TITLE: Teoria dei Codici e Crittografia
 #+AUTHOR: Dario Balboni
 #+DATE:
+#+LATEX_CLASS: article
 #+OPTIONS: toc:nil
 #+LATEX_HEADER: \usepackage[top=20mm,bottom=20mm,left=20mm,right=20mm]{geometry}
 
@@ -122,10 +123,22 @@
       - Se ad un certo punto abbiamo $\gcd(v, n) \neq 1, n$, abbiamo trovato un fattore non banale di $n$.
 
 * Altri crittosistemi
+** Crittosistema di Rabin
+   
 * Lezioni del Maestro
   *Disclaimer*: Le parole del Maestro sono a volte di difficile decifrazione, e comunque invitano sempre ad una riflessione personale piuttosto che ad un bieco nozionismo.
   Pertanto siete pregati di non prendere con assoluta certezza quanto scritto di seguito che serve principalmente ad ispirare delle piacevoli conversazioni con i vostri amici.
 
+** Note sull'effettiva calcolabilità (Nota di Redazione)
+   Per avere un'idea di quanto una cosa sia effettivamente realizzabile (ed un attacco crittografico portabile a termine) diamo un'idea delle dimensioni attuali di memoria e di capacità di calcolo:
+   Attualmente un processore può spingersi a qualche GigaHertz di clock e quindi (stimando grezzamente che ogni ciclo di clock corrisponda ad una operazione) dato il numero di operazioni da effettuare si può dividere per $10^9$ per ottenere approssimativamente il numero di secondi che occorrono (ricordiamo che in un anno ci sono circa $3 * 10^7$ secondi).
+   Questa quantità va ovviamente divisa per il numero di processori che si hanno a disposizione per effettuare il calcolo (che in un medio-grosso datacenter possono arrivare a $1000$ macchine con una trentina di processori l'una).
+   Inoltre le quantità di memoria disponibili (sempre per un medio-grosso datacenter) viaggiano, nella migliore delle ipotesi, sull'ordine delle centinaia di PetaByte, ovvero circa $2^57 \simeq 10^17$ byte.
+
+   Molte dei parametri crittografici utilizzati oggigiorno (ad esempio la lunghezza dei primi in RSA) hanno lunghezze dai 300 ai 2000 bit.
+   Ad esempio se dovessimo risolvere il logaritmo discreto in un gruppo di ordine primo di 500 cifre binarie, utilizzando baby-steps giant-steps avremmo bisogno di circa (più o meno) $2^250$ bit di memoria e $2^250$ operazioni, assolutamente proibitivo.
+   Infatti vengono solitamente presi in considerazione anche eventuali attacchi da parte di servizi segreti e simili che possono avere come budget a disposizione anche parecchi miliardi di dollari per un singolo attacco.
+   Moltiplicando i precedenti valori per $10^30$ ci si può però ritenere protetti anche da tali attacchi.
 ** Assunzioni per la sicurezza in crittografia (modelli)
 *** P $\neq$ NP
     Si assume sempre che P $\neq$ NP, dove si suppone che i problemi in P siano quelli efficientemente risolubili, mentre quelli NP-hard o NP-completi siano impossibili da risolvere.
@@ -188,7 +201,7 @@
 
     Nell'RSA standard lo zero e l'uno vengono sempre codificati come sé stessi e questa è un'altra debolezza.
 
-    Inoltre chiave pubblica e chiave privata *non sono simmetriche*: se l'esponente privato è piccolo ($< \sqrt{n}$) esso può essere riconosciuto facilmente.
+    Inoltre chiave pubblica e chiave privata *non sono simmetriche*: se l'esponente privato è piccolo ($< \sqrt{n}$) esso può essere riconosciuto facilmente (vedere a questo proposito [[https://en.wikipedia.org/wiki/Coppersmith%2527s_attack][l'attacco di Coppersmith]]).
 *** Attacco di prossimità all'implementazione RSA con TCR
     *Supposizione*: Chi decifra il messaggio (e quindi conosce $p$ e $q$) potrebbe voler velocizzare i conti ed esponenziare il messaggio modulo i due primi per poi ricomporre il risultato con il Teorema Cinese.
     
@@ -246,25 +259,158 @@
     Se siamo in dimensione $2$, l'algoritmo termina sicuramente restituendo una base ridotta per il reticolo.
     Viene quindi data una definizione di base $\delta$-ridotta in dimensione arbitraria per permettere all'algoritmo LLL di terminare.
 
-    Una base $a_1, \ldots, a_n$ si dice $\delta$-ridotta (con $\frac{1}{4} < \delta < 1$) se valgono le condizioni $||a_i|| \le ||a_i \pm a_j||$ ed inoltre si ha
-    $\delta \pi_i(a_i) < \pi_i(a_{i+1})$ dove $\pi_i$ è "fare Gram-Schmidt fino al punto $i$-esimo".
-*** Algoritmo LLL (Lenstra-Lenstra-Lovaz)
+    Una base $A = \{a_1, \ldots, a_n\}$ si dice $\delta$-ridotta (con $\frac{1}{4} < \delta < 1$) se valgono le condizioni:
+    1. Detta $B = \{b_1, \ldots, b_n\}$ la base ottenuta dal processo di ortonormalizzazione di Gram-Schmidt, e chiamati $\mu_{ij} = \frac{\langle a_i, b_j\rangle}{\langle b_j, b_j\rangle}$ per $j < i$ i coefficienti di approssimazione vale che $|\mu_{ij}| \le \frac{1}{2}$
+    2. Per ogni coppia di vettori consecutivi vale $|b_i + \mu_{i, i-1} b_{i-1}|^2 \ge \delta |b_{i-1}|^2$.
+*** Algoritmo LLL (Lenstra-Lenstra-Lovasz)
     Permette di trovare una base $\delta$-ridotta di un reticolo qualunque, fissato $\delta$ a priori, in tempo polinomiale.
     
     Funziona nel "modo ovvio":
     1. Si controlla se tutte le condizioni sono soddisfatte, nel qual caso ci si ferma
-    2. Si esegue un passo di riduzione con Gram-Schmidt approssimato
-    3. Se $\delta \pi_i(a_i) \ge \pi_i(a_{i+1})$ si scambiano $a_i$ ed $a_{i+1}$
+    2. Se $\exists i,j$ tale che $\mu_{ij} > \frac{1}{2}$ allora si "aggiorna" la coppia di vettori $a_i \leftarrow a_i - \lfloor \mu_{ij} \rceil a_j$ (e si ricomputano i coefficienti di GS)
+    3. Se $\langle b_k, b_k \rangle < (\delta - \mu_{k, k-1}^2) \langle b_{k-1}, b_{k-1} \rangle allora si scambiano $a_k$ e $a_{k+1}$ (e si riaggiorna tutto).
 
-    La parte furba di tutto è mostrare che l'algoritmo termina in tempo polinomiale, ma questo l'hanno già fatto Lenstra, Lenstra e Lovaz.
+    La parte furba di tutto è mostrare che l'algoritmo termina in tempo polinomiale, ma questo l'hanno già fatto Lenstra, Lenstra e Lovasz.
+    Si noti che l'algoritmo è ben definito anche per il caso $\delta = 1$, ma non è assicurato che termini in tempo polinomiale.
+    In particolare esiste una costante effettiva $c_1$ tale che l'algoritmo restituisce come primo vettore della base un vettore $a_1$ vicino al vettore più corto del reticolo originale $s$ in modo che valga $|a_1| \le c_1 |s|$.
+
+    *Idea della terminazione*: chiamiamo $\Delta_i$ il determinante del sottoreticolo generato dai primi $i$ vettori della base.
+    Tutte le trasformazioni di Gram-Schmidt approssimato preservano i determinanti, mentre essi decrescono quando si effettua uno scambio.
+    Se si considera $\Delta = \prod_i \Delta_i$ questo è un numero naturale che decresce ad ogni "passo" dell'algoritmo, quindi esso deve terminare.
 *** Fattorizzazione di Polinomi a coefficienti interi
+**** Prima di LLL
+     Si considera il polinomio modulo $p$ e lo si fattorizza in $\mathbb{F}_p$.
+     Si una quindi il [[https://en.wikipedia.org/wiki/Hensel%27s_lemma][Lemma di sollevamento di Hansel]] per ottenere delle radici sui $p$-adici.
+     Ora o i coefficienti sono troppo grossi (vedere la stima di Mignotte) oppure abbiamo trovato un candidato fattore.
+     Se il polinomio $f$ è irriducibile invece non ci resta altra scelta che provare tutti i fattori in $\mathbb{F}_p$.
+**** Dopo LLL
+     Possiamo utilizzare LLL per far diventare polinomiale l'euristica:
+     
+     $\dotfill$
+*** Risoluzione di Closest Vector Problem
+    LLL permette anche di trovare dei vettori vicini ad uno dato (anche se non di risolvere closest vector).
+    Un problema equivalente a CVP è quello di trovare la classe di equivalenza più piccola modulo il reticolo di un vettore dato.
+
+    Per fare ciò ci sono principalmente due algoritmi:
+    - *Round off*, che è veloce ma che genera cattive approssimazioni: dato $v$ da approssimare, si calcola $v = \sum_i c_i v_i$ dove i $v_i$ sono la base del reticolo ed i $c_i \in \mathbb{Q}$.
+      Basta ora arrotondare i $c_i$ a degli interi per trovare un vettore nel reticolo.
+      Ovviamente non è detto che sia il più vicino ed anzi ci sono casi in cui si hanno dei bound pessimi (si pensi a dei reticoli molto schiacciati in una direzione e molto allungati nelle altre).
+    - *LLL con base aumentata*, considero i vettori $v_1, \ldots, v_n, v$ (che non sono necessariamente più una base) ed eseguo l'algoritmo LLL fino a quando esso non arriva alla fine, avendo così prodotto un vettore piccolo che è $v$ con sottratti alcuni dei $v_i$.
 ** Applicazioni Crittografiche dei Reticoli
 *** Merkle-Hellman
     Si può rompere Merkle-Hellman utilizzando LLL considerando la matrice opportuna codificandolo come problema di Shortest Vector.
-    (Tralascio la matrice perché non ho voglia di scriverla)
-*** Goldreich-Goldwasser-Halewi
-*** Fiat-Shamir
-*** Ferigle-Fiat-Shamir
-*** Digital Signature Standard
-*** NTRU
+    Con le stesse notazioni di sopra, la matrice da considerare è:
+    \begin{displaymath}
+    \left(
+    \begin{array}{ccc|c}
+    2 & & & 2 N a_1 \\
+    & \ddots & & \vdots \\
+    & & 2 & 2 N a_n \\ \hrule
+    1 & \cdots & 1 & 2 N A \\
+    \end{array}
+    \right)
+    \end{displaymath}
+    dove $N$ è scelto molto grande in modo che (visto che $A$ si può rappresentare come somma di alcuni $a_i$) si ottenga come vettore più corto $(\pm 1, \ldots, \pm 1, 0)$
+    dove si ha $-1$ al posto $i$ se $c_i = 1$ e $1$ al posto $i$ se $c_i = 0$.
+    
+    È stato inoltre osservato che non c'è modo di aggiustare Merkle-Hellman per farlo resistere a questo tipo di attacchi.
+*** Goldreich-Goldwasser-Halevi
+    È un _crittosistema asimmetrico_ basato sui reticoli.
+    L'idea è quella di prendere un reticolo dato da una matrice quadrata di interi.
+    Il reticolo ha una base privata "buona" ed una base pubblica che è "cattiva".
 
+    *Attenzione*: quella sotto pare essere una versione interpretata dal Maestro nel corso di una divinazione.
+    Per essere sicuri di riferirsi a GGH con persone terze posso suggerire la consultazione della [[https://en.wikipedia.org/wiki/GGH_encryption_scheme][pagina Wikipedia corrispondente]].
+
+    *Costruzione della chiave*: Si sceglie un $\lambda$ piccolo (es $\lambda = 3$) e si riporta sulla diagonale della matrice.
+    A questo punto la matrice viene "abbellita" con alcuni elementi fuori dalla diagonale, sempre in modo che $\lambda$ sia l'elemento prevalente (ovvero che la base ottenuta alla fine del procedimento sia $\delta$-ridotta).
+    Una volta trovata la matrice "buona", la si "abbruttisce": ad esempio la si moltiplica per una matrice unimodulare (ovvero ad entrate intere e determinante $\pm 1$) oppure la si porta in forma di Hermite (la quale sarebbe comunque calcolabile da chi riceve la matrice e quindi non dà alcuna informazione ulteriore).
+    
+    Per cifrare si prende un vettore di zeri e uni e lo si riduce lungo la forma di Hermite.
+    Essendo corto il vettore di zeri e uni è lo Shortest Vector associato alla sua cifratura e può quindi essere ricostruito da chi ha la base buona.
+
+    *Problemi*: La chiave pubblica risulta essere di dimensione $n^2$ ed anche il numero di calcoli da fare è elevato.
+    Inoltre cercando di evitare alcuni possibili attacchi si vede che $n >> 1000$ e diventa quindi impensabile realizzarlo.
+*** Fiat-Shamir
+    È un _protocollo di autenticazione_: voglio mostrare a qualcun'altro che conosco un quadrato modulo $n$ senza svelarlo (dove $n = pq$ prodotto di due primi può essere scelto globalmente da una parte fidata).
+    Si sceglie quindi casualmente un $x$ e si calcola $s = x^2$.
+    La propria chiave pubblica è $s$ e la chiave privata è $x$.
+
+    Ora se Alice vuole identificarsi con Bob (che conosce solo $(n, s)$) può fare nel seguente modo:
+    - Alice sceglie casualmente un $y$, calcola $y^2$ e lo comunica a Bob
+    - Ora Bob conosce $s$ e $m = y^2$ mentre Alice conosce $x$, $y$ e quindi anche $xy$.
+      Bob può scegliere se farsi svelare da Alice uno tra $y$ oppure $xy$.
+
+      In questo modo Bob non può conoscere $x$ (perché lo ottiene eventualmente moltiplicato per un numero casuale) ma può scegliere se controllare una tra:
+      - Il fatto che Alice stia effettivamente calcolando quadrati di numeri (ovvero verificare che $m = y^2$)
+      - Il fatto che Alice davvero conosca $x$ (verificando che $sm = (xy)^2$)
+
+    Visto che la scelta di Bob viene fatta dopo che Alice ha già mandato il valore, se essa non conoscesse una fattorizzazione di $n$ avrebbe solo il 50% di probabilità di poter rispondere correttamente.
+    Ripetendo il protocollo molte volte si può far diminuire la probabilità di poter barare.
+    Inoltre si può adattare il protocollo per effettuare tutte le $N$ challenges con due sole comunicazioni tra Alice e Bob.
+
+    Non è però un protocollo Zero-Knowledge poiché Bob può imparare che un certo elemento con simbolo di Jacobi uguale a $1$ *è* un residuo quadratico modulo $n$ (e quindi modulo entrambi i primi).
+*** Feige-Fiat-Shamir
+    Basato sul precedente è un _protocollo di autenticazione a Conoscenza Zero_: si ha cioè che la persona contro la quale ci stiamo autenticando non guadagna nessuna informazione sui parametri segreti del crittosistema tranne quelle che aveva già in precedenza.
+
+    *Attenzione*: Per una volta, non fidatevi di Wikipedia, riporta il protocollo in una maniera sbagliata: riferitevi alla paper originale DOI 10.1007/BF02351717.
+    
+    Un'entità pubblica di cui si ha fiducia pubblica $n = pq$ prodotto di due numeri primi congrui a $3$ modulo $4$.
+    In questo modo $-1$ è un nonresiduo quadratico il cui simbolo di Jacobi è $+1$.
+
+    - Alice sceglie casualmente $x_1, \ldots, x_v$ e calcola (scegliendo i segni in maniera random ed indipendente) $s_i = \pm x_i^{-2}$. Gli $s_i$ costituiscono la chiave pubblica (assieme ad $n$).
+      Il motivo per cui si scelgono dei $\pm$ è che in questo modo gli $s_i$ possono a priori essere un qualunque numero con simbolo di Jacobi $+1$.
+    - Per l'autenticazione Alice sceglie casualmente un intero $r$ ed un segno $\varepsilon \in \{1, -1\}$ e computa $t = \varepsilon r^2 \mod n$ che manda a Bob.
+    - Bob sceglie casualmente dei numeri $a_1, \ldots, a_v$ dove $a_i = 0, 1$ e li manda ad Alice.
+    - Alice computa $y = r x_1^{a_1} \cdot \ldots \cdot x_v^{a_v} \mod n$ e lo manda a Bob.
+    - Bob controlla che valga $t = \pm y^2 s_1^{a_1} \cdot \ldots \cdot s_v^{a_v}$.
+
+    La procedura viene ripetuta con diversi $r$ ed $a_i$ fino a quando Bob non è soddisfatto del risultato.
+    Da notare che la possibilità che Alice risponda giusto senza che conosca le radici è $2^{-v}$ per ogni richiesta.
+*** Digital Signature Standard
+    È un _protocollo di firma_ di documenti.
+    Si stabiliscono due numeri primi $p$ e $q$ in modo che $q$ sia di 160 bit e $p$ sia di 512 bit tali che $p = kq + 1$.
+    Questa richiesta si fa in modo che $p - 1$ abbia un primo grosso nella sua fattorizzazione (poiché il problema del logaritmo discreto si può scomporre sui fattori).
+
+    *Inizializzazione del sistema*: $q$ viene generato in maniera random e controllato con Miller-Rabin, mentre $p$ viene cercato all'interno della progressione aritmetica.
+    Per un noto teorema, la densità di primi all'interno di una progressione aritmetica è la stessa che tra tutti i numeri naturali (in particolare nel nostro caso $\frac{1}{512}$ è primo).
+    $p$ e $q$ sono pubblici e possono anche essere condivisi tra diversi utenti.
+    Bisogna inoltre controllare che la fattorizzazione di $p-1$ sia difficile.
+
+    Bisogna poi trovare un generatore del sottogruppo ciclico di ordine $q$: prediamo un elemento casuale $g'$ e calcoliamo $(g')^k$, il quale ha ordine $1$ o $q$.
+    Se $g'^k = 1$ viene scartato, altrimenti si considera $g = g'$ (anch'esso può essere reso pubblico).
+
+    *Chiave personale*: viene scelto $x$ casuale tra $1$ e $q$ e si calcola $y = g^x$: $y$ è la chiave pubblica mentre $x$ è quella privata.
+    
+    *Firma*: Dato un documento ne calcolo un hash $h$ che sia di circa 160 bit. $0 < h < q$ e si sceglie $w \in (0, q)$ random.
+    Si calcola quindi $g^w \mod p$ (che è un altro generatore del sottogruppo generato da $g$) e si calcola $r = g^w \mod p \mod q$ (il valore principale si intende).
+    Si cerca poi un $s$ tale che $sw \equiv h + xr \mod q$ e la firma cercata è $(r, s)$.
+
+    *Verifica della Firma*: Si calcolano $u_1 = s^{-1}h \mod q$ e $u_2 = s^{-1}r \mod q$.
+    Si verifica poi se vale che $g^{u_1} y^{u_2} \mod p = r \mod q$.
+*** Altro sui Reticoli
+**** Cifratura
+     Se abbiamo a disposizione un reticolo con base buona e base cattiva (come in GGH), e se il messaggio è sufficientemente piccolo esso può essere interpretato come rumore da aggiungere al reticolo.
+     Risolvendo il problema di Closest Vector con la base ridotta si decifra il messaggio.
+**** Firma
+     Fare la firma con i reticoli è molto più difficile perché l'hash può andare a finire in un qualsiasi punto del parallelogramma fondamentale e quindi con un numero sufficientemente alto di firme si può ricavare la base buona del reticolo.
+     Quindi il tipo naïve di firma è insicura.
+*** NTRU
+    Definito in precedenza come _sistema crittografico_ sui polinomi a coefficienti interi $\frac{\mathbb{Z}[x]}{(x^n - 1)}$.
+    Dove "$x^n-1$ può essere sostituito un po' da qualunque cosa".
+    
+    *Setup delle chiavi*: Si scelgono due numeri primi $(p, q)$ dove $p$ è un numero primo piccolo (ma basta anche un irriducibile dell'anello).
+    Serve inoltre che $n$ sia primo altrimenti si hanno delle debolezze nel crittosistema.
+    
+    Si scelgono inoltre due polinomi $f, g \in \frac{\mathbb{Z}[x]}{(x^n - 1)}$ che devono essere invertibili modulo $q$ ed $f$ anche invertibile modulo $p$.
+    Questi due polinomi costituiscono la chiave privata (e supponiamo che siano polinomi con coefficienti in $\{-1, 0, 1\}$).
+
+    Calcoliamo ora $h = \frac{g}{f} \mod q$ (quindi è bene che anche $g$ sia invertibile altrimenti si potrebbe carpire qualcosa osservando gli zeri di $h$).
+    La chiave pubblica è data da $h$ e $ph$.
+
+    *Cifratura*: Sia $m$ un messaggio che è un polinomio piccolo, con coefficienti in $\{-1, 0, 1\}$ ed $r$ un polinomio random (sempre con coefficienti in $\{-1, 0, 1\}$) scelti secondo una distribuzione prestabilita (solitamente gaussiana o uniforme).
+    Per cifrare si spedisce $c = m + rh \mod q$ ($h$ non ha coefficienti piccoli e quindi "oscura" il messaggio).
+
+    *Decifratura*: Si esegue $cf \mod q \equiv fm + rfh \equiv fm + rgp$ dove $f, m, r, g$ sono a coefficienti piccoli e quindi possiamo "cancellare" l'operazione di modulo $q$ ed avere un polinomio ben determinato.
+    Questo polinomio viene ridotto $\mod p$ per eliminare il rumore e successivamente moltiplicato per $f^{-1}$ per riottenere $m$.
+    
