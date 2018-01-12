@@ -5,14 +5,77 @@
 #+OPTIONS: toc:nil
 #+LATEX_HEADER: \usepackage[top=20mm,bottom=20mm,left=20mm,right=20mm]{geometry}
 
-* Introduzione ai Codici
-* Codici Lineari
-* Codici Ciclici
-* Codici BCH e RS
-* Codici di Goppa
-* Introduzione alla Crittografia
+Questo pdf raccoglie in maniera chiara e veloce i vari algoritmi della parte di crittografia del corso di Teoria dei Codici e Crittografia.
+
 * Test di Primalità
+** Crivello di Eratostene
+   Il classico crivello: si scrivono tutti i numeri da $2$ a $n$, poi si ripete il passo seguente: saltando il primo numero rimanente dopo i precedenti, si eliminano tutti i multipli di esso, che risulta primo.
+   Si prosegue fino ad arrivare a $\sqrt{n}$: i numeri successivi sono primi.
+** Test di Fermat
+   Basato sul Teorema di Fermat: se $n$ è primo e $a$ è coprimo con $n$ si ha $a^{n-1} \equiv 1 \mod n$ per ogni $a \in \mathbb{Z}_n^*$.
+   Quindi si può semplicemente testare se, preso un numero $a$, esso soddisfa $a^{n-1} \equiv 1 \mod n$.
+   Se non è così, $n$ è sicuramente composto.
+   Purtroppo esistono dei numeri non primi per i quali vale questa uguaglianza in tutte le basi (pseudoprimi di Carmichael).
+** Test di Miller-Rabin
+   Sia $n$ un primo dispari e $n - 1 = 2^s r$ dove $r$ è dispari.
+   Sia inoltre $a$ un numero coprimo con $n$.
+   Allora vale una delle seguenti:
+   - $a^r \equiv 1 \mod n$
+   - $a^{2^j r} \equiv -1 \mod n$ per qualche $j = 0, \ldots, s-1$.
+     
+   Si può dimostrare che la probabilità che Miller-Rabin risponda probabilmente primo se $n$ è composto è minore di $\frac{1}{4}$.
+** Test di Pocklington
+   Sia $n$ un intero e supponiamo che esista un primo $q \mid n - 1$ e $q > \sqrt{n} - 1$.
+   Se esiste $a$ tale che
+   - $a^{n-1} \equiv 1 \mod n$
+   - $\gcd(a^{\frac{n-1}{q}} - 1, n) = 1$
+   allora $n$ è primo.
+
+   *Applicabilità*: Spesso $a = 2$ funziona, mentre è molto difficile trovare $q$.
+   Ad esempio, per $n < 10000$, i primi che posseggono un tale $q$ sono solamente il 57,8% del totale.
 * Fattorizzazione su $\mathbb{Z}$
+** Residui quadratici
+   Sia $n = pq$ prodotto di due primi. La conoscenza delle radici quadrate di un residuo quadratico $a \mod n$ è equivalente alla conoscenza della fattorizzazione di $n$.
+
+   *Criterio di Eulero*: $\left(\frac{a}{p}\right) \equiv a^{\frac{p-1}{2}} \mod p$
+   
+   *Formula per $p=2$*: $\left(\frac{2}{p}\right) \equiv (-1)^{\frac{p^2 - 1}{8}}$
+
+   *Reciprocità Quadratica*: $\left(\frac{p}{q}\right) \left(\frac{q}{p}\right) = (-1)^{\frac{p-1}{2} \frac{q-1}{2}}$
+** $\rho$ di Pollard
+   Algoritmo efficiente nel cercare piccoli fattori di un numero composto.
+   Si scelga $f: \mathbb{Z}_n \rar \mathbb{Z}_n$ una qualsiasi funzione (solitamente si usa $f(x) = x^2 + 1$).
+   Si scelga inoltre un valore a caso $a_1 \in \mathbb{Z}_n$ e si definisca la successione $a_{i+1} = f(a_i)$.
+
+   Poiché i valori di $\mathbb{Z}_n$ sono finiti, prima o poi si entra in un ciclo.
+   Utilizzando un metodo lepre-tartaruga si cerca $h$ tale che $a_h = a_{2h}$.
+   Sia ora $p$ un fattore primo sconosciuto di $n$.
+   Ad ogni passo calcoleremo $c = \gcd(a_{2h} - a_h, n)$:
+   - Se $c = 1$ si continua con la sequenza
+   - Se $c = n$ si ri-inizia partendo da un diverso $a_1$
+   - Se $c \neq 1, n$ abbiamo trovato un divisore di $n$
+
+   Il motivo per cui funziona è basato sul paradosso del compleanno e si ha che, per $k$ grande, una congruenza modulo $k$ si ottiene circa dopo $\sqrt{\frac{k\pi}{8}}$ passi.
+** Algoritmo $p-1$ di Pollard
+   Usato per trovare efficientemente fattori primi $p$ di un intero composto $n$ tali che $p-1$ sia $B$ -liscio con $B$ relativamente piccolo.
+   $$ Q := \prod_{q \le B, q \text{ primo}} q^{\lfloor \frac{\ln n}{\ln q} \rfloor} $$
+
+   Se $p$ è un fattore primo di $n$ tale che $p-1$ sia $B$ -liscio, allora $p - 1 | Q$ per definizione di $Q$.
+   Allora, per ogni $a$ coprimo con $p$, si ha per il piccolo teorema di Fermat che $a^Q \equiv 1 \mod p$.
+   Detto $d = \gcd(a^Q - 1, n)$, si ha che $p \mid d$ e, se $d \neq 1, n$, abbiamo trovato un fattore non banale.
+** Metodo di Fermat
+   Basato sull'uguaglianza notevole $x^2 - y^2 = (x - y) (x + y)$: se $n = ab$ è un numero composto allora si ha
+   $$ n = \left(\frac{a + b}{2}\right)^2 - \left(\frac{a - b}{2}\right)^2 $$
+   e quindi ogni numero dispari si può scrivere come differenza di quadrati.
+   
+   È efficiente se i fattori di $n$ sono vicini a $\sqrt{n}$.
+   Molto semplicemente si inizia da $a = \lceil n \rceil$ e da $b = a^2 - n$ e si procede aumentando $a$ di uno (e ricalcolando $b$) fino a quando $b$ non è un quadrato.
+** Base di Fattori e Crivello Quadratico
+   Generalizzazione del metodo di Fermat: cerchiamo di risolvere la congruenza $x^2 \equiv y^2 \mod n$ con $x \not\equiv \pm y \mod n$.
+   In tal caso infatti $\gcd(x-y, n)$ e $\gcd(x+y, n)$ sono fattori non banali di $n$.
+   
+   $\dotfill$
+** TODO General Number Field Sieve
 * Problemi con il Logaritmo Discreto
   In questa sezione $g$ indica la base del logaritmo e $b$ l'elemento da trovare tale che $a = g^b$.
   L'ordine del gruppo viene indicato con $n$.
@@ -26,13 +89,13 @@
    $$ f(x) = \left\{ \begin{array}{cc} ax & \text{se } x \in G_0 \\ x^2 & \text{se } x \in G^1 \\ gx & \text{se } x \in G_2 \\ \end{array} \right. $$
    che in un algoritmo vero scriveremmo come due successioni sugli esponenti di $a$ e di $g$.
 
-   Se troviamo una collisione $a^\gamma g^\beta = a^{\gamma'} g^{\beta'}$ allora si ha $b = (\gamma - \gamma')^{-1} (\beta' - \beta)\ \mod n$.
+   Se troviamo una collisione $a^\gamma g^\beta = a^{\gamma'} g^{\beta'}$ allora si ha $b = (\gamma - \gamma')^{-1} (\beta' - \beta)\mod n$.
 ** Pohlig-Hellman
    Particolarmente efficiente se l'ordine del gruppo si fattorizza con primi piccoli.
    Scriviamo $n = \prod_{i=1}^r p_i^{e_i}$ e $b = \log_g a$.
-   Vogliamo prima di tutto determinare $b_i \equiv b\ \mod p_i^{e_i}$ per poi rimontare la soluzione con il teorema cinese del resto.
+   Vogliamo prima di tutto determinare $b_i \equiv b\mod p_i^{e_i}$ per poi rimontare la soluzione con il teorema cinese del resto.
 
-   Ogni intero $b_i$ viene ottenuto calcolando le cifre $l_j$ per $j = 0, \ldots, e_i - 1$ della sua espansione $p_i$-aria nel seguente modo:
+   Ogni intero $b_i$ viene ottenuto calcolando le cifre $l_j$ per $j = 0, \ldots, e_i - 1$ della sua espansione $p_i$ -aria nel seguente modo:
    al passo $j$ (posto $q = p_i$ e $e = e_i$) si calcola $\gamma = g^{l_0 + l_1 q + \ldots + l_{j-1} q^{j-1}}$ e si nota che (scrivendo $b = b_i + k q^e$) $(g^{n / q^{j+1}})^{k q^e} = 1$.
    Da ciò segue che $\tilde a = (a \gamma^{-1})^{n / q^{j+1}} = {\tilde g}^l_j$ e quindi si può usare un altro algoritmo per calcolare $b_i = \log_{\tilde g} \tilde a$.
 ** Basi di fattori
@@ -50,17 +113,17 @@
    È più che altro un protocollo di _scambio di chiavi_.
    - Alice e Bob scelgono di comune accordo un primo $p$ e un generatore $g$ di $\mathbb{Z}_p^*$.
    - Alice sceglie un numero segreto $a$ e Bob un numero segreto $b$.
-   - Alice invia a Bob $A = g^a\ \mod p$, Bob invia ad Alice $B = g^b\ \mod p$.
-   - Alice calcola $B^a = g^{ab}\ \mod p$ e Bob calcola $A^b = g^{ab}\ \mod p$.
+   - Alice invia a Bob $A = g^a\mod p$, Bob invia ad Alice $B = g^b\mod p$.
+   - Alice calcola $B^a = g^{ab}\mod p$ e Bob calcola $A^b = g^{ab}\mod p$.
      
    In questo modi essi ottengono un segreto comune.
    Un eventuale terzo che potesse ascoltare la loro conversazione imparerebbe solo $p$, $g$, $g^a$ e $g^b$ ed avrebbe bisogno di un metodo efficiente per calcolare $g^{ab}$ dati $g^a$ e $g^b$, che al giorno d'oggi non è noto (ed il meglio che si possa fare è il logaritmo discreto di uno dei due).
 ** Elgamal
    Protocollo di _cifratura asimmetrica_.
    - Alice sceglie un primo $p$ ed un generatore $g \in \mathbb{Z}_p^*$.
-     Successivamente sceglie $a$ e calcola $A = g^a\ \mod p$.
+     Successivamente sceglie $a$ e calcola $A = g^a\mod p$.
      La chiave pubblica è $(p, g, A)$ mentre quella privata è $a$.
-   - Bob che vuole mandare un messaggio $m$ ad Alice, sceglie un intero $b$ e calcola $B = g^b\ \mod p$.
+   - Bob che vuole mandare un messaggio $m$ ad Alice, sceglie un intero $b$ e calcola $B = g^b\mod p$.
      Quindi calcola la chiave di cifratura $K = A^b = g^{ab}$, cifra il messaggio calcolando $m' = Km$ ed invia ad alice $(B, m')$.
    - Per decifrare, Alice calcola la chiave $K$ come $B^a$, quindi recupera il messaggio calcolando $K^{-1}m' = m$.
 ** RSA
@@ -69,10 +132,10 @@
    - Alice genera la sua coppia di chiavi: sceglie opportunamente due numeri primi $p$ e $q$ e ne fa il prodotto $n = pq$.
      Calcola infine $\phi(n) = (p-1)(q-1)$ e sceglie un numero $e$ tale che $1 < e < \phi(n)$ e $\gcd(e, \phi(n)) = 1$.
      La coppia $(n, e)$ è la chiave pubblica di Alice.
-     Infine essa calcola $d$ tale che $de \equiv 1\ \mod \phi(n)$, che le servirà per decifrare.
+     Infine essa calcola $d$ tale che $de \equiv 1\mod \phi(n)$, che le servirà per decifrare.
      La sua chiave privata è formata da $(p, q, d)$.
-   - Per mandare un messaggio $m$ (compreso tra $0$ e $n$ e coprimo con $n$) ad Alice, Bob calcola $c = m^e\ \mod n$ ed invia $c$ ad Alice.
-   - Per recuperare il messaggio Alice deve solamente calcolare $c^d = m^{ed} = m\ \mod n$.
+   - Per mandare un messaggio $m$ (compreso tra $0$ e $n$ e coprimo con $n$) ad Alice, Bob calcola $c = m^e\mod n$ ed invia $c$ ad Alice.
+   - Per recuperare il messaggio Alice deve solamente calcolare $c^d = m^{ed} = m\mod n$.
    La sicurezza di RSA discende dal fatto che per trovare $d$ è necessario conoscere $\phi(n)$, ma questo è dimostrabilmente tanto difficile quanto fattorizzare $n$.
    Questo sistema si basa quindi *effettivamente* sulla difficoltà della fattorizzazione.
 
@@ -103,7 +166,7 @@
 ** Goldwasser-Kilian
    È un _test di primalità_ simile al test di Pocklington.
    Sia $n$ un intero positivo, $a, b \in \mathbb{Z}_n$ e sia
-   $$ E = \left\{ (x, y) \in (\mathbb{Z}_n)^2 \mid y^2 \equiv x^3 + ax + b\ \mod n\right\} \cup \left\{ O \right\} $$
+   $$ E = \left\{ (x, y) \in (\mathbb{Z}_n)^2 \mid y^2 \equiv x^3 + ax + b\mod n\right\} \cup \left\{ O \right\} $$
    dove $O$ è un simbolo che denota il "punto all'infinito". Sia inoltre $m$ un intero.
    Supponiamo che esista un primo $q$ che divide $m$ e tale che $q > (n^{1/4} + 1)^2$.
    Se esiste $P \in E$ tale che $m \cdot P = O$ e $\frac{m}{q} P \neq O$ allora $n$ è primo.
@@ -123,8 +186,32 @@
       - Se ad un certo punto abbiamo $\gcd(v, n) \neq 1, n$, abbiamo trovato un fattore non banale di $n$.
 
 * Altri crittosistemi
+  Alcuni crittosistemi presenti in questo capitolo ma spiegati anche dal Maestro rientrano nella sezione successiva.
+
 ** Crittosistema di Rabin
-   
+   - Alice sceglie due primi $p, q \equiv 3 \mod 4$ e pubblica $n = pq$.
+     La sua chiave pubblica è $n$, quella privata $(p, q)$.
+   - Bob vuole mandare ad Alice un messaggio $m \in \mathbb{F}_2^N$.
+     Sceglie casualmente un elemento $0 \neq x_1 \in \mathbb{Z}_n$ e calcola la successione $x_{i+1} = x_i^2 \mod n$ per $i = 1, \ldots, N$.
+     La cifra della chiave $b_i$ è $x_i \mod 2$.
+     Bob manda ad alice $c_i = m_i + b_i \mod 2$ ed invia ad alice $({\bf c}, x_{N+1})$.
+   - Per decodificare Alice calcola ${\bf b}$ estraendo in sequenza le radici a partire da $x_{N+1}$.
+** Protocollo di McEliece
+   Basato sulla difficoltà di decodificare un generico codice lineare.
+   - Alice sceglie $G \in \mathfrak{M}_{k \times n}(\mathbb{K})$, matrice generatrice per un codice $t$ -correttore il cui algoritmo di decodifica è noto e veloce (come i Codici di Goppa).
+     Sceglie quindi una matrice invertibile $S \in \mathfrak{M}_k(\mathbb{K})$ ed una matrice di permutazione $P \in \mathfrak{M}_n(\mathbb{K})$.
+     Calcola infine la matrice $\hat G = SGP$.
+     La chiave pubblica è $(\hat G, t)$, mentre quella privata è $(S, G, P)$.
+   - Bob per mandare un messaggio $m \in \mathbb{K}^k$, calcola un vettore casuale $r \in \mathbb{K}^n$ di peso minore di $t$, ed invia ad alice $c = m \hat G + r$.
+   - Alice, per decifrare il messaggio, calcola $\hat c = c P^{-1}$, decodifica ottenendo $\hat m$ e recupera quindi il messaggio calcolando $m = \hat m S^{-1}$.
+** Hidden Field Equations
+   $\dotsfill$
+** Polly Cracker
+   $\dotsfill$
+** DES
+   $\dotsfill$
+** AES
+   $\dotsfill$
 * Lezioni del Maestro
   *Disclaimer*: Le parole del Maestro sono a volte di difficile decifrazione, e comunque invitano sempre ad una riflessione personale piuttosto che ad un bieco nozionismo.
   Pertanto siete pregati di non prendere con assoluta certezza quanto scritto di seguito che serve principalmente ad ispirare delle piacevoli conversazioni con i vostri amici.
@@ -236,8 +323,8 @@
    Inoltre la soluzione deve essere unica.
 
    Se gli $a_i$ sono supercrescenti, ovvero $a_{i+1} > \sum_{k = 1}^i a_k$, dato $A = \sum_i c_i a_i$ è molto semplice trovare i $c_i$.
-   Idea: posso prendere $m$ e $d < m$ scelto casualmente (ma vicino ad $m$ per mascherare anche i numeri piccoli) e considerare $b_i = d a_i\ \mod m$ e pubblicare come base $\{b_i\}_i$.
-   Quando ricevo $\sum_i c_i b_i$ moltiplico per l'inverso di $d$ ed ottengo $\sum_i c_i a_i\ \mod m$ da cui recupero il messaggio originario.
+   Idea: posso prendere $m$ e $d < m$ scelto casualmente (ma vicino ad $m$ per mascherare anche i numeri piccoli) e considerare $b_i = d a_i\mod m$ e pubblicare come base $\{b_i\}_i$.
+   Quando ricevo $\sum_i c_i b_i$ moltiplico per l'inverso di $d$ ed ottengo $\sum_i c_i a_i\mod m$ da cui recupero il messaggio originario.
 ** Reticoli Interi
    Sono interessanti perché per ora sono gli unici tipi di crittosistemi classici che ancora resistono ai computer quantistici.
 
@@ -257,13 +344,13 @@
     Nel caso una delle disuguaglianze non valga si può sostituire uno dei due vettori con quello più corto trovato.
 
     Se siamo in dimensione $2$, l'algoritmo termina sicuramente restituendo una base ridotta per il reticolo.
-    Viene quindi data una definizione di base $\delta$-ridotta in dimensione arbitraria per permettere all'algoritmo LLL di terminare.
+    Viene quindi data una definizione di base $\delta$ -ridotta in dimensione arbitraria per permettere all'algoritmo LLL di terminare.
 
-    Una base $A = \{a_1, \ldots, a_n\}$ si dice $\delta$-ridotta (con $\frac{1}{4} < \delta < 1$) se valgono le condizioni:
+    Una base $A = \{a_1, \ldots, a_n\}$ si dice $\delta$ -ridotta (con $\frac{1}{4} < \delta < 1$) se valgono le condizioni:
     1. Detta $B = \{b_1, \ldots, b_n\}$ la base ottenuta dal processo di ortonormalizzazione di Gram-Schmidt, e chiamati $\mu_{ij} = \frac{\langle a_i, b_j\rangle}{\langle b_j, b_j\rangle}$ per $j < i$ i coefficienti di approssimazione vale che $|\mu_{ij}| \le \frac{1}{2}$
     2. Per ogni coppia di vettori consecutivi vale $|b_i + \mu_{i, i-1} b_{i-1}|^2 \ge \delta |b_{i-1}|^2$.
 *** Algoritmo LLL (Lenstra-Lenstra-Lovasz)
-    Permette di trovare una base $\delta$-ridotta di un reticolo qualunque, fissato $\delta$ a priori, in tempo polinomiale.
+    Permette di trovare una base $\delta$ -ridotta di un reticolo qualunque, fissato $\delta$ a priori, in tempo polinomiale.
     
     Funziona nel "modo ovvio":
     1. Si controlla se tutte le condizioni sono soddisfatte, nel qual caso ci si ferma
@@ -279,14 +366,14 @@
     Se si considera $\Delta = \prod_i \Delta_i$ questo è un numero naturale che decresce ad ogni "passo" dell'algoritmo, quindi esso deve terminare.
 *** Fattorizzazione di Polinomi a coefficienti interi
 **** Prima di LLL
+
      Si considera il polinomio modulo $p$ e lo si fattorizza in $\mathbb{F}_p$.
-     Si una quindi il [[https://en.wikipedia.org/wiki/Hensel%27s_lemma][Lemma di sollevamento di Hansel]] per ottenere delle radici sui $p$-adici.
+     Si una quindi il [[https://en.wikipedia.org/wiki/Hensel%27s_lemma][Lemma di sollevamento di Hansel]] per ottenere delle radici sui $p$ -adici.
      Ora o i coefficienti sono troppo grossi (vedere la stima di Mignotte) oppure abbiamo trovato un candidato fattore.
      Se il polinomio $f$ è irriducibile invece non ci resta altra scelta che provare tutti i fattori in $\mathbb{F}_p$.
-**** Dopo LLL
+**** TODO Dopo LLL
+
      Possiamo utilizzare LLL per far diventare polinomiale l'euristica:
-     
-     $\dotfill$
 *** Risoluzione di Closest Vector Problem
     LLL permette anche di trovare dei vettori vicini ad uno dato (anche se non di risolvere closest vector).
     Un problema equivalente a CVP è quello di trovare la classe di equivalenza più piccola modulo il reticolo di un vettore dato.
@@ -311,7 +398,7 @@
     \right)
     \end{displaymath}
     dove $N$ è scelto molto grande in modo che (visto che $A$ si può rappresentare come somma di alcuni $a_i$) si ottenga come vettore più corto $(\pm 1, \ldots, \pm 1, 0)$
-    dove si ha $-1$ al posto $i$ se $c_i = 1$ e $1$ al posto $i$ se $c_i = 0$.
+    dove si ha $ -1$ al posto $i$ se $c_i = 1$ e $1$ al posto $i$ se $c_i = 0$.
     
     È stato inoltre osservato che non c'è modo di aggiustare Merkle-Hellman per farlo resistere a questo tipo di attacchi.
 *** Goldreich-Goldwasser-Halevi
@@ -323,7 +410,7 @@
     Per essere sicuri di riferirsi a GGH con persone terze posso suggerire la consultazione della [[https://en.wikipedia.org/wiki/GGH_encryption_scheme][pagina Wikipedia corrispondente]].
 
     *Costruzione della chiave*: Si sceglie un $\lambda$ piccolo (es $\lambda = 3$) e si riporta sulla diagonale della matrice.
-    A questo punto la matrice viene "abbellita" con alcuni elementi fuori dalla diagonale, sempre in modo che $\lambda$ sia l'elemento prevalente (ovvero che la base ottenuta alla fine del procedimento sia $\delta$-ridotta).
+    A questo punto la matrice viene "abbellita" con alcuni elementi fuori dalla diagonale, sempre in modo che $\lambda$ sia l'elemento prevalente (ovvero che la base ottenuta alla fine del procedimento sia $\delta$ -ridotta).
     Una volta trovata la matrice "buona", la si "abbruttisce": ad esempio la si moltiplica per una matrice unimodulare (ovvero ad entrate intere e determinante $\pm 1$) oppure la si porta in forma di Hermite (la quale sarebbe comunque calcolabile da chi riceve la matrice e quindi non dà alcuna informazione ulteriore).
     
     Per cifrare si prende un vettore di zeri e uni e lo si riduce lungo la forma di Hermite.
@@ -356,7 +443,7 @@
     *Attenzione*: Per una volta, non fidatevi di Wikipedia, riporta il protocollo in una maniera sbagliata: riferitevi alla paper originale DOI 10.1007/BF02351717.
     
     Un'entità pubblica di cui si ha fiducia pubblica $n = pq$ prodotto di due numeri primi congrui a $3$ modulo $4$.
-    In questo modo $-1$ è un nonresiduo quadratico il cui simbolo di Jacobi è $+1$.
+    In questo modo $ -1$ è un nonresiduo quadratico il cui simbolo di Jacobi è $+1$.
 
     - Alice sceglie casualmente $x_1, \ldots, x_v$ e calcola (scegliendo i segni in maniera random ed indipendente) $s_i = \pm x_i^{-2}$. Gli $s_i$ costituiscono la chiave pubblica (assieme ad $n$).
       Il motivo per cui si scelgono dei $\pm$ è che in questo modo gli $s_i$ possono a priori essere un qualunque numero con simbolo di Jacobi $+1$.
@@ -405,8 +492,8 @@
     Si scelgono inoltre due polinomi $f, g \in \frac{\mathbb{Z}[x]}{(x^n - 1)}$ che devono essere invertibili modulo $q$ ed $f$ anche invertibile modulo $p$.
     Questi due polinomi costituiscono la chiave privata (e supponiamo che siano polinomi con coefficienti in $\{-1, 0, 1\}$).
 
-    Calcoliamo ora $h = \frac{g}{f} \mod q$ (quindi è bene che anche $g$ sia invertibile altrimenti si potrebbe carpire qualcosa osservando gli zeri di $h$).
-    La chiave pubblica è data da $h$ e $ph$.
+    Calcoliamo ora $h = p\frac{g}{f} \mod q$ (quindi è bene che anche $g$ sia invertibile altrimenti si potrebbe carpire qualcosa osservando gli zeri di $h$).
+    La chiave pubblica è data da $h$, da $q$ e da $n$.
 
     *Cifratura*: Sia $m$ un messaggio che è un polinomio piccolo, con coefficienti in $\{-1, 0, 1\}$ ed $r$ un polinomio random (sempre con coefficienti in $\{-1, 0, 1\}$) scelti secondo una distribuzione prestabilita (solitamente gaussiana o uniforme).
     Per cifrare si spedisce $c = m + rh \mod q$ ($h$ non ha coefficienti piccoli e quindi "oscura" il messaggio).
@@ -414,3 +501,23 @@
     *Decifratura*: Si esegue $cf \mod q \equiv fm + rfh \equiv fm + rgp$ dove $f, m, r, g$ sono a coefficienti piccoli e quindi possiamo "cancellare" l'operazione di modulo $q$ ed avere un polinomio ben determinato.
     Questo polinomio viene ridotto $\mod p$ per eliminare il rumore e successivamente moltiplicato per $f^{-1}$ per riottenere $m$.
     
+    *Codifica come reticolo*: Ci basiamo sull'isomorfismo di $\mathbb{Z}$ -moduli $\frac{\mathbb{Z}[x]}{(x^n - 1)} \simeq \mathbb{Z}^n$.
+    Per recuperare la chiave privata dalla chiave pubblica, un malintenzionato dovrebbe risolvere un SVP sul reticolo generato dalle righe della matrice
+    \begin{displaymath}
+    \left(
+    \begin{array}{cccc|cccc}
+    \alpha & 0 & \cdots & 0 & h_0 & h_1 & \cdots & h_{n-1} \\
+    0 & \alpha & \cdots & 0 & h_{n-1} & h_0 & \cdots & h_{n-2} \\
+    \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \cdots & \alpha & h_1 & h_2 & \cdots & h_0 \\ \hrule
+    0 & 0 & \cdots & 0 & q & 0 & \cdots & 0 \\
+    0 & 0 & \cdots & 0 & 0 & q & \cdots & 0 \\
+    \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \cdots & 0 & 0 & 0 & \cdots & q \\
+    \end{array}
+    \right)
+    \end{displaymath}
+    dove $\alpha$ è un parametro da fissare.
+    Il vettore $(\alpha f, g)$ è un vettore corto di questo lattice (si può vedere considerando la relazione di definizione di $h$).
+    
+
