@@ -1,0 +1,51 @@
+#+TITLE: Informazione Quantistica I
+#+AUTHOR: Dario Balboni
+#+LATEX_CLASS: article
+#+LATEX_HEADER: \usepackage[top=20mm,bottom=20mm,left=20mm,right=20mm]{geometry}
+#+LATEX_HEADER: \input{custom-commands}
+
+\vskip 1.0cm
+Questo pdf nasce per matematici che stanno seguendo il corso di Informazione Quantistica I di Giovannetti.
+Serve per inquadrare più chiaramente la materia e glissa su molti aspetti, motivo per il quale è consigliabile utilizzarlo solo come spunto.
+
+* Cose generali e notazioni
+** Stati di un sistema
+   Gli stati che può assumere un sistema quantistico sono vettori di norma uno di uno spazio di Hilbert $\cH$ sui complessi $\bbC$.
+   In tutto questo corso gli spazi di Hilbert saranno di dimensione finita $d = \dim \cH < \infty$.
+
+   In realtà vorrebbero essere dei vettori del proiettificato dello spazio di Hilbert, visto che viene fatto notare che due stati che differiscono per una "fase globale" $e^{i \theta}$ con $\theta \in \bbR$ ovvero $\ket\psi$ e $\ket{e^{i\theta}\psi}$ rappresentano lo stesso stato fisico.
+** Stati Puri Vs. Stati Reali ed Ensemble
+   Quando si ha a che fare con apparati sperimentali "veri" è inverosimile che essi producano sempre uno stesso stato $\ket{\psi}$.
+   In meccanica quantistica si ha bisogno di riprodurre gli esperimenti svariate volte, a causa dell'entità puramente "statistica" delle misure.
+
+   Per questo si dirà che lo "stato reale" prodotto da un apparato è un ensemble $\cE = \lrg{p_i, \ket{\psi_i}}_i$ di stati, dove $p_i$ rappresenta la probabilità che la macchina produca lo stato $\ket{\psi_i}$ e quindi $\sum_i p_i = 1$.
+   Possiamo allora definire la "matrice di densità" di un apparato come sovrapposizione pesata dei vari stati $\rho_A = \sum_i p_i \ket{\psi_i}$.
+
+   In realtà più propriamente potremmo scrivere $\cE = (\psi, \de\mu)$ con $\psi: \Omega \rar \cH$ e $\mu$ una misura di probabilità sullo spazio.
+   In questo modo $\rho_A = \int_\Omega \psi(\omega) \de\mu(\omega)$.
+** Operatori di Traccia
+   Dati due spazi vettoriali $V$ e $W$ si può definire l'operatore di traccia parziale $\Tr_W : \cL(V \otimes W) \rar \cL(V)$ definito da $ \Tr_W (A \otimes B) = \Tr(B) \cdot A$ esteso per linearità.
+   Notiamo che $\Tr(A \otimes B) = \Tr_V \circ \Tr_W (A \otimes B) = \Tr_W \circ \Tr_V (A \otimes B)$.
+** Sistemi Multipli e Prodotto Tensore
+   Quando si considerano due sistemi quantistici "assieme", lo spazio dei loro stati è dato dal prodotto tensore degli spazi degli stati dei singoli sistemi, con il prodotto scalare prodotto.
+   Visto che gli spazi sono finito dimensionali, anche il loro prodotto tensore è completo e quindi è uno spazio di Hilbert.
+** Matrici di Densità
+   Abbiamo già definito le matrici di densità di un sistema singolo.
+   # Matrice di densità di un sistema composto e tracce parziali
+** Osservabili
+   Un osservabile è un operatore (funzione lineare) autoaggiunto sullo spazio di Hilbert degli stati $\theta: \cH \rar \cH$.
+   Le uniche cose che ci è dato conoscere (misurare) di un sistema quantistico sono le tracce di osservabili con le matrici di densità, ovvero $\Tr(\rho\theta)$.
+** Tipi di Operatori
+   - *Hermitiani*: 
+   - *Positivi*:
+   - *Unitari*:
+   - *Autoaggiunti*:
+** Singular Values Decomposition
+** Purificazione di Stati
+
+# * Tipizzazione delle scritture bra e ket
+#   Questa parte permette di dare un senso alle scritture con i bra e con i ket, per capire cosa significano.
+#   - $\psi \in \cH_A \vdash \ket\psi : (B \otimes A \rar C) \rar (B \rar C)$
+#   - $\psi \in \cH_A \vdash \bra\psi : (B \rar C \otimes A^*) \rar (B \rar C)$
+#   - $\theta \in \cL(\cH_A) \vdash \left|\theta\rigth| : A \rar A$
+
