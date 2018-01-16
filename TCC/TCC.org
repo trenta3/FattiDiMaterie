@@ -4,15 +4,75 @@
 #+OPTIONS: toc:nil
 #+LATEX_HEADER: \usepackage[top=20mm,bottom=20mm,left=20mm,right=20mm]{geometry}
 
-Questo pdf raccoglie in maniera chiara e veloce i vari algoritmi della parte di crittografia del corso di Teoria dei Codici e Crittografia.
+Questo pdf raccoglie in maniera chiara e veloce i vari tipi di codici e algoritmi della parte di crittografia del corso di Teoria dei Codici e Crittografia.
 Alcune parti *sono sbagliate* quindi non fidatevi troppo di ciò che c'è scritto.
 
+* Codici su Campi
+** Distanza di un codice
+     È la minima distanza di Hamming tra due stringhe diverse appartenenti al codice.
+** Errori rilevabili
+     Dato un codice di distanza $d$, esso è in grado di rilevare al più $d-1$ errori in una parola.
+** Errori correggibili
+     Dato un codice di distanza $d$, esso è in grado di correggere al più $\lfloor \frac{d-1}{2} \rfloor$ errori.
+** Disuguaglianza di Hamming
+     Dato un codice di distanza $d$ dentro a $\mathbb{K}^n$ e detta $b$ la cardinalità di una qualsiasi palla di raggio $t = \lfloor \frac{d-1}{2} \rfloor$ si ha
+     $$ b \cdot \# C \le (\# \mathbb{K})^n $$
+* Codici Lineari
+** Distanza di un codice lineare
+   Dato $C \subseteq \mathbb{K}^n$ codice lineare e $P$ una sua matrice di parità, $C$ ha distanza $d$ se e solo se, scelte comunque $d-1$ righe di $P$, esse sono linearmente indipendenti, ed esistono almeno $d$ righe di $P$ linearmente dipendenti.
+
+   *Attenzione*: Questa nozione *non* coincide con il rango della matrice.
+** Disuguaglianza di Singleton
+   Se $C \subseteq \mathbb{K}^n$ è un codice lineare di dimensione $m$ e distanza $d$ si ha
+   $$ d - 1 \le n - m $$
+** Codici di Hamming
+   Sia $r \ge 2$ fissato, $\mathbb{K} = \mathbb{F}_q$ e sia $n = \frac{q^r - 1}{q - 1}$.
+   Il codice di Hamming di ridondanza $r$ è il codice lineare in $(\mathbb{F}_q)^n$ la cui matrice di parità $P$ ha per righe tutte e sole le $r$ -uple che siano a due a due linearmente indipendenti, ed è quindi una matrice $\frac{q^r - 1}{q - 1} \times r$.
+   I codici di Hamming hanno distanza $d = 3$ e sono codici perfetti.
+* Codici Ciclici
+  Un codice $C \subseteq \mathbb{K}^n$ è ciclico se e solo se è un ideale in $\frac{\mathbb{K}[x]}{(x^n - 1)}$.
+** Polinomio Generatore
+   Dato che $\frac{\mathbb{K}[x]}{(x^n - 1)}$ è PIR, esiste $g(x)$ tale che $C = (g(x))$, che prende il nome di polinomio generatore.
+   
+   Inoltre $g(x)$ è il polinomio generatore di un codice ciclico se e solo se divide $x^n - 1$.
+** Sindrome e Decodifica
+   Data una parola $w(x)$ definiamo sindrome come $w(x) \mod g(x)$.
+   La matrice di parità avrà quindi sulla $i$ -esima riga la parola corrispondente a $x^i \mod g(x)$.
+
+   Sia $h(x)$ il polinomio tale che $g(x)h(x) = x^n - 1$.
+   Allora $h$ viene chiamato polinomio di controllo visto che si ha $c(x) \in C$ se e solo se $c(x)h(x) = 0 \in \frac{\mathbb{K}[x]}{(x^n - 1)}$.
+** Collegamento con le estensioni di Campi
+   Se la matrice di parità del codice ha un numero di colonne divisibile per $l$, si può raggruppare ogni gruppo di $l$ colonne in una sola estendendo il campo dei coefficienti.
+
+   Scegliamo ora un codice ciclico su $\mathbb{F}_q$ di lunghezza $n = q^r - 1$.
+   Un polinomio generatore divide $x^n - 1$, quindi le sue radici saranno alcuni elementi $\beta_1, \ldots, \beta_t \in \mathbb{F}_{q^r}$.
+
+   Si ha allora che se $g(x) \in \mathbb{F}_q[x]$ è un polinomio generatore di un codice ciclico $C$ di lunghezza $n = q^r - 1$, e $\beta_1, \ldots, \beta_t \in \mathbb{F}_{q^r}$ sono le sue radici (tutte distinte), si ha che
+   $$ C = \left\{ c(x) \in \mathbb{F}_q[x] \mid c(\beta_1) = \ldots = c(\beta_t) = 0 \text{ in } \mathbb{F}_{q^r} \right\} $$
+   In questo caso la valutazione può essere utilizzata come decodifica!
+* Codici BCH
+  Un codice BCH di distanza designata $\delta$ è un codice ciclico su $\mathbb{F}_q$ di lunghezza $n$ il cui polinomio generatore è il minimo comune multiplo dei polinomi minimi su $\mathbb{F}_q$ di $\beta^l, \ldots, \beta^{l + \delta - 2}$ per qualche $l$, dove $\beta$ indica una radice primitiva $n$ -esima dell'unità in $\mathbb{F}_{q^r}$.
+** Distanza
+   Un codice BCD di distanza designata $\delta$ ha distanza almeno pari a $\delta$.
+** Decodifica
+   Dato un codice BCH di lunghezza $n = q^r - 1$ su $\mathbb{F}_q$ con distanza designata $\delta = 2 t + 1$ e $\beta$ un elemento primitivo di $\mathbb{F}_{q^r}$.
+   
+   Da una trasmissione e ricezione di parola, definiamo $M = \{i \mid e_i \neq 0\}$ l'insieme dei posti dove sono occorsi degli errori.
+   Definiamo il polinomio locatore d'errore $\sigma(z) = \prod_{i \in M} (1 - \beta^i z)$ ed il polinomio valutatore d'errore $\omega(z) = \sum_{i \in M} e_i \beta^i z \prod_{j \in M \setminus \{i\}} (1 - \beta^j z)$.
+
+   Allora abbiamo un errore in posizione $i$ se e solo se $\sigma(\beta^{-i}) = 0$ ed in tal caso è $e_i = - \frac{\omega(\beta^{-i}) \beta^i}{\sigma '(\beta^{-i})}$.
+
+   Inoltre il ricevente conosce il rapporto $\frac{\omega(z)}{\sigma(z)}$ modulo $z^{2t}$.
+   Allora si possono determinare i polinomi $\sigma(z)$ e $\omega(z)$ tali che:
+   - Il grado di $\omega$ non superi quello di $\sigma$
+   - Il grado di $\sigma$ sia il più piccolo possibile
+   - Valga la condizione $\frac{\omega(z)}{\sigma(z)} \equiv \sum_{l=1}^{2t} z^l \omega(\beta^l) \mod z^{2t}$
 * Test di Primalità
 ** Crivello di Eratostene
    Il classico crivello: si scrivono tutti i numeri da $2$ a $n$, poi si ripete il passo seguente: saltando il primo numero rimanente dopo i precedenti, si eliminano tutti i multipli di esso, che risulta primo.
    Si prosegue fino ad arrivare a $\sqrt{n}$: i numeri successivi sono primi.
 ** Test di Fermat
-   Basato sul Teorema di Fermat: se $n$ è primo e $a$ è coprimo con $n$ si ha $a^{n-1} \equiv 1 \mod n$ per ogni $a \in \mathbb{Z}_n^*$.
+   Basato sul Teorema di Fermat: se $n$ è primo e $a$ è coprimo con $n$ si ha $a^{n-1} \equiv 1 \mod n$.
    Quindi si può semplicemente testare se, preso un numero $a$, esso soddisfa $a^{n-1} \equiv 1 \mod n$.
    Se non è così, $n$ è sicuramente composto.
    Purtroppo esistono dei numeri non primi per i quali vale questa uguaglianza in tutte le basi (pseudoprimi di Carmichael).
@@ -44,7 +104,7 @@ Alcune parti *sono sbagliate* quindi non fidatevi troppo di ciò che c'è scritt
    *Reciprocità Quadratica*: $\left(\frac{p}{q}\right) \left(\frac{q}{p}\right) = (-1)^{\frac{p-1}{2} \frac{q-1}{2}}$
 ** $\rho$ di Pollard
    Algoritmo efficiente nel cercare piccoli fattori di un numero composto.
-   Si scelga $f: \mathbb{Z}_n \rar \mathbb{Z}_n$ una qualsiasi funzione (solitamente si usa $f(x) = x^2 + 1$).
+   Si scelga $f: \mathbb{Z}_n \rightarrow \mathbb{Z}_n$ una qualsiasi funzione (solitamente si usa $f(x) = x^2 + 1$).
    Si scelga inoltre un valore a caso $a_1 \in \mathbb{Z}_n$ e si definisca la successione $a_{i+1} = f(a_i)$.
 
    Poiché i valori di $\mathbb{Z}_n$ sono finiti, prima o poi si entra in un ciclo.
@@ -153,7 +213,7 @@ Alcune parti *sono sbagliate* quindi non fidatevi troppo di ciò che c'è scritt
    con $q = y_1 - m x_1$.
 ** Teorema di Hasse
    Data $E$ una curva ellittica definita su $\mathbb{F}_q$ si ha la stima
-   $$ \left| #E - (q + 1) \rigth| \le 2 \sqrt{q} $$
+   $$ \left| \#E - (q + 1) \rigth| \le 2 \sqrt{q} $$
 ** Contare il numero di punti
    Prendiamo un punto $P$ e ne calcoliamo l'ordine con un metodo lepre-tartaruga sulla successione $P_i = i \cdot P$.
    Speriamo di trovare, nell'intervallo fornito dal Teorema di Hasse, un solo multiplo dell'ordine trovato.
