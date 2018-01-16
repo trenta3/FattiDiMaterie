@@ -1,11 +1,11 @@
 #+TITLE: Teoria dei Codici e Crittografia
 #+AUTHOR: Dario Balboni
-#+DATE:
 #+LATEX_CLASS: article
 #+OPTIONS: toc:nil
 #+LATEX_HEADER: \usepackage[top=20mm,bottom=20mm,left=20mm,right=20mm]{geometry}
 
 Questo pdf raccoglie in maniera chiara e veloce i vari algoritmi della parte di crittografia del corso di Teoria dei Codici e Crittografia.
+Alcune parti *sono sbagliate* quindi non fidatevi troppo di ciò che c'è scritto.
 
 * Test di Primalità
 ** Crivello di Eratostene
