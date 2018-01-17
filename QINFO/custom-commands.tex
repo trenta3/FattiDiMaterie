@@ -2,6 +2,7 @@
 \usepackage{fancyhdr} % Per modificare l'intestazione ed il piè di pagina
 \usepackage{bm}
 \usepackage{bbm}
+\usepackage{bbold}
 %\usepackage{mbboard}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
@@ -60,8 +61,7 @@
 \newcommand{\oc}[1]{\widehat{#1}}
 \newcommand{\tc}{\mbox{ t.c. }}
 
-\newcommand{\norma}[1]{\mid\mid #1 \mid\mid}
-\newcommand{\abs}[1]{\mid #1 \mid}
+\newcommand{\norma}[1]{\ensuremathmode{||#1||}}
 \newcommand{\scal}[2]{\langle #1 \mid #2 \rangle}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 
@@ -103,6 +103,9 @@
 \newcommand{\lrq}[1]{\left[{#1}\right]}
 \newcommand{\lrt}[1]{\left({#1}\right)}
 
+\newcommand{\one}{\ensuremathmode{\mathbb{1}}}
+\renewcommand{\exp}[1]{\ensuremathmode{\text{exp}\lrq{#1}}}
+\newcommand{\abs}[1]{\ensuremathmode{|{#1}|}}
 \sloppy
 
 \setlength\parskip{0.5em}

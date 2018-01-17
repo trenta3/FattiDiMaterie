@@ -1,7 +1,7 @@
 #+TITLE: Informazione Quantistica I
 #+AUTHOR: Dario Balboni
 #+LATEX_CLASS: article
-#+LATEX_HEADER: \usepackage[top=20mm,bottom=20mm,left=20mm,right=20mm]{geometry}
+#+LATEX_HEADER: \usepackage[top=20mm,bottom=20mm,left=16mm,right=16mm]{geometry}
 #+LATEX_HEADER: \input{custom-commands}
 
 \vskip 1.0cm
@@ -20,32 +20,65 @@ Serve per inquadrare più chiaramente la materia e glissa su molti aspetti, moti
 
    Per questo si dirà che lo "stato reale" prodotto da un apparato è un ensemble $\cE = \lrg{p_i, \ket{\psi_i}}_i$ di stati, dove $p_i$ rappresenta la probabilità che la macchina produca lo stato $\ket{\psi_i}$ e quindi $\sum_i p_i = 1$.
    Possiamo allora definire la "matrice di densità" di un apparato come sovrapposizione pesata dei vari stati $\rho_A = \sum_i p_i \ket{\psi_i}$.
+   Notiamo che essa non presenta più le ambiguità dovute alla possibilità di scegliere una "fase" per ciascun vettore dell'ensemble.
 
    In realtà più propriamente potremmo scrivere $\cE = (\psi, \de\mu)$ con $\psi: \Omega \rar \cH$ e $\mu$ una misura di probabilità sullo spazio.
    In questo modo $\rho_A = \int_\Omega \psi(\omega) \de\mu(\omega)$.
+** Tipi di Operatori
+   - Normali :: $\theta \theta^\dagger = \theta^\dagger \theta$
+   - Isometrie :: $\theta^\dagger \theta = \one$
+   - Unitari :: Se è un *isometria normale* (negli spazi finito-dimensionali isometria $\implies$ unitario)
+   - Hermitiani o Autoaggiunti :: $\theta^\dagger = \theta$
+   - Antihermitiani :: $\theta^\dagger = - \theta$
+   - Semidefiniti Positivi :: $\forall \ket\psi \in \cH \quad \braaket{\psi}{\theta}{\psi} \ge 0$
+
+   Notiamo che $\theta$ positivo implica $\theta$ hermitiano ma non vale il viceversa.
+   Lo spazio degli operatori semidefiniti positivi è chiuso per combinazione lineare convessa.
+*** Scrittura di Operatori Unitari
+    - Dato $\theta$ unitario $\exists \lrg{\ket{e_j}}_{j=1, \ldots, d}, \lrg{\ket{h_j}}_{j=1, \ldots, d}$ insiemi indipendenti ortonormali tali che $\theta = \sum_{j = 1}^d \ket{h_j}\ \bra{e_j}$.
+    - Se $U$ è unitario, allora preserva il prodotto scalare: $\lrt{\bra{\psi} U^\dagger}\lrt{U \ket{\phi}} = \braket{\psi}{\phi}$.
+    - Se $U$ è unitario allora $\exists H$ hermitiano tale che $U = \exp{iH}$.
+*** Teoremi Spettrale per operatori Normali
+    - Se $\theta$ è normale allora ammette un insieme completo ortonormale di autovettori $\lrg{\ket{e_j}}_j$: $\theta \ket{e_j} = \lambda_j \ket{e_j}$.
+      Inoltre si ha che $\theta$ è:
+      - Hermitiano :: se e solo se $\forall j \quad \lambda_j \in \bbR$.
+      - Unitario :: se e solo se $\forall j \quad \lambda_j = e^{i\alpha_j}$ con $\alpha_j \in \bbR$, ovvero $\abs{\lambda_j} = 1$.
+      - Positivo :: se e solo se $\forall j \quad \lambda_j \in \bbR^+ \cup \lrg{0}$.
+    - Se $\theta$ è normale si può diagonalizzare unitariamente, ovvero $\exists U$ unitario tale che $U \theta U^\dagger = D$ diagonale.
+** Decomposizioni di Operatori
+   - Decomposizione Polare :: Dato $\theta$ un operatore qualunque, $\exists U$ unitario e $K, J \ge 0$ tali che $\theta = UK = JU$.
+	In tal caso si ha $K = \sqrt{\theta^\dagger \theta}$ e $J = \sqrt{\theta \theta^\dagger}$.
+   - Singular Value Decomposition :: Dato $\theta$ operatore qualunque, $\exists V, W$ unitari tali che $\theta = VDW$ con $D$ diagonale e positivo.
+	Gli elementi sulla diagonale di $D$ sono gli autovalori di $\sqrt{\theta^\dagger \theta}$.
+** Norme Operatoriali
+   Dato un operatore $\theta$ ed i suoi autovalori singolari $\lambda_j$ si hanno le seguenti norme:
+   - Norma infinito :: $\norma{\theta}_\infty = \sup_{\ket{v} \in \cH} \frac{\norma{\theta\ket{v}}}{\norma{\ket{v}}} = \max_j \abs{\lambda_j}$.
+   - Norma di Hilbert-Schmidt :: $\norma{\theta}_2 = \sqrt{\Tr\lrt{\theta^\dagger \theta}} = \sqrt{\sum_{j=1}^d \lambda_j^2}$.
+   - Norma traccia :: $\norma{\theta}_1 = \Tr\lrt{\sqrt{\theta^\dagger \theta}} = \sum_j \lambda_j$
+   
+   Tra esse valgono $\norma\theta_\infty \le \norma\theta_2 \le \norma\theta_1$ e negli spazi in dimensione finita $\norma\theta_1 \le \sqrt{d} \norma\theta_2 \le d \norma\theta_\infty$.
 ** Operatori di Traccia
    Dati due spazi vettoriali $V$ e $W$ si può definire l'operatore di traccia parziale $\Tr_W : \cL(V \otimes W) \rar \cL(V)$ definito da $ \Tr_W (A \otimes B) = \Tr(B) \cdot A$ esteso per linearità.
    Notiamo che $\Tr(A \otimes B) = \Tr_V \circ \Tr_W (A \otimes B) = \Tr_W \circ \Tr_V (A \otimes B)$.
+** Osservabili
+   Un osservabile è un operatore (funzione lineare) autoaggiunto sullo spazio di Hilbert degli stati $\theta: \cH \rar \cH$.
+   Le uniche cose che ci è dato conoscere (misurare) di un sistema quantistico sono i "valori di aspettazione" degli osservabili sugli stati, ovvero $\braaket{\psi}{\theta}{\psi}$.
+   Ciò corrisponde a tracciare la matrice di densità con l'osservabile, ovvero $\Tr(\rho\theta)$.
 ** Sistemi Multipli e Prodotto Tensore
    Quando si considerano due sistemi quantistici "assieme", lo spazio dei loro stati è dato dal prodotto tensore degli spazi degli stati dei singoli sistemi, con il prodotto scalare prodotto.
    Visto che gli spazi sono finito dimensionali, anche il loro prodotto tensore è completo e quindi è uno spazio di Hilbert.
+
+   All'interno del prodotto tensore i tensori semplici vengono chiamati *stati separati*, mentre gli altri tensori vengono chiamati *stati entangled*.
+   A livello fisico il fatto che uno stato sia *separato* ci dice che può essere preparato operando _indipendentemente_ su ciascuno dei due sistemi.
+
+*** Decomposizione di Schmidt
+    Dato un vettore $\ket{\psi}_{AB} \in \cH_A \otimes \cH_B$ nel prodotto tensore esistono due basi ortonormali $\lrg{\ket{v_j}}_j \subseteq \cH_A$ e $\lrg{\ket{w_k}}_k \subseteq \cH_B$ tali che $\ket\psi_{AB} = \sum_i \lambda_i \ket{v_i}_A \otimes \ket{w_i}_B$.
+    I $\lambda_i$ sono reali positivi, soddisfano l'equazione $\sum_i \lambda_i^2 = 1$ e vengono chiamati *coefficienti di Schmidt*.
 ** Matrici di Densità
    Abbiamo già definito le matrici di densità di un sistema singolo.
-   # Matrice di densità di un sistema composto e tracce parziali
-** Osservabili
-   Un osservabile è un operatore (funzione lineare) autoaggiunto sullo spazio di Hilbert degli stati $\theta: \cH \rar \cH$.
-   Le uniche cose che ci è dato conoscere (misurare) di un sistema quantistico sono le tracce di osservabili con le matrici di densità, ovvero $\Tr(\rho\theta)$.
-** Tipi di Operatori
-   - *Hermitiani*: 
-   - *Positivi*:
-   - *Unitari*:
-   - *Autoaggiunti*:
-** Singular Values Decomposition
-** Purificazione di Stati
+   Notiamo che una matrice è matrice di densità se è *autoaggiunta*, *semidefinita positiva* ed ha *traccia unitaria*.
 
-# * Tipizzazione delle scritture bra e ket
-#   Questa parte permette di dare un senso alle scritture con i bra e con i ket, per capire cosa significano.
-#   - $\psi \in \cH_A \vdash \ket\psi : (B \otimes A \rar C) \rar (B \rar C)$
-#   - $\psi \in \cH_A \vdash \bra\psi : (B \rar C \otimes A^*) \rar (B \rar C)$
-#   - $\theta \in \cL(\cH_A) \vdash \left|\theta\rigth| : A \rar A$
+   A livello operatoriale possiamo anche caratterizzare gli stati puri come matrici di densità tali che $\rho^2 = \rho$.
+
+   # Matrice di densità di un sistema composto e tracce parziali
 
