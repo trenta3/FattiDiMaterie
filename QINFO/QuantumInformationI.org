@@ -1,12 +1,19 @@
 #+TITLE: Informazione Quantistica I
 #+AUTHOR: Dario Balboni
+#+LANGUAGE: Italian
 #+LATEX_CLASS: article
 #+LATEX_HEADER: \usepackage[top=20mm,bottom=20mm,left=16mm,right=16mm]{geometry}
 #+LATEX_HEADER: \input{custom-commands}
 
-\vskip 1.0cm
+\clearpage
 Questo pdf nasce per matematici che stanno seguendo il corso di Informazione Quantistica I di Giovannetti.
 Serve per inquadrare più chiaramente la materia e glissa su molti aspetti, motivo per il quale è consigliabile utilizzarlo solo come spunto.
+
+Alcune fonti consigliate per apprendere la materia sono:
+- [[https://gabrielesicuro.files.wordpress.com/2012/08/information1.pdf][Dispense scritte da Gabriele Sicuro]], studente che ha seguito il corso nel 2008
+- [[https://libgen.pw/download/book/5a1f04b93a044650f50401bb][Quantum Computation and Quantum Information]], libro di M. A. Nielsen e I. L. Chuang
+- [[https://libgen.pw/download/book/5a1f04ae3a044650f5031be7][Quantum Information]], libro di S. Barnett
+- [[https://libgen.pw/download/book/5a1f04f33a044650f508afde][Quantum Systems, Channels, Information]], libro di A. S. Holevo, più avanzato dei precedenti
 
 * Cose generali e notazioni
 ** Stati di un sistema
@@ -72,13 +79,39 @@ Serve per inquadrare più chiaramente la materia e glissa su molti aspetti, moti
    A livello fisico il fatto che uno stato sia *separato* ci dice che può essere preparato operando _indipendentemente_ su ciascuno dei due sistemi.
 
 *** Decomposizione di Schmidt
-    Dato un vettore $\ket{\psi}_{AB} \in \cH_A \otimes \cH_B$ nel prodotto tensore esistono due basi ortonormali $\lrg{\ket{v_j}}_j \subseteq \cH_A$ e $\lrg{\ket{w_k}}_k \subseteq \cH_B$ tali che $\ket\psi_{AB} = \sum_i \lambda_i \ket{v_i}_A \otimes \ket{w_i}_B$.
+    Dato un vettore $\ket{\psi}_{AB} \in \cH_A \otimes \cH_B$ nel prodotto tensore esistono due basi ortonormali $\lrg{\ket{v_j}}_j \subseteq \cH_A$ e $\lrg{\ket{w_k}}_k \subseteq \cH_B$ tali che $\ket\psi_{AB} = \sum_{i=1}^r \lambda_i \ket{v_i}_A \otimes \ket{w_i}_B$.
     I $\lambda_i$ sono reali positivi, soddisfano l'equazione $\sum_i \lambda_i^2 = 1$ e vengono chiamati *coefficienti di Schmidt*.
-** Matrici di Densità
-   Abbiamo già definito le matrici di densità di un sistema singolo.
-   Notiamo che una matrice è matrice di densità se è *autoaggiunta*, *semidefinita positiva* ed ha *traccia unitaria*.
 
-   A livello operatoriale possiamo anche caratterizzare gli stati puri come matrici di densità tali che $\rho^2 = \rho$.
+    Il numero di termini da sommare $r$ è \textcolor{red}{forse} ben definito ed uno stato è separabile se e solo se $r = 1$.
 
-   # Matrice di densità di un sistema composto e tracce parziali
+*** Matrici di Densità di sistemi composti
+    Abbiamo già definito le matrici di densità di un sistema singolo.
+    Notiamo che una matrice è matrice di densità se è *autoaggiunta*, *semidefinita positiva* ed ha *traccia unitaria*.
+    A livello operatoriale possiamo anche caratterizzare gli stati puri come matrici di densità tali che $\rho^2 = \rho$.
+
+    Data una matrice di densità $\rho_{AB}$ per un sistema composto $\cH_A \otimes \cH_B$ possiamo ricavarne due matrici di densità (nel senso di autoaggiunte, semidefinite positive a traccia unitaria) prendendo le tracce parziali di $\rho_{AB}$ sui due spazi $\cH_A$ e $\cH_B$.
+    Queste rappresentano quello che vedremmo "osservando" un singolo componente alla volta: detta infatti $\tilde\rho_A = \Tr_B(\rho_{AB})$ la parziale e $\theta \in \cL(\cH_A)$ un osservabile di $A$, possiamo considerare $\theta \otimes \one$ per ottenere un osservabile sul prodotto degli spazi e notare che $\expected{\theta_A} = \Tr_A(\tilde\rho_A \theta) = \Tr_A(\Tr_B(\rho_{AB}) \theta) = \Tr(\rho_{AB} (\theta \otimes \one))$.
+
+*** Legami tra le matrici di densità parziali e separabilità dello stato
+    - Se $\ket{\psi}_{AB} = \ket{\psi_1}_A \otimes \ket{\psi_2}_B$ allora $\tilde\rho_A = \ketbra{\psi_1}{\psi_1}$.
+    - Se invece $\ket{\psi}_{AB}$ è uno stato generico *puro*, detti $\lambda_j$ i coefficienti di Schmidt, si ha $\tilde\rho_A = \sum_j \lambda_j^2 \cdot \ketbra{v_j}{v_j}$ con $\ket{v_j}$ base ortonormale data dalla decomposizione ai valori singolari.
+      Le due matrici densità parziali hanno quindi gli stessi autovalori $\lambda_j^2$.
+
+      Ciò non succede quando lo stato $\ket{\psi}_{AB}$ è misto, a causa del fatto che ogni stato puro potrebbe diagonalizzarsi in una base ortogonale diversa.
+    - Inoltre lo stato del sistema composto è separabile se e solo se $\exists j \tc \lambda_j = 1$ e $\forall i \neq j : \lambda_i = 0$.
+      Ovvero si ha che lo stato è entangled se e solo se $\tilde\rho_A$ non è pura se e solo se $\tilde\rho_B$ non lo è.
+
+*** Purificazione di Stati
+    Data una matrice di densità $\rho_A$ del sistema $\cH_A$ posso trovare un sistema $\cH_B$ ($\forall d = \dim \cH_B \ge \dim \cH_A$) ed uno stato *puro* $\ket{\psi}_{AB}$ di $\cH_A \otimes \cH_B$ tale che $\Tr_B(\ketbra{\psi}{\psi}) = \rho_A$.
+    Questo ci dice che possiamo sempre descrivere un processo in termini di stati puri, a prescindere dall'eventuale rumore presente o dalla procedura di misura.
+    
+** Sfera di Bloch
+   Lo stato di un qubit ($\cH$ di dimensione due con base $\ket{0}, \ket{1}$) può essere rappresentato da una matrice del tipo $\rho = \matr{p}{\gamma}{\gamma^*}{1 - p}$, dove gli elementi fuori dalla diagonale soddisfano $\abs{\gamma} \le \sqrt{p (1-p)}$ a causa della condizione $\det \rho \ge 0$.
+   Possiamo definire alcune matrici (dette "di Pauli") che ci permettono di dare una corrispondenza tra i vettori della palla unitaria nello spazio tridimensionale ed i possibili stati di un qubit.
+   Questo penso permetterà in seguito alcune dimostrazioni tramite disegni e supercazzole grafiche, ma spero di sbagliarmi.
+
+   - Matrici di Pauli: :: \hskip 0.5em $\sigma_0 = \matr{1}{0}{0}{1}$, $\sigma_x = \matr{0}{1}{1}{0}$, $\sigma_y = \matr{0}{-i}{i}{0}$, $\sigma_z = \matr{1}{0}{0}{-1}$.
+   - Vettore di Bloch: :: Alla matrice $\rho$ come sopra associamo $a = (2 \Re \gamma, - 2 \Im \gamma, 2p - 1) \in \bbR^3$ e $\abs{a} \le 1$.
+   - Corrispondenza inversa: :: $\rho = \frac{1}{2} \lrt{\sigma_0 + a_x\sigma_x + a_y\sigma_y + a_z\sigma_z}$.
+   - Stati puri: :: Gli stati puri corrispondono ad $a$ nella sfera di Bloch tali che $\abs{a} = 1$.
 
