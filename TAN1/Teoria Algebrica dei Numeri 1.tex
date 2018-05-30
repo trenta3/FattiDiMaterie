@@ -1,0 +1,83 @@
+% Created 2018-05-30 mer 15:30
+\documentclass[a4paper, 11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+\usepackage[italian]{babel}
+\usepackage[left=20mm,textwidth=167mm,headsep=8mm,footskip=20pt,top=2.5cm,bottom=2.5cm]{geometry}
+\input{latex-abbreviations}
+\author{Dario Balboni}
+\date{}
+\title{Teoria Algebrica dei Numeri 1}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\linespread{1.2}
+
+\section{Domini di Dedekind}
+\label{sec-1}
+\begin{itemize}
+\item (\textbf{Definizione}) È un dominio d'integrità noetheriano normale e di dimensione uno
+\item Sia $K$ campo di numero, allora $\cO_K$ è un dominio di Dedekind
+\item (\textbf{Fattorizzazione di Ideali}) $R$ dominio di Dedekind. Allora ogni ideale frazionario $I \neq \lrt{0}$ di $R$ si scrive in modo unico come prodotto di ideali primi $I = \prod_i P_i^{e_i}$ con $e_i \in \bbZ$.
+Inoltre $I \subseteq R \sse e_i \ge 0 \quad \forall i$.
+\end{itemize}
+
+\section{Campi particolari e caratteristiche}
+\label{sec-2}
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{lll}
+$K$ & $\cO_K$ & $\disc K$\\
+\hline
+$\bbQ(\sqrt{m})$ con $m \equiv 2, 3 \mod 4$ & $\bbZ[\sqrt{m}]$ & $4m$\\
+$\bbQ(\sqrt{m})$ con $m \equiv 1 \mod 4$ & $\bbZ[\frac{1 + \sqrt{m}}{2}]$ & $m$\\
+$\bbQ(\zeta_n)$ & $\bbZ[\zeta_n]$ & \\
+$\bbQ(\zeta_n + \overline{\zeta_n})$ & $\bbZ[\zeta_n + \overline{\zeta_n}]$ & \\
+$\bbQ(\sqrt[3]{ab^2})$, $ab^2 \equiv \pm 1 \mod 9$ &  & $-3a^2b^2$\\
+$\bbQ(\sqrt[3]{ab^2})$, $ab^2 \not\equiv \pm 1 \mod 9$ &  & $-27a^2b^2$\\
+\end{tabular}
+\end{table}
+
+\section{Cose Utili sui campi particolari (quadratici e ciclotomici)}
+\label{sec-3}
+\begin{description}
+\item[{Cardinalità degli invertibili di $\cO_K$}] Analizziamo i campi principali
+\begin{description}
+\item[{$K = \bbQ(\sqrt{m})$ con $m < 0$:}] Hanno tutti due o quattro invertibili
+\item[{$K = \bbQ(\sqrt{m})$ con $m > 1$:}] $\cO_K^* \simeq \bbZ \oplus \lrg{\pm 1}$
+\end{description}
+\item[{Contenimenti}] $\bbQ(\sqrt{m}) \subseteq \bbQ(\zeta_d)$ dove $d = \disc \bbQ(\sqrt{m})$.
+\end{description}
+
+\section{Altre Amenità}
+\label{sec-4}
+\begin{description}
+\item[{Criterio di Stickelberger}] $K$ campo di numeri $\implies \disc K \equiv 0, 1 \mod 4$.
+\end{description}
+% Emacs 24.4.1 (Org mode 8.2.10)
+\end{document}

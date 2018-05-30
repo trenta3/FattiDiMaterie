@@ -1,0 +1,43 @@
+#+TITLE: Teoria Algebrica dei Numeri 1
+#+AUTHOR: Dario Balboni
+#+DATE:
+#+LANGUAGE: it
+#+OPTIONS: H:4 toc:3
+#+LaTeX_class_options: [a4paper, 11pt]
+#+LaTeX_header: \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+#+LaTeX_header: \usepackage[AUTO]{babel}
+#+LaTeX_header: \usepackage[left=20mm,textwidth=167mm,headsep=8mm,footskip=20pt,top=2.5cm,bottom=2.5cm]{geometry}
+#+LaTeX_header: \input{latex-abbreviations}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\linespread{1.2}
+
+* Domini di Dedekind
+  - (*Definizione*) È un dominio d'integrità noetheriano normale e di dimensione uno
+  - Sia $K$ campo di numero, allora $\cO_K$ è un dominio di Dedekind
+  - (*Fattorizzazione di Ideali*) $R$ dominio di Dedekind. Allora ogni ideale frazionario $I \neq \lrt{0}$ di $R$ si scrive in modo unico come prodotto di ideali primi $I = \prod_i P_i^{e_i}$ con $e_i \in \bbZ$.
+    Inoltre $I \subseteq R \sse e_i \ge 0 \quad \forall i$.
+  - $\cO_K$ PID $\sse \cO_K$ UFD.
+
+* Campi particolari e caratteristiche
+
+  #+CAPTION: 
+  | $K$                                                    | $\cO_K$                              | $\disc K$   |
+  |--------------------------------------------------------+--------------------------------------+-------------|
+  | $\bbQ(\sqrt{m})$ con $m \equiv 2, 3 \mod 4$            | $\bbZ[\sqrt{m}]$                     | $4m$        |
+  | $\bbQ(\sqrt{m})$ con $m \equiv 1 \mod 4$               | $\bbZ[\frac{1 + \sqrt{m}}{2}]$       | $m$         |
+  | $\bbQ(\zeta_n)$                                        | $\bbZ[\zeta_n]$                      |             |
+  | $\bbQ(\zeta_n + \overline{\zeta_n})$                   | $\bbZ[\zeta_n + \overline{\zeta_n}]$ |             |
+  | $\bbQ(\sqrt[3]{ab^2})$, $ab^2 \equiv \pm 1 \mod 9$     |                                      | $-3a^2b^2$  |
+  | $\bbQ(\sqrt[3]{ab^2})$, $ab^2 \not\equiv \pm 1 \mod 9$ |                                      | $-27a^2b^2$ |
+
+* Cose Utili sui campi particolari (quadratici e ciclotomici)
+  - Cardinalità degli invertibili di $\cO_K$ :: Analizziamo i campi principali
+    - $K = \bbQ(\sqrt{m})$ con $m < 0$: :: Hanno tutti due o quattro invertibili
+    - $K = \bbQ(\sqrt{m})$ con $m > 1$: :: $\cO_K^* \simeq \bbZ \oplus \lrg{\pm 1}$
+  - Contenimenti :: $\bbQ(\sqrt{m}) \subseteq \bbQ(\zeta_d)$ dove $d = \disc \bbQ(\sqrt{m})$.
+
+* Altre Amenità
+  - Criterio di Stickelberger :: $K$ campo di numeri $\implies \disc K \equiv 0, 1 \mod 4$.
+
