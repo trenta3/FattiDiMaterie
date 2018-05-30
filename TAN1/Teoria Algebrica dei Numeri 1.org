@@ -19,10 +19,39 @@
   - (*Fattorizzazione di Ideali*) $R$ dominio di Dedekind. Allora ogni ideale frazionario $I \neq \lrt{0}$ di $R$ si scrive in modo unico come prodotto di ideali primi $I = \prod_i P_i^{e_i}$ con $e_i \in \bbZ$.
     Inoltre $I \subseteq R \sse e_i \ge 0 \quad \forall i$.
   - $\cO_K$ PID $\sse \cO_K$ UFD.
+  - (*Ramificazione di Ideali Primi*) Dato $\bbQ \subseteq K \subseteq F$ e $P$ un primo di $\cO_K$ consideriamo la fattorizzazione di $P\cO_F$ ideale di $\cO_F$.
+    Detto $P\cO_F = \prod_i Q_i^{e_i}$ denotiamo con $e_i = e_{Q_i}(P)$ l'indice di ramificazione di $Q_i$ in $P$.
+    Abbiamo inoltre che $\frac{\cO_K}{P} \subseteq \frac{\cO_F}{Q_i}$ come campi. Definiamo allora $f_i = f_{Q_i}(P) = \lrq{\frac{\cO_F}{Q_i} : \frac{\cO_K}{P}}$ il grado d'inerzia di $Q_i$ su $P$.
+    
+    *Relazione ramificazione-inerzia*: Dato $\bbQ \subseteq K \subseteq F$ con $\lrq{F : K} = n$, $P \subseteq \cO_K$ primo si ha $$\sum_i e(Q_i|P) \cdot f(Q_i|P) = n$$
 
-* Campi particolari e caratteristiche
+    #+BEGIN_QUESTION
+    È l'unica relazione possibile per gli spezzamenti? 
+    Ovvero, se fissiamo $e_i$ ed $f_i$ tali che la somma dei prodotti sia $n$, possiamo trovare un primo che spezza in questo modo in una estensione di grado $n$?
+    #+END_QUESTION
 
-  #+CAPTION: 
+    *Moltiplicatività per torri*: Data la torre $K \subseteq F \subseteq L$ e $P$ primo di $K$, se $U \mid Q \mid P$ si ha che
+    $$e(U|P) = e(U|Q) \cdot e(Q|P) \hskip 1.5em f(U|P) = f(U|Q) \cdot f(Q|P)$$
+
+    #+BEGIN_QUESTION
+    Ci sono relazioni che valgono sui traslati?
+    Ad esempio se un primo non ramifica lateralmente, è vero anche per il suo esteso?
+    #+END_QUESTION
+  - *Azione transitiva del Galois*: Sia $L/K$ un'estensione di Galois di grado $n$, se $P \subseteq \cO_K$ è primo allora $G = \Gal(L/K)$ agisce transitivamente sull'insieme dei primi di $\cO_L$ sopra $P$.
+
+    Da ciò segue che $P\cO_L = (Q_1 \cdot \ldots \cdot Q_r)^e$ e $f(Q_i|P) = f \quad \forall i$, inoltre $f \cdot e \cdot r = n$.
+    Questo limita grandemente i possibili tipi di spezzamenti nelle estensioni di galois.
+
+    Inoltre vale il *Teorema di densità di Chebotarev*: $K/\bbQ$ estensione, $\tilde K$ chiusura normale di $K$ su $\bbQ$, $G = \Gal(\tilde K/Q)$.
+    Allora $d(\lrg{p \in \bbZ \mid p\cO_K \text{ ha fattorizzazione di tipo F }}) = \frac{\abs{\lrg{\sigma \in G \sqsubseteq S_n \mid \sigma \text{ è di tipo F}}}}{\abs G}$, dove $d$ è la densità naturale.
+  - *Ramificazione finita*: Sia $K$ di grado $n$ su $\bbQ$. $p \in \bbZ$ è ramificato in $K$ $\implies p \mid \disc K$.
+    
+    Data inoltre una qualunque estensione $L/K$, solo un numero finito di primi di $\cO_K$ ramifica in $\cO_L$.
+    In particolare se $P \subseteq \cO_K$ ramifica, allora $p = P \cap Z$ divide $\disc L$.
+
+* Cose Utili sui campi particolari
+
+  #+CAPTION: Anelli degli interi e discriminanti di alcuni campi
   | $K$                                                    | $\cO_K$                              | $\disc K$   |
   |--------------------------------------------------------+--------------------------------------+-------------|
   | $\bbQ(\sqrt{m})$ con $m \equiv 2, 3 \mod 4$            | $\bbZ[\sqrt{m}]$                     | $4m$        |
@@ -32,12 +61,41 @@
   | $\bbQ(\sqrt[3]{ab^2})$, $ab^2 \equiv \pm 1 \mod 9$     |                                      | $-3a^2b^2$  |
   | $\bbQ(\sqrt[3]{ab^2})$, $ab^2 \not\equiv \pm 1 \mod 9$ |                                      | $-27a^2b^2$ |
 
-* Cose Utili sui campi particolari (quadratici e ciclotomici)
   - Cardinalità degli invertibili di $\cO_K$ :: Analizziamo i campi principali
     - $K = \bbQ(\sqrt{m})$ con $m < 0$: :: Hanno tutti due o quattro invertibili
     - $K = \bbQ(\sqrt{m})$ con $m > 1$: :: $\cO_K^* \simeq \bbZ \oplus \lrg{\pm 1}$
   - Contenimenti :: $\bbQ(\sqrt{m}) \subseteq \bbQ(\zeta_d)$ dove $d = \disc \bbQ(\sqrt{m})$.
 
-* Altre Amenità
+** Ramificazioni dei primi
+*** Campi Quadratici
+    Sia $K = \bbQ(\sqrt{m})$, con $m$ squarefree.
+
+    Per $p \neq 2$ primo si ha:
+    $$ p\cO_K = \left\{ \begin{array}{ll}
+    (p, \sqrt{m})^2 & p \mid m \\
+    (p, n - \sqrt{m}) (p, n + \sqrt{m}) & p \nmid m \wedge m \equiv n^2 \mod p \\
+    (p) & p \nmid m \wedge m \not\equiv n^2 \mod p \\
+    \end{array}\right. $$
+
+    Invece, per $p = 2$:
+    $$ 2\cO_K = \left\{ \begin{array}{ll}
+    (2, \sqrt{m})^2 & 2 \mid m \\
+    (2, 1 + \sqrt{m})^2 & m \equiv 3 \mod 4 \\
+    (2, \frac{1 + \sqrt{m}}{2})(2, \frac{1 - \sqrt{m}}{2}) & m \equiv 1 \mod 8 \\
+    (2) & m \equiv 5 \mod 8 \\
+    \end{array}\right. $$
+*** Campi Ciclotomici
+    Sia $K = \bbQ(\zeta_m)$, $p$ un certo primo e $m = p^k n$ con $(n, p) = 1$.
+
+    Allora $p\cO_K = (Q_1 \cdot \ldots \cdot Q_r)^e$ con $e = \phi(p^k)$, $f = \ord_{(\bbZ/n\bbZ)^*}(p)$ ed $r$ tale che $fer = \phi(m)$.
+    
+    Detto come si mangia, $p$ ramifica in $\bbQ(\zeta_{p^k})$ e si spezza in $\bbQ(\zeta_{n})$.
+** Altre Amenità
   - Criterio di Stickelberger :: $K$ campo di numeri $\implies \disc K \equiv 0, 1 \mod 4$.
+
+* Domande altre
+  #+BEGIN_QUESTION
+  I vari teoremi che abbiamo fatto, quanto usano il fatto di essere su $\bbQ$?
+  Si possono rifare sui separabili e/o sui campi finiti?
+  #+END_QUESTION
 

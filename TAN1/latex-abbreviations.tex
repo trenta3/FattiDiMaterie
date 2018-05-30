@@ -4,6 +4,7 @@
 \usepackage{ragged2e}
 \usepackage{color}
 \usepackage{array}
+\usepackage{tcolorbox}
 \usepackage{thmtools, thm-restate}
 
 % Definiamo un environment per i sistemi di equazioni
@@ -35,6 +36,8 @@
 \newcommand{\Rar}{\ensuremath{\Rightarrow}}
 \newcommand{\disc}{\ensuremath{\text{disc }}}
 \newcommand{\sse}{\ensuremath{\Leftrightarrow}}
+\newcommand{\Gal}{\ensuremath{\text{Gal}}}
+\newcommand{\ord}{\ensuremath{\text{ord}}}
 
 \newcommand{\halfpi}{\ensuremath{\frac{\pi}{2}}}
 
@@ -121,4 +124,10 @@ bodyfont=\normalfont
 
 \newcommand{\TODO}{\textcolor{red}{\bf{ANCORA DA SCRIVERE / FINIRE}}}
 \newcommand{\Optional}{\textcolor{blue}{[Opzionale]}}
+
+\newenvironment{question}{%
+  \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Domanda]
+}{%
+  \end{tcolorbox}
+}
 
