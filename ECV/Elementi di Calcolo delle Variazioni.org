@@ -1,0 +1,97 @@
+#+TITLE: Elementi di Calcolo delle Variazioni
+#+AUTHOR: Dario Balboni
+#+DATE:
+#+LANGUAGE: it
+#+OPTIONS: H:4 toc:nil
+#+LaTeX_class_options: [a4paper, 11pt]
+#+LaTeX_header: \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+#+LaTeX_header: \usepackage[AUTO]{babel}
+#+LaTeX_header: \usepackage[left=20mm,textwidth=167mm,headsep=8mm,footskip=20pt,top=2.5cm,bottom=2.5cm]{geometry}
+#+LaTeX_header: \input{latex-abbreviations}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\linespread{1.2}
+
+* Metodo indiretto (pp. 8-50)
+  Roadmap:
+  1. *Condizioni Necessarie*: ELE + BC
+  2. *Risolvere le equazioni*
+  3. *Dimostrare che le soluzioni sono minimi* via convessità o lemma trivial
+
+** Idee generali
+  #+CAPTION: Idea generale dell'andamento a seconda della Lagrangiana
+  | Lagrangiana             |                                 |
+  |-------------------------+---------------------------------|
+  | Strett. convessa in $p$ | Esistenza ed Unicità            |
+  | Non convessa            | Guai                            |
+  | Convessa ma non strett. | Rischi per Unicità e Regolarità |
+
+  #+CAPTION: Vincoli generati dal metodo diretto con la variazione prima
+  | Vincoli ad un estremo       | Condizioni di Dirichlet $u(b) = B$                  |
+  | No vincoli ad un estremo    | Condizioni di von Neumann $\dot{u}(b) = 0$          |
+  | Vincoli in punto intermedio | Troppe condizioni: se sono sfortunato non ha minimo |
+** Trovare il minimo
+  - (*Variazione prima*) Se $x_0 \in \argmin \lrg{F(x) : x \in \bbX}$ allora per ogni curva $\gamma$ si ha $\delta F(x_0, \gamma) = 0$ quando esiste.
+    Se $\bbX$ è uno spazio affine e $V$ il suo spazio vettoriale di riferimento posso considerare come curve le rette lungo una direzione.
+  - (*FLCV*) Sia $f: [a,b] \rar \bbR \in \cC^0$ e supponiamo che $\int_a^b f(x) v(x) \de x = 0 \quad \forall v \in V$ allora $f(x) = 0$ per ogni $x \in [a,b]$.
+    Questo lemma vale quando la chiusura di $\Span(V)$ rispetto alla convergenza uniforme sui compatti contenuti in $[a,b]$ meno un numero finito di punti è tutto $\cC^0$.
+    In particolare vale per $V = \cC^\infty_c(a,b)$.
+  - (*DBR*) Sia $f: [a, b] \rar \bbR \in \cC^0$ e supponiamo che $\int_a^b f(x) v(x) \de x = 0 \quad \forall v \in V$ tali che $\int_a^b v(x) \de x = 0$ allora $f(x)$ è costante in $[a,b]$.
+    Vale per gli stessi $V$ di cui sopra. Notiamo inoltre che le funzioni del tipo $\dot{v}(x)$ con $v \in \cC^\infty_c$ sono tutte e sole le $w \in \cC^\infty_c$ a media nulla.
+  - /Osservazione/: Se $F(u)$ dipende da $u$ e da $\dot u$ non posso mettere vincoli su $\dot u$ altrimenti il minimo molto probabilmente non esiste e l'inf è quello senza condizione.
+  - (*ELE*) Sia dato un funzionale $F(u) := \int_a^b L(x, u(x), \dot u(x)) \de x$ dove $L: [a, b] \times \bbR \times \bbR \rar \bbR$ con variabili $(x, s, p)$.
+    1. *Prima forma integrale della variazione prima*: Se $L, u, v \in \cC^1$ si ha $\delta F(u, v) = \int_a^b \lrq{L_s(x, u, \dot u) v + L_p(x, u, \dot u) \dot v} \de x$
+    2. *Seconda forma integrale della variazione prima*: Se $L, u \in \cC^2$, $v \in \cC^1$ e $v(a) = v(b) = 0$ allora $\delta F(u, v) = \int_a^b \lrq{L_s(x, u, \dot u) - (L_p(x, u, \dot u))'} v \de x$
+
+    /ELE Differenziale/: Se $L, u \in \cC^2$ ed $u$ è punto di minimo per $F$ si ha $\lrq{L_p(x, u, \dot u)}' = L_s(x, u, \dot u)$.
+    L'equazione espansa è $L_{px} + L_{ps} \dot u + L_{pp} \ddot u = L_s$ che si può scrivere in forma normale se $L_pp \neq 0 \quad \forall x \in [a,b]$.
+    
+    /ELE-DBR/: $L_p(x, u(x), \dot u(x)) = c + \int_a^x L_s(t, u(t), \dot u(t)) \de t$ (serve meno regolarità in $L$, basta $L \in \cC^1$).
+
+    /ELE Erdmann/: Se $L$ non dipende da $x$ allora si ottiene $L_p(u, \dot u) \dot u = c + L(u, \dot u)$ (ha solo ordine uno).
+    È equivalente alla ELE classica solo nei punti in cui $\dot u(x) \neq 0$.
+
+    /Condizioni di Neumann/: Se sono soggetto alla condizione $u(a) = A$ ottengo nell'altro estremo la condizione $L_p(x, u, \dot u) = 0$.
+
+    /Ultrageneralizzazione/: Se $L$ dipende da più derivate successive ed $u$ è un punto di minimo per FLCV troviamo la formula
+    $$\sum_{i=1}^k (-1)^{i+1} \frac{\de^i}{\de x^i} L_{p_i} (x, u, \dot u, \ldots, u^{(k)}) = L_s (x, u, \dot u, \ldots, u^{(k)})$$
+** Dimostrare che è il minimo
+*** Convessità
+    Consideriamo $F(u) = \int_a^b L(x, u(x), \dot u(x)) \de x$ con DBC e supponiamo
+    1. Abbastanza regolarità: $L \in \cC^2$
+    2. $u_0(x)$ sia soluzione della prima forma integrale di ELE (ELE-DBR)
+    3. $\forall x \in [a, b]$ la funzione $(s, p) \mapsto L(x, s, p)$ è convessa
+
+    Allora $u_0$ è punto di minimo per il problema con le DBC.
+    
+    Se inoltre $L(x, \cdot, cdot)$ è strettamente convessa si ha che $u_0$ è l'unico punto di minimo.
+*** Lemma Trivial
+    Sia $\bbX$ un insieme e siano $F, G: \bbX \rar \bbR$ due funzioni tali che
+    1. $F(x) \ge G(x) \quad \forall x \in \bbX$
+    2. $x_0 \in \bbX$ è punto di minimo per $G$
+    3. $F(x_0) = G(x_0)$
+
+    Allora $x_0$ è punto di minimo per $F$.
+
+    Inoltre se $x_0$ è unico punto di minimo per $G$ è unico anche per $F$.
+** Point-to-curve Problems
+   Dato un punto $(a, A) \in \bbR^2$ ed una funzione $\phi: \bbR \rar \bbR$ con $F(u) = \int_a^b L(x, u, \dot u) \de x$ vogliamo minimizzare $F(u)$ al variare delle coppie $(u, b)$ tali che $u \in \cC^1[a,b], u(a) = A, u(b) = \phi(b)$.
+
+   Se $L \in \cC^2, \phi \in \cC^1$ e $(u_0, x_0)$ è punto di minimo, allora si ottiene, oltre alla solita ELE e DBC, un'altra condizione, detta di transversality:
+   $$L_p(x_0, u_0(x_0), \dot u_0(x_0)) (\dot u_0(x_0) - \dot \phi(x_0)) = L(x_0, u_0(x_0), \dot u_0(x_0))$$
+* Metodo diretto (pp. 51-)
+  Roadmap:
+  1. *Formulazione Debole*: Estendere $F(u)$ ad un ambiente più ampio (Sobolev)
+  2. *Compattezza*: Dimostrare che i sottolivelli di $F(u)$ sono compatti rispetto a qualche nozione di convergenza
+  3. *Semicontinuità*: Dimostrare che $F$ è SCI rispetto alla stessa nozione di convergenza, ovvero che i minimi esistono nell'ambiente più vasto
+  4. *Regolarità*: Dimostrare che i punti di minimo in realtà stanno anche nell'ambiente originario
+
+* Rilassamento
+* Gamma convergenza
+* Teoremi di Analisi inferiore
+  Riportiamo qui alcuni lemmini che servono nel corso ma che si dovrebbero già sapere:
+  - *Integrali dipendenti da parametro*: $[a,b] \subseteq \bbR$, $\delta > 0$ e $f: [a,b] \times (-\delta, \delta) \rar \bbR$ e poniamo $\psi(t) = \int_a^b f(x, t) \de x$.
+    1. Se $f(x, t)$ è continua in $[a,b] \times (-\delta, \delta)$ si ha che $\psi(t) è continua in $(-\delta, \delta)$
+    2. Se $f_t(x, t)$ è continua in $[a,b] \times (-\delta, \delta)$ allora $\psi$ è derivabile e vale $\psi'(t) = \int_a^b f_t(x, t) \de x$
+
