@@ -6,6 +6,8 @@
 \usepackage{array}
 \usepackage{tcolorbox}
 \usepackage{thmtools, thm-restate}
+\usepackage{enumitem}
+\usepackage{titlesec}
 
 % Definiamo un environment per i sistemi di equazioni
 \newenvironment{eqsystem}[1]
@@ -32,12 +34,17 @@
 \newcommand{\sps}{\ensuremath{\supset}}
 \newcommand{\lar}{\ensuremath{\leftarrow}}
 \newcommand{\rar}{\ensuremath{\rightarrow}}
+\newcommand{\rhu}{\ensuremath{\rightharpoonup}}
 \newcommand{\Lar}{\ensuremath{\Leftarrow}}
 \newcommand{\Rar}{\ensuremath{\Rightarrow}}
 \newcommand{\disc}{\ensuremath{\text{disc }}}
 \newcommand{\sse}{\ensuremath{\Leftrightarrow}}
 \newcommand{\Gal}{\ensuremath{\text{Gal}}}
 \newcommand{\ord}{\ensuremath{\text{ord}}}
+\newcommand{\Span}{\ensuremath{\text{Span}}}
+\newcommand{\argmin}{\ensuremath{\text{argmin}}}
+\newcommand{\Seq}{\ensuremath{\text{Seq}}}
+\newcommand{\tc}{\ensuremath{\text{t.c.}}}
 
 \newcommand{\halfpi}{\ensuremath{\frac{\pi}{2}}}
 
@@ -45,7 +52,9 @@
 \newcommand{\lrq}[1]{\ensuremath{\left[{#1}\right]}}
 \newcommand{\lrt}[1]{\ensuremath{\left({#1}\right)}}
 \newcommand{\lra}[1]{\ensuremath{\langle{#1}\rangle}}
+\let\scal\lra
 \newcommand{\abs}[1]{\ensuremath{\left|{#1}\right|}}
+\newcommand{\norm}[1]{\ensuremath{\left|\left|{#1}\right|\right|}}
 \newcommand{\ceil}[1]{\ensuremath{\left\lceil{#1}\right\rceil}}
 \newcommand{\floor}[1]{\ensuremath{\left\lfloor{#1}\right\rfloor}}
 

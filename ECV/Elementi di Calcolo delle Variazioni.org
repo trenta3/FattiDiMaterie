@@ -11,7 +11,11 @@
 
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1em}
+\setlist{nosep}
 \linespread{1.2}
+\titlespacing\section{0pt}{0pt}{0pt}
+\titlespacing\subsection{0pt}{0pt}{0pt}
+\titlespacing\subsubsection{0pt}{0pt}{0pt}
 
 * Metodo indiretto (pp. 8-50)
   Roadmap:
@@ -37,6 +41,8 @@
   - (*FLCV*) Sia $f: [a,b] \rar \bbR \in \cC^0$ e supponiamo che $\int_a^b f(x) v(x) \de x = 0 \quad \forall v \in V$ allora $f(x) = 0$ per ogni $x \in [a,b]$.
     Questo lemma vale quando la chiusura di $\Span(V)$ rispetto alla convergenza uniforme sui compatti contenuti in $[a,b]$ meno un numero finito di punti è tutto $\cC^0$.
     In particolare vale per $V = \cC^\infty_c(a,b)$.
+
+    In versione Lebesgue si ha: $f: (a, b) \rar \bbR \in \cL^2(a, b)$ e supponiamo che $\int_a^b f(x) v(x) \de x = 0$ per ogni $v \in \cC^\infty_c(a, b)$. Allora $f(x) \equiv 0$ per quasi ogni $x \in (a, b)$.
   - (*DBR*) Sia $f: [a, b] \rar \bbR \in \cC^0$ e supponiamo che $\int_a^b f(x) v(x) \de x = 0 \quad \forall v \in V$ tali che $\int_a^b v(x) \de x = 0$ allora $f(x)$ è costante in $[a,b]$.
     Vale per gli stessi $V$ di cui sopra. Notiamo inoltre che le funzioni del tipo $\dot{v}(x)$ con $v \in \cC^\infty_c$ sono tutte e sole le $w \in \cC^\infty_c$ a media nulla.
   - /Osservazione/: Se $F(u)$ dipende da $u$ e da $\dot u$ non posso mettere vincoli su $\dot u$ altrimenti il minimo molto probabilmente non esiste e l'inf è quello senza condizione.
@@ -80,18 +86,113 @@
 
    Se $L \in \cC^2, \phi \in \cC^1$ e $(u_0, x_0)$ è punto di minimo, allora si ottiene, oltre alla solita ELE e DBC, un'altra condizione, detta di transversality:
    $$L_p(x_0, u_0(x_0), \dot u_0(x_0)) (\dot u_0(x_0) - \dot \phi(x_0)) = L(x_0, u_0(x_0), \dot u_0(x_0))$$
-* Metodo diretto (pp. 51-)
+* Metodo diretto (pp. 85-96)
   Roadmap:
   1. *Formulazione Debole*: Estendere $F(u)$ ad un ambiente più ampio (Sobolev)
   2. *Compattezza*: Dimostrare che i sottolivelli di $F(u)$ sono compatti rispetto a qualche nozione di convergenza
   3. *Semicontinuità*: Dimostrare che $F$ è SCI rispetto alla stessa nozione di convergenza, ovvero che i minimi esistono nell'ambiente più vasto
   4. *Regolarità*: Dimostrare che i punti di minimo in realtà stanno anche nell'ambiente originario
+     1. *Equazione di Eulero debole*
+     2. *Guadagno della prima derivata*
+     3. *Bootstrap*
 
+  Fatto ciò bisogna poi trovare i punti di minimo.
+** Dimostrazione della Compattezza
+    Abbiamo $F(u) := \int_a^b (\abs{\dot u}^p + g(x, u)) \de x$.
+    Sotto quali ipotesi possiamo dedurre che $F(u_n) \le M \implies u_{n_k} \rar u_\infty$ in un certo senso?
+    
+    Questo certo senso significa $u_n \rar u_\infty$ uniformemente e $\dot u_n \rhu^{\cL^2} \dot u_\infty$.
+
+    /Risposta/: Se ho una stima del tipo $g(x, s) \ge - A - B \abs{s}^q$ con $q < p$ e $A, B$ reali.
+
+    /Dimostrazione/:
+    1. $\norm{\dot u_n}_{\cL^p}^p = \int_a^b \dot u_n^2 = F(u_n) - \int_a^b g(x, u_n(x)) \de x \le F(u_n) + A (b-a) + B \int_a^b \abs{u_n(x)}^q$.
+       Per poter stimare questo numero usiamo una delle seguenti due condizioni per ottenere limitatezza globale:
+       1. Se si ha una DBC del tipo $u(a) = C$ allora stimando con l'equihölderianità si ha una limitazione globale dipendente dalla norma della derivata: $\abs{u_n(x)} \le \norm{\dot u_n}_{\cL^p} \abs{b - a}^{\frac{1}{p'}}$
+       2. Avere una condizione integrale del tipo $\int_a^b \abs{u_n(x)}^s \le T$ che ci permette di avere limitatezza in un punto usando il teorema della media integrale e poi procedere come in (a)
+       3. Avere $g(x, s)$ limitata dal basso, ovvero $g(x, s) \ge -D$, assieme ad una stima del tipo $g(x, u) \ge K \abs{u}^e - N$ con $K > 0$.
+          In questo caso la stima sulle derivate si ha dalla stima dal basso: $\norm{\dot u_n}_{\cL^p} = F(u_n) - \int_a^b g(x, s) \de x \le F(u_n) - D (a-b) \le M - D (a-b)$.
+	  Mentre la stima integrale si ottiene dalla seconda disuguaglianza: $\norm{u_n}_{\cL^e} \le \frac{1}{K} \lrq{N + \int_a^b g(x, u) \de x} \le \frac{1}{K} \lrq{N + F(u_n)} \le \frac{N + M}{K}$.
+
+       Nei casi (a) e (b) segue $\norm{\dot u_n}_{\cL^p}^p - B (b-a)^{2 - \frac{1}{p}} \norm{\dot u_n}_{\cL^p}^q \le \norm{\dot u_n}_{\cL^p}^p - B \int_a^b \abs{u_n(x)}^q \le M + A (b-a)$.
+       Ora se $q < p$ si ha una disuguaglianza su $\norm{\dot u_n}_{\cL^p}$ che è soddisfatta solo sui punti interni, da cui si ottiene $\norm{\dot u_n}_{\cL^p} \le M'$.
+
+       E quindi si ha anche (essendo $[a,b]$ limitato) che $\norm{\dot u_n}_{\cL^2} \le M''$ (infatti $\abs{x}^p \le 1 + \abs{x}^2$) ed analogamente per $\norm{u_n}_{\cL^2}$.
+    2. Per compattezza debole delle palle in $\cL^2$ (Hilbert separabile) otteniamo che $\exists \dot u_{n_k} \rhu^{\cL^2} v_\infty$.
+    3. Per la stima sull'Hölderianità delle $u_n$ abbiamo che le $u_{n_k}$ sono $\frac{1}{p}$ Hölder con costante comune e sono equilimitate per via del dato al bordo e della stima con l'equihölderianità.
+       Inoltre abbiamo precedentemente ottenuto una limitazione globale.
+    4. Per Ascoli-Arzelà si ha, a meno di altre sottosuccessioni, $u_{n_k} \rar u_\infty$ uniformemente in $[a,b]$
+    5. Dal passaggio al limite nella formula di integrazione per parti otteniamo che $v_\infty = \dot u_\infty$
+
+    Questo ci fa ottenere la convergenza $u_n \rar u_\infty$ uniformemente e $\dot u_n \rhu^{\cL^p} \dot u_\infty$.
+** Dimostrazione della Semicontinuità
+   Sia $F(u) = \int_a^b \psi(u(x)) + g(x, u) \de x$.
+   
+   /Parte in $g$/:
+   1. Se $g$ è continua e $u_n \rar u_\infty$ uniformemente allora $\int_a^b g(x, u_n(x)) \de x \rar \int_a^b g(x, u_\infty(x)) \de x$.
+   2. Se $g$ è SCI e limitata dal basso posso usare il lemma di Fatou per avere la semicontinuità di questa parte di integrale.
+
+   /Parte in $\psi$/: Se $\psi$ è convessa
+* Risoluzione Equazioni Differenziali con variazioni (pp. 97-)
 * Rilassamento
 * Gamma convergenza
+* Spazi con nozione di convergenza
+  - (*Definizione*) Dato un insieme $\bbX$, una nozione di convergenza in $\bbX$ significa dichiarare le successioni convergenti ed i relativi limiti, ovvero significa dare un sottoinsieme di $\Seq(\bbX) \times \bbX$.
+  - (*Compattezza*) $K \subseteq \bbX$ si dice compatto per successioni se $\forall \lrq{x_n}_n \subseteq K$, $\exists x_\infty \in K \tc x_n \rar x_\infty$.
+  - (*Continuità*) $f: \bbX \rar \bbR$ si dice continua se per ogni successione $x_n \rar x_\infty$ in $\bbX$ vale $f(x_n) \rar f(x_\infty)$.
+  - (*SCI*) $f: \bbX \rar \bbR$ si dice SCI se per ogni successione $x_n \rar x_\infty$ in $\bbX$ vale $\liminf_{n \rar +\infty} f(x_n) \ge f(x_\infty)$.
+  - (*Teorema di Weierstrass*) Data $f: \bbX \rar \bbR$ SCI con $\bbX$ compatto $\implies f$ ha minimo su $\bbX$.
+  - (*Coercività*) $f: \bbX \rar \bbR$ si dice coerciva se $\exists K \subseteq \bbX$ tale che $\inf_{x \in \bbX} f(x) = \inf_{x \in K} f(x)$.
+    
+    In particolare se $f: \bbX \rar \bbR$ è SCI ed esiste un sottolivello non vuoto e contenuto in un compatto allora $f$ ammette minimo.
+* Spazi di Hilbert e convergenza Debole
+  - (*Formule con componenti*) $\norm{v}^2 = \sum_{n=1}^\infty \scal{v, e_n}^2$ e si ha $\scal{v, w} = \sum_{n=1}^\infty \scal{v, e_n} \scal{w, e_n}$.
+  - (*Convergenza di serie*) Data $\lrg{e_n}$ una basa Hilbertiana di $\cH$ (sistema ortonormale a span denso) e $\lrg{v_n}$ una successione di numeri reali si ha
+    $$\sum_{n=1}^\infty v_n e_n \text{ converge in } \cH \sse \sum_{n=1}^\infty v_n^2 \text{ converge in } \bbR$$
+  - (*Palle non fortemente compatte*) Se $\cH$ ha dimensione infinita, allora le palle *NON* sono compatte.
+  - (*Convergenza forte e debole*): $x_n \rar x_\infty$ è la convergenza forte, ovvero $\norm{x_n - x_\infty} \rar 0$ come numeri reali.
+    La convergenza debole si indica con $x_n \rhu x_\infty$ e significa che $\forall v \in \cH \quad \scal{x_n, v} \rar \scal{x_\infty, v}$ come numeri reali.
+
+    Ovviamente convergenza forte implica convergenza debole.
+  - (*Continuità forte della norma*) Se $x_n \rar x_\infty$ allora $\norm{x_n} \rar \norm{x_\infty}$. Purtroppo la norma *non* è debolmente continua.
+  - (*Semicontinuità debole della norma*) Se $x_n \rhu x_\infty$ allora $\liminf_{n \rar +\infty} \norm{x_n} \ge \norm{x_\infty}$.
+  - (*Compattezza debole delle palle*) In un Hilbert separabile le palle chiuse sono debolmente compatte.
+    Ovvero data una successione $\lrg{v_n} \subseteq \cH \tc \norm{v_n}^2 \le M$, esiste una sottosuccessione $v_{n_k} \rhu v_\infty$.
+  - (*Convergenza dei prodotti scalari*) Se $v_n \rhu v_\infty$ e $w_n \rar w_\infty$ allora $\scal{v_n, w_n} \rar \scal{v_\infty, w_\infty}$.
+    Entrambe convergenze deboli non sono sufficienti.
+  - (*Indebolimento convergenza debole*) Se $\lrg{v_n} \subseteq \cH$ è limitata, $W \subseteq \cH$ un sottoinsieme a span denso rispetto alla convergenza forte (ad esempio una base hilbertiana) e vale $\scal{v_n, w} \rar \scal{v_\infty, w} \quad \forall w \in W$ allora $v_n \rhu v_\infty$.
+  - (*Limitatezza delle successioni convergenti*) Se $v_n \rhu v_\infty$ allora $v_n$ è limitata.
+* Spazi di Sobolev e derivata Debole
+  - (*Definizione W*) Sia $p \ge 1$. Si dice che $u \in W^{1,p}(a, b)$ e che $v$ è la sua derivata debole se $u, v \in \cL^p(a, b)$ e vale la formula $\forall \phi \in \cC^\infty_c(a, b) \quad \int_a^b u(x) \dot\phi(x) \de x = - \int_a^b v(x) \phi(x) \de x$.
+  - (*Definizione H*) Sia $p \ge 1$. Si dice che $u \in H^{1,p}(a, b)$ e che $v$ è la sua derivata debole se $u, v \in \cL^p(a, b)$ ed $\exists \lrg{u_n}_n \subseteq \cC^1(a, b)$ tali che $u_n \rar^{\cL^p} u$ e $u_n' \rar^{\cL^p} v$.
+  - (*Completamento delle $\cC^1$*) $H^{1, p}$ è anche il completamento delle funzioni $\cC^1$ dotate della metrica $d(f, g) = \norm{f - g}_{\cL^p} + \norm{f' - g'}_{\cL^p}$.
+  - (*Derivata convergente in $\cL^p$*) $W^{1,p}$ si può anche definire come funzioni $u$ tali che il rapporto incrementale $R_h(x) = \frac{u(x+h) - u(x)}{h}$ converge a qualcosa in $\cL^p$. Tale qualcosa sarà la derivata debole.
+  - (*Unicità della derivata debole*) Se la derivata debole esiste, è unica.
+  - (*Consistenza con il caso classico*) $u \in \cC^1(a, b) \implies u \in W^{1,p}(a, b)$ e la derivata vera coincide con quella debole.
+    In realtà si può vedere che ci stanno anche tutte le funzioni $P\cC^1$ (ovvero $\cC^1$ a tratti).
+
+    Inoltre, se $u \in W^{1,p}$ e la sua derivata debole $v$ è continua, allora $u \in \cC^1$.
+  - Sia $\lrg{u_n}_n \subseteq W^{1,2}$ e supponiamo che $u_n \rhu^{\cL^2} u_\infty$ e $\dot u_n \rhu^{\cL^2} v_\infty$. Allora $u_\infty \in W^{1,2}$ e $v_\infty = \dot u_\infty$.
+  - (*Primitive della derivata debole*) Sia $u \in W^{1,p}(a, b)$ con $v = \dot u$. Allora si ha $u(x) = c + \int_a^x v(t) \de t$.
+  - (*Hölderianità delle funzioni di Sobolev*) /Nota: Questo è vero solo in dimensione uno/. Sia $p > 1$ e $q = p'$ l'esponente coniugato, $u \in W^{1,p}(a,b)$. Allora $u \in \cC^{0,\frac{1}{q}}$, in particolare $u$ è continua.
+    Inoltre $\abs{u(y) - u(x)} \le \norm{\dot u}_{\cL^p} \cdot \abs{y - x}^{\frac{1}{q}}$.
 * Teoremi di Analisi inferiore
   Riportiamo qui alcuni lemmini che servono nel corso ma che si dovrebbero già sapere:
   - *Integrali dipendenti da parametro*: $[a,b] \subseteq \bbR$, $\delta > 0$ e $f: [a,b] \times (-\delta, \delta) \rar \bbR$ e poniamo $\psi(t) = \int_a^b f(x, t) \de x$.
     1. Se $f(x, t)$ è continua in $[a,b] \times (-\delta, \delta)$ si ha che $\psi(t) è continua in $(-\delta, \delta)$
     2. Se $f_t(x, t)$ è continua in $[a,b] \times (-\delta, \delta)$ allora $\psi$ è derivabile e vale $\psi'(t) = \int_a^b f_t(x, t) \de x$
+  - *Beppo Levi o Convergenza Monotona*: Siano $f_n: (a, b) \rar \bbR$ misurabili secondo lebesgue tali che $f_n \ge 0$ e $f_{n+1} \ge f_{n}$.
+    Allora $\int_a^b \sup_n f_n(x) \de x = \sup_n \int_a^b f_n(x) \de x$.
+  - *Lemma di Fatou*: Siano $f_n: (a, b) \rar \bbR$ misurabili secondo lebesgue e $f_n \ge 0$.
+    Allora $\int_a^b \liminf_{n \rar \infty} f_n(x) \de x \le \liminf_{n \rar \infty} \int_a^b f_n(x) \de x$.
+  - *Convergenza Dominata*: Siano $f_n: (a, b) \rar \bbR$ misurabili secondo lebesgue, convergenti puntualmente ($\forall x : f_n(x) \rar f_\infty(x)$) e dominate da una funzione integrabile $g: (a, b) \rar \bbR$ ($\abs{f_n(x)} \le g(x)$).
+    Allora $\int_a^b f_\infty(x) \de x = \lim_{n \rar \infty} \int_a^b f_n(x) \de x$.
+  - *Disuguaglianza di Hölder*: Dati $r, p_i \ge 1$ tali che $\sum_i \frac{1}{p_i} = \frac{1}{r}$ ed $f_i \in \cL^{p_i}$ si ha $\prod_i f_i \in \cL^r$ e vale $\norm{\prod_i f_i}_{\cL^r} \le \prod_i \norm{f_i}_{\cL^{p_i}}$.
+  - *Teorema di Approssimazione di $\cL^p$*: $p \ge 1$ ed $f \in \cL^p(a, b)$. Allora esiste una successione $\lrg{f_n} \subseteq \cC^0(a,b)$ tale che $f_n \rar^{\cL^p} f$ e $f_n \rar f$ in maniera puntualmente dominata in $\cL^p$.
+  - *Ascoli-Arzelà*: Siano $\bbX, \bbY$ spazi metrici ed $f_n: \bbX \rar \bbY$ e supponiamo che:
+    1. (Compattezza ad $x$ fisso): $\forall x \in \bbX : \exists K_x \subseteq \bbY \text{ cpt} \tc f_n(x) \in K_x \quad \forall n \in \bbN$
+    2. (Equi-continuità): $\forall \epsilon > 0 \quad \forall x \in [a,b] \quad \exists \delta > 0 \tc y \in [a,b] \cap (x-\delta, x+\delta) \implies \abs{f_n(x) - f_n(y)} \le \epsilon \quad \forall n \in \bbN$
+
+    Allora se $\bbX$ è compatto esiste $f_{n_k} \rar f_\infty$ uniformemente in $\bbX$.
+    Se $\bbX$ è unione numerabile di compatti si ha invece convergenza uniforme sui compatti.
 
