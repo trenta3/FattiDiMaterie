@@ -382,6 +382,112 @@
   - (*Riscrittura di (ELE) con slope function*) $L_{px} + L_{ps} p + L_{pp} (p_x + p_s p) = L_s$.
   - (*Weierstrass representation formula (WRF)*) Sia $v: [a, b] \rar \bbR$ di classe $\cC^1$ con le stesse DBC di $u_0(x)$.
     Allora $F(v) - F(u_0) = \int_a^b E(x, v(x), p(x, v(x)), \dot v(x)) \de x$, dove $E(x, s, p, q) = L(x, s, q) - L(x, s, p) - (q - p) L_p(x, s, p)$.
+* Moltiplicatori di Lagrange e problemi di minimo con vincoli (pp. 194-199)
+  *Setting*: Problemi di minimo vincolato del tipo $\min\lrg{F(u) \mid u \in \text{ certa classe con o senza BC }, G(u) = G_0}$ dove $G$ è un altro funzionale.
+  - (*Moltiplicatori di Lagrange*) Sotto ipotesi ragionevoli (esistenza delle variazioni prime), se $u_0$ è un punto di minimo, allora vale almeno una delle seguenti due possibilità:
+    1. $\delta G(u_0, v) = 0 \quad \forall v \in \cC^\infty_c$ (o per ogni funzione ammissibile)
+    2. $\exists \lambda \in \bbR$ tale che $\delta F(u_0, v) = \lambda \delta G(u_0, v)$ per ogni $v \in \cC^\infty_c$ (o ammissibile)
+      
+    Notiamo che $\lambda$ è il moltiplicatore di lagrange ed *è lo stesso per ogni $v$ ammissibile*.
+
+    /Equivalente alla due/: La (2) equivale a dire che $\delta \Phi(u_0, v) = 0$ per ogni $v$ ammissibile, dove $\Phi(u) = F(u) - \lambda G(u)$.
+  - (*Lemma sui minimi e molt. di Lagrange*) Se $u_0$ è punto stazionario e di minimo per $\Phi(u)$, allora $u_0$ è punto di minimo per il problema vincolato.
+** TODO Scrivere la formula nel caso di più vincoli
+** TODO Domanda: Quando vale che se il problema "libero" ha minimo, allora ha minimo anche il problema con vincolo?
+* Funzionali integrali con integrali multipli (pp. 200-204)
+  /Morale sui vincoli al bordo/: Le condizioni al bordo, per essere viste, devono essere assegnate su insiemi di dimensione almeno $n-1$.
+  Inoltre se metto DBC su un po' del bordo, sul resto mi appaiono delle condizioni di von Neumann sulla derivata normale nulla.
+
+  /FLCV/: Vale con la stessa dimostrazione.
+** Metodo indiretto
+   $F(u) := \int_\Omega L(x, u(x), \nabla u(x)) \de x$ dove $\nabla u$ è un vettore, ovvero $L(x, s, p_1, \ldots, p_n)$.
+   - (*Prima forma integrale*) $\delta F(u_0, v) = \int_\Omega L_s(x, u_0, \nabla u_0) v + \scal{\nabla_p L(x, u_0, \nabla u_0), \nabla v}$
+     dove $\nabla_p L$ è $\nabla L$ rispetto alle variabili $p_1, \ldots, p_n$.
+   - (*Seconda forma integrale*) Integrando per parti la prima, e supponendo che $v \equiv 0$ su $\partial\Omega$ si ottiene
+     $\delta F(u_0, v) = \int_\Omega L_s(x, u_0, \nabla u_0) v - \div (\nabla_p L(x, u_0, \nabla u_0)) v$
+   - (*ELE differenziale*) Con FLCV dalla seconda forma integrale si ha: $\div (\nabla_p L(x, u_0, \nabla u_0)) = L_s (x, u_0, \nabla u_0)$.
+     Le eventuali NBC nate on the road sono del tipo $\nabla_p L (x, u_0, \nabla u_0) = 0$ sugli opportuni pezzi di $\partial\Omega$.
+* Compattezza e semicontinuità parte II (pp. 205-229)
+  - (*Convergenza debole in $\cL^p$*) Sia $f_n \subseteq \cL^p(a, b)$ una successione e sia $f_\infty \in \cL^p$ un'altra funzione.
+    Diciamo che $f_n \rhu^{\cL^p} f_\infty$ se si ha $\int_a^b f_n(x) \phi(x) \de x \rar \int_a^b f_\infty(x) \phi(x) \de x$ per ogni $\phi \in \cL^q$ con $\frac{1}{p} + \frac{1}{q} = 1$. (e vale anche se $p=1, q=\infty$).
+
+    Osservazione: Più aumento $p$, più aumento le funzioni test ammissibili, quindi convergere debolmente diventa più difficile: la convergenza più debole di tutte è la debole $\cL^1$.
+  - (*Semicontinuità dei funzionali integrali convessi*) Sia $\phi: \bbR \rar \bbR$ convessa e $v_n \rhu^{\cL^1} v$.
+    Allora $\liminf_n \int_a^b \phi(v_n(x)) \de x \ge \int_a^b \phi(v_\infty(x)) \de x$.
+  - (*Guadagno della convergenza debole*) Sia $f_n$ una successione in $\cL^p(a, b)$. Supponiamo che
+    1. $\norm{f_n}_p \le M$ (la successione è limitata in $\cL^p$)
+    2. $f_n \rhu^{\cL^1} f_\infty$ (ha limite debole in $\cL^1$)
+    
+    Allora $f_\infty \in \cL^p$ e $f_n \rhu^{\cL^p} f_\infty$.
+  - (*Compattezza per convergenza debole limitata degli $\cL^p$*) Basandosi su $\cL^2$ si mostra che ogni successione $f_n$ limitata in $\cL^p$ con $p \ge 2$ ha una sottosuccessione che converge debole $\cL^1$, ma anche debole $\cL^p$, ad una certa $f_\infty$.
+  - (*Crescita superlineare*) $\phi: \bbR \rar \bbR$ si dice avere crescita superlineare se $\lim_{p \rar +\infty} \frac{\phi(p)}{p} = \lim_{p \rar -\infty} \frac{\phi(p)}{\abs{p}} = +\infty$.
+  - (*Crescita almeno quadratica*) $\phi: \bbR \rar \bbR$ si dice avere crescita almeno quadratica se $\liminf_{p \rar \pm\infty} \frac{\phi(p)}{p^2} > 0$.
+    
+    /Osservazione/: $\phi$ ha crescita almeno quadratica se e solo se $\exists A, B$ reali con $A > 0$ tali che $\phi(p) \ge A p^2 - B$ per ogni $p \in \bbR$.
+
+    /Fatto vero (non banale)/: Se $\phi$ ha crescita superlineare e $\int_a^b \phi(f_n(x)) \de x \le M$ allora $f_n$ ammette una sottosuccessione convergente debole in $\cL^1$.
+
+    /Fatto vero (più semplice)/: Vale la stessa cosa se si suppone crescita almeno quadratica (ci si basa su $\cL^2$ e si ottiene convergenza $\cL^2$ debole).
+  - (*Esempio: Semicontinuità*) Abbiamo $F(u) = \int_a^b f(x, u_n(x)) \abs{\dot u_n}^p$ con $f \ge 0$, continua e $p > 1$.
+    Vogliamo mostrare che è SCI rispetto alla convergenza debole in $H^p$.
+    1. Scriviamo $F(u_n) = \int_a^b f(x, u_\infty) \abs{\dot u_n}^p + \int_a^b (f(x, u_n) - f(x, u_\infty)) \abs{\dot u_n}^p$.
+    2. Il secondo termine tende a zero: $\int_a^b \abs{(f(x, u_n) - f(x, u_\infty))} \abs{\dot u_n}^p \le \norm{f(x, u_n) - f(x, u_\infty)}_{\cL^\infty} \cdot \int_a^b \abs{\dot u_n}^p$ ed il primo termine tende a zero (??), mentre il secondo è limitato per convergenza debole delle derivate.
+    3. Per il primo termine si ha: $\int_a^b f(x, u_\infty(x)) \abs{\dot u_n(x)}^p = \int_a^b f(x, u_\infty(x)) \abs{\dot u_\infty + (\dot u_n - \dot u_\infty)}^p$ ...
+       Verosimilmente vale la disuguaglianza $\abs{y}^p - \abs{x}^p \ge p \abs{x}^{p-1} (y - x)$ per ogni $p > 1$ e si può usare per ottenere che il secondo termine va a zero per convergenza debole.
+  - (*Teorema sull'estensione per rilassamento*) Dato $F(u) = \int_a^b \psi(\dot u) \de x$ lo vogliamo estendere a tutto $\cL^2$.
+    Supponiamo che valga:
+    1. $\psi$ è convessa
+    2. $\psi$ ha crescita superlineare
+       
+    Allora $\hat F(u) = \int_a^b \psi(\dot u) \de x$ se $u$ è in uno spazio di Sobolev opportuno e $+\infty$ altrimenti è il rilassamento di $F$ rispetto alla metrica di $\cL^2$ (ma nulla cambia per $\cL^{27}$).
+  - (*Densità in energia delle funzioni affini a tratti per $\hat F$*) Detto $\hat F$ come prima, le seguenti classi di funzioni sono dense in energia per $\hat F$: affini a tratti, $\cC^1$, $\cC^\infty$.
+  - (*Inviluppo convesso*) Data $\psi: \bbR \rar \bbR$ una funzione qualunque, definiamo il suo inviluppo convesso come $\psi^{**}(x) = \sup\lrg{g(x) \mid g \text{ convessa }, g(y) \le \psi(y) \forall y \in \bbR}$.
+    
+    *Proprietà dell'inviluppo convesso*:
+    1. $\psi^{**}$ è convessa
+    2. $\psi^{**} \le \psi$
+    3. Il sup nella definizione è un max
+    4. Posso definire equivalentemente $\psi^{**}(x) = sup \lrg{\text{rette che stanno sotto } \psi}$
+    5. $\psi^{**}$ è l'inf di tutti i segmenti che congiungono due punti del grafico, uno prima ed uno dopo $x$.
+  - (*Altra estensione per rilassamento*) Sia dato un funzionale del tipo $F(u) = \int_a^b \psi(\dot u) \de x$ se $u \in \cC^1$ e $+\infty$ altrimenti in $\cL^2$.
+    Supponiamo che $\psi$ sia a crescita superlineare.
+    Allora il rilassato è $\hat F(u) = \int_a^b \psi^{**}(\dot u) \de x$ se $u \in$ Sobolev opportuno altrimenti $+\infty$.
+** TODO Generalizzare l'esempio di pag. 213 utilizzando crescita almeno quadratica
+* Geodetiche (pp. 230-235)
+  Dati due punti in un certo spazio ci chiediamo quale sia la curva di lunghezza minore tra i due.
+  - (*Spazio eucliedeo*) È l'unica retta congiungente.
+  - (*Cilindro*) Se si sviluppa sul piano sono le rette congiungenti il primo punto con un rappresentante del secondo.
+    Una è però più corta delle altre.
+  - (*Sfera*) La curva ottimale ha $\theta$ costante, ovvero è un meridiano.
+** Casi generali
+   Il funzionale di minimo delle geodetiche è lineare e ciò non è buono.
+   Vediamo però che è collegato ad uno quadratico.
+ 
+   Sia $F_p(\gamma) = \int_a^b \norm{\dot \gamma(t)}^p \de t$.
+   Allora si ha $F_1(\gamma) \le \sqrt{b - a} F_2(\gamma)^\frac{1}{2}$ dove la disuguaglianza si ottiene da Hölder e pertanto vale $=$ se e solo se $\norm{\dot \gamma(t)} \equiv c$ costante.
+   In particolare, fissati $\gamma(a) = A, \gamma(b) = B$ vale che $\min F_1 \le \sqrt{b-a} (\min F_2)^{\frac{1}{2}}$.
+
+   I due minimi hanno il segno di uguale se vale il seguente lemma:
+   *Lemma*: Data $gamma: [a, b] \rar \bbR^n$ di classe $\cC^1$, esiste una riparametrizzazione $\psi: [a, b] \rar [a, b]$ monotona e surgettiva e abbastanza regolare tale che $\gamma(\psi(t)) = \gamma_2$ ha la stessa lunghezza e $\norm{\dot \gamma_2(t)} \equiv c$ costante.
+   /Osserviamo che il lemma non è banale/: Esiste una curva $\cC^\infty$ che percorre un quadrato, la sua riparametrizzazione è lipschitz ma non $\cC^1$.
+* Problemi con ostacolo (pp. 236-241)
+  Ostacolo ovvero vincolo del tipo disuguaglianza sulla funzione o su alcuni suoi punti.
+
+  /Morale/: Gli ostacoli sulla funzione si comportano bene nel metodo diretto perché passano al limite rispetto alla convergenza uniforme.
+  Gli ostacoli sulla derivata sono più difficili da passare al limite, ma si può usare il trucco dell'integrale.
+  
+  - (*Passaggio al limite degli ostacoli*): Prendiamo $\psi: \bbR \rar \bbR$ $\cC^1$ e convessa tale che $\psi(x) > 0$ per $x < 0$ e $\psi(x) = 0$ per $x \ge 0$.
+    Supponiamo ora che le $v_n \rhu^{\cL^2} v_\infty$ e che soddisfino un vincolo del tipo $v_n(x) \ge f(x)$ per ogni $x \in [a, b]$ con $f$ continua.
+    Allora vale che $\int_a^b \psi(v_n(x) - f(x)) \de x = 0$ e, essendo $\psi$ convessa, per i teoremi di SCI vale che $\int_a^b \psi(v_\infty(x) - f(x)) \de x = 0$, ovvero $v_\infty(x) \ge f(x)$ quasi ovunque.
+  - (*ELE con ostacolo*) Se abbiamo un ostacolo del tipo $u(x) \ge \phi(x)$ allora si ottiene (ELE) come $L_s(x, u, \dot u) - [L_p(x, u, \dot u)]' \ge 0$.
+    Ovvero detto $K = \lrg{ x \mid u(x) = \phi(x)}$ la regione di contatto si ha:
+    1. (ELE) con $\le$ vale per tutti gli $x \in [a, b]$
+    2. (ELE) con $=$ vale per ogni $x \in [a, b] \setminus K$
+  - (*Regolarità*) Se $\phi \in \cC^1$, il contatto è $\cC^1$. In generale non si può dire di più, nel senso che ci sono casi in cui il minimo non è $\cC^2$ ma $\phi$ è $\cC^\infty$.
+* Effetti di linearizzazione (pp. 242-)
+  Trattiamo problemi con parametri piccoli e ne facciamo il limite al tendere del parametro a zero.
+  
+  /Metodo bovino/: Si cerca di sostituire il parametro $\epsilon$ dentro alla lagrangiana e si guessa la gamma convergenza alla cosa che ha $\epsilon = 0$ con equicoercività.
 * Spazi con nozione di convergenza
   - (*Definizione*) Dato un insieme $\bbX$, una nozione di convergenza in $\bbX$ significa dichiarare le successioni convergenti ed i relativi limiti, ovvero significa dare un sottoinsieme di $\Seq(\bbX) \times \bbX$.
   - (*Compattezza*) $K \subseteq \bbX$ si dice compatto per successioni se $\forall \lrq{x_n}_n \subseteq K$, $\exists x_\infty \in K \tc x_n \rar x_\infty$.
@@ -441,7 +547,11 @@
 
     Allora se $\bbX$ è compatto esiste $f_{n_k} \rar f_\infty$ uniformemente in $\bbX$.
     Se $\bbX$ è unione numerabile di compatti si ha invece convergenza uniforme sui compatti.
-
+  - *Gauss-Green*: $\int_\Omega f \cdot \div \vec E = \int_{\partial\Omega} f \cdot \scal{\vec E, \vec n} \de \sigma - \int_\Omega \scal{\nabla f, \vec E}$
+    dove $f: \Omega \rar \bbR$ ed $\vec E: \Omega \rar \bbR^n$ ed $\vec n$ è la normale esterna.
+  - *Lipschitz e Hölder*: Se $f: [a, b] \rar \bbR$ è continua e $\abs{f(x)}^\alpha$ è lipschitziana per un qualche $\alpha > 1$, allora $f$ è $\frac{1}{\alpha}$ Hölderiana.
+    
+    Questo si può utilizzare per il bootstrapping: supponiamo di avere $(4 \dot u^3)' = 3 u^2$. Allora si ha $\dot u \in \cC^0 \implies u$ è lipschitz $\implies 3u^2$ è lipschitz $\implies$ lo è la sua primitiva, ovvero $4 \dot u^3$ è lipschitz $\implies \dot u$ è $\frac{1}{3}$ Hölderiana.
 * Fatti elementari ma che si scordano
   - (*superadditività del liminf*) $\liminf_n (A_n + B_n) \ge \liminf_n A_n + \liminf_n B_n$. Se una delle due ha limite allora vale l'uguale.
   - (*subadditività del limsup*) $\limsup_n (A_n + B_n) \le \limsup_n A_n + \limsup_n B_n$. Se una delle due ha limite allora vale l'uguale.
@@ -449,3 +559,5 @@
     C'è un legame generale tra le equazioni di Riccati e le equazioni lineari di ordine due del tipo $\ddot w = \alpha(x) \dot w + \beta(x) w$.
     Il legame è dato dalla ricerca di soluzioni positive dell'equazione al secondo ordine del tipo $w(x) = e^{-v(x)}$.
     Data una di queste e posto $z(x) = \dot v(x)$ essa risolve una riccati del tipo $\dot z = z^2 + \alpha(x) z + \beta(x)$.
+* Particolari equazioni differenziali
+** TODO Scrivere la soluzioni di \ddot u = \lambda u.
