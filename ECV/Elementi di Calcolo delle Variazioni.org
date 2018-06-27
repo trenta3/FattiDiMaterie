@@ -267,7 +267,121 @@
   - (*Lemma fondamentale per il $\Gamma-\limsup$*) $\forall x \in \bbX, \forall r, \epsilon > 0$, $\exists i \in \bbN$ tale che $\forall j \ge i$ si ha $\exists y$ tale che $d(x, y) \le r$ e $f_j(y) \le \Gamma-\limsup_n f_n(x) + \epsilon$.
     Ovvero definitivamente c'è un punto vicino ad $x$ che è poco più basso del $\Gamma-\limsup$.
 ** TODO Vedere l'esempio di pagina 145 e generalizzare
-* Tipologie di minimo (pp. 147-)
+* Tipologie di minimo e variazione seconda (pp. 147-169)
+  - (*Definizioni di tipi di minimo*) Il setting è quello di un funzionale integrale $F(u)$ con DBC.
+    1. *GM* (Global Minimum) Se $F(u) \ge F(u_0)$ per ogni $u \in \bbX$
+    2. *WLM* (Weak Local Minimum) Se $u_0$ è un punto di minimo locale rispetto alla metrica $\cC^1$, ovvero $\exists r > 0$ tale che $F(u) \ge F(u_0)$ per ogni $u \in \bbX$ tale che $\norm{u - u_0}_\infty + \norm{\dot u - \dot u_0}_\infty \le r$.
+    3. *SLM* (Strong Local Mimimum) Se è come sopra ma rispetto alla metrica $\cC^0$, ovvero se $\exists r > 0 \tc F(u) \ge F(u_0)$ per ogni $u \in \bbX$ tale che $\norm{u - u_0}_\infty \le r$
+    4. *DLM* (Directional Local Minimum) Se la funzione $\phi(t) = F(u_0 + tv)$ ha minimo locale per $t = 0$ per ogni $v \in \cC^1$ nulla al bordo.
+  - (*Implicazioni tra i minimi*) GM $\implies$ SLM $\implies$ WLM $\implies$ DLM. Tutte le implicazioni inverse *non valgono*.
+  - (*Variazione Seconda*) Costruiamo $\psi(t) = F(u_0 + tv)$ e definiamo la variazione seconda del funzionale $\delta^2 F(u_0, v) = \psi''(0)$.
+  - (*DLM $\implies \delta^2 \ge 0$*) Se $u_0$ è DLM allora $\delta^2 F(u_0, v) \ge 0 \quad \forall v \in \cC^1$ nulle al bordo, ammesso che esista.
+    Inoltre, fissato $u_0$, $v \mapsto \delta F(u_0, v)$ è lineare e $v \mapsto \delta^2 F(u_0, v)$ è quadratica, analoga alla forma quadratica della matrice Hessiana.
+** Funzionali quadratici ed implicazioni
+   Il setting in cui ci mettiamo adesso è quello dei funzionali quadratici, ovvero cose del tipo $Q(v) := \int_a^b A(x) v^2 + 2 B(x) v \dot v + C(x) \dot v^2 \de x$.
+   Sui coefficienti $A, B, C$ si possono dare varie ipotesi ($\cL^\infty$ è sufficiente per dare senso a $Q(v)$ per ogni $v \in H^1$).
+   Noi considereremo sempre funzioni $v$ nulle al bordo.
+
+   Nel seguito $L$ sta per Legendre, $J$ sta per Jacobi, $R$ sta per Riccati.
+
+   - (*Funzionali non-negativi*) Un funzionale quadratico si dice non-negativo o semidefinito positivo se vale $\forall v \in V \quad Q(v) \ge 0$, dove è indifferente se $V$ è uno qualsiasi dei seguenti: $\cC^\infty_c, \cC^1, P\cC^1, H^1$ (tutte nulle al bordo).
+
+     /Condizioni necessarie per non-negatività/: (L) + [(L^{+}) \implies (J)]
+     
+     *Nel dettaglio*: 
+     1. Se $C$ è continuo, $A, B$ limitati allora vale (L).
+     2. Se i coefficienti sono $\cC^1$ allora (L^{+}) $\implies$ (J).
+
+     /Condizioni sufficienti per non-negatività/: (L^{+}) + (J^{+})
+
+     *Nel dettaglio* si ha (L^{+}) + (J^{+}) \implies (J^{++}) \implies (R) \implies $Q \ge 0$.
+     
+     /Condizione mega-sufficiente/: Se vale $A(x) C(x) \ge [B(x)]^2$ e $C(x) \ge 0$ per ogni $x \in [a, b]$, allora $Q(v) \ge 0$ per ogni $v \in \cC^\infty$ anche senza supporto compatto.
+
+   - (*JDE*) Si intende $(C \dot v + B v)' = A v + B \dot v$ che è (ELE) di $Q(v)$.
+     Se i coefficienti sono di classe $\cC^1$ e vale (L^{+}) posso fare i conti e portare in forma normale ottenendo l'equazione $\ddot v = - \frac{\dot C}{C} \dot v + \frac{A - \dot B}{C} v$.
+     A questo punto valgono tutti i teoremi (esistenza, regolarità, unicità) di Analisi 2.
+   - (*Punti coniugati*) Un punto $c$ si dice punto coniugato di $a$ (estremo dell'intervallo) se la soluzione del problema di Cauchy (JDE) con $u(a) = 0, \dot u(a) = 1$ si annulla in $c$.
+     (La condizione $\dot u(a) = \alpha \neq 0$ porterebbe ad un multiplo della stessa soluzione e la definizione di punto coniugato non dipende da ciò).
+
+     Allo stesso modo si definiscono punti coniugati di $b$ risolvendo (JDE) con $u(b) = 0, \dot u(b) = 1$.
+   - (*Reciprocità dei punti coniugati*) Sotto l'ipotesi (L^{+}) sono equivalenti:
+     1. (J), ovvero Non esistono punti coniugati di $a$ nell'intervallo $(a, b)$
+     2. Non esistono punti coniugati di *$b$* nell'intervallo $(a, b)$
+     3. L'unica soluzione di (JDE) che si annulla almeno due volte nell'intervallo $(a, b)$ è quella identicamente nulla
+   - (*Lemma di oscillazione*) Data un'equazione lineare del tipo $\ddot w = \alpha(x) \dot w + \beta(x) w$. Siano $w_1, w_2$ due soluzioni non identicamente nulle e non una multipla dell'altra.
+     Allora tra ogni coppia di zeri di $w_1$ esiste uno zero (e quindi anche uno solo) di $w_2$.
+   - (*Stima dall'alto per funzionali quadratici*) $\abs{Q(v)} \le M \int_a^b \dot v^2(x) \de x$ per ogni $v \in \cC^\infty_c(a, b)$.
+     Dove $M$ dipende dalle norme infinito di $A, B, C$ e diventa piccolo a piacere quando le norme diventano piccole.
+     In particolare $M = (\norm{C}_\infty + \norm{B}_\infty) + (\norm{A}_\infty + \norm{B}_\infty) (b - a)^2$.
+   - (*Stima dal basso per un funzionale quadratico*) Sia $Q(v)$ un funzionale quadratico che soddisfa (L^{+}) e (J^{+}). Allora esiste $\epsilon_0 > 0$ tale che $Q(v) \ge \epsilon_0 \int_a^b \dot v(x)^2 \de x$ per ogni $v \in \cC^\infty_c(a, b)$.
+   - (*Funzionali non-negativi vicini*) Sia $Q_0(v)$ funzionale quadratico con coefficienti $A_0, B_0, C_0$ che soddisfa $(L^+), (J^+)$.
+     Sia $Q(v)$ un funzionale quadratico con coefficienti $A, B, C$ vicini in norma $\cC^0$ ad $A_0, B_0, C_0$.
+     Se $\norm{A - A_0}_\cC^0, \norm{B - B_0}_\cC^0, \norm{C - C_0}_\cC^0$ sono abbastanza piccole, allora $Q(v) \ge 0$ per ogni $v \in \cC^\infty_c$.
+*** Diagramma delle implicazioni
+   Legenda per leggere il diagramma seguente:
+   - (E) :: $u_0$ soddisfa (ELE).
+   - (L) :: $C(x) \ge 0$ per ogni $x \in [a, b]$.
+   - (L^{+}) :: $C(x) > 0$ per ogni $x \in [a, b]$ (se $C(x)$ è continuo è equivalente a dire $C(x) \ge m > 0$).
+   - (J) :: Non esistono punti coniugati di $a$ nell'intervallo $(a, b)$.
+   - (J^{+}) :: Non esistono punti coniugati di $a$ nell'intervallo $(a, b]$, ovvero (J^{+}) = (J) + $b$ non è pto coniugato.
+   - (J^{++}) :: Esiste una soluzione $w$ di (JDE) tale che $w(x) > 0$ per ogni $x \in [a, b]$.
+   - (R) :: Esiste $z: [a, b] \rar \bbR$ $\cC^1$ tale che (RDE): $\dot z = \frac{[z + B]^2}{C} - A$ per ogni $x \in [a, b]$.
+   - (W) :: $E(x, u_0(x), \dot u_0(x), q) \ge 0 \quad \forall x \in [a, b], \forall q \in \bbR$ (vedere in Calibrazioni per l'Eccesso di Weierstrass)
+   - (W^{+}) :: $\exists \delta > 0$ tale che $E(x, s, p, q) \ge 0$ $\forall x \in [a, b], \forall q \in \bbR, \forall (s, p) \in \bbR^2$ tali che $\abs{s - u_0(x)} \le \delta$ e $\abs{p - u_0(x)} \le \delta$.
+   - (F) :: Field: Esistenza di un campo di Weierstrass
+   - (WRF) :: Weierstrass representation formula
+
+   \begin{array}{ccccccc}
+      &          & (E) + (L^+) + (J^+) + (W^+) &          & (E) + (L^+) + (J^+) &          &                                  \\
+      &          & \Downarrow                  &          & \Downarrow          &          &                                  \\
+   GM & \implies & SLM                         & \implies & WLM                 & \implies & DLM                              \\
+      &          & \Downarrow                  &          &                     &          & \Downarrow                       \\
+      &          & (W)                         &          &                     &          & (E) + (L) + [(L^+) \implies (J)] \\
+   \end{array}
+   
+   \begin{align*}
+   (L^+) + (J^+) \implies (J^{++}) \implies (R) \implies Q \ge 0 \\
+   (E) + (L^+) + (J^+) \implies (F) \implies (WRF) \\
+   (W) + (WRF) \implies SLM \\
+   L \text{ convessa in } p \implies (W) \\
+   \end{align*}
+
+** TODO Inserire esempi di non valgono le implicazioni inverse p. 148 (Magari tornano utili negli esercizi)
+* Calibrazioni (pp. 170-193)
+  - (*Null lagrangian*) Sono lagrangiane del tipo $\hat L(x, s, p) = A(x, s) p + B(x, s)$ con $A, B \cC^1$ e verificano $A_x(x, s) = B_s(x, s)$.
+    Per teoremi di analisi due vale, sotto ipotesi di semplice connessione della zona di definizione, che esiste $V(x, s)$ tale che $A(x, s) = V_s(x, s)$ e $B(x, s) = V_x(x, s)$.
+  - (*Calibrazione via null lagrangian*) Consideriamo un problema di minimo con DBC e lagrangiana $L(x, s, p)$ e sia $u_0: [a, b] \rar \bbR$ un candidato punto di minimo.
+    Supponiamo che
+    1. Esista $\hat L(x, s, p) = A(x, s) p + B(x, s)$ null lagrangian (ovvero $A_x(x, s) = B_s(x, s)$)
+    2. Valga $L(x, s, p) \ge \hat L(x, s, p)$ $\forall (x, s, p) \in [a, b] \times \bbR^2$
+    3. Valga $L(x, u_0(x), \dot u_0(x)) = \hat L(x, u_0(x), \dot u_0(x)) \quad \forall x \in [a, b]$
+
+    Allora $u_0(x)$ è punto di minimo.
+    Inoltre i punti di minimo sono tutti e soli quelli che verificano l'uguaglianza $L(x, v_0(x), \dot v_0(x)) = \hat L(x, v_0(x), \dot v_0(x))$ per ogni $x \in [a, b]$.
+  - (*Osservazioni sulla generalità*) Sia quando $L$ è quadratica, sia quando $L$ è convessa in $(s, p)$ si possono riottenere i teoremi che avevamo precedentemente.
+  - (*Value function*) Consideriamo il problema di minimo $V(x, s) := \min \lrg{\int_a^x L(t, u(t), \dot u(t)) \de t \mid u(a) = A, u(x) = S, u \in \cC^1[a, x]}$, e voglio trovare $V(b, B)$ per risolvere un problema di minimo classico.
+  - (*Calibrazione via Value Function*) Supponiamo che $V(x, s)$ sia di classe $\cC^1$ (questo è da controllare, non è per nulla scontato).
+    Allora $\hat L(x, s, p) = V_s(x, s) p + V_x(x, s)$ verifica le ipotesi del teorema di calibrazione.
+
+    *Botta di culo infinita*: Se sono così bravo da guessare il punto di minimo per ogni soluzione finale $u(x) = s$, posso calcolare quello che dovrebbe essere $V(x, s)$ e verificare a mano che soddisfa la disuguaglianza (b) e l'uguaglianza (c) nel teorema di calibrazione.
+  - (*Eccesso di Weierstrass*) Data una lagrangiana $L(x, s, p)$ definiamo eccesso di Weierstrass come $E(x, s, p, q) = L(x, s, q) - L(x, s, p) - (q - p) L_p(x, s, p)$.
+    È una specie di differenza tra $L$ ed il suo sviluppo al primo ordine in $p$.
+
+    Se $L$ è convessa in $p$ allora $E \ge 0$.
+  - (*Campo di Weierstrass (F)*) Si dice che un funzionale ha un campo di Weierstrass se $\exists \epsilon_0 > 0$ ed $\exists u: [-\epsilon_0, \epsilon_0] \times [a, b] \rar \bbR$ tale che:
+    1. $u(0, x) = u_0(x)$ per ogni $x \in [a, b]$
+    2. Per ogni $\epsilon \in [-\epsilon_0, \epsilon_0]$ la funzione $x \mapsto u(\epsilon, x)$ risolve (ELE)
+    3. Per ogni $x \in [a, b]$, la funzione $\epsilon \mapsto u(\epsilon, x)$ è strettamente crescente
+
+    /Brutalmente/: $u_0(x)$ è immersa in una famiglia di soluzioni di (ELE), ovviamente con DBC diverse.
+  - (*Slope function*) Dato un campo di Weierstrass si definisce la sua slope function $p : \Omega \rar \bbR$ nel seguente modo: dato $(x, s)$ si prende $\epsilon \in [-\epsilon_0, \epsilon_0]$ tale che $u(\epsilon, x) = s$ e poi si pone $p(x, s) = u_x(\epsilon, x)$.
+    La slope function soddisfa l'equazione $p(x, u(\epsilon, x)) = u_x(\epsilon, x) \quad \forall (\epsilon, x) \in [-\epsilon_0, \epsilon_0] \times [a, b]$.
+    
+    In particolare se risolvo $\dot u = p(x, u)$ trovo proprio le funzioni $u(\epsilon, x)$.
+  - (*Riscrittura di (ELE) con slope function*) $L_{px} + L_{ps} p + L_{pp} (p_x + p_s p) = L_s$.
+  - (*Weierstrass representation formula (WRF)*) Sia $v: [a, b] \rar \bbR$ di classe $\cC^1$ con le stesse DBC di $u_0(x)$.
+    Allora $F(v) - F(u_0) = \int_a^b E(x, v(x), p(x, v(x)), \dot v(x)) \de x$, dove $E(x, s, p, q) = L(x, s, q) - L(x, s, p) - (q - p) L_p(x, s, p)$.
 * Spazi con nozione di convergenza
   - (*Definizione*) Dato un insieme $\bbX$, una nozione di convergenza in $\bbX$ significa dichiarare le successioni convergenti ed i relativi limiti, ovvero significa dare un sottoinsieme di $\Seq(\bbX) \times \bbX$.
   - (*Compattezza*) $K \subseteq \bbX$ si dice compatto per successioni se $\forall \lrq{x_n}_n \subseteq K$, $\exists x_\infty \in K \tc x_n \rar x_\infty$.
@@ -331,3 +445,7 @@
 * Fatti elementari ma che si scordano
   - (*superadditività del liminf*) $\liminf_n (A_n + B_n) \ge \liminf_n A_n + \liminf_n B_n$. Se una delle due ha limite allora vale l'uguale.
   - (*subadditività del limsup*) $\limsup_n (A_n + B_n) \le \limsup_n A_n + \limsup_n B_n$. Se una delle due ha limite allora vale l'uguale.
+  - (*Equazioni di Riccati*) Sono equazioni differenziali del tipo $\dot z = a(x) z^2 + b(x) z + c(x)$.
+    C'è un legame generale tra le equazioni di Riccati e le equazioni lineari di ordine due del tipo $\ddot w = \alpha(x) \dot w + \beta(x) w$.
+    Il legame è dato dalla ricerca di soluzioni positive dell'equazione al secondo ordine del tipo $w(x) = e^{-v(x)}$.
+    Data una di queste e posto $z(x) = \dot v(x)$ essa risolve una riccati del tipo $\dot z = z^2 + \alpha(x) z + \beta(x)$.
