@@ -133,9 +133,141 @@
    2. Se $g$ è SCI e limitata dal basso posso usare il lemma di Fatou per avere la semicontinuità di questa parte di integrale.
 
    /Parte in $\psi$/: Se $\psi$ è convessa
-* Risoluzione Equazioni Differenziali con variazioni (pp. 97-)
-* Rilassamento
-* Gamma convergenza
+* Risoluzione Equazioni Differenziali con variazioni (pp. 97-108)
+  Supponiamo di avere il problema $\ddot u = h(u, x)$ con $u(a) = A, u(b) = B$. Notiamo che questo *non* è un problema di Cauchy classico.
+  Vogliamo studiare esistenza, unicità e regolarità della soluzione.
+
+  - (*Problema di minimo equivalente*) Possiamo trasformare questo problema come ELE del problema di minimo di $F(u) = \int_a^b \frac{(\dot u)^2}{2} + g(u, x) \de x$ dove $g(s, x) = \int_a^s h(t, x) \de t$.
+    Sfruttiamo il metodo diretto per ottenere informazioni sul problema.
+    
+    Nel caso in cui uno dei due vincoli iniziali sia con $\dot u(c) = C$ al bordo (ovvero $c = a$ oppure $c = b$) allora abbiamo due possibilità
+    1. Modifico il funzionale come $F(u) = \int_a^b \frac{1}{2} (\dot u)^2 - C \dot u + g(u, x) \de x$ e non metto la condizione, ottenendo come condizione in corso d'opera $\dot u(c) = C$
+    2. Cambio variabili e pongo $v(x) = u(x) - Cx$ e trovo che equazione risolve $v$
+       
+    Il primo metodo modifica la parte in $p$ della Lagrangiana (può portare a problemi di convessità), la seconda modifica $g$ (possibili problemi di integrazione di $h$).
+  - (*Soluzioni periodiche*) Per la ricerca di soluzioni periodiche devo, al variare di $\lambda$ periodo, minimizzare con $u(a) = u(a + \lambda)$ nell'intervallo $[a, a + \lambda]$.
+    Se ci riesco ottengo le NBC $\dot u(a) = \dot u(a + \lambda)$ e, per unicità della soluzione del problema di Cauchy, so che la soluzione è periodica.
+* Funzioni SCI e Rilassamento (pp. 109-127)
+  Tutto ciò che c'è in questa sezione suppone $(\bbX, d)$ metrico.
+  - (*Funzioni semicontinue inferiori*) Una funzione $f: \bbX \rar \bar\bbR$ si dice semicontinua inferiore se vale uno dei seguenti fatti equivalenti:
+    1. $\forall x \in \bbX \quad \liminf_{y \rar x} f(y) \ge f(x)$
+    2. Per ogni successione $x_n \rar x_\infty$ vale $\liminf_{n \rar +\infty} f(x_n) \ge f(x_\infty)$
+    3. Per ogni $M \in \bbR$ il sottolivello $\lrg{x \in \bbX : f(x) \le M}$ è chiuso
+    4. L'epigrafico di $f$ $\lrg{(x, y) \in \bbX \times \bbR \mid y \ge f(x)}$ è chiuso in $\bbX\times\bbR$
+  - (*Chiusura per sup*) Data una famiglia $\lrg{f_i}_{i \in I}$ di funzioni SCI, allora $s(x) := \sup \lrg{f_i(x) : i \in I}$ è SCI.
+  - (*Inviluppo SCI*) Data $f: \bbX \rar \bar\bbR$ si definisce /inviluppo SCI/ $\hat f(x) := \sup \lrg{g(x) \mid g \SCI, g(y) \le f(y) \forall y \in \bbX}$
+  - (*Rilassamento*) Data $f: \bbX \rar \bar\bbR$ si definisce /rilassamento/ $\bar f(x) := \inf \lrg{\liminf_{n \rar +\infty} f(x_n) \mid x_n \rar x}$
+  - (*Lemma fondamentale*) Vale $\forall x \in \bbX, \forall r, \epsilon > 0 \exists y \in \bbX \tc d(x, y) \le r$ e $f(y) \le \bar f(x) + \epsilon$
+  - (*Recovery sequence*) Una successione $x_n \rar x$ si dice recovery sequence per $f$ in $x$ se $\lim_{n \rar +\infty} f(x_n) = \bar f(x)$.
+    Si dimostra che esistono delle recovery sequence per ogni punto $x$.
+  - (*Coercività*) Una funzione $f: \bbX \rar \bar\bbR$ si dice coerciva se $\exists K \subseteq X$ compatto tale che $\inf_{x \in K} f(x) = \inf_{x \in X} f(x)$.
+  - (*Proprietà di Rilassamento ed Inviluppo SCI*)
+    1. $\forall f$ si ha $\hat f = \bar f$
+    2. $\bar f(x) \le f(x)$
+    3. $\bar f(x) = \min\lrg{\liminf_{n \rar +\infty} f(x_n) \mid x_n \rar x}$
+    4. $\bar f$ è SCI
+    5. $\forall A \subseteq \bbX$ aperto vale che $\inf_{x \in A} f(x) = \inf_{x \in A} \bar f(x)$
+    6. Se $f$ è coerciva (con compatto $K$) allora $\bar f$ ha minimo in $\bbX$ e vale $\inf_{x \in \bbX} f(x) = \min_{x \in K} \bar f(x)$.
+    7. Sia $x_n$ una successione infizzante per $f$ e supponiamo che $x_n \rar x_\infty$. Allora $x_\infty$ è un punto di minimo di $\bar f$.
+  - Se $\lrg{f(x) < M}$ è non vuoto e contenuto in un compatto allora tutte le successioni infizzanti per $f$ hanno almeno una sottosuccessione che tende ad un punto di minimo di $\bar f$.
+  - Se $\bar f$ ha un unico punto di minimo, e $\lrg{f(x) < M}$ è non vuoto e contenuto in un compatto, allora tutte le successioni infizzanti tendono (senza sottosuccessioni) al punto di minimo di $\bar f$.
+    Anzi, le successioni infizzanti di $f$ sono tutte e sole le recovery sequence del punto di minimo di $\bar f$.
+  - (*Stabilità per perturbazioni continue*) Se $\phi: \bbX \rar \bbR$ è continua allora $\bar{f + \phi} = \bar f + \phi$.
+    In generale vale solo che $\bar{f + \phi} \ge \bar f + \bar \phi$.
+  - (*Uguaglianza con il rilassato*) Vale $f = \bar f \sse f \SCI$.
+  - (*Sottoinsieme denso in energia*) Sia $f: \bbX \rar \bbR$. Un sottoinsieme $D \subseteq \bbX$ si dice /denso in energia per $f$/ se $\forall x \in \bbX: \exists \lrg{x_n} \subseteq D$ tale che $x_n \rar x$ e $f(x_n) \rar f(x)$.
+    (Se $f$ è continua allora denso in energia sse denso).
+  - (*Estensione per rilassamento*) Supponiamo di avere $f: A \rar \bar\bbR$ una funzione da $A \subseteq \bbX$ e di volerla "estendere" in un qualche senso a tutto $\bbX$.
+    Allora posso porre $\tilde f = \bar g$ dove $g(x) = f(x) \text{ se } x \in A$ e vale $+\infty$ altrimenti. 
+*** Dimostrare una disuguaglianza di funzioni da una su un denso
+    Siano $\phi, \psi: \bbX \rar \bar\bbR$ e sia $D \subseteq \bbX$.
+    Se valgono:
+    1. $\phi(x) \le \psi(x)$ per ogni $x \in D$
+    2. $D$ è denso in energia per $\psi$
+    3. $\phi$ è SCI
+      
+    Allora $\phi(x) \le \psi(x)$ $\forall x \in \bbX$.
+*** Mostrare che $g$ è il rilassato di $f$ -- Strategia 1
+    Se valgono:
+    1. *Liminf inequality*: $\forall x_n \rar x$ vale $\liminf_{n \rar +\infty} f(x_n) \ge g(x)$
+    2. *Limsup inequality*: $\forall x \in \bbX$, $\exists x_n \rar x$ tale che $\limsup_{n \rar +\infty} f(x_n) \le g(x)$ (ma basterebbe il $\liminf$)
+     
+    Allora $g = \bar f$.
+*** Mostrare che $g$ è il rilassato di $f$ -- Strategia 2
+    Date $f, g: \bbX \rar \bar\bbR$, se vale che
+    1. $g$ è SCI
+    2. $g(x) \le f(x) \quad \forall x \in \bbX$
+    3. $\exists D \subseteq \bbX$ denso in energia per $g$ tale che $\forall x \in D \quad \exists x_n \rar x \tc \limsup_{n \rar +\infty} f(x_n) \le g(x)$ (ma basterebbe il $\liminf$)
+    
+    Allora $g$ è il rilassato di $f$.
+*** Rilassato nel caso di $f$ quasi-periodica
+    Supponiamo di voler minimizzare $F(u) := \int_a^b f(\dot u) + g(u, x) \de x$ con $g$ continua.
+    Supponiamo che:
+    1. $f \ge -T$, ovvero $f$ sia limitata dal basso
+    2. $\exists x_n \rar +\infty, \exists y_n \rar -\infty : \lim_n f(x_n) = \lim_n f(y_n) = -T$ (questo succede sempre se $f$ è periodica)
+       
+    Allora il rilassato $\bar F(u) = (a-b)T + \int_a^b g(u, x) \de x$ e non si ha minimo a meno che il minimo di $\int_a^b g(u, x)$ esista e sia una spezzata con pendenze $m_i$ tali che $f(m_i) = -T$.
+
+    *Dimostrazione*:
+    1. Sappiamo che $\inf F(u) = \inf \bar F(u)$.
+    2. Per calcolare il rilassato basta calcolare quello di $R(u) := \int_a^b f(\dot u)$ (infatti l'altro pezzo è continuo ed esce).
+    3. Dico che $\bar R(u) = S(u) = \int_a^b -T = (a-b)T$. Per dimostrarlo utilizziamo la strategia 2
+    4. $S(u)$ è SCI poiché è costante, e $S(u) \le R(u)$ poiché $f(x) \ge -T$.
+    5. Consideriamo come denso in energia le funzioni affini a tratti (visto che $S$ è costante basta un denso qualunque).
+       Approssimiamo ora una retta con una spezzata vicina in norma $\cL^2$ e con coefficienti angolari in $\lrg{x_n, y_n}_n$ in modo che $f(\dot u)$ sia molto vicino a $-T$ costantemente.
+       Questo si può fare prendendo coefficienti angolari in modulo sempre più alti in modo che il limite della $f$ tenda a $-T$.
+    6. Se ci fosse un minimo $u_0$ avrei $F(u_0) = \bar F(u_0) = (a-b)T + \int_a^b g(u_0, x) \de x$.
+       Quindi $u_0$ dovrebbe essere un minimo di $g$, ovvero $g(u, x) \ge g(u_0, x)$.
+       Se $g$ *non* ammette minimo, il problema non ha minimo ed ha inf $= (a-b)T + \inf \int_a^b g(u, x) \de x$.
+       
+       Supponiamo da ora che $g$ ammetta minimo $u_0$
+    7. Sia $Q = \int_a^b g(u_0, x)$: allora per ogni altra funzione si ha $F(u) \ge Q + \int_a^b f(\dot u)$ ma la parte in $f$ ha minimo solo sulle spezzate con pendenze $m_i$ tali che $f(m_i) = -T$.
+       Quindi si hanno i due casi:
+       - *Esiste un minimo* se nella classe in cui vogliamo minimizzare esiste una spezzata di rette con coefficienti angolari in $f^{-1}(-T)$ tale che essa è anche un minimo di $\int_a^b g(u_0, x)$.
+       - *Non esiste il minimo* se non vale la condizione di cui sopra. In questo caso l'inf è $(a-b)T + \inf \int_a^b g(u, x) \de x$ che si ottiene approssimando con spezzate di pendenze opportune l'inf di $g$.
+* Gamma convergenza (pp. 128-146)
+  Anche in questa sezione supponiamo $(\bbX, d)$ metrico. Dove compare $f_\infty$ e non è specificato si intende che esso è il $\Gamma-\liminf$ e se compare $f_\infty^+$ esso è il $\Gamma-\limsup$.
+  - (*Definizione di \Gamma-convergenza*) Data $f_n: \bbX \rar \bar\bbR$ successione di funzioni, essa \Gamma-converge ad $f_\infty: \bbX \rar \bar\bbR$ se valgono:
+    1. (*Liminf inequality*) $\forall x_n \rar x_\infty \in \bbX$ vale $\liminf_{n \rar +\infty} f_n(x_n) \ge f_\infty(x_\infty)$.
+    2. (*Limsup inequality*) $\forall x \in \bbX$ $\exists x_n \rar x$ tale che $\limsup_{n \rar +\infty} f_n(x_n) \le f_\infty(x_\infty)$.
+       In questa in realtà vale il limite.
+  - (*Definizione di Recovery sequence*) Le successioni $x_n \rar x$ per cui vale la limsup inequality si dicono *recovery sequence* per $x$.
+  - (*Rilassato come \Gamma-limite*) Se $f_n(x) = f(x) \quad \forall n$ allora $f_n \rar^\Gamma \bar f$.
+  - (*Convergenza uniforme sui compatti e semicontinuità implica \Gamma-limite*) Supponiamo che $f_n \rar f_\infty$ unif sui compatti di $\bbX$ e che $f_\infty$ sia SCI.
+    Allora $f_n \rar^\Gamma f_\infty$.
+  - (*Unicità del \Gamma-limite*) Viene dal fatto che se esiste coincide con il $\Gamma-\liminf$ che ha una definizione come formula rispetto alle $f_n$.
+  - (*Stabilità per perturbazioni continue*) Siano $f_n: \bbX \rar \bar\bbR$ e $g: \bbX \rar \bar\bbR$ continua.
+    Allora $\Gamma-\lim_{n \rar +\infty} \lrq{f_n(x) + g(x)} = \lrq{\Gamma-\lim_{n \rar +\infty} f_n(x)} + g(x)$.
+
+    *Osservazione 1*: Per la liminf inequality basta $g$ SCI e per la limsup inequality basta $g$ SCS.
+    
+    *Osservazione 2*: Ciò rimane vero se sostituisco $g$ fissa con una successione di funzioni continue $g_n \rar g_\infty$ uniformemente sui compatti.
+  - (*$\Gamma-\liminf$ e $\Gamma-\limsup$*) Data $f_n : \bbX \rar \bar\bbR$ si possono sempre definire:
+    1. $\Gamma-\liminf_n f_n(x) := \inf\lrg{\liminf_{n \rar +\infty} f_n(x_n) \mid x_n \rar x}$
+    2. $\Gamma-\limsup_n f_n(x) := \inf\lrg{\limsup_{n \rar +\infty} f_n(x_n) \mid x_n \rar x}$
+
+    Essi soddisfano $\Gamma-\liminf_n f_n \le \Gamma-\limsup_n f_n$ e coincidono se e solo se esiste il \Gamma-limite.
+  - (*Lemma fondamentale per $\Gamma-\liminf$*) $\forall x \in \bbX, \forall i \in \bbN, \forall r, \epsilon > 0 \quad \exists j \in \bbN, \exists y \in \bbX$ tali che $j > i$, $d(x, y) \le r$, $f_j(y) \le \Gamma-\liminf_n f_n(x) + \epsilon$.
+    Ovvero frequentemente c'è un punto vicino ad $x$ che è poco più basso del $\Gamma-\liminf$.
+  - (*$\Gamma-\liminf$ di una sottosuccessione*) Sia $k_n \rar +\infty$ successione crescente di naturali e sia $x_n \rar x_\infty$.
+    Allora $\liminf_{n \rar +\infty} f_{k_n}(x_n) \ge f_\infty(x_\infty)$ (ovvero è come dire che il $\Gamma-\liminf$ si una successione è $\ge$).
+    La dimostrazione si fa "riempendo i buchi" con il valore costante $x_\infty$.
+  - Nella definizione di $\Gamma-\liminf$ e di $\Gamma-\limsup$ gli $\inf$ sono in realtà dei minimi.
+  - (*SCI di \Gamma-\liminf e \Gamma-\limsup*) $\Gamma-\liminf_n f_n(x)$ e $\Gamma-\limsup_n f_n(x)$ sono sempre funzioni SCI.
+  - (*inf, liminf, \Gamma-liminf sugli aperti*) Sia $A \subseteq \bbX$ un aperto. Allora $\liminf_n \lrt{\inf_{x \in A} f_n(x)} \le \inf_{x \in A} \lrt{\Gamma-\liminf_n f_n(x)}$.
+  - (*inf, liminf, \Gamma-liminf sui compatti*) Sia $K \subseteq \bbX$ un compatto. Allora $\liminf_n \lrt{\inf_{x \in K} f_n(x)} \ge \inf_{x \in K} \lrt{\Gamma-\liminf_n f_n(x)}$.
+  - (*Equicoercività*) Una successione $f_n: \bbX \rar \bar\bbR$ si dice equicoerciva se $\exists K \subseteq \bbX$ compatto (indipendente da $n$) tale che $\forall n \in \bbN$ si abbia $\inf_{x \in \bbX} f_n(x) = \inf_{x \in K} f_n(x)$.
+  - (*Convergenza dei minimi*) Sia $f_n: \bbX \rar \bar\bbR$ una successione di funzioni e $f_\infty$ il suo $\Gamma-\liminf$.
+    Supponiamo inoltre che *$f_n$ sia equicoerciva* con compatto $K$.
+    Allora vale che:
+    1. $f_\infty$ ammette minimo in $\bbX$.
+    2. $\liminf_n \lrt{\inf_{x \in \bbX} f_n(x)} = \min_{x \in \bbX} f_\infty(x)$.
+    3. Se $f_\infty$ è anche \Gamma-limite allora se $\lrg{x_n} \subseteq \bbX$ è una successione di quasi-minimi, ovvero vale $\lim_n \lrt{f_n(x_n) - \inf_{x \in \bbX} f_n(x)} = 0$, ed una sua sottosuccessione converge, diciamo $x_{k_n} \rar x_\infty$, allora $x_\infty \in \argmin \lrg{f_\infty(x) \mid x \in \bbX}$.
+    4. se $f_\infty$ è anche \Gamma-limite allora $\lim_n \lrt{\inf_{x \in \bbX} f_n(x)} = \min_{x \in \bbX} f_\infty(x)$.
+  - (*Lemma fondamentale per il $\Gamma-\limsup$*) $\forall x \in \bbX, \forall r, \epsilon > 0$, $\exists i \in \bbN$ tale che $\forall j \ge i$ si ha $\exists y$ tale che $d(x, y) \le r$ e $f_j(y) \le \Gamma-\limsup_n f_n(x) + \epsilon$.
+    Ovvero definitivamente c'è un punto vicino ad $x$ che è poco più basso del $\Gamma-\limsup$.
+** TODO Vedere l'esempio di pagina 145 e generalizzare
+* Tipologie di minimo (pp. 147-)
 * Spazi con nozione di convergenza
   - (*Definizione*) Dato un insieme $\bbX$, una nozione di convergenza in $\bbX$ significa dichiarare le successioni convergenti ed i relativi limiti, ovvero significa dare un sottoinsieme di $\Seq(\bbX) \times \bbX$.
   - (*Compattezza*) $K \subseteq \bbX$ si dice compatto per successioni se $\forall \lrq{x_n}_n \subseteq K$, $\exists x_\infty \in K \tc x_n \rar x_\infty$.
@@ -196,3 +328,6 @@
     Allora se $\bbX$ è compatto esiste $f_{n_k} \rar f_\infty$ uniformemente in $\bbX$.
     Se $\bbX$ è unione numerabile di compatti si ha invece convergenza uniforme sui compatti.
 
+* Fatti elementari ma che si scordano
+  - (*superadditività del liminf*) $\liminf_n (A_n + B_n) \ge \liminf_n A_n + \liminf_n B_n$. Se una delle due ha limite allora vale l'uguale.
+  - (*subadditività del limsup*) $\limsup_n (A_n + B_n) \le \limsup_n A_n + \limsup_n B_n$. Se una delle due ha limite allora vale l'uguale.
