@@ -1,0 +1,203 @@
+#+TITLE: Esercizi svolti di ECV
+#+AUTHOR: Dario Balboni, Andrea Marino
+#+DATE: 18 Luglio 2018
+#+OPTIONS: toc:nil
+#+LATEX_HEADER: \input{latex-abbreviations}
+#+LATEX_HEADER: \usepackage[top=20mm,bottom=20mm,right=16mm,left=16mm]{geometry}
+
+* Metodo indiretto
+  $$F(u) = \int_0^\pi (\dot u^2 - u \cos x) \de x$$
+  *Discutere il problema di minimo con BC: $u(\pi) = u(0)$*
+
+  1. *Claim dei Minimi*: Se $u_0$ è punto di minimo, allora $\forall v$ nello spazio vettoriale di riferimento vale $\delta F(u, v) = 0$.
+     Calcoliamo quindi $\delta F$ ed integriamo per parti supponendo $u \in \cC^2$:
+     $$\delta F(u, v) = \int_0^\pi (2 \ddot u - \cos x) v \de x + 2 (\dot u(\pi) - \dot u(0))v(0)$$
+     
+     Utilizzando le $v \in \cC^\infty_c(0, \pi)$ il termine di bordo è nullo e per FLCV otteniamo $2 \ddot u - \cos x = 0$.
+     
+     Utilizzando ora $v$ tali che $v(0) \neq 0$ otteniamo anche $\dot u(\pi) = \dot u(0)$.
+      
+     Le soluzioni (omogenee + particolare) di $\ddot u = \frac12 \cos x$ sono della forma $u(x) = - \frac12 \cos x + ax + b$.
+     Imponendo le BC otteniamo $u(x) = - \frac{\cos x}{2} - \frac{x}{4 \pi} + b$ con $b \in \bbR$ che risolvono tutte (ELE).
+  2. *Dimostrazione che sono i minimi*: Utilizziamo il seguente lemma: 
+
+     Supponiamo che la lagrangiana $\cL \in \cC^2$, 
+     $u_0$ soluzione di (ELE) in prima forma integrale, e 
+     $\forall x \in [0, \pi]$ $(p, s) \mapsto \cL(x, p, s)$ debolmente convessa, 
+     allora $u_0$ è punto di minimo.
+  3. *Sono tutti*: Se la lagrangiana fosse strettamente convessa avremmo finito.
+     In questo caso non lo è ma se $u \in \cC^1$ è minimo, risolve (ELE) in prima forma integrale.
+      
+     Allora otteniamo che $u$ soddisfa l'equazione $$\int 2 \dot u \dot v = \int v \cos x \qquad \forall v$$
+     il che ci dice che $\dot u$ ha derivata di Sobolev $-\cos x$ che è $\cC^1$ e quindi $u \in \cC^2$.
+* Equazioni differenziali
+  $$\ddot u = \frac{\sinh u - 3}{3 + \cosh \dot u} \qquad u(0) = u(2017) = 3$$
+  *Discutere esistenza, unicità e regolarità delle soluzioni*
+
+  1. *Riformulazione come problema di minimo*: Siccome $3 + \cosh \dot u \ge 4$ sempre, una $u$ è soluzione del problema differenziale iniziale se e solo se risolve
+     $$\ddot u (3 + \cosh \dot u) = \sinh u - 3$$
+     
+     Riconosciamo che questa equazione è (ELE) per il problema di Lagrangiana $\cL(x, s, p) = \frac32 p^2 + \cosh p + \cosh s - 3s$.
+     Notiamo che la Lagrangiana è debolmente convessa in $(s, p)$ ad $x$ fissato.
+
+     Allora per il teorema solito [...] una funzione $u$ che risolve il problema differenziale iniziale risolve anche il problema di minimo.
+     
+     Viceversa, se $u \in \cC^2$ risolve il problema di minimo allora soddisfa anche (ELE) per $\cL$, ovvero il problema differenziale iniziale.
+  2. *Metodo diretto: Setting*: Risolviamo il problema di minimo
+     $$\min\lrg{\int_0^{2017} \cL(x, u(x), \dot u(x)) \de x \mid u \in H^{1, 2}, u(0) = u(2017) = 3}$$
+     e notiamo che il problema è ben posto poiché $u \in H^{1, 2} \implies u$ Holderiane e quindi continue, ovvero il valore puntuale ha senso.
+
+     Come nozione di convergenza prendiamo $u_n \rar u$ se $u_n \stackrel{\rar}{\rar} u$ uniformemente e $\dot u_n \rhu^{\cL^2} \dot u$ debole $\cL^2$.
+  3. *Metodo diretto: Intermezzo*: Richiamiamo il teorema di Weierstrass generalizzato:
+     - $\bbX$ uno spazio con nozione di convergenza
+     - $F: \bbX \rar \bbR$ un operatore SCI
+     - $\exists M \in \bbR$ tale che $\lrg{x \mid F(x) \le M}$ sia non vuoto e contenuto in un compatto $\bbK$
+
+     Allora $F$ ammette minimo.
+  4. *Metodo diretto: Semicontinuità*: Somma di SCI è SCI, quindi analizziamo i due pezzi separatamente.
+     - *Parte in p, s*: $\int \psi(\dot u, u)$ è SCI quando $\psi$ è convessa in $\dot u, u$.
+     - *Parte in s, x*: $\int g(u, x)$ è SCI quando $g$ è continua in $u, x$.
+
+     Quindi abbiamo mostrato che $F$ è SCI rispetto alla nozione di convergenza definita in precedenza.
+  5. *Metodo diretto: Compattezza parte 1*: $F(u) \le M \implies \frac32 \norm{\dot u}_{\cL^2}^2 - 3 \int \abs{u} \le M$ dove abbiamo utilizzato che $g(x, s) = \cosh s - 3 s \ge - 3 \abs{s}$.
+     
+     Inoltre abbiamo $\abs{u(x)} \le \abs{u(x) - 3} + 3 \le \abs{u(x) - u(0)} + 3 \le \norm{\dot u}_{\cL^2} \abs{x}^{\frac12} + 3$ da cui $\int \abs{u} \le \norm{\dot u}_{\cL^2} + 3 \cdot 2017$ e quindi
+     $\norm{\dot u}^2 - 3 \norm{\dot u} \le M + 3 \cdot 2017$ e il membro a sinistra tende a $+\infty$ per $\norm{\dot u} \rar +\infty$ perciò otteniamo anche la disuguaglianza $\norm{\dot u} \le N$.
+  6. *Metodo diretto: Compattezza parte 2*: Si prenda ora una successione $u_n \in H^{1, 2}$ nel sottolivello
+     $$\lrg{u \in \bbX \mid F(u) \le M} \subseteq \lrg{u \in H^{1,2} \mid \norm{\dot u}_{\cL^2} \le N, u(0) = u(2017) = 3, \norm{u}_\infty \le R}$$
+     e mostriamo che si ha una sottosuccessione convergente nel senso di $\bbX$.
+
+     Per prima cosa si ha che $\norm{\dot u_n}_{\cL^2} \le N$ da cui per compattezza debole delle palle in $\cL^2$ si ha una sottosuccessione $u_{n_k}$ tale che $\dot u_{n_k} \rhu^{\cL^2} v$.
+
+     Inoltre si ha che:
+     - Le $u_n$ sono equiholderiane di costante $N$ (uniforme) $\implies$ equicontinue
+     - Le $u_n$ sono equilimitate (in particolare ad $x$ fissato)
+     - [0, 2017] è compatto
+
+     Da cui, per Ascoli-Arzelà, $\exists u_{n_{k_s}}$ sottosuccessione ed $\exists u$ tale che $u_{n_{k_s}} \stackrel{\rar}{\rar} u$ uniformemente.
+
+     Inoltre per ciascuna di queste $u_n$ vale che
+     $$\forall \phi \in \cC^\infty_c \quad \int u_n \phi' = - \int \phi \dot u_n.$$
+     Passando al limite l'uguaglianza lungo la successione $u_{n_{k_s}}$ si ottiene che $v = \dot u$ derivata debole di Sobolev.
+     Dove i limiti si hanno poiché:
+     - RHS per convergenza debole delle $u_{n_{k_s}}$ e dal fatto che $\phi \in \cC^\infty_c \implies \phi \in (\cL^2)^*$
+     - LHS per convergenza uniforme delle $u_{n_{k_s}}$
+
+     Abbiamo quindi mostrato che: data una successione $(u_n)_n \subseteq \bbX$ che sta nel sottolivello di $F$, essa ammette una sottosuccessione convergente (nel senso di $\bbX$) ad una $u$ limite in $H^{1, 2}$.
+     Tale $u$ sta anche nel sottolivello di $F$ poiché, essendo $F$ SCI, ha sottolivelli chiusi.
+     
+     $F$ ammette quindi minimo per il teorema di Weierstrass generalizzato poiché, preso un sottolivello di $F$ non vuoto $A = \lrg{x \in \bbX \mid F(x) \le M}$ si ha:
+     - $\inf_{x \in \bbX} F(x) = \inf_{x \in A} F(x)$ (poiché $A$ è un sottolivello non vuoto)
+     - $A$ è compatto (poiché chiuso in un compatto) per la nozione di convergenza di $\bbX$
+
+     Quindi $F$ ammette minimo su $A$ che è anche il minimo su tutto $\bbX$.
+  7. *Unicità*: Guardando il funzionale vediamo che la lagrangiana è strettamente convessa in $(s, p)$ ad $x$ fissato e quindi il punto di minimo è unico.
+     Per quanto abbiamo già detto sulla relazione tra punti di minimo e soluzioni della differenziale, l'unicità segue banalmente.
+  8. *Regolarità*: Sappiamo che il minimo soddisfa (ELE) in prima forma integrale da cui sappiamo che
+     $$\forall \phi \in \cC^\infty_c \qquad \int \cL_p(x, u, \dot u) \phi'(x) \de x = - \int \cL_s(x, u, \dot u) \phi(x) \de x$$
+
+     Da questa ricaviamo, detta $\psi(t) = 3t + \sinh t$, che $\lrt{\psi(\dot u)}' = \sinh u - 3$.
+     Sappiamo ora che $u \in H^{1, 2} \implies u \in \cC^0 \implies \sinh u - 3 \in \cC^0 \implies \psi(\dot u)' \in \cC^0$.
+
+     Da ciò sappiamo che $\psi(\dot u) \in \cL^2$ con derivata debole continua.
+     Allora per un noto teorema, si ha che $\psi(\dot u) \in \cC^1$.
+
+     Ora mostriamo che $\psi: \bbR \rar \bbR$ ha un'inversa $\cC^\infty$ il che ci permetterà di concludere che $\dot u \in \cC^1$ da cui potremo continuare il bootstrap per guadagnare $u \in \cC^\infty$.
+     Calcoliamo $\psi' = 3 + \cosh t \ge 3 + 1 = 4$ da cui siccome $\psi'(x) \neq 0$ sempre, per il teorema della funzione inversa, $\psi$ ammette un'inversa $\cC^\infty$ $\rho: \psi(\bbR) \rar \bbR$.
+     
+     Quindi $\dot u \in \cC^1 \implies u \in \cC^2$. Notiamo ora che un discorso analogo al precedente ci porta a dire:
+     $$u \in \cC^k \implies \sinh u - 3 \in \cC^k \implies \psi(\dot u)' \in \cC^k \implies \psi(\dot u) \in \cC^{k+1} \implies \rho\psi(\dot u) = \dot u \in \cC^{k+1} \implies u \in \cC^{k+2}$$
+     che ci permette di concludere $u \in \cC^\infty$.
+
+  *Dimostrare che la soluzione soddisfa $1 < u(x) \le 3$ per ogni $x \in [0, 2017]$*:
+  1. *$u(x) \le 3$*: Mostriamo che ai minimi non conviene stare sopra a $3$, ovvero mostriamo che, detta $v = \min\lrg{3, u}$, si ha $F(v) \le F(u)$.
+     Definiamo $A = \lrg{x \mid u(x) > 3}$; allora
+     $$F(u) - F(v) = \int_A \frac32 \dot u^2 + (\cosh \dot u - 1) + (\cosh u - \cosh 3) - 3(u - 3) \ge \int_A \cosh u - \cosh 3 - 3(u - 3)$$
+     
+     Wolfram alpha (o un po' di calcoli a mano) ci mostrano che $\cosh(3 + x) \ge \cosh 3 + 3 x$ per $x \ge 0$ e quindi si ha $F(u) \ge F(v)$, come volevamo.
+
+     Allora, visto che una soluzione dell'equazione differenziale per $u(0) = u(2017) = 3$ è un minimo per il funzionale, si deve avere $F(\min\lrg{3, u}) = F(u)$ che per unicità implica $u = \min\lrg{3, u} \implies u(x) \le 3$.
+  2. *$u(x) > 1$*: TODO (Non ho idea di come si faccia)
+** Caveat
+   - Se il problema differenziale ha delle NBC $= 0$, esse non vanno riportate nel problema di minimo perché nascono "on the road".
+   - Se le NBC sono ad esempio $u'(0) = 3$ bisogna prima ricondursi al caso precedente in uno dei seguenti due modi:
+     1. *cambio di variabile*: $v(x) = u(x) - 3x$ e vedere che equazione differenziale soddisfa $v$:
+	$$\ddot v(3 + \cosh(\dot v + 3)) = \sinh(v + 3x) - 3 \qquad \implies \quad \cL_v(x, s, p) = \frac32 p^2 + \cosh(p + 3) - 3s - \cosh(s + 3x)$$
+     2. *cambio del funzionale*: Modifichiamo la lagrangiana scrivendo $\cL'(x, s, p) = \cL(x, s, p) - 3p$.
+   - L'unicità della soluzione si può dedurre a volte anche guardando l'equazione differenziale stessa e supponendo che vi siano due soluzioni, farne la differenza e vedere che equazione differenziale essa soddisfa, per poi cercare di dimostrare che la differenza deve essere nulla.
+   - *Disequazioni sulle soluzioni*: Detto $\cL = \phi(\dot u) + g(x, u)$ supponiamo che:
+     1. $\forall t \quad \phi(t) \ge \phi(0)$ ($\phi$ abbia minimo in $0$)
+     2. $\exists a \quad \forall x \quad \forall t > a \quad g(x, t) \ge g(x, a)$
+  
+     Allora i minimi del funzionale che agli estremi valgono $\ge a$ rimangono $\ge a$ sempre: infatti sia $v = \min\lrg{u, a}$ allora detto $A = \lrg{x \mid u(x) > a}$ si ha
+     $$F(u) - F(v) = \int_A (\phi(t) - \phi(0)) + (g(x, t) - g(x, a)) \ge 0$$
+
+     Analogamente se vale (1) e se $\exists b \quad \forall x \quad \forall t < b \quad g(x, t) \ge g(x, b)$ allora detto $v = \max\lrg{u, b}$ si ha, detto $B = \lrg{x \mid u(x) < b}$, che 
+     $F(u) - F(v) = \int_B (\phi(t) - \phi(0)) + (g(x, t) - g(x, b)) \ge 0$
+** TODO Come cambia il metodo indiretto se si ha $\abs{\dot u}^4$?
+* Valori negativi di Funzionali
+  Per questo tipo di problemi si legga prima il paragrafo finale sullo studio del funzionale universale $G$, molto utile.
+
+  Si consideri, per ogni $l > 0$, il problema
+  $$\inf\lrg{ \int_0^l \lrq{(1 + u^2) \dot u^2 - 10 \sin^2(u) + \cdot u^6} \de x \mid u(0) = u(l) = 0 }$$
+  
+  *Determinare per quali valori di $l$ il funzionale assume valori negativi*:
+  1. *Dimostrazione di alcuni valori negativi*: Sia $\varepsilon > 0$ piccolo e $u$ qualunque e fissata e calcoliamo $F(\varepsilon u)$, notando che $\varepsilon u(0) = \varepsilon u(l) = 0$ e quindi siamo ancora all'interno della stessa classe di funzioni.
+
+     \begin{align*}
+     F(\varepsilon u) & = \int (1 + \varepsilon^2 u^2) \varepsilon^2 \dot u^2 - 10 \sin^2(\varepsilon u) + \varepsilon^6 u^6 \\
+                      & = \varepsilon^2 \int \dot u^2 - 10 u^2 + O(\varepsilon^4) \\
+                      & = \varepsilon^2 G_{l, 10}(u) + O(\varepsilon^4) \\
+     \end{align*}
+
+     Presa $u: [0, l] \rar \bbR$ ed $a \in \bbR^+$ definiamo $v(x) = u(ax)$ con $v: [0, l/a] \rar \bbR$ e calcoliamo $G_{l, a^2}(v) = a \cdot G_{al, 1}(u)$.
+
+     Da cui si ricava che $F(\varepsilon u) = \varepsilon^2 \sqrt{10} G_{\sqrt{10} l, 1}(v) + O(\varepsilon^4)$, quindi per $\sqrt{10} l > \pi$, siccome $G$ ha valori negativi, preso $\varepsilon$ abbastanza piccolo, anche $F$ ha valori strettamente negativi.
+  2. *Dimostrazione della positività del resto*: Questo solitamente si ottiene per disuguaglianze, basterà infatti mostrare che $\forall u \quad F(u) \ge G_{l, 10}(u)$ per $l \ge \frac\pi{\sqrt{10}}$:
+     e per ottenere ciò utilizziamo le disuguaglianze banali $1 + u^2 \ge 1$, $\sin x \le x$, $u^6 \ge 0$.
+     Da cui $F(u) \ge G_{l, 10}(u) \ge 0$.
+** Studio del funzionale universale
+  Sia $G(u) = \int_0^l \dot u^2 - u^2$. Ci chiediamo per quali $l$ esiste $u$ tale che $G(u) < 0$.
+  
+  /Risposta/: Per $l \le \pi$ $G(u) \ge 0$ per ogni $u$, mentre per $l > \pi$ esistono $u$ tali che $G(u) < 0$.
+
+  /Sketch di dimostrazione/: TODO (Racchiude delle buone idee)
+* TODO Leading term di successioni di minimi e punti con valore predeterminato
+  $$m_\varepsilon = \inf\lrg{\int_0^2 \lrt{\varepsilon \dot u^4 - \dot u^2 + \varepsilon^2 u^4} \de x \mid u(0) = u(2) = 2}$$
+
+  Non dimostriamo che $\forall \varepsilon > 0$ l'inf è in realtà un minimo per via del metodo diretto classico.
+
+  *Computa il termine di testa di $m_\varepsilon$ quando $\varepsilon \rar 0^+$*: ___
+
+
+  *Esistono valori di $\varepsilon$ tali che $m_\varepsilon = - 118$?*: ___
+* TODO Determinazione della tipologia di minimo
+  Consideriamo, per ogni $l > 0$, il seguente problema:
+  $$\inf\lrg{\int_0^l \lrq{\arctan(\dot u^2) + \sin(u^2)} \de x \mid u(0) = u(l) = 0}$$
+
+  *Determina per quali valori di $l$, la funzione $u_0(x) \equiv 0$ è un WLM*:
+
+  *Determina per quali valori di $l$, la funzione $u_0(x) \equiv 0$ è un SLM*:
+
+  *Determina l'inf in funzione di $l$*:
+  1. *Determinazione netta dell'inf*: Notiamo che la funzione $\psi(t) = \arctan(t^2)$ è limitata, quindi moralmente "non paghiamo la derivata grossa".
+
+     Siccome la funzione $g(x, u) = \sin(u^2)$ non dipende da $x$ vi sarà un $c$ tale che $g(x, c)$ è minima.
+     In questo caso vogliamo $\sin(c^2) = -1 \implies c^2 = \frac32 \pi$ va bene, ovvero $c = \sqrt{\frac32 \pi}$.
+
+     Possiamo allora considerare delle funzioni $u_n$ definite come:
+     $$u_n(x) = \left\{
+       \begin{array}{lr}
+         c & x \in [\frac{1}{n}, l - \frac{1}{n}] \\
+         cnx & x \in [0, \frac{1}{n}] \\
+         cn(l - x) & x \in [l - \frac{1}{n}, l] \\
+       \end{array}\right.$$
+     e prendere delle funzioni a loro molto vicine ma $\cC^\infty$.
+
+     Allora si ha, detto $A = [0, \frac1n] \cup [l - \frac1n, l]$ e $B = [\frac1n, l - \frac1n]$ che
+     \begin{align*}
+     F(u_n) & = \int_A \arctan(\dot u_n^2) + \int_A \sin(u_n^2) + \int_B \arctan(\dot u_n^2) + \int_B \sin(u_n^2) \\
+            & \le \mu(A) \frac{\pi}{2} + \mu(A) 1 + 0 + \mu(B) \sin(c^2) \\
+            & \le \frac{1}{n} \lrt{\frac{\pi}{2} + 1} - \lrt{l - \frac1n} 1 \rar_n -\infty \\
+     \end{align*}
+
