@@ -1,0 +1,145 @@
+\usepackage{bm, bbm}
+\usepackage{xifthen, xparse}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{ragged2e}
+\usepackage{color}
+\usepackage{array}
+\usepackage{tcolorbox}
+\usepackage{thmtools, thm-restate}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+% Definiamo un environment per i sistemi di equazioni
+\newenvironment{eqsystem}[1]
+{
+  \begin{displaymath}
+    \left\{
+      \begin{array}{#1}
+}{
+      \end{array}
+    \right.
+  \end{displaymath}
+}
+
+% Comandi vari e particolarmente utili
+\newcommand{\dpar}[2]{\ensuremath{\frac{\partial {#1}}{\partial {#2}}}}
+\newcommand{\ddpar}[2]{\ensuremath{\frac{\partial^2 {#1}}{\partial {#2}^2}}}
+\newcommand{\de}{\ensuremath{\text{d}}}
+\newcommand{\matr}[4]{{\ensuremath{\lrt{\begin{array}{cc} {#1} & {#2} \\ {#3} & {#4} \\ \end{array}}}}}
+
+% Abbreviazioni per i comandi più usati classici
+\newcommand{\sbsq}{\ensuremath{\subseteq}}
+\newcommand{\spsq}{\ensuremath{\supseteq}}
+\newcommand{\sbs}{\ensuremath{\subset}}
+\newcommand{\sps}{\ensuremath{\supset}}
+\newcommand{\lar}{\ensuremath{\leftarrow}}
+\newcommand{\rar}{\ensuremath{\rightarrow}}
+\newcommand{\rhu}{\ensuremath{\rightharpoonup}}
+\newcommand{\Lar}{\ensuremath{\Leftarrow}}
+\newcommand{\Rar}{\ensuremath{\Rightarrow}}
+\newcommand{\disc}{\ensuremath{\text{disc }}}
+\newcommand{\sse}{\ensuremath{\Leftrightarrow}}
+\newcommand{\Gal}{\ensuremath{\text{Gal}}}
+\newcommand{\ord}{\ensuremath{\text{ord}}}
+\newcommand{\Span}{\ensuremath{\text{Span}}}
+\newcommand{\argmin}{\ensuremath{\text{argmin}}}
+\newcommand{\Seq}{\ensuremath{\text{Seq}}}
+\newcommand{\tc}{\ensuremath{\text{t.c.}}}
+\newcommand{\SCI}{\ensuremath{\text{SCI}}}
+
+\newcommand{\halfpi}{\ensuremath{\frac{\pi}{2}}}
+
+\newcommand{\lrg}[1]{\ensuremath{\left\{{#1}\right\}}}
+\newcommand{\lrq}[1]{\ensuremath{\left[{#1}\right]}}
+\newcommand{\lrt}[1]{\ensuremath{\left({#1}\right)}}
+\newcommand{\lra}[1]{\ensuremath{\langle{#1}\rangle}}
+\let\scal\lra
+\newcommand{\abs}[1]{\ensuremath{\left|{#1}\right|}}
+\newcommand{\norm}[1]{\ensuremath{\left|\left|{#1}\right|\right|}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil{#1}\right\rceil}}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor{#1}\right\rfloor}}
+
+\newcommand{\zu}{\lrg{0,1}}
+\newcommand{\grad}{\ensuremath{\nabla}}
+\let\bar\overline
+\renewcommand{\div}{\ensuremath{\text{div}}}
+
+%mathbb mathcal mathfrak e mathbm per le lettere dell'alfabeto e anche mathbb per quelle greche
+\def\mydeflett#1{\expandafter\def\csname bb#1\endcsname{\mathbb{#1}}
+		\expandafter\def\csname c#1\endcsname{\mathcal{#1}}
+		\expandafter\def\csname k#1\endcsname{\mathfrak{#1}}
+		\expandafter\def\csname bl#1\endcsname{\mathbf{#1}}}
+\def\mydefalllett#1{\ifx#1\mydefalllett\else\mydeflett#1\expandafter\mydefalllett\fi}
+\mydefalllett ABCDEFGHIJKLMNOPQRSTUVWXYZ\mydefalllett
+
+\def\mydeffrakmath#1{\expandafter\def\csname k#1\endcsname{\mathfrak{#1}}}
+\def\mydefallfrak#1{\ifx#1\mydefallfrak\else\mydeffrakmath#1\expandafter\mydefallfrak\fi}
+\mydefallfrak abcdefghijklmnopqrstuvwxyz\mydefallfrak
+
+\def\mydefgreek#1{\expandafter\def\csname bl#1\endcsname{\text{\boldmath$\mathbf{\csname #1\endcsname}$}}}
+\def\mydefallgreek#1{\ifx\mydefallgreek#1\else\mydefgreek{#1}%
+   \lowercase{\mydefgreek{#1}}\expandafter\mydefallgreek\fi}
+\mydefallgreek {Gamma}{Delta}{Theta}{Lambda}{Xi}{Pi}{Sigma}{Upsilon}{Phi}{Varphi}{Psi}{Omega}{alpha}{beta}{gamma}{delta}{epsilon}{varepsilon}{zeta}{eta}{theta}{iota}{kappa}{lambda}{mu}{nu}{xi}{omicron}{pi}{rho}{sigma}{tau}{upsilon}{phi}{varphi}{chi}{psi}{omega}\mydefallgreek
+
+\def\defcomplexityclass#1{\expandafter\def\csname #1\endcsname{\text{\boldmath$\mathbf{#1}$}}}
+\def\defallcc#1{\ifx\defallcc#1\else\defcomplexityclass{#1}%
+  {\defcomplexityclass{#1}}\expandafter\defallcc\fi}
+\defallcc {BPP}{EXP}{DTIME}{NTIME}{BPTIME}{SUBEXP}{P}{NP}{ZPP}{RP}{AM}{MA}{IP}{PSPACE}{L}{NL}{E}{NE}{coNE}{NL}{coNL}{coNP}{coRP}{DSPACE}{coNTIME}\defallcc
+
+\newcounter{TheoremCounter}
+\newcounter{DefinitionCounter}
+\newcounter{ExampleCounter}
+\newcounter{EquationCounter}
+\newcounter{NotationCounter}
+\newcounter{RemarkCounter}
+
+\newtheoremstyle{nostrostile} % <name>
+{\baselineskip} % <Space above>
+{\baselineskip} % <Space below>
+{} % <Body font>
+{} % <Indent amount>
+{\bf\scshape} % <Theorem head font>
+{:} % <Punctation after theorem head>
+{1em} % <Space after theorem head>
+{} % <Theorem head spec>
+
+\declaretheoremstyle[
+spaceabove=3pt, spacebelow=3pt,
+headfont=\normalfont\bf\scshape,
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont
+]{genericlittle}
+
+\theoremstyle{nostrostile}
+\newtheorem{definition}[DefinitionCounter]{Definizione}
+\newtheorem{definizione}[DefinitionCounter]{Definizione}
+\newtheorem{criterio}[TheoremCounter]{Criterio}
+\newtheorem{corollario}[TheoremCounter]{Corollario}
+\newtheorem{example}[ExampleCounter]{Esempio}
+\newtheorem{esempio}[ExampleCounter]{Esempio}
+\newtheorem{theorem}[TheoremCounter]{Teorema}
+\newtheorem{teorema}[TheoremCounter]{Teorema}
+\newtheorem{lemma}[TheoremCounter]{Lemma}
+\newtheorem{proposizione}[TheoremCounter]{Proposizione}
+\newtheorem{proposition}[TheoremCounter]{Proposizione}
+\newtheorem{notation}[NotationCounter]{Notazione}
+\newtheorem{remark}[RemarkCounter]{Osservazione}
+\newtheorem{fatto}[RemarkCounter]{Fatto}
+\let\proof\undefined
+\declaretheorem[style=genericlittle,numbered=no,prefoothook=\qed,title=Dimostrazione]{proof}
+
+\interfootnotelinepenalty=10000
+
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\newcolumntype{C}{>{$}c<{$}}
+\newcolumntype{R}{>{$}r<{$}}
+
+\newcommand{\TODO}{\textcolor{red}{\bf{ANCORA DA SCRIVERE / FINIRE}}}
+\newcommand{\Optional}{\textcolor{blue}{[Opzionale]}}
+
+\newenvironment{question}{%
+  \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Domanda]
+}{%
+  \end{tcolorbox}
+}
+

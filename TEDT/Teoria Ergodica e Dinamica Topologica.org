@@ -1,0 +1,86 @@
+#+TITLE: Teoria Ergodica e Dinamica Topologica
+#+AUTHOR: Dario Balboni
+#+DATE:
+#+LANGUAGE: it
+#+OPTIONS: H:4 toc:nil
+#+LaTeX_class_options: [a4paper, 11pt]
+#+LaTeX_header: \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+#+LaTeX_header: \usepackage[AUTO]{babel}
+#+LaTeX_header: \usepackage[left=20mm,textwidth=167mm,headsep=8mm,footskip=20pt,top=2.5cm,bottom=2.5cm]{geometry}
+#+LaTeX_header: \usepackage{diagrams}
+#+LaTeX_header: \input{latex-abbreviations}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\setlist{nosep}
+\linespread{1.2}
+\titlespacing\section{0pt}{0pt}{0pt}
+\titlespacing\subsection{0pt}{0pt}{0pt}
+\titlespacing\subsubsection{0pt}{0pt}{0pt}
+
+* Definizioni
+  - (*Topologically Conjugate Homeo*)
+   Let $f, g: X \rar X$ be two homeomorphisms, and $X$ a compact metric space.
+   
+   We say that $f$ and $g$ are *topologically conjugate* if there $\exists h: X \rar X$ homeomorphism such that $f \circ h = h \circ g$.
+   In such case of course we also have $f^n \circ h = h \circ g^n$.
+  - (*Structurally stable systems*) $X$ $\cC^r$ compact manifold with $r \ge 0$.
+    Denote by $\cG^r$ the $\cC^r$ dynamical discrete system on $X$: $\cG^r = \Diff^r(X)$, which is a topological space with the local distance given by the sup of the difference of the sum of the derivatives in a ball.
+    
+    Theorem: $\cG^r$ is a banach manifold.
+  - (*Structurally stable dynamics*) The set $SS(X)$ of structurally stable dynamical systems is $\lrg{ f \in \cG \mid \exists W \text{ open neigh. of } f s.t. \forall g \in W \implies g \sim_\text{top} f }$.
+    The complement of the SS points of $\cG$ is called the bifurcation set (which is closed).
+  - (*Wandering Point*) $x \in X$ is wandering iff $\exists U$ neigh. of $x$ s.t. $\lrt{\cup_{n \neq 0\in \bbZ} f^n(U)} \cap U = \empty$.
+
+    $\Omega(f) = \lrg{x \in X \mid x \text{ not wandering }}$.
+
+    Definition of $\alpha$ and $\omega$ limits of $x$:
+    - $\alpha(x)$ is the set of all acculumations points of the orbit of x _in the past_
+    - $\omega(x)$ is the set of all accumulations points of the orbit of x _in the future_
+      
+      that is $y \in \omega(x)$ iff $\exists n_k \rar \infty$ s.t. $x_{n_k} \rar y$.
+
+    Two alternative definitions are:
+    $$ 
+       \alpha(x) = \cap_{n < 0} \bar{\cup_{m \le n} f^m(x)} \hskip 1.5em
+       \omega(x) = \cap_{n > 0} \bar{\cup_{m \ge n} f^m(x)}
+    $$
+  - (*Recurrent points*) A point $x$ is (positively / negatively) recurrent iff $x \in \omega(x)$ / $x \in \alpha(x)$.
+    And it's said to be recurrent if $x \in \alpha(x) \cap \omega(x)$ \sse x \in \Omega(f)$.
+* Properties of maps
+  - (*Topological transitivity*) A dynsys is *topologically transitive* iff $\exists x \in X$ s.t. $\bar{\cO_f(x)} = X$.
+
+    Moreover, TFAE:
+    1. $f$ is topologically transitive
+    2. $U \subseteq X$ open and $f$-invariant (i.e. $U = f(U) = f^{-1}(U)) $\implies U = \emptyset$ or $\bar{U} = X$.
+    3. If $U$ and $V$ are open and non-empty then there $\exists n \in \bbN$ s.t. $f^n(U) \cap V \neq \emptyset$
+    4. $\lrg{x \in X \mid \bar{\cO_f(x)} = X}$ is a dense $G_\delta$.
+  - (*Genericity*) The word "generic" in topological dynamic means that the behaviour happens in a dense $G_\delta$.
+  - (*Minimality*) A dynsys is *minimal* iff $\forall x \in X$ : $\bar{\cO_f(x)} = X$.
+* Categories
+  - (*Factors of maps*) Suppose we have the following diagram:
+    \begin{diagram}
+    Y & \rTo^{g} & Y \\
+    \dTo^{\pi} & & \dTo_{\pi} \\
+    X & \rTo^{f} & X \\
+    \end{diagram}
+    then we say that *f is a factor of g* and that *g extends f*.
+  - (*Observables*) An observable is just a function $\phi: X \rar \bbC$ in the same "category" of your phase space X.
+* Examples of dynsys
+  - (*Irrational rotations of the torus*) $R_\alpha: \bbT^1 \rar \bbT^1 \simeq \bbR/\bbZ$ defined by $R_\alpha(x) = x + \alpha$ for $\alpha \in \bbR \setminus \bbQ$ is *minimal*.
+    
+    Let now $X = \bbT^n = \bbR^n / \bbZ^n$ for $n \ge 2$ and $R_\alpha: X \rar X$ with $x \mapsto x + \alpha$ where
+    $\alpha \in \bbR^n$ must satisfy $k \cdot \alpha + p \neq 0$ $\quad \forall k \in \bbZ^n \setminus \lrg{0}, p \in \bbZ$.
+    This is the right condition instead of irrationality in the multidimensional case to be minimal.
+  - (*$x \mapsto 2x (\mod 1)$*) is *topologically transitive* but *not minimal*, because zero is a fix point.
+    If we write the numbers in binary expansion this system is just the shift of the digit string $\lrg{0, 2}^\bbN$.
+    
+    Where the shift $\sigma: \lrg{0,1}^\bbN \rar \lrg{0,1}^\bbN$ is defined as: let $s = (s_j)_{j \in \bbN}$ where $s_j \in \lrg{0,1}$ is an element.
+    Then the left shift is $(\sigma(s))_j = s_{j+1}$ and the distance between two points is defined as $d(s, t) = 2^{- \min_j \lrg{ s_j \neq t_j }}$.
+
+    A dense point is the concatenation of all possible prefixes: $s = 0 \, 1 \, 00 \, 01 \, 10 \, 11 \, 000 \, \ldots$.
+    It is dense because if we want to get near $x_1$ we can search the first digits of the expansion of $x_1$ and then iterate until they are the first digits of $f^n(x_0)$.
+* Fatterelli
+  - (*Multipliers*) For a fix point $x_0 \in X$ his multiplier is defined as the diffeomorphism derivative at the point $f'(x_0)$.
+    If the orbit of $x_0$ is periodic of period $p$, then the multiplier is the product $\prod_{i=0}^{p-1} f'(x_i)$.
+  - (*Top conj $\implies$ same multipliers*) If $f, g, h \in \cC^1$ and we have a fixed point $x_0 \in X$ (i.e. $gx_0 = x_0$, so also $f(h x_0) = h x_0$) then we have $f = h \circ g \circ h^{-1}$ and, denoted by $\bar{x_0} = h(x_0)$ we have that $f'(\bar{x_0}) = g'(\bar{x_0}) = \lambda$ i.e. the point multiplier is the same.
