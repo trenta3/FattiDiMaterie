@@ -19,11 +19,38 @@
 \titlespacing\subsubsection{0pt}{0pt}{0pt}
 
 * Definizioni
+  - (*Deterministic Dynamical system*, from an article of Smale, '67)  A dynsys is the datum of:
+    * $G$ a semi-group (which gives the notion of time, e.g. $\bbN, \bbZ, \bbR$)
+    * $X$ is a phase space, that can be:
+      - A locally compact metric space $\rar$ topological dynamics
+      - A Measure Space $(X, \cA, \mu)$ s.t. $\mu(X) = 1$ (compactness equation)
+
+    The dynsys is specified by an action of $G$ on $X$: $\Phi: G \times X \rar X$ defined by $\Phi(g, x) = \phi_g (x)$ satisfying:
+    1. $\phi_e(x) = x$
+    2. $\phi_{g + h}(x) = \phi_g \circ \phi_h (x)$
+    3. $\forall g : \phi_g \in \End(X)$
+
+    Moreover:
+    * If $X$ is a metric space, then $\phi_g$ is assumed to be continuous
+    * If $X$ is a measure space, we ask that $\forall A \in \cA : \mu(\phi_g^{-1}(A)) = \mu(A)$
+  
+    *Remark*: Every ODE or PDE of evolution time with global existance is a dynamical system.
+
+    *Remark*: Every continuous dynsys becomes a discrete dynsys ($G = \bbZ$) by stroboscopic observation.
+    i.e. Fix $\tau > 0$ and consider $(\phi_{n\tau})_{n \in \bbZ}$. The choice of $\tau$, concerning the applications, is the busillis.
+  - (*Conjugate dynsys*) Two $G$-actions on $X$: $(\phi, \psi)$ are conjugated iff there $\exists \xi \in \Aut(X)$ s.t. the following diagram commutes
+    \begin{diagram}
+    X & \rTo^{\psi_g} & X \\
+    \dTo^{\xi} & & \dTo_{\xi} \\
+    X & \rTo^{\phi_g} & X \\
+    \end{diagram}
+    i.e. the two systems have the same orbit under a fixed change of coordinate.
+    It is a natural notion for discdynsys but it is too much for contdynsys, because I'm also asking that the orbits have the same speed.
   - (*Topologically Conjugate Homeo*)
-   Let $f, g: X \rar X$ be two homeomorphisms, and $X$ a compact metric space.
+    Let $f, g: X \rar X$ be two homeomorphisms, and $X$ a compact metric space.
    
-   We say that $f$ and $g$ are *topologically conjugate* if there $\exists h: X \rar X$ homeomorphism such that $f \circ h = h \circ g$.
-   In such case of course we also have $f^n \circ h = h \circ g^n$.
+    We say that $f$ and $g$ are *topologically conjugate* if there $\exists h: X \rar X$ homeomorphism such that $f \circ h = h \circ g$.
+    In such case of course we also have $f^n \circ h = h \circ g^n$.
   - (*Structurally stable systems*) $X$ $\cC^r$ compact manifold with $r \ge 0$.
     Denote by $\cG^r$ the $\cC^r$ dynamical discrete system on $X$: $\cG^r = \Diff^r(X)$, which is a topological space with the local distance given by the sup of the difference of the sum of the derivatives in a ball.
     
@@ -47,10 +74,56 @@
     $$
   - (*Recurrent points*) A point $x$ is (positively / negatively) recurrent iff $x \in \omega(x)$ / $x \in \alpha(x)$.
     And it's said to be recurrent if $x \in \alpha(x) \cap \omega(x)$ \sse x \in \Omega(f)$.
+
+    We define the reccurent point of $A$ by $A_\text{rec} = \lrg{x \in A \mid f^n(x) \in A \text{ for } \infty \text{ many } n \in \bbN}$.
+  - (*Devaney chaos*) A system $(X, d, f)$ is chaotic /à la Devaney/ iff it is toptrans and the set of periodic points $\Per(f)$ is dense.
+  - (*SDOIC - Sensitive Dependence on Initial Conditions*) $(X, d, f)$ is SDOIC at a point $x_0 \in X$ iff there $\exists \varepsilon > 0$ $\exists U$ nghb. of $x_0$ st. $\forall y_0 \in U$ there $\exists n \ge 0$ : $d(f^n(x_0), f^n(y_0)) > \varepsilon$.
+    
+    *Remarks*: 
+    - Isometries are never SDOIC
+    - Uniformly expanding maps must be SDOIC
+  - (*Lyapounov Stability*) $(X, d, f)$ is lyapounov stable at $x_0$ iff $\forall \varepsilon > 0$ there $\exists U$ nhbg of $x_0$ s.t. $\forall y_0 \in U$ $\forall n \ge 0$ : $d(f^n(x_0), f^n(y_0)) < \varepsilon$.
+  - (*Ergodicity*) $(X, \cA, \mu, f)$ a meas discdynsys and $\mu(f^{-1}(A)) = \mu(A) \quad \forall A \in \cA$.
+    
+    /Idea/: We want to interpret $\mu$ as a probability "naturally generated from the dynamics", i.e. what is its relation to the statistics of the orbits?
+    
+    We are asking if it holds the law of large numbers:
+    $$\bbE[\phi] \stackrel{?}{=} \lim_{T \rar \infty} \frac{1}{T} \sum_{j = 0}^{T - 1} \phi \circ f^j(x)$$
+    If the equality holds we call such system *ergodic*. Note that $\phi \circ f^j(x) = \phi(x_j)$.
+    
+    1. Is there a statistics associated to orbits of $f$? (See Birkoff theorem)
+    2. Are the empirical frequencies (computed by means of the orbit) converging to the apriori probability of $\mu$? (Content of Ergodicity)
+       
+    ------
+    Let $A \in \cA, x_0 \in X, T > 0$. We define:
+    - "number of visits of the orbit of length $T$ of $x_0$ to $A$": $\cN(A, x_0, T) = \sum_{j = 0}^{T - 1} \chi_A (f^j(x_0))$.
+    - "average frequency of visits of ...": $\nu(A, x_0, T) = \cN(A, x_0, T) \cdot \frac1T$.
+    - "upper and lower frequencies of visits to the orbit of $x_0$ to $A$": $\bar{\nu}(A, x_0) = \limsup_{T \rar \infty} \nu(A, x_0, T)$ and $\underline{\nu}{A, x_0) = \liminf_{T \rar \infty} \nu(A, x_0, T)$.
+      
+    If $\underline{\nu}(A, x_0) = \bar\nu(A, x_0)$ we call it the frequency of visits and denote it by $\nu(A, x_0)$.
+
+    *Birkoff sum*: Given an observable $\phi: X \rar \bbR$ we define the "Birkoff sum" of $\phi$ along a segment of orbit of $x_0$ of length $T$ by $(\cS_T \phi)(x_0) = \sum_{j=0}^{T-1} \phi(x_j)$.
+    
+    The "time average of $\phi$ ..." is $\frac1T (\cS_T \phi)(x_0)$ and if $\lim_{T \rar \infty} \frac1T (\cS_T \phi)(x_0)$ exists then we call it $\lra{\phi}(x_0)$ and we have $\lra\phi \circ f = \lra\phi$.
+    - (*Birkoff theorem*) Let $(X, \cA, \mu, f)$ be a measurable dynsys:
+      1. $\forall A \in \cA$ and $\mu$-a.e. $x_0 \in X$ we have $\nu(A, x_0)$ exists
+      2. $\forall \phi \in \cL^1$ and $\mu$-a.e. $x_0 \in X$ the time average $\lra\phi$ exists
+
+    - (*Ergodicity*) A MDS is *ergodic* iff $\forall A \in \cA$, $\mu$-a.e. $x_0 \in X$ : $\nu(A, x_0) = \mu(A)$.
+
+      TFAE:
+      1. The dynsys is *ergodic* and *topologically transitive*
+      2. (*Metrical indecomposability*) $\forall A \in \cA$, $A$ is $f$-invariant $\implies$ $\mu(A) = 0$ or $\mu(A) = 1$
+      3. $\forall \phi$ observable, $\phi$ is a first integral, i.e. $\exists c \in \bbR$ s.t. $\phi = c$ $\mu$-a.e.
+      4. $\forall \phi \in \cL^1$ observable and $\mu$-a.e. $x_0 \in X$ we have $\lra\phi = \bbE_\mu[\phi] = \lim_{T \rar \infty} \frac1T \sum_{j = 0}^{T - 1} \phi \circ f^j == \int_X \phi \de\mu$.
+      5. $\forall A, B \in \cA$: $\lim_{n \rar \infty} \frac1n \sum_{j = 0}^{n - 1} \mu(f^{-j}(A) \cap B) = \mu(A) \mu(B)$
+   - (*Strongly mixing*) We say a MDS is strongly mixing iff $\forall A, B \in \cA$ we have $\lim_{n \rar \infty} \mu(f^{-n}(A) \cap B) = \mu(A) \mu(B)$.
+     
+     This *implies ergodicity*. The converse does not hold.
 * Properties of maps
   - (*Topological transitivity*) A dynsys is *topologically transitive* iff $\exists x \in X$ s.t. $\bar{\cO_f(x)} = X$.
 
-    Moreover, TFAE:
+    Moreover TFAE:
     1. $f$ is topologically transitive
     2. $U \subseteq X$ open and $f$-invariant (i.e. $U = f(U) = f^{-1}(U)) $\implies U = \emptyset$ or $\bar{U} = X$.
     3. If $U$ and $V$ are open and non-empty then there $\exists n \in \bbN$ s.t. $f^n(U) \cap V \neq \emptyset$
@@ -58,6 +131,16 @@
   - (*Genericity*) The word "generic" in topological dynamic means that the behaviour happens in a dense $G_\delta$.
   - (*Minimality*) A dynsys is *minimal* iff $\forall x \in X$ : $\bar{\cO_f(x)} = X$.
 * Categories
+  - (*Suspension*) Given a discdynsys on $X$ represented by the map $f: X \rar X$ we can obtain a contdynsys on $Y$ that is "naturally associated" with the initial one.
+    We take $Y = X \times \frac{[0, 1]}{(x, 1) \sim (f(x), 0)}$ and the action is $\frac{\partial}{\partial s}$, i.e. a traslation on the second coordinate. 
+
+    If $X$ is a variety and $f \in \Diff(X)$, then $Y$ is regular.
+  - (*Suspension under a roof*) /return time/
+    ... and if there is a section s.t. the return time is constant we have a cohomological equation.
+  - (*Poincaré section*) It is in a certain sense, the inverse operation of suspension:
+  
+    We look at an hypersurface $\Sigma$, trasversal to the field of $Y$, and define the map "first comeback on $\Sigma$".
+    Note that taking $\Sigma = X$ in the suspension we get to the original discdynsys.
   - (*Factors of maps*) Suppose we have the following diagram:
     \begin{diagram}
     Y & \rTo^{g} & Y \\
@@ -66,12 +149,18 @@
     \end{diagram}
     then we say that *f is a factor of g* and that *g extends f*.
   - (*Observables*) An observable is just a function $\phi: X \rar \bbC$ in the same "category" of your phase space X.
+    
+    Precisely, for topdyn we ask that $\phi \in \cC^0(X, \bbC)$ and for measdyn we ask that $\phi: X \rar \bbC$ be measurable or $\cL^1(X, \cA, \mu)$
+
+    *First integral*: is an observable which is constant along orbits and globally non-constant
 * Examples of dynsys
   - (*Irrational rotations of the torus*) $R_\alpha: \bbT^1 \rar \bbT^1 \simeq \bbR/\bbZ$ defined by $R_\alpha(x) = x + \alpha$ for $\alpha \in \bbR \setminus \bbQ$ is *minimal*.
     
     Let now $X = \bbT^n = \bbR^n / \bbZ^n$ for $n \ge 2$ and $R_\alpha: X \rar X$ with $x \mapsto x + \alpha$ where
     $\alpha \in \bbR^n$ must satisfy $k \cdot \alpha + p \neq 0$ $\quad \forall k \in \bbZ^n \setminus \lrg{0}, p \in \bbZ$.
     This is the right condition instead of irrationality in the multidimensional case to be minimal.
+
+    *Suspension*: The suspension of the rotation $R_\alpha$ on the unit circle is a linear flow on the torus given by $\dot{x_1} = \omega_1$ and $\dot{x_2} = \omega_2$ where $\alpha = \frac{\omega_1}{\omega_2}$.
   - (*$x \mapsto 2x (\mod 1)$*) is *topologically transitive* but *not minimal*, because zero is a fix point.
     If we write the numbers in binary expansion this system is just the shift of the digit string $\lrg{0, 2}^\bbN$.
     
@@ -80,7 +169,50 @@
 
     A dense point is the concatenation of all possible prefixes: $s = 0 \, 1 \, 00 \, 01 \, 10 \, 11 \, 000 \, \ldots$.
     It is dense because if we want to get near $x_1$ we can search the first digits of the expansion of $x_1$ and then iterate until they are the first digits of $f^n(x_0)$.
-* Fatterelli
+  - (*Tent map*) Defined by
+    $$F(x) = \left\{ \begin{array}{lr} 2x & x \in [0, \frac{1}{2}] \\ 2 - 2x & x \in [\frac{1}{2}, 1] \\ \end{array} \right.$$
+    The lebesgue measure is $F$-invariant.
+  - (*Ulam-Von Neumann map*) Defined by $x \mapsto 4 x (1-x)$. An invariant measure for it is $\de\mu(x) = \frac{\de x}{\pi \sqrt{x (1-x)}}$.
+
+    Conjugated to the Tent Map by a change of variables: $y = \sin^2 \lrt{\frac{\pi x}{2}}$.
+  
+    In general the family of $x \mapsto \lambda x (1-x)$ where $x \in [0, 1], \lambda \in [0, 4]$ is called the logistic family.
+    For low values of $\lambda$ we have an attractive fix point at the origin.
+    For high values of lambda the system exibits a chaotic behaviour.
+* Spiegazioni
+  - (*Measurable dynamics: obstructions to measure preserving*)
+    1. Lack of compactness (e.g. $X = \bbR, f(x) = x + 1$)
+    2. Discontinuity (e.g. $X = [0, 1]$, $f(x) = 0 \text{ if } x = 1$ and $f(x) = x \text{ if } x \neq 1$, the fixed point is not there)
+  - (*Measurable dynamics: probabilistic pov*) $(X, \cA, mu, f)$:
+    - $X$ is the "samples space"
+    - $\cA$ is a "collection of events"
+    - $\mu$ is "the probability" ($\mu(A) = \bbP(x \in A)$)
+    - Observables in dynamics $\leftrightarrow$ "Random variables"
+    - $\phi_n = \phi \circ f^n$ is the analogue of a "stochastic process"
+* Fatterelli e Teoremi
   - (*Multipliers*) For a fix point $x_0 \in X$ his multiplier is defined as the diffeomorphism derivative at the point $f'(x_0)$.
     If the orbit of $x_0$ is periodic of period $p$, then the multiplier is the product $\prod_{i=0}^{p-1} f'(x_i)$.
   - (*Top conj $\implies$ same multipliers*) If $f, g, h \in \cC^1$ and we have a fixed point $x_0 \in X$ (i.e. $gx_0 = x_0$, so also $f(h x_0) = h x_0$) then we have $f = h \circ g \circ h^{-1}$ and, denoted by $\bar{x_0} = h(x_0)$ we have that $f'(\bar{x_0}) = g'(\bar{x_0}) = \lambda$ i.e. the point multiplier is the same.
+  - (*Theorem*) If $f$ is Devaney-chaotic on $X$ and $X$ has no isolated points then $f$ has SDOIC.
+  - (*Krylov-Bogolyubov*) If $X$ is a complete metric space and $f \in \cC^0(X)$, then there $\exists \mu$ an $f$-invariant probability measure defined on borelians
+    
+    /Examples/ of invariant measure for irrational rotatons on the torus, the multiplying map.
+
+    * Let now be $\cM(X)$ the space of probability measures on $X$ endowed with the weak${}^*$ topology, i.e. $\mu_n \rar \mu$ iff $\forall \phi \in \cC(X, \bbR)$ we have $\int_X \phi \de \mu_n \rar \int_X \phi \de \mu$. Then $\cM(X)$ is compact.
+    * *Riesz representation theorem*: Let $j: \cC(X, \bbR) \rar \bbR$ a positive linear continuous functional with $j(\bb1) = 1$, then $\exists \mu \in \cM(X)$ s.t. $j(\phi) = \int_X \phi \de \mu$.
+    * *Proof*: Given $f$, we define an action on $\cM(X)$ given by $(f_* \mu)(A) = \mu(f^{-1}(A))$.
+      Pick up an initial measure $\mu_0 \in \cM(X)$ and define $\mu_m = \frac{1}{m} \sum_{j = 0}^{m - 1} f_*^j \mu_0$.
+      By compactness there is a converging subsequence to an accumulation point $\nu \in \cM(X)$, that is invariant under $f_*$ and we have
+      $$\int (\phi - \phi \circ f) \de \mu_n = \frac{1}{m} \abs{\int \sum_{j = 0}^{m - 1} (\phi \circ f^j - \phi \circ f^{j+1}) \de \mu} = \frac{1}{m} \lrt{\abs{\int \phi \de\mu} + \abs{\int \phi \circ f^{n+1} \de\mu}} \le \frac{2 \cdot \max_X \phi}{m} \rar_{m \rar \infty} 0$$
+  - (*Poincaré recurrence theorem*) $\mu(A_\text{rec}) = \mu(A)$.
+* Divagazioni e Conti
+  | Topic                                                | Date  | Notes                                   |
+  |------------------------------------------------------+-------+-----------------------------------------|
+  | Lorenz Attractor                                     | 14/11 | Lorenz's article and the counterexample |
+  | Invariant measure for $P\cC^1$, Farey map, Gauss map | 14/11 |                                         |
+* Libri suggeriti
+  - Walters, An introduction to ergodic theory (GTM, Springer)
+  - Cornfeld-Fomin-Sinai, Ergodic theory
+  - Knuth, The Art of Computer Programming (Chapters on pseudorandom number generators)
+  - Widgerson of IAS Princeton, Talks on Pseudorandomness and randomness
+  - Appendice di Diana & Oliveira, Foundations of Ergodic Theory
