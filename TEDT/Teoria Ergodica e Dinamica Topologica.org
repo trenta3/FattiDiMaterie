@@ -120,6 +120,31 @@
    - (*Strongly mixing*) We say a MDS is strongly mixing iff $\forall A, B \in \cA$ we have $\lim_{n \rar \infty} \mu(f^{-n}(A) \cap B) = \mu(A) \mu(B)$.
      
      This *implies ergodicity*. The converse does not hold.
+   - (*Lyapounov exponent for map of intervals preserving $\mu$*): $\lambda = \int_I \ln\abs{f'(x)} \de\mu(x)$, that exists because $\frac1n \sum_{j = 0}^{n - 1} \ln\abs{f'(x_j)}$ converges $\mu$-a.e.
+   - (*Hahn decomposition of a measure*) Let $(X, \cA, \mu)$ and $\mu$ a signed measure.
+     Then there $\exists P, N \in \cA$ s.t.:
+     1. $P \cap N = \emptyset$ and $P \cup N = X$
+     2. $\forall E \subseteq P$ and $E \in \cA$ we have $\mu(E) \ge 0$
+     3. $\forall E \subseteq N$ and $E \in \cA$ we have $\mu(E) \le 0$
+
+     Moreover, $P$ and $N$ are uniquely determined, except for a set of null measure.
+     We will denote $\mu^+(E) = \mu(E \cap P)$ and $\mu^-(E) = \mu(E \cap N)$.
+   - (*Extreme points of a convex subset of tvs*) Let $S \subseteq X$ and $S$ convex.
+     Then $x_0 \in S$ is an extremal point of $S$ if $x_0 \notin$ any open segment joining two points of $S$.
+   
+     *Krein-Milman Theorem*: Let $X$ be a lctvs and $S \subseteq X$ a convex.
+     Then $S$ is the /closed convex hull/ of its extremal points.
+   - (*Unique ergodicity*) iff $\cM_f(X) = \lrg\mu$.
+   - (*Support of a measure*) $\supp \mu = \bar\lrg{x \in X \mid \forall U \subseteq X \text{ open }, x \in U \implies \mu(U) > 0}$
+   - (*1-coboundaries*) Let $X4 be a compact metric space and $f: X \rar X$ an homeomorphism.
+     A continuous observable $\phi \in \cC^0(X, \bbR)$ is a 1-coboundary iff $\exists \psi \in \cC(X, \bbR)$ s.t.
+     $$\phi = \psi\circ f - \psi = \de_f \psi$$
+
+     We can then show that $\cM_f^\text{sign}(X) \simeq \de_f\cC(X, \bbR)^\top = \frac{\cC(X, \bbR)}{\bar{\de_f \cC(X, \bbR)}}$.
+
+     From that follows that *corollary*: $f$ is uniquely ergodic iff $\bar{\de_f \cC(X, \bbR)}$ has codimension $1$ in $\cC(X, \bbR)$.
+
+     *Exercise*: If $\phi$ is a coboundary then $\frac1n \sum_{j = 0}^{n - 1} \phi \circ f^j \stackrel{\rar}{\rar} 0$.
 * Properties of maps
   - (*Topological transitivity*) A dynsys is *topologically transitive* iff $\exists x \in X$ s.t. $\bar{\cO_f(x)} = X$.
 
@@ -153,6 +178,25 @@
     Precisely, for topdyn we ask that $\phi \in \cC^0(X, \bbC)$ and for measdyn we ask that $\phi: X \rar \bbC$ be measurable or $\cL^1(X, \cA, \mu)$
 
     *First integral*: is an observable which is constant along orbits and globally non-constant
+  - (*Skew-product*) Given a dynsys $f: X \rar X$ we extend it using $\phi: X \rar \bbR$:
+    \begin{diagram}
+    X \times \bbR & \rTo^{F} & X \times \bbR \\
+    \dTo^{\pi_1} & & \dTo_{\pi_1} \\
+    X & \rTo^{f} & X \\
+    \end{diagram}
+    where $F(x, u) = (f(x), u + \phi(x))$.
+  - (*Transfer operator*) Let $T: I \rar I$ be a non-singular continuous map (i.e., $\mu(A) = 0 \implies \mu(T(A)) = 0$).
+    We define the transfer operator as $P_T: \cL^1 \rar \cL^1$ s.t. $\int_A P_T f\de m = \int_{T^{-1}A} f \de m$ for every $A$ measurable.
+
+    /Properties/:
+    1. $P_T$ is linear
+    2. $P_T$ is positive (i.e. $f \ge 0 \implies P_T f \ge 0$)
+    3. Normalization preserving: $\int_I P_T f \de\mu = \int_I f \de m$
+    4. is a contraction wrt. $\cL^1$: $\norm{P_T f^+}_1 \le \norm{f}_1$
+
+    *Theorem*: Transfer fix-point define $T$-invariant measures: $P_T f^* = f^*$ and $T$ non-singular iff $\mu(A) = \int_A f^* \de m$ is $T$-invariant
+    
+    *Theorem*: $T$ non singular, $\mu$ invariant. Then $T$ is ergodic iff $\frac1n \sum_{n = 1}^\infty P_T^n f \rhu^{\cL^1} \mathbb{1}$ for every $f \neq 0$.
 * Examples of dynsys
   - (*Irrational rotations of the torus*) $R_\alpha: \bbT^1 \rar \bbT^1 \simeq \bbR/\bbZ$ defined by $R_\alpha(x) = x + \alpha$ for $\alpha \in \bbR \setminus \bbQ$ is *minimal*.
     
@@ -160,8 +204,9 @@
     $\alpha \in \bbR^n$ must satisfy $k \cdot \alpha + p \neq 0$ $\quad \forall k \in \bbZ^n \setminus \lrg{0}, p \in \bbZ$.
     This is the right condition instead of irrationality in the multidimensional case to be minimal.
 
+    /Properties/: Irrational rotations are *ergodic*.
     *Suspension*: The suspension of the rotation $R_\alpha$ on the unit circle is a linear flow on the torus given by $\dot{x_1} = \omega_1$ and $\dot{x_2} = \omega_2$ where $\alpha = \frac{\omega_1}{\omega_2}$.
-  - (*$x \mapsto 2x (\mod 1)$*) is *topologically transitive* but *not minimal*, because zero is a fix point.
+  - (*Doubling map. $x \mapsto 2x (\mod 1)$*) is *topologically transitive* but *not minimal*, because zero is a fix point.
     If we write the numbers in binary expansion this system is just the shift of the digit string $\lrg{0, 2}^\bbN$.
     
     Where the shift $\sigma: \lrg{0,1}^\bbN \rar \lrg{0,1}^\bbN$ is defined as: let $s = (s_j)_{j \in \bbN}$ where $s_j \in \lrg{0,1}$ is an element.
@@ -169,9 +214,13 @@
 
     A dense point is the concatenation of all possible prefixes: $s = 0 \, 1 \, 00 \, 01 \, 10 \, 11 \, 000 \, \ldots$.
     It is dense because if we want to get near $x_1$ we can search the first digits of the expansion of $x_1$ and then iterate until they are the first digits of $f^n(x_0)$.
+
+    /Properties/: The doubling map is *ergodic*.
   - (*Tent map*) Defined by
     $$F(x) = \left\{ \begin{array}{lr} 2x & x \in [0, \frac{1}{2}] \\ 2 - 2x & x \in [\frac{1}{2}, 1] \\ \end{array} \right.$$
     The lebesgue measure is $F$-invariant.
+
+    /Properties/: It is *ergodic*, *mixing* and *positively entropic*.
   - (*Ulam-Von Neumann map*) Defined by $x \mapsto 4 x (1-x)$. An invariant measure for it is $\de\mu(x) = \frac{\de x}{\pi \sqrt{x (1-x)}}$.
 
     Conjugated to the Tent Map by a change of variables: $y = \sin^2 \lrt{\frac{\pi x}{2}}$.
@@ -179,6 +228,22 @@
     In general the family of $x \mapsto \lambda x (1-x)$ where $x \in [0, 1], \lambda \in [0, 4]$ is called the logistic family.
     For low values of $\lambda$ we have an attractive fix point at the origin.
     For high values of lambda the system exibits a chaotic behaviour.
+  - (*Cauchy distribution*) $f: \bbR \rar \bbR$ defined by $f(x) = \frac12 \lrt{x - \frac1x}$.
+    It preserves $\de\mu(x) = \frac{\de x}{\pi (1 + x^2)}$, it is a distribution that has no moments.
+  - (*Hyperbolic automorphisms of the torus are ergodic*) An automorphisms $A$ is hyberbolic when its spectrum $\sigma(A)$ is disjoint from the unit circle iff $\abs{\Tr(A)} > 2$.
+    Let $A = \matr{a}{b}{c}{d}$ and let $f_A: \bbT^2 \rar \bbT^2$ induced by $A$ as $f_A \vect{x_1}{x_2} = \vect{a x_1 + b x_2}{c x_1 + d x_2}$.
+    Let $\phi: \bbT^2 \rar \bbC$ and from $\phi \circ f_A = \phi$ we get that if $\phi \in \cL^2$ we have $\hat\phi (k) = \hat\phi(\lrt{A^\dagger}^{-1} k) \quad \forall k \in \bbZ^2$
+  - (*Hamiltonian ODE*) $H: \bbR^{2n} \rar \bbR$ the map $H(\rab p, \rab q)$ and consider the system given by
+    $$\system{\dot p_i = -\frac{\partial H}{\partial q_i} \\ \dot q_i = \frac{\partial H}{\partial p_i}}$$
+    
+    In Hamiltonian system one wants to preserve the special form of the equation with transformations.
+
+    *CCI - Completely Canonically Integrable systems*: A system is CCI iff there $\exists$ canonical variables ACTION ($J \in B_1 \subseteq \bbR^n$) and ANGLE ($\chi \in \bbT^n$) such that the new Hamiltonian only depends on the actions.
+    For a CCI we have that all $J$ are first integrals and $\chi_k(t) = \omega_k(t) + \chi_k(0)$ where $\omega_k(t) = \partial{H}{j_k}(j)$.
+
+    In dimension $n = 1$ all Hamiltonian systems are CCI.
+
+    In dimension $n = 2$ the value of the Hamiltonian is preserved, and we can foliate the space by its "energy".
 * Spiegazioni
   - (*Measurable dynamics: obstructions to measure preserving*)
     1. Lack of compactness (e.g. $X = \bbR, f(x) = x + 1$)
@@ -189,6 +254,16 @@
     - $\mu$ is "the probability" ($\mu(A) = \bbP(x \in A)$)
     - Observables in dynamics $\leftrightarrow$ "Random variables"
     - $\phi_n = \phi \circ f^n$ is the analogue of a "stochastic process"
+  - (*Pseudo-Random Generators*) We want to generate numbers according to the Cauchy distribution $\de\mu(x) = \frac{\de}{\pi (1 + x^2)}$, that we know is associated (is an invariant measure to the ergodic dynsys) $f(x) = \frac12 \lrt{x - \frac1x}$ on $\bbR$.
+    By conjugacy ($z = \frac{x - i}{x + i}$) we get the doubling map on the circle: $T(\theta) = 2 \theta (\mod 1)$.
+
+    Not, to get an almost-Gaussian generator, we can do a change of variables $h(x) = \log \frac{x}{1 - x}$ and obtain something similar to a Gaussian.
+  - (*Relations TopDyn - ErgTheory*)
+    | Topological Dynamics     | Ergodic Theory           |
+    |--------------------------+--------------------------|
+    | Topological Transitivity | Ergodicity               |
+    | Minimality               | Unique Ergodicity        |
+    | Topological Entropy      | Kolmogorov-Sinai entropy |
 * Fatterelli e Teoremi
   - (*Multipliers*) For a fix point $x_0 \in X$ his multiplier is defined as the diffeomorphism derivative at the point $f'(x_0)$.
     If the orbit of $x_0$ is periodic of period $p$, then the multiplier is the product $\prod_{i=0}^{p-1} f'(x_i)$.
@@ -205,14 +280,41 @@
       By compactness there is a converging subsequence to an accumulation point $\nu \in \cM(X)$, that is invariant under $f_*$ and we have
       $$\int (\phi - \phi \circ f) \de \mu_n = \frac{1}{m} \abs{\int \sum_{j = 0}^{m - 1} (\phi \circ f^j - \phi \circ f^{j+1}) \de \mu} = \frac{1}{m} \lrt{\abs{\int \phi \de\mu} + \abs{\int \phi \circ f^{n+1} \de\mu}} \le \frac{2 \cdot \max_X \phi}{m} \rar_{m \rar \infty} 0$$
   - (*Poincaré recurrence theorem*) $\mu(A_\text{rec}) = \mu(A)$.
+  - (*Unique erogidicity is equivalent to uniform convergence of Birkoff averages*) Let $X$ be a compact metric space, $\cA = \Bor(X)$, $f \in \cC^0$ and let us assume that $\cM_f(X) = \lrg\mu$. Then
+    1. $\mu$ is ergodic
+    2. $\forall \phi \in \cC(X, \bbR)$ the Birkoff averages converges uniformly to $\bbE$, i.e. $\frac1n \sum_{j = 0}^{n - 1} \phi \circ f^j \stackrel{\rar}{\rar} \int \phi \de\mu$.
+
+    Also $(2) \implies $ unique ergodicity.
+  
+    /Lemmas/:
+    1. $\mu \in \cM_f(X)$ is ergodic $\sse$ it is an extremal point of $\cM_f(X)$.
+  - (*f-invariance, full support and ergodic => top transitivity*) If $\mu$ is $f$-invariant and has full support, $\mu$ ergodic $\implies$ that $X$ is top.transitive and moreover $\mu(\lrg{x \in X \mid \bar{\Orb_f(x)} = X}) = 1$.
+
+    The converse is false: the counterexample is a time reparametrization of irrational linear flow $\phi$ on $\bbT^2$ which is top. transitive but the invariant probability measure is $M_{\phi_t} = \lrg{\delta_p}$.
+    It is enough to have $\frac{\de t}{\de \tau} = \phi(x)$, i.e. slowing down the flux to let it have a fixpoint.
+
+    But: *theorem*: If $f$ is uniquely ergodic and $\cM_f = \lrg\mu$ then $f$ is minimal iff $\mu$ has full support.
+  - (*Gottschalk-Hedlund*) If $f$ is minimal and $\exists x_0 \in X$, $\exists C > 0$ s.t. $\forall n$ we have $\abs{\sum_{j = 0}^{n - 1} \phi \circ f^j(x_0)} \le C$ then $\exists \psi$ s.t. $\phi = \psi \circ f - \psi$.
 * Divagazioni e Conti
-  | Topic                                                | Date  | Notes                                   |
-  |------------------------------------------------------+-------+-----------------------------------------|
-  | Lorenz Attractor                                     | 14/11 | Lorenz's article and the counterexample |
-  | Invariant measure for $P\cC^1$, Farey map, Gauss map | 14/11 |                                         |
+  | Topic                                                | Date        | Notes                                                                                  |
+  |------------------------------------------------------+-------------+----------------------------------------------------------------------------------------|
+  | Lorenz Attractor                                     | 14/11       | Lorenz's article and the counterexample                                                |
+  | Invariant measure for $P\cC^1$, Farey map, Gauss map | 14/11       |                                                                                        |
+  | Almost gaussian generators and Gauss Map             | 23/11       |                                                                                        |
+  | Teoria di Fourier                                    | 21/11-23/11 |                                                                                        |
+  | Small perturbations of hamiltonian systems           | 28/11       |                                                                                        |
+  | Poincaré nonexistance theorem                        | 30/11       | Precise statement, proof in ___                                                        |
+  | Furstenberg's Example                                | 05/12       | Smooth minimal diffeo of the torus which preserves the Haar measure but is not ergodic |
+  | Transfer and expanding maps of intervals             | 12/12       |                                                                                        |
+** Esercizi da svolgere
+   1. Sequenza della prima cifra di $2^k$: $1, 2, 4, 8, 1, 3, 6, ...$.
+      È più frequente che esca $7$ o $8$?
 * Libri suggeriti
   - Walters, An introduction to ergodic theory (GTM, Springer)
   - Cornfeld-Fomin-Sinai, Ergodic theory
   - Knuth, The Art of Computer Programming (Chapters on pseudorandom number generators)
   - Widgerson of IAS Princeton, Talks on Pseudorandomness and randomness
   - Appendice di Diana & Oliveira, Foundations of Ergodic Theory
+* Lezioni mancanti
+  - 07/12/2017
+  - 12/12/2017 Recuperare appunti propri
