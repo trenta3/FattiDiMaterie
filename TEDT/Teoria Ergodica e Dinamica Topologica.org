@@ -145,6 +145,79 @@
      From that follows that *corollary*: $f$ is uniquely ergodic iff $\bar{\de_f \cC(X, \bbR)}$ has codimension $1$ in $\cC(X, \bbR)$.
 
      *Exercise*: If $\phi$ is a coboundary then $\frac1n \sum_{j = 0}^{n - 1} \phi \circ f^j \stackrel{\rar}{\rar} 0$.
+   - (*IET - Interval Exchange Transformations*) Let $\cA$ be an alphabet of cardinality $\abs\cA = d$ and $T = (\pi, \lambda)$ where $\pi = (\pi_0, \pi_1)$ a pair of bijections from $\cA$ to $\lrg{1, \ldots, d}$.
+     $\lambda$ is a vector $\lrt{\lambda_a}_{a \in \cA} \in \bbR^{\abs\cA}_+$. Spesso chiederemo inoltre $\sum_\alpha \lambda_\alpha = 1$.
+
+     Consideriamo $I = \sqcup_{\alpha \in \cA} I_\alpha$ con $\abs{I_\alpha} = \lambda_\alpha$.
+
+     *Admissible permutation*: $\pi$ is admissible (not two separated pieces) if $\forall 1 \le k < d$ we have $\pi_0^{-1}(\lrg{1, \ldots, k}) \neq \pi_1^{-1}(\lrg{1, \ldots, k])$.
+     
+     *Connection*: A connection for the IET $T = (\pi, \lambda)$ is $(\alpha, \beta, m)$ with $\alpha, \beta \in \cA$, $m \in \bbN$ and $\pi_0(\beta) > 1$ s.t. $T^m(\partial I_\alpha) = \partial(I_\beta)$.
+     $T$ is said to satisfy the *Keane property* if it has no connection.
+
+     *Keane theorem*:
+     1. If $T$ has no connections $\implies$ $T$ is minimal.
+     2. $\lambda_\alpha$ linearly independent on $\bbQ$ $\implies$ $T$ has no connections.
+
+     The natural measure on the space of IET is the counting measure on $\pi$, and the Lebesgue measure on $\lambda_i$, then almost certainly the $\lambda_\alpha$ are $\bbQ$-independent.
+
+     Keane produces an example of $T$ with no connections which is not uniquely ergodic.
+     Few years later it was proved that almost every IET is uniquely ergodic.
+  - (*Operatore Koopman*) Given $(X, \cA, \mu, f)$ where $f$ preserves $\mu$, $\phi \in \cL^2$ we define $U_f \phi = \phi \circ f$.
+    It is a unitary operator on $\cL^2$ and we will study its spectrum.
+  - (*Shannon entropy*) Let $\phi$ be an event that has only finitely possible outcomes $A_1, \ldots, A_n$ with probabilities $p_1, \ldots, p_n$ that sum to one.
+    
+    We consider $H^n: \Delta^n \rar [0, +\infty)$ with $\Delta^n$ the symplex of dimension $n-1$ and we ask the following properties to hold for $H^n$:
+    1. Completely symmetric: $H^n(\ldots, p_i, \ldots, p_j, \ldots) = H^n(\ldots, p_j, \ldots, p_i, \ldots)$
+    2. $H^n(1, 0, \ldots, 0) = 0$ (should measure the uncertainty)
+    3. $H^n(0, p_2, \ldots, p_n) = H^{n-1}(p_2, \ldots, p_n)$ (reducibility in case of null outcome)
+    4. $H^n(p_1, \ldots, p_n) \le H^n(\frac1n, \ldots, \frac1n)$ (max uncertainty with equal probability outcomes)
+    5. If $A$ and $B$ are partitions, with $A$ finer than $B$, then $H(A) = H(B) + H(A\mid B)$
+
+       That is, if $A$ is $\pi_{ij}$ and $B$ is $p_i$ then $\abs{A} = nl$ and $\abs{B} = n$ with $p_i = \sum_j \pi_{ij}$ then we have
+       $$H^{np}(\pi_{11}, \ldots, \pi_{1l}, \pi_{21}, \ldots) = H^n(p_1, \ldots, p_n) + \sum_i p_i H^p(\frac{\pi_{i1}]{p_i}, \ldots, \frac{\pi_{ip}}{p_i})$$
+    6. $H$ must be continuous
+
+    If $H^n$ satisfies the conditions above, then it satisfies:
+    $\exists c > 0$ s.t. $H^n(p_1, \ldots, p_n) = - c \sum_i p_i \log p_i$.
+  - (*Kolmogorov-Sinai entropy*) 
+    Let $(X, \cA, \mu, f)$ be ergodic, and take two partitions $\cP = \lrg{A_1, \ldots, A_n}$ and $\cQ = \lrg{B_1, \ldots, B_l}$ s.t. $X = \sqcup_i A_i = \sqcup_i B_i$ modulus trascurable sets and set $\cP \vee \cQ = \lrg{A_i \cap B_j}$.
+    
+    Now we can define $\vee_{i=0}^{T-1} f^i \cP = \cP \vee f^{-1} \cP \vee \ldots \vee f^{-(T-1)} \cP$, which has at most $n^T$ sets, and denote $n_k = \card (\vee_{i=0}^{k-1} f^i \cP)$.
+    We can now define $a(k) = \frac1k H^{n_k}(\vee_{i=0}^{T-1} f^i \cP)$ where the $p_i = \mu(A_i)$ and define $h(f, \cP) = \lim_{T \rar \infty} a(T)$, which is well defined since $H^{n_T}$ is subadditive in $T$.
+
+    Finally the *KS-entropy* is defined as $h_{KS}(f, \mu) = \sup \lrg{h(f, \cP) \mid \cP \text{ is a finite partition wrt } \mu \text{ of } X}$.
+
+    /Properties/:
+    1. $h_{KS}$ is isomorphism-invariant (that preserve null sets)
+    2. (*Sinai Theorem*): If $\cP$ is generating (i.e. $f^{-1}(\cP)$ generates $\cA$ as a $\sigma$-algebra) then $h_{KS}(f, \mu) = h_{KS}(f, \cP)$.
+  - (*Topological entropy*) Let $(X, d, f)$ with $(X, d)$ compact metric space and $f$ an homeomorphism of $X$.
+
+    $\forall n \ge 0$ we define $d_n(x, y) = \max \lrg{d(f^i(x), f^i(y)) \mid i \in \lrg{0, \ldots, n-1}}$, which is a metric equivalent to $d$.
+
+    /Definitions/:
+    * We say that $S \subseteq X$ is $(n, \varepsilon)$ /spanning/ if $\forall x \in X$ : $\exists y \in S$ s.t. $d_n(x, y) < \varepsilon$.
+    * $r(n, \varepsilon) = \min \lrg{\abs{S} \mid S \text{ is } (n, \varepsilon) \text{ spanning}} < \infty$.
+    * *Topological entropy*: $h_{TOP}(f) = \lim_{\varepsilon \rar 0} \limsup_{n \rar \infty} \frac1n \log(r(n, \varepsilon))$.
+      It exists because the limsup is decreasing in $\varepsilon$.
+
+    /Properties/:
+    1. $f$ isometry $\implies h_{TOP}(f) = 0$
+    2. $f$ is homeomorphism $\implies h_{TOP}(f) = h_{TOP}(f^{-1})$.
+    3. $h_{TOP}(f^m} = \abs{m} h_{TOP}(f)$.
+    4. Topological entropy does not change if $d$ is replaced by $d'$, an equivalent metric.
+       With the same proof, we get that a surjective map gets up a inequality between entropies.
+
+    Moreover, we have the *entropy inequality*: $h_{KS}(\mu) \le h_{TOP}(f)$.
+  - (*Equivalent definition of top. entropy*) $A \subseteq X$ is $(n, \varepsilon)$ separated if $\forall x, y \in A$, $x \neq y$ and $d_n(x, y) \ge \varepsilon$ we have $s(n, \varepsilon) = \max \lrg{ \card A \mid A \text{ is } \varepsilon \text{ separated }}$.
+    Then $h_{TOP}(f) = \lim_{\varepsilon \rar 0} \limsup_{n \rar \infty} \frac1n \log(s(n, \varepsilon))$.
+
+    This roughly corresponds to how many different orbits (truncated to the time $n$) you can distinguish if you miopia is $\varepsilon$.
+  - (*Another definition of top. entropy*) Given $\alpha, \beta$ open coverings, we call $\alpha \vee \beta := \lrg{A \cap B \mid A \in \alpha, B \in \beta}$ and let $N(\alpha)$ be the minimal cardinality of a subcover (which is $< \infty$ because $X$ is compact).
+    We remark that $N(\alpha \vee \beta) \le N(\alpha) N(\beta)$ and that $N(f^{-1}(\alpha)) \le N(\alpha)$.
+
+    We then set $a(n) = \ln N(\vee_{i=0}^{n-1} f^i(\alpha))$ and there exists $\exists \lim_{n \rar \infty} \frac1n \ln\lrq{N(\vee_{i=0}^{n-1} f^i(\alpha))} = h_{TOP}(f, \alpha)$ and $h_{TOP}(f) = \sup_\alpha h_{TOP}(f, \alpha)$.
+  - (*Haussdorf space*) Given a complete metric space $(X, d)$ one can define $\cH(X) = \lrg{\text{compact non-empty subsets of } X}$, that is a complete metric space with the metric $h(A, B) = \max\lrg{d(A, B), d(B, A)}$, where $d(A, B) = \max\lrg{d(x, B) \mid x \in A}$.
 * Properties of maps
   - (*Topological transitivity*) A dynsys is *topologically transitive* iff $\exists x \in X$ s.t. $\bar{\cO_f(x)} = X$.
 
@@ -178,13 +251,10 @@
     Precisely, for topdyn we ask that $\phi \in \cC^0(X, \bbC)$ and for measdyn we ask that $\phi: X \rar \bbC$ be measurable or $\cL^1(X, \cA, \mu)$
 
     *First integral*: is an observable which is constant along orbits and globally non-constant
-  - (*Skew-product*) Given a dynsys $f: X \rar X$ we extend it using $\phi: X \rar \bbR$:
-    \begin{diagram}
-    X \times \bbR & \rTo^{F} & X \times \bbR \\
-    \dTo^{\pi_1} & & \dTo_{\pi_1} \\
-    X & \rTo^{f} & X \\
-    \end{diagram}
-    where $F(x, u) = (f(x), u + \phi(x))$.
+  - (*Skew-product*) Let $(X, \cA, \mu, f)$ be a measure preserving transformation and $\phi: X \rar G$ a function.
+    Moreover, if $G$ is a locally compact topological group and $G$ acts on $(Y, \cB, \nu)$ in a measure preserving way, then we can define:
+    $$S_\phi: X \times Y \rar X \times Y \hskip 1.5em (x, y) \mapsto (f(x), \phi(x) y)$$
+    This is a dynsys that extends the original one $(X, \cA, \mu, f)$.
   - (*Transfer operator*) Let $T: I \rar I$ be a non-singular continuous map (i.e., $\mu(A) = 0 \implies \mu(T(A)) = 0$).
     We define the transfer operator as $P_T: \cL^1 \rar \cL^1$ s.t. $\int_A P_T f\de m = \int_{T^{-1}A} f \de m$ for every $A$ measurable.
 
@@ -244,6 +314,55 @@
     In dimension $n = 1$ all Hamiltonian systems are CCI.
 
     In dimension $n = 2$ the value of the Hamiltonian is preserved, and we can foliate the space by its "energy".
+  - (*Farey map*) $$f(x) = \partdef{\frac1{x-1} & x > \frac12 \\ \frac{x}{1-x} & x < \frac12}$$
+    It is ergodic wrt $\de\mu(x) = \frac{\de x}{x}$.
+  - (*Bernoulli Schemes*) Let $X = \lrg{1, \ldots, N}^\bbZ$. We get it to be an ultrametric space with $d(x, y) = 2^{-a(x, y)}$ where $a(x, y) = \min \lrg{\abs i \text{ s.t. } x_i \neq y_i}$.
+    
+    The shift operator $\sigma: X \rar X$ defined by $(\sigma x)_i = x_{i + 1}$ is $\cC^0$ and it's an homeo.
+
+    Now let $\cA$ the $\sigma$-algebra generated by cilinders, where a cilinder is, fixed $k \in \bbN, j_1, \ldots, j_k \in \lrg{1, N}$ the set $\lrg{x \in X \mid x_{i_1} = j_1, \ldots, x_{i_k} = j_k}$.
+    And, fixed $(p_1, \ldots, p_n) \in \Delta^N$, $\mu$ is the product measure $\mu(C^{i_1, \ldots, i_k}_{j_1, \ldots, j_k}) = p_{j_1} \cdot \ldots \cdot p_{j_k}$.
+    Then $\mu(\sigma^{-1}(A)) = \mu(A) \quad \forall A \in \cA$ because this is true for cilinders.
+    
+    We then get that $h_{KS}(\sigma, \mu) = h_{KS}(\sigma, p_1, \ldots, p_n) = - \sum_{i = 1}^N p_i \log p_i$.
+
+    *Ornstein theorem*: If two bernoulli schemes have the same entropy, they are isomorphic. [Without proof].
+  - (*Topological Markov chains*) A generalization of Bernoulli schemes.
+    Let $\Gamma$ be an oriented graph with $N$ nodes (i.e. a subset of $\lrg{1, \ldots, N}^2$ where $(i, j) \in \Gamma$ iff there is an arc going from node $i$ to node $j$).
+    
+    Define its adiacency matrix $A_\Gamma$ as $a_{ij} = \lrq{(i, j) \in \Gamma}$ (Iverson parenthesis notation).
+
+    The associated space is $\Sigma_\Gamma = \lrg{x \in \lrg{1, \ldots, N}^\bbZ \mid \forall i (x_i, x_{i+1}) \in \Gamma}$, that is the possible vertex walks.
+    The map is the shift on $\Sigma_\Gamma$ defined by $(\sigma x)_i = x_{i+1}$ with the distance $d(x, y) = 2^{-l(x, y)}$ where $l(x, y) = \inf\lrg{\abs i \mid x_i \neq y_i}$.
+  
+    /Possible properties of square matrices $A_{ij}$/:
+    * *Nonnegative* if $a_{ij} \ge 0 \quad \forall i, j$
+    * *Irreducible* If nonnegative and $\forall i, j : \exists n$ s.t. $(A^n)_{ij} > 0$ (i.e. there is a path from each vertex to each other)
+    * *Aperiodic/transitive/primitive* if there $\exists n$ s.t. $\forall i, j$ it holds $(A^n)_{ij} > 0$.
+
+    Moreover, $A_\Gamma$ transitive $\implies \Sigma_\Gamma$ topologically transitive
+  - (*Random walk on $\bbZ$*) Let $\Sigma = \lrg{0, 1}^\bbN$ be a Bernoulli scheme and let $\phi: \Sigma \rar \bbZ$ be given by $x \mapsto (-1)^{x_0}$ where $x_0$ is the first coordinate of $x$.
+    Taking the skew-product we get $T_\phi: \Sigma \times \bbZ \rar \Sigma \times \bbZ$ defined as $T_\phi(x, k) = (\sigma(x), k + \phi(x))$ and such a map is an extension of the Bernoulli shift.
+  - (*IFS - Iterated Function Systems*) It is a topological dynsys on $(\cH(X), h)$ given by $\cS = \lrg{S_1, \ldots, S_m}$ contractions with Lipschitz constants $c_i \in [0, 1)$.
+    Let $c = \max_i c_i$ and define the dynsys by $f(A) = \cup_{i=1}^m S_i(A)$.
+    
+    Such a map is a contraction on the Haussdorf space since $h(f(A), f(B)) \le c h(A, B)$ and by the contraction theorem, each $\cS$ has a unique attractor that we denote with $A(\cS) \in \cH(X)$.
+    Moreover by the same theorem, $\forall B \in \cH(X)$ we have $h(\cS^n(B), A(\cS)) \le c^n h(B, A(\cS))$.
+
+    Many fractals are IFS, such as the Cantor Set, the Sierpinski Triangle.
+
+    *To plot the IFS attractor* one can begin with a single point and iterate such system.
+    Suppose the system has $\card \cS = 3$ and $c = \frac12$, as it is for the Sierpinski Triangle.
+    To have a decent resolution we need $n = 10$ steps, but we should then calculate $3^n$ points, that is proibitively large.
+  - (*Probabilistic IFS as skew-products over Bernoulli schemes*) We can avoid the above problem in this way.
+
+    Let as before $\cS = \lrg{S_1, \ldots, S_m}$ be contractions and give them some probabilities $(p_1, \ldots, p_m) \in \Delta^{m-1}$ (i.e. $p_i \in (0, 1)$ and $\sum_i p_i = 1$).
+    Let $\Sigma_m = \lrg{1, \ldots, m}^\bbN$ and $\mu$ be the bernoulli measure on $\Sigma_m$ corresponding to $p_i$.
+
+    Then we can define the skew product map $\hat f: \Sigma_m \times \cH(X) \rar \Sigma_m \times \cH(X)$ by $\hat f(\xi, A) = (\sigma(\xi), S_{\xi_0}(A))$.
+    We have then $\hat f^n(\xi, A) = (\sigma^n(\xi), S_{\xi_{n-1}} \ldots S_{\xi_0}(A))$ and then there $\exists \lim_{n \rar \infty} \hat f^n(\xi, x_0)$ independent of $x_0$.
+  - (*Baker map*) Defined on the unit square by $B(x, y) = (2x (\mod 1), z)$ where $z = \partdef{\frac y2 & x \le \frac12 \\ \frac y2 + \frac12 & x > \frac12}$.
+    It is an ergodic, mixing map and can be seen as a factor of the bernoulli scheme $\Sigma_2^\bbZ$ by the projection $\pi((\xi_i)_{i \in \bbZ}) = (\sum_{i = 0}^\infty \xi_i 2^{-i}, \sum_{i = -1}^{- \infty} \xi_i 2^i)$.
 * Spiegazioni
   - (*Measurable dynamics: obstructions to measure preserving*)
     1. Lack of compactness (e.g. $X = \bbR, f(x) = x + 1$)
@@ -295,6 +414,44 @@
 
     But: *theorem*: If $f$ is uniquely ergodic and $\cM_f = \lrg\mu$ then $f$ is minimal iff $\mu$ has full support.
   - (*Gottschalk-Hedlund*) If $f$ is minimal and $\exists x_0 \in X$, $\exists C > 0$ s.t. $\forall n$ we have $\abs{\sum_{j = 0}^{n - 1} \phi \circ f^j(x_0)} \le C$ then $\exists \psi$ s.t. $\phi = \psi \circ f - \psi$.
+  - (*Entropy variational principle*) Let $(X, d, f)$ be a top. dynsys and $\cP_f(X) = \cM_f(X) = \lrg{\mu \text{ prob. meas. on } Bor(X) \text{ that are invariant under } f}$.
+    Then $h_{TOP}(f) = \sup_{\mu \in \cM_f(X)} h_\mu(f)$.
+  - (*Perron-Frobenius*) Let $A$ be a nonnegative matrix. Then:
+    1. If some column is not entirely zero, there $\exists \lambda > 0$ eigenvalue with an eigenvector $w \ge 0$.
+    2. If $\exists \lambda, w$ s.t. $Aw = \lambda w$ with $\lambda > 0, w > 0$ then [...].
+       Hence $\lambda$ is unique and any other eigenvalue satisfied $\abs\mu < \lambda$.
+    3. If $A$ is irreducible, then if $Aw = \lambda w$ with $w \ge 0$, $\lambda > 0$, then $w > 0$.
+    
+    So, if $A$ is irreducible, there $\exists \lambda_A > 0$ eigenvalue s.t.
+    1. $\forall \mu$ eigenvalue $\abs\mu < \lambda_A$
+    2. The right eigenvector $w > 0$ corresponding to $\lambda_A$ is unique
+    3. Any eigenvector $v \ge 0$ is a multiple of $w$
+    4. If $A$ is aperiodic $\implies$ $\abs\mu < \lambda_A \quad \forall \mu \neq \lambda_A$
+
+    If this happens, $(\lambda_A, w)$ are called Perron-Frobenius eigenvalue/eigenvector.
+  - (*Multiplicative ergodic theorem 1968*)
+    *Idea*: We have a disc dynsys $f \in \cC^1(\bbR^n)$ and let $x_0, x_1, \ldots$ be an orbit.
+    We would like to calculate $J(x_n)J(x_{n-1})\cdot \ldots \cdot J(x_0)$ and see how it goes to $\infty$.
+    We have ergodicity "$\sse$" it does not depend on $x_0$.
+
+    *Statement*: Let $(X, \cA, \mu)$ be a probability space with $T: X \rar X$ measure preserving.
+    Let $A: X \rar \cM(\bbR, k \times k)$ be measurable and such that $x \mapsto \log^+ \norm{A(x)} \in \cL^1(X, \mu)$.
+
+    Then there $\exists B \in \cA$ s.t. $\mu(B) = 1$, $T(B) \subseteq B$ and:
+    1. $\exists s: B \rar \bbN$ measurable s.t. $s \circ T = s$.
+    2. If $x \in B$ then $\exists -\infty \le \lambda^1(x) < \lambda^2(x) < \ldots < \lambda^{s(x)}(x)$ 
+       and linear subspaces $\lrg{0} = V^0(x) \subseteq V^1(x) \subseteq \ldots \subseteq V^{s(x)}(x) = \bbR^k$
+       such that if $1 \le i \le s(x)$ then $\forall v \in V^i(x) \setminus V^{i-1}(x)$ we have
+       $$\lim{n \rar \infty} \frac1n \log \norm{A(T^{n-1}(x)) \cdot \ldots \cdot A(x) \cdot v} = \lambda^{(i)}x$$
+
+       Moreover, if $T$ is ergodic, such limit does not depend on the chosen point $x \in B$.
+    3. $\lambda^i$ is defined and measurable on $\lrg{x \in B \mid s(x) \ge i}$ and $\lambda^i(T(x)) = \lambda^i(x)$ and on such set we have $A(x) V^i(x) \subseteq V^i(T(x))$.
+  - (*Smooth ergodic theory*)
+    *Theorem statement for invertible A, T*: Let $T$ be invertible and measure preserving wrt $(X, \cA, \mu)$, $A: X \rar GL(\bbR, k\times k)$ measurable and s.t. $x \mapsto \log^+ \norm{A(x)} \in \cL^1(X, \mu)$ and $x \mapsto \log^+ \norm{A^{-1}(x)} \in \cL^1(X, \mu)$.
+
+    Then there $\exists C \in \cA$ with $\mu(C) = 1$ totally invariant $T(C) = C$ s.t. $\forall x \in C$ $\exists \bbR^k = W^1(x) \oplus \ldots \oplus W^{s(k)}(x)$, s.t. $\forall v \in W^i(x) \setminus 0$ we have
+    $$\lim_{n \rar \infty} \frac1n \log\norm{A(T^{n-1}(x)) \cdot \ldots \cdot A(x) \cdot v} = \lambda^i x$$
+    $$\lim_{n \rar \infty} \frac1n \log\norm{\lrq{A(T^{-1}(x)) \cdot \ldots cdot A(T^{-n}(x))}^{-1} \cdot v} = \lambda^i x$$
 * Divagazioni e Conti
   | Topic                                                | Date        | Notes                                                                                  |
   |------------------------------------------------------+-------------+----------------------------------------------------------------------------------------|
@@ -306,15 +463,23 @@
   | Poincaré nonexistance theorem                        | 30/11       | Precise statement, proof in ___                                                        |
   | Furstenberg's Example                                | 05/12       | Smooth minimal diffeo of the torus which preserves the Haar measure but is not ergodic |
   | Transfer and expanding maps of intervals             | 12/12       |                                                                                        |
+  | Interval Exchange transformations                    | 19/12       |                                                                                        |
+  | Rauzy-Veech algorithm                                | 14/12       | To get the dual of an IET                                                              |
+  | Spectral theory of dynamical system                  | 11/01       |                                                                                        |
+  | Perron-Frobenius and Markov Chains                   | 16/01       |                                                                                        |
+  | Asyntotic behaviour of powers                        | 18/01       |                                                                                        |
+  | Information Theory and Shannon article               | 25/01-30/01 |                                                                                        |
 ** Esercizi da svolgere
    1. Sequenza della prima cifra di $2^k$: $1, 2, 4, 8, 1, 3, 6, ...$.
       È più frequente che esca $7$ o $8$?
 * Libri suggeriti
   - Walters, An introduction to ergodic theory (GTM, Springer)
+    * pages 233-234 (Multiplicative Ergodic Theorem)
   - Cornfeld-Fomin-Sinai, Ergodic theory
   - Knuth, The Art of Computer Programming (Chapters on pseudorandom number generators)
   - Widgerson of IAS Princeton, Talks on Pseudorandomness and randomness
   - Appendice di Diana & Oliveira, Foundations of Ergodic Theory
+  - Chapter 9 of Falconer's "Fractal Geometry"
 * Lezioni mancanti
   - 07/12/2017
   - 12/12/2017 Recuperare appunti propri
