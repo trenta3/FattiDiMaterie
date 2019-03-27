@@ -1,4 +1,7 @@
 #+AUTHOR: Dario Balboni
+#+OPTIONS: toc:nil
+#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
+
 Algoritmi scritti sul libro di Grossi e Co.
 
 * Strutture Dati
@@ -143,8 +146,8 @@ Algoritmi scritti sul libro di Grossi e Co.
    - Ricerca binaria :: Se la sequenza è ordinata in tempo $O(\log n)$.
    - Lower Bound :: Ogni algoritmo di ricerca per confronti ne richiede $\Omega(\log n)$ nel caso pessimo.
 ** Implementazioni
-   - Implementazioni di Pile e Code con Array e Liste
-   - Implementazione di Code con priorità attravero heap :: Enqueue: inseriamo un nuovo nodo contenente il valore come foglia dell'albero in modo da mantenerlo completo a sinistra.
+   - Implementazioni di Pile e Code con Array e Liste :: PENSA
+   - Implementazione di Code con priorità attraverso heap :: Enqueue: inseriamo un nuovo nodo contenente il valore come foglia dell'albero in modo da mantenerlo completo a sinistra.
 	Iterativamente, confrontiamo le priorità dell'elemento inserito con quella dell'elemento contenuto nel padre di un nodo.
 	Se la priorità è più alta, scambiamo i due nodi (in questo modo manteniamo le proprità di un heaptree).
 
@@ -356,7 +359,7 @@ Algoritmi scritti sul libro di Grossi e Co.
        Si può usare il minimum spanning tree come base per il partizionamento in cluster: infatti, ogni arco dell'albero è l'arco di peso inferiore tra quelli in grado di collegare le due porzioni di albero ottenute dalla rimozione dell'arco stesso.
        In termini di data mining, rimuovere un arco dà luogo ad una separazione tra due cluster dove la distanza tra due qualunque punti non può essere inferiore al peso dell'arco rimosso: scegliendo quindi di rimuovere gli archi più lunghi presenti nel MST, iniziamo a separare i cluster più distanti tra loro.
 * NP-Completezza ed approssimazione
-  - Definizione di P, NP, NP-completo e di riduzione polinomiale.
+  - Definizione di P, NP, NP-completo e di riduzione polinomiale :: non riportate
   - Riduzione di 2-SAT a componenti fortemente connesse in un grafo :: Due vertici per ogni variabile, due archi per ogni clausola e la formula $l \vee p$ viene tradotta come $\bar l \rar p$ e $\bar p \rar l$ ed i corrispondenti due archi modellano il fatto che se uno dei due letterali non è soddisfatto allora lo è l'altro.
        Teorema: la formula è soddisfacibile se e solo se $v_i^{pos}$ e $v_i^{neg}$ appartengono a due componenti fortemente connesse distinte del grafo per ogni $i$.
        Complessità: 2-SAT può essere risolto in tempo lineare.
