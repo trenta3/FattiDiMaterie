@@ -1,0 +1,489 @@
+#+AUTHOR: Dario Balboni
+Algoritmi scritti sul libro di Grossi e Co.
+
+* Strutture Dati
+** Lineari
+   - Array :: Occupano memoria contigua.
+	      L'accesso ad un elemento avviene in tempo costante.
+	      Le operazioni di ridimensionamento sono dispendiose ma possono essere ammortizzate a costanti.
+   - Liste :: Non occupa memoria contigua, ed ha quindi bisogno di tenere in memoria anche un riferimento al dato successivo.
+	      L'accesso all'elemento $i$ avviene in tempo $O(i)$.
+	      Inserimento ed eliminazione di un elemento possono essere eseguite in tempo costante.
+   - Liste doppie :: Preservano un riferimento anche all'elemento precedente per poterlo accedere in tempo costante.
+		     Semplificano anche l'operazione di cancellazione di un elemento.
+   - Pile :: Collezione di elementi su cui le operazioni disponibili sono ristrette unicamente a quello più recentemente inserito.
+	     Le operazioni classiche sono Push, Pop e Top, oltre possibilmente ad Empty.
+   - Code :: Collezione di elementi che vengono estratti in "testa" ed inseriti in "coda".
+	     Le operazioni classiche sono Enqueue, Dequeue, First, Empty.
+   - Code con priorità :: Collezione di elementi in cui a ciascuno viene associato un valore (detto priorità) appartenente ad un insieme totalmente ordinato.
+	Le operazioni disponibili sono le stesse della coda: Empty, Enqueue, Dequeue, First.
+	La differenza è che Dequeue e First restituiscono l'elemento con priorità massima.
+	Realizzate con un heap eseguire $k$ operazioni richiede tempo ammortizzato $O(k \log n)$ dove $n = m + k$ ed $m$ è il numero di elementi inizialmente presenti in un heap.
+** Non-lineari
+   - Alberi :: Ogni elemento può avere più di un successore: ogni nodo dell'albero ha associata la lista dei figli ad esso collegati.
+   - Alberi Binari :: Ogni nodo ha al più due figli ed ogni figlio ha un ruolo: è o figlio sinistro o figlio destro.
+   - Alberi cardinali :: O $k$-ari, dove ogni nodo ha $k$ riferimenti ai figli.
+   - Alberi ordinali :: Ogni nodo memorizza solamente la lista ordinata dei riferimenti non nulli ai figli ed il numero di figli è variabili.
+   - Heaptree :: È un albero vuoto oppure un albero dove (1) la priorità dell'elemento contenuto nella radice è maggiore o uguale di quelle dei figli della radice e (2) l'albero radicato in un qualunque figlio è a sua volta un heaptree.
+   - Heap :: È un heaptree con il vincolo aggiuntivo di essere binario e completo a sinistra, ed ha quindi altezza pari a $O(\log n)$.
+	     Completo a sinistra significa che i nodi di profondità minore dell'altezza massima $h$ formano un albero completamente bilanciato (ovvero tutte le foglie sono di profondità $h$, ed ogni nodo interno ha esattamente due figli), ed i nodi di profondità $h$ sono tutti accumulati a sinistra.
+
+	     Possono essere inseriti in un array in modo implicito: la radice occupa la posizione $0$; se un nodo occupa la posizione $i$, allora il suo figlio sinistro (se esiste) occupa la posizione $2i + 1$ ed il suo figlio destro (se esiste) occupa la posizione $2 i + 2$.
+	     In questo modo la navigazione nell'albero da un nodo ai suoi figli e viceversa richiede tempo costante, come nella rappresentazione esplicita, ed ha dei notevoli benefit in termini di memoria occupata.
+   - Albero Bilanciato :: Se vale che la sua altezza è logaritmica nei nodi: $h = O(\log n)$.
+   - Alberi completi :: Ogni nodo interno ha esattamente due figli non vuoti.
+   - Alberi completamente bilanciato :: È completo e tutte le foglie hanno la stessa profondità.
+   - Nodi cardine :: Quando la sua profondità è uguale all'altezza del sottoalbero che vi origina.
+*** Dizionari
+    - Operazioni sui dizionari :: Ricerca(k) -> sat, Inserisci(k, sat) -> (), Cancella(k) -> ()
+    - Dizionari ordinati :: Quando è definita una relazione di ordine totale sulle chiavi.
+	 Essi forniscono inoltre le operazioni: Successore(k) -> e, Predecessore(k) -> e, Intervallo(k, k') -> List[e], Rango(k) -> Int.
+    - Implementazione con liste doppie :: Complessità $O(n)$, operazioni nel modo ovvio (accesso sequenziale, lista non ordinata).
+    - Tabelle hash con liste di trabocco :: La tabella è un array di $m$ liste doppie, gestite come precedentemente detto, dove le chiavi che collidono fornendo lo stesso hash $h$ sono memorizzate nella stessa lista, etichettata con $h$.
+	 La ricerca scandisce la lista associata all'hash della chiave, mentre l'inserimento inserisce un nuovo nodo in fondo alla lista opportuna.
+	 
+	 Ha caso pessimo in tempo $O(n)$, ma se la funzione di hash è scelta buona (in modo che gli hash siano distribuiti in modo uniformemente casuale), allora la lunghezza media delle liste di trabocco è $O(n / m)$, $\alpha = n / m$ viene chiamato fattore di carico, e le operazioni richiedono in media un tempo costante $O(1 + \alpha)$.
+	 Mantenendo $\alpha$ circa a $1/2$ (ovvero $m$ circa doppio di $n$), si ottengono hash tables efficienti.
+    - Tabelle hash con indirizzamento aperto :: La tabella è un array di $m$ celle, dove si usa ~null~ per segnalare che la posizione corrente è vuota.
+	 Le chiavi sono collocate direttamente nell'array, e viene utilizzata una sequenza di funzioni $Hash[i]$ per $0 \le i \le m - 1$, detta sequenza di scansione, in modo che i valori $Hash[0](k), Hash[1](k), \ldots, Hash[m-1](k)$ formino sempre una permutazione delle posizioni $0, 1, \ldots, m-1$ per ogni chaive.
+	 Tale permutazione rappresenta l'ordine con cui vengono esaminate le posizioni di tabella durante le operazioni del dizionario.
+	 
+	 Inserimento: Si inserisce nella prima cella trovata vuota dalla scansione.
+	 Ricerca: Si cercano le celle piene per confrontare se la chiave è quella cercata, fino a trovare una cella vuota.
+	 Eliminazione: Si sostituisce l'elemento con un indicatore speciale per indicare che la cella ora è vuota ma prima era piena (per non fermarsi durante le successive ricerche di altre chiavi).
+
+	 Complessità peggiore: $O(n)$.
+	 Però se per ogni chiave, la sequenza di scanzione è una delle permutazioni possibili in modo uniformememnte casuale, il costo medio delle operazioni è costante se $\frac1{1 - \alpha} = O(1)$.
+
+	 Scelta una funzione Hash si può realizzare:
+      - Scansione lineare :: $Hash[i](k) = (Hash(k) + i) \% m$
+      - Scansione quadratica :: $Hash[i](k) = (Hash(k) + ai^2 + bi + c) \% m$, dove occorre scegliere $a$, $b$, $c$ in modo che vengano ottenute tutte le posizioni $0, \ldots, m-1$ al variare di $i$.
+      - Scansione con hash doppio :: $Hash[i](k) = (Hash(k) + i \cdot (1 + Hash'(k))) \% m$, dove occorre che $Hash'$ sia diverso da $Hash$ e che per ogni $k$ vengano ottenute tutte le posizioni in $0, \ldots, m-1$ al variare di $i$.
+*** Alberi binari di ricerca
+    - Definizione :: per ogni nodo, tutti gli elementi del sottoalbero sinistro sono minori dell'elemento contenuto nella radice e, analogamente, tutti gli elementi nel sottoalbero destro sono maggiori del dato contenuto nella radice.
+		     Vederne proprietà algoritmiche pg. 123-124.
+    - 1-bilanciati :: Un albero binario è 1-bilanciato se ad ogni nodo, le altezze dei suoi due figli differiscono per al più una unità.
+    - AVL :: Albero binario di ricerca 1-bilanciato.
+	     Gli alberi di fibonacci $Fib_h$ sono gli alberi 1-bilanciati di altezza $h$ col minimo numero di nodi, si ha quindi che $n_h \ge c^h$, ovvero che hanno altezza logaritmica.
+	     Si mostrano facilmente essere minimali, ovvero se si toglie loro un nodo diminuiscono di altezza oppure non sono più 1-bilanciati.
+	     Il fatto che siano un minimo non viene mostrato.
+
+	     Ogni nodo tiene memorizzata la sua altezza.
+	     L'inserimento si fa come nel caso degli alberi binari di ricerca qualunque e poi si percorrono gli antenati del nodo aggiunto guardando qual'è il primo ad essere sbilanciato: si distinguono quattro casi a seconda di a quale sottoalbero appartiene la foglia appena inserita (sx.sx, sx.dx, dx.sx, dx.dx).
+	     Si opera mediante rotazioni orarie ed antiorarie che "ruotano" la posizione dell'albero preservando l'ordine sui nodi.
+	     Ogni caso richiede una o due rotazioni e quindi il tempo di inserimento è $O(\log n)$.
+
+	     Per la cancellazione possono essere più nodi critici tra gli antenati del nodo cancellato: si preferisce quindi marcare logicamente i nodi cancellati, che vengono ignorati ai fini della ricerca.
+	     Quando una frazione costante dei nodi sono marcati come cancellati, si ricostruisce l'albero con le sole chiavi valide, ottenendo un costo ammortizzato $O(\log n)$.
+*** Trie o Alberi digitali di ricerca
+    Struttura largamente impiegata per memorizzare un insieme di stringhe.
+    Oltre che verificare se una stringa appare, essi permettono di trovare il più lungo prefisso di una stringa che appare come prefisso di una delle stringhe nell'insieme.
+    
+    - Definizione :: è un albero cardinale $\sigma$-ario (dove $\sigma$ è la dimensione dell'alfabeto) e che rappresenta un insieme $S$ di stringhe in modo che, detto $S_c$ l'insieme delle stringhe in $S$ aventi $c$ come carattere iniziale, e detto $u$ il nodo radice, $u.figlio[c]$ memorizza il trie ricorsivamente definito per $S_c$, dove alcuni dei figli possono essere vuoti.
+		     Ciascun nodo di un trie è dotato di un campo in cui memorizzare un elemento.
+    - Trie compatti :: Dato un trie diciamo che un suo nodo è unario se ha esattamente un figlio non vuoto, e sostituiamo una catena massimale di tali nodi con un singolo arco etichettato con la stringa di caratteri.
+* Algoritmi
+** Ordinamento
+   - Selection Sort :: Al passo $i$ viene selezionato l'elemento che occuperà la posizione $i$ della sequenza ordinata.
+		       L'algoritmo seleziona il minimo degli elementi che si trovano dalla posizione $i$ in avanti e lo scambia con quello di posizione $i$.
+		       Invariante: al passo $i$, gli $i+1$ elementi iniziali sono tra loro ordinati e minori di tutti gli elementi successivi.
+		       Complessità: Tempo $\theta(n^2)$, con $n$ lunghezza della sequenza.
+   - Insertion Sort :: Al passo $i$ l'elemento in posizione $i$ viene inserito al posto giusto tra i primi $i + 1$ elementi.
+		       L'algoritmo confronta l'elemento in posizione $i$ con i primi $i$ elementi per trovare la posizione corretta in cui inserirlo.
+		       Invariante: al passo $i$, gli $i+1$ elementi sistemati fino a quel momento sono tra loro ordinati, anche se non coincidono necessariamente con i primi $i+1$ elementi della sequenza ordinata finale.
+		       Complessità: Tempo $O(n^2)$, con $n$ lunghezza della sequenza da ordinare.
+		       Pro: Rispetto al selection sort in casi speciali questo richiede meno operazioni (ad esempio se la sequenza iniziale è già ordinata).
+   - Heap Sort :: Si esegue utilizzando una coda con priorità ed inserendo prima tutti gli elementi e poi estraendoli tutti.
+		  Quando realizzato attraverso un heap si ottiene un algoritmo in tempo $O(n \log n)$.
+   - Lower Bound :: Ogni algoritmo di ordinamento basato su confronto di elementi richiede $\Omega(n \log n)$ confronti nel caso pessimo.
+   - Merge Sort :: Decomposizione: Se la sequenza ha almeno due elementi, viene divisa in due sotto-sequenze uguali (o quasi) in lunghezza.
+		   Ricorsione: Ordina ricorsivamente le due sotto-sequenze.
+		   Ricombinazione: Fondiamo le due sotto-sequenze ordinate in un'unica sequenza ordinata.
+		   Complessità: in tempo $O(n \log n)$.
+   - Quick Sort :: Decomposizione: Se la sequenza ha almeno due elementi, sceglie un elemento pivot e la sequenza viene divisa in due sotto-sequenze, eventualmente vuote, dove la prima contiene gli elementi minori o uguali al pivot e la seconda contiene elementi maggiori o uguali.
+		   Ricorsione: Ordina ricorsivamente le due sotto-sequenze.
+		   Ricombinazione: Concatena implicitamente le due sotto-sequenze ordinate in un'unica sequenza ordinata.
+
+		   Notiamo che possiamo utilizzare una strategia simile per estrarre l'elemento di rango $r$, visto che quicksort ci permette di determinare il rango del pivot.
+		   In questo modo otteniamo la selezione in tempo $O(n)$.
+** Moltiplicazione di numeri interi
+   - Elementari :: Complessità: Tempo $O(n^2)$.
+   - Karatsatuba :: Basato sull'uguaglianza
+		    $$xy = (10^{n/2} x_s + x_d)(10^{n/2} y_s + y_d) = 10^n x_s y_s + 10^{n/2} (x_s y_d + x_d y_s) + x_d y_d$$
+		    e sul fatto che $x_s y_d + x_d y_s = x_s y_s + x_d y_d - (x_s - x_d) \cdot (y_s - y_d)$, che permette di ridurre le moltiplicazioni necessarie a tre.
+		    Complessità: Tempo $O(n^{\log_2 3}) = O(n^{1.585})$.
+** Moltiplicazione di Matrici
+   - Classica :: Complessità: Tempo $O(n^3)$.
+   - Strassen :: Basato sul fatto che la moltiplicazione di due matrici $2 \times 2$ può essere effettuata con solo 7 moltiplicazioni, invece che con 8.
+		 Per vedere i valori a pg. 89 del libro.
+		 Complessità: Tempo $O(n^{\log 7}) = O(n^{2.807})$.
+** Coppia più vicina sul piano
+   - Può essere risolto in tempo $O(n \log n)$: dividiamo l'insieme in due parti $S$ e $D$, a sinistra ed a destra di una fissata linea verticale.
+     Si trova poi ricorsivamente le soluzioni per le due istanze individuando le coppie $d_S$ e $d_D$.
+     La soluzione finale può essere una delle due coppie già individuate oppure può essere formata da un punto in $S$ ed uno in $D$.
+     Vedere dettagli a pg. 93 del libro.
+** Master Theorem
+   Sia $f(n)$ una funzione non decrescente e siano $\alpha, \beta, n_0, c_0, c$ costanti tali che $\alpha \ge 1, \beta > 1, n_0, c_0, c > 0$, per la relazione di ricorrenza: $T(n) \le c_0$ se $n \le n_0$ e $T(n) \le \alpha T(n / \beta) + c f(n)$ altrimenti.
+   Se esistono due costanti positive $\gamma$ e $n_0'$ tali che $\alpha f(n / \beta) \ge \gamma f(n)$ per ogni $n \ge n_0'$, allora la relazione di ricorrenza ha i seguenti limiti superiori:
+   - $T(n) = O(f(n))$ se $\gamma < 1$.
+   - $T(n) = O(f(n) \log_\beta n)$ se $\gamma = 1$.
+   - $T(n) = O(n^{\log_\beta \alpha})$ se $\gamma > 1$ e $\alpha > 1$.
+** Algoritmi ricorsivi decomponibili su alberi binari
+   Possono tutti essere computati in $O(n)$ poiché ricorrono una sola volta sia a destra che a sinistra.
+   Ne diamo la descrizione come formula ricorsiva sul sottoalbero di destra e di sinistra:
+   - Dimensione (totale nodi) :: $Dim = Dim(sx) + Dim(dx) + 1$, $Dimnull = 0$.
+   - Altezza :: $Alt = 1 + max{Alt(sx), Alt(dx)}$, $Dimnull = -1$.
+*** Tipi di visita su alberi binari
+    L'albero viene attraversato come si fa con le sequenze lineari. Si distinguono diversi tipi, a seconda di quando viene effettuata un'operazione:
+    - Visita anticipata (preorder) :: Operazione sul nodo; visita sottoalbero SX; visita sottoalbero DX;
+    - Visita simmetrica (inorder) :: Visita sottoalbero SX; Operazione sul nodo; Visita sottoalbero DX;
+    - Visita posticipata (postorder) :: Visita sottoalbero SX; Visita sottoalbero DX; Operazione sul nodo;
+** Ricerca di una chiave
+   - Ricerca Sequenziale :: Tempo $O(n)$.
+   - Ricerca binaria :: Se la sequenza è ordinata in tempo $O(\log n)$.
+   - Lower Bound :: Ogni algoritmo di ricerca per confronti ne richiede $\Omega(\log n)$ nel caso pessimo.
+** Implementazioni
+   - Implementazioni di Pile e Code con Array e Liste
+   - Implementazione di Code con priorità attravero heap :: Enqueue: inseriamo un nuovo nodo contenente il valore come foglia dell'albero in modo da mantenerlo completo a sinistra.
+	Iterativamente, confrontiamo le priorità dell'elemento inserito con quella dell'elemento contenuto nel padre di un nodo.
+	Se la priorità è più alta, scambiamo i due nodi (in questo modo manteniamo le proprità di un heaptree).
+
+	Dequeue: Estraiamo la radice in modo da restituire l'elemento in essa contenuto alla fine dell'operazione.
+	Rimuoviamo l'ultima foglia dell'albero (quella più a destra nell'ultimo livello) per inserirla come radice al posto di quella estratta, al fine di mantenere l'albero completo a sinistra.
+	Iterativamente, confrontiamo la priorità dell'elemento nella radice con quelle degli elementi nei suoi figli e, se il massimo fra le priorità non è quella della radice, essa viene scambiata con il figlio contenente un elemento di priorità massima: l'iterazione termina se la radice diventa una foglia o se contiene un elemento la cui priorità è maggiore o uguale a quelle degli elementi contenuti nei suoi figli.
+** A caso
+   - Di conversione da notazione infissa a postfissa
+* Scelte casuali e tempo ammortizzato
+** Quicksort
+   Scegliendo casualmente il pivot, si ha tempo medio $O(n \log n)$.
+   Distinguendo infatti se esso è interno (tra il primo ed il terzo quartile) oppure esterno (prima del primo o dopo il terzo quartile) si hanno due complessità differenti.
+   Ciascuno di questi casi viene scelto equiprobabilmente, e si può risolvere la ricorrenza in questo modo.
+** Liste
+   - skip list :: Partiamo da una lista ordinata di $n+2$ elementi, che costituisce il livello $0$ della lista a salti.
+		  Il primo e l'ultimo elemento sono $\pm \infty$, per l'elemento $i$-esimo della lista creiamo $r_i$ copie, con $2^{r_i} || i$.
+		  Ciascuna copia ha un livello crescente $r_i$ e punta alla copia di livello inferiore $l-1$.
+		  Il massimo livello o altezza della lista a salti è $h = O(\log n)$.
+
+		  Per la ricerca si utilizza la nozione di *predecessore*, ovvero il massimo tra i minoranti di un elemento, e si saltella dalla lista più alta alla successiva cercando prima il predecessore della chiave nella lista in cui si è e poi passando alla lista gerarchicamente più bassa.
+		  L'operazione di inserimento è più complicata perché richiederebbe di modificare tutte le copie degli elementi che seguono la chiave inserita.
+		  Per far fronte a ciò usiamo un algoritmo random di inserimento che con alta probabilità continua a mantenere un'altezza media logaritmica: identificati i predecessori della chiave, eseguiamo una sequenza di lanci che si ferma se otteniamo un $1$ oppure se otteniamo $h+1$ lanci.
+		  Se ne otteniamo $h+1$ dobbiamo incrementare l'altezza. In ogni caso, creiamo $r$ copie di $k$ e le inseriamo nelle liste $L_0, L_1, \ldots, L_r$.
+		  Il costo totale dell'operazione è in media $O(\log n)$.
+
+		  Per la cancellazione si cancellano tutte le copie dell'elemento (efficacemente fatto memorizzando la lista di suoi predecessori).
+   - Union find per liste disgiunte :: Siamo interessati a gestire una sequenza arbitraria di operazioni di unione e di appartenenza su un insieme di liste (disgiunte a due a due) contenenti un totale di $m$ elementi.
+	Un'operazione di unione prende due delle liste disponibili e le concatena, mentre un operazione di appartenenza stabilisce se due elementi appartengono alla stessa lista.
+	
+	Rappresentiamo ciascuna lista con un riferimento all'inizio ed alla fine della lista stessa nonché con la sua lunghezza.
+	Inoltre, diamo ad ogni elemento un riferimento alla propria lista di appartenenza.
+	Quando uniamo due liste, cambiamo il riferimento agli elementi della lista più corta.
+	In questo modo, l'appartenenza si può verificare in tempo costante attraverso il riferimento alla lista, mentre la concatenazione avviene come in precedenza.
+	
+	In questo modo il costo di $n$ operazioni unisci è $O(n \log m)$, mentre ciascuna operazione appartieni è $O(1)$ al caso pessimo.
+	Infatti si può valutare un limite superiore al numero di riferimenti cambiati: si vede che l'$i$-esima volta che l'elemento z cambia puntatore alla lista, la grandezza della nuova lista è almeno $2^i$.
+	Ogni elemento cambia quindi il puntatore alla lista al più $O(\log m)$ volte.
+   - Liste ad auto-organizzazione :: Utile quando la lista non è necessariamente ordinata in base alle chiavi di ricerca.
+	Si usa il principio di *località temporale*, ovvero se accediamo ad un elemento in un dato istante, è molto probabile che accederemo a questo stesso elemento in istanti immediatamente successivi.
+	La ricerca avviene sequenzialmente, ma successivamente ad essa si riorganizzano in modo profiquo gli elementi della stessa.
+   - OPT :: Algoritmo di preveggenza teorico che, note anticipatamente tutte le richieste, riorganizza gli elementi per garantire il minor costo possibile di accesso.
+	    Utilizzato per un'analisi del tempo degli algoritmi delle liste ad auto-organizzazione.
+   - Liste MTF (Move to front) :: Un tipo di liste ad auto-organizzazione che spostano l'elemento acceduto dalla posizione attuale alla cima della lista, lasciando invariato l'ordine relativo degli altri elementi.
+	Il costo di MTF non supera il doppio del costo di OPT quando le liste di partenza sono uguali.
+	Ciò si mostra contando il numero di inversioni al passo $j$-esimo, che verificano $c_j + \phi_j - \phi_{j-1} \le 2 c_j'$.
+	Vedere pg. 172 per i dettagli.
+* Programmazione Dinamica
+  Salvarsi in memoria soluzioni a sottoproblemi per prenderne i risultati nel risolvere problemi più grossi.
+  - Definizione vera :: Un problema caratterizzato dalle seguenti due proprietà:
+       /Ottimalità dei sotto-problemi/: La soluzione ottima di un problema deriva dalle soluzioni ottime dei sotto-problemi in cui è stato decomposto,
+       /Sovrapposizione dei sotto-problemi/: Uno stesso sotto-problema può essere utilizzato nella soluzione di due (o più) sotto-problemi diversi.
+  - Problema del resto col minor numero di monete :: Idea: Se dobbiamo dare resto $R$ e diamo una moneta di peso $v_i$ poi ci servono $r(R - v_i)$ monete.
+       Memorizziamo quindi una tabella di $c \rar r(c)$.
+
+       Si può provare a risolvere con un algoritmo goloso di restituire sempre la moneta di peso più alto possibile che è molto più veloce, anche se non sempre dà il risultato ottimo.
+  - Sotto-sequenza comune più lunga :: Individuare se una sequenza $S$ appare come sotto-sequenza di $F$ (posizioni crescenti).
+       Noi individueremo date due sequenze $a$ e $b$, la loro sotto-sequenza comune più lunga $x$.
+       
+       Si definisce $L(i, j)$ come lunghezza massima delle sotto-sequenze comuni alle due seq. dei primi i e j elementi.
+       Allora $L(m, n)$ è la soluzione cercata (con $m = \abs a$, $n = \abs b$) e $L(i, 0) = L(0, j) = 0$.
+       Per gli altri valori si ha, se $a[i] = b[i]$ $L(i, j) = L(i-1, j-1) + 1$, altrimenti si ha $\max \lrg{L(i, j-1), L(i-1, j)}$.
+       
+       Questo è in tempo $O(mn)$ ma si può fare anche con asintotiche migliori.
+  - Problema di partizione :: Insieme di interi positivi $A$ con somma totale $= 2s$, vogliamo determinare se esiste un suo sottoinsieme $A'$ con somma totale $= s$.
+
+       Possiamo definire il valore $T(i, j)$ che è TRUE se esiste un sottoinsieme dei primi $i$ elementi di $A$ con somma $j$.
+       Allora $T(n, s)$ è la soluzione al nostro problema, $T(0, 0) = TRUE$, $T(0, j) = FALSE$.
+       Inoltre la ricorsione si può spezzare a seconda che il nuovo insieme a somma $j$ includa o non includa $a_i$, ottenendo quindi regole di ricorsione.
+  - Problema della bisaccia (knapsack) :: Multi-insieme di elementi $A$, ciascuno ha un valore ed un peso (interi positivi). Inoltre vi è un intero possanza, del massimo peso che si può trasportare.
+       Vogliamo determinare un sottoinsieme tale che il peso dei suoi elementi rientri nella possanza, e che il valore degli oggetti selezionati sia il massimo possibile.
+       Come prima il sottoproblema consiste nell'avere una minore possanza e solo i primi $i$ elementi a disposizione.
+       Come prima, si può ottenere la ricorsione spezzando il problema a seconda se $a_i$ debba essere incluso nella soluzione ottima oppure no.
+  - Rilassamento della bisaccia (bisaccia frazionabile) :: Degli elementi ora se ne può prendere una frazione qualunque.
+       Questo problema può essere risolto con un algoritmo goloso corretto: inseriamo nella bisaccia quanto più possibile l'elemento con il più alto valore per unità di peso.
+       Se resta altro spazio proseguiamo con il secondo elemento con più alto valore per unità di peso e così via.
+       Se non riusciamo ad includere interamente un elemento, basta prendere la sua frazione che entra nello zaino.
+
+       Complessità: $O(n \log n)$ in quanto il suo costo è dominato dall'ordinamento degli elementi.
+  - Massimo insieme indipendente in un albero :: Dato un albero $T$ di $n$ nodi dell'insieme $V$, un insieme indipendente è un sottoinsieme di $V$ che non contiene coppie di nodi nella relazione diretta padre-figlio.
+       Il problema consiste nel trovare un insieme indipendente di cardinalità massima.
+       
+       Il sottoproblema è dato dal trovare la dimensione del massimo insieme indipendente nel sottoalbero radicato in $u$ nei due casi in cui l'insieme massimale contenga $u$ e in cui non lo contenga.
+  - Minimo ricoprimento di un albero :: Dato un albero binario pesato di $n$ nodi, un ricoprimento di $T$ è un sottoinsieme $R$ di vertici tale che per ogni collagamento diretto padre-figlio, almeno uno dei due nodi è in $R$.
+       Il costo di un ricoprimento è dato dalla somma dei pesi dei nodi in esso contenuti.
+       Il problema chiede di trovare il costo minimo di un ricoprimento di $T$.
+
+       Anche qui il sottoproblema è dell'albero radicato in $u$ a seconda se contenga o meno il nodo $u$.
+  - Alberi di ricerca ottimi :: Gli alberi bilanciati garantiscono ricerca in $O(\log n)$, ma se alcune chiavi vengono chiamate più frequentemente di altre noi vogliamo tenerle vicine alla radice.
+       Supponiamo quindi di avere anche l'informazione sulla probabilità che un dato elemento venga ricercato tramite la sua chiave, e vogliamo costruire alberi di ricerca nei quali il tempo medio per la ricerca è inferiore.
+       
+       Chiamiamo $t(u, v)$ il tempo di ricerca medio nell'albero ottimo contenente gli elementi $u, u+1, \ldots, v$ in base alle loro probabilità $p_u, p_{u+1}, \ldots, p_v$.
+       Il valore della soluzione ottima è $t(0, n-1)$, mentre quando $v < u$ si ha $t(u, v) = 0$.
+       Nel resto dei casi la relazione di ricorrenza si ottiene scegliendo quale dei nodi tra $u$ e $v$ deve diventare radice e spezzando così la somma dei tempi di attesa.
+  - Algoritmi psuedo-polinomiali :: Gli algoritmi visti in questa sezione hanno costo che dipende anche dai valori degli elementi e non solo dal loro numero.
+       Gli algoritmi pseudo-polinomiali sono quelli che diventano polinomiali quando un certo valore è polinomiale nella descrizione dell'istanza del problema.
+* Grafi
+  - Grafo pesato :: Se ha anche una funzione che ad ogni arco associa un numero reale detto peso.
+  - Cammino semplice :: Se non attraversa alcun nodo più di una volta (tranne il primo e l'ultimo nodo che possono essere uguali).
+  - Componente connessa :: Sottografo connesso e massimale tra quelli connessi.
+  - Clique (o cricca) :: Grafo in cui tutte le coppie di nodi sono adiacenti.
+  - Perfect matching :: Vogliamo assegnare le poltrone di un pullman a coppie di persone che si conoscono già.
+       Modellizziamo il grafo dove i nodi sono le persone ed hanno un arco se si conoscono già.
+       La soluzione è un sottoinsieme di archi tale che tutti i nodi siano incidenti a tali archi e che ogni nodo compaia in solo un arco di questi.
+       Tale sottoinsieme viene denominato abbinamento perfetto dei nodi.
+  - Cammino hamiltoniano :: Cammino sul grafo che passi una ed una sola volta per tutti i nodi.
+       Si dice ciclo se chiediamo che si possa chiudere.
+  - Multigrafo :: Se possono esserci archi multipli sulla stessa coppia di vertici.
+  - Ciclo euleriano :: Ciclo che passa esattamente una volta da ogni arco.
+       
+       Eulero mostrò che è equivalente ad essere connessi e che tutti i nodi abbiano grado pari.
+  - Rappresentazione con matrice di adiacenza :: Array bidimensionale di $n \times n$ elementi tale che $A_{ij} = 1 \sse$ $i$ e $j$ sono connessi da un arco.
+       Per i grafi pesati possiamo associare una matrice dei pesi in cui $P_{ij} = w(i, j)$.
+       
+       Si può verificare in tempo $O(1)$ l'esistenza di un arco tra due nodi ma, dato un nodo $i$, è richiesto tempo $O(n)$ per scandire l'insieme dei nodi adiacenti.
+  - Rappresentazione con liste di adiacenza :: A ogni nodo del grafo è associata la lista doppia dei nodi adiacenti, implementata come un dizionario a lista di lunghezza pari al grado del nodo.
+       
+       L'adiacenza e l'enumerazione delle adiacenze sono fattibili in tempo proporzionale al grado del nodo.
+  - Contrazione di un grafo :: Il grafo che si ottiene collassando i vertici di grado $2$.
+  - Grafi planari :: Quelli che è possibile disegnare su un piano senza intersezioni degli archi.
+		     Eulero mostro che un grafo planare di $n$ vertici contiene $m = O(n)$ archi, risultando quindi sparsi.
+
+		     Inoltre un grafo è planare se e solo se non ha contrazioni $K_5$ e $K_{3, 3}$ (Kuratowski-Pontryagin-Wagner).
+  - Chiusura transitiva :: Indichiamo con $G^*$ la chiusura transitiva di $G$, ovvero il grafo che ha due vertici adiacenti se essi sono collegati da un /cammino/ in $G$.
+       Data la matrice di adiacenza $A$ di $G$, indichiamo con $A^*$ la sua matrice di adiacenza e si ha che $A^*_{ij} = [(I + A)^n_ij != 0 ]$
+  - Visita in apiezza BFS (Breadth-First Search) :: Esplora i nodi in ordine crescente di distanza da un nodo inziale tenendo presente l'esigenza di evitare che la presenza di cicli possa portare ad esaminare ripetutamente gli stessi cammini.
+       
+       Usiamo un array di appoggio per ricordarci quali nodi abbiamo già visitato.
+       Trovato un nuovo nodo, tutti i suoi vicini vengono inseriti in una coda dalla quale viene prelevato il prossimo nodo da visitare.
+       L'utilizzo della coda ci garantisce la visita in ampiezza.
+       Costo: $O(m + n)$ tempo e $O(m + n)$ celle di memoria.
+
+       Gli archi che conducono a vertici non ancora visitati formano un albero detto *albero BFS*.
+       Quando gli archi di tale sottografo sono incidenti a tutti i vertici, l'albero BFS ottenuto è un albero di ricoprimento (spanning tree).
+       L'albero BFS è utile per rappresentare i cammini minimi dal vertice di partenza $s$ verso tutti gli altri vertici in ung rafo non pesato.
+
+       Proprietà dell'albero BFS: Gli archi del grafo che non sono nell'albero BFS possono collegare solo due vertici alla stessa profondità o a profondità consecutive $p$ e $p+1$ ed il diametro del grafo può essere calcolato come la massima tra le altezze degli alberi BFS radicati nei diversi vertici del grafo.
+  - Visita in profondità DFS (Depth-First Search) :: Usiamo una pila al posto di una coda.
+       Anche qui si costruisce un *albero DFS*, i cui archi sono individuati in corrispondenza della scoperta di nuovi vertici.
+
+       Costo: temporale $O(m + n)$, di memoria per visita iterativa $O(m)$, per visita ricorsiva $O(n)$.
+  - Grafi ciclici e visite BFS / DFS :: Un grafo è ciclico se e solo se contiene almeno un arco all'indietro (definito per visite BFS e DFS).
+  - Ordinameto topologico di DAG :: Dato un grafo diretto aciclico, un ordinamento topologico è una numerazione dei vertici tale che per è crescente per ogni arco ($u \rar v \implies \eta(u) < \eta(v)$).
+       Può essere visto come un ordinamento totale compatibile con quello parziale rappresentato dal DAG.
+
+       Algoritmo stupido: Cerco un nodo con grado in uscita nullo, gli assegno il numero più alto, lo tolgo dal grafo e vado per ricorsione.
+       
+       Algoritmo più semplice: Visita ricorsiva in profondità ed assegniamo una priorità al nodo dopo che l'abbiamo data a tutti i suoi vicini.
+       Complessità: $O(m + n)$ tempo e spazio $O(n)$ celle di memoria.
+  - Individuazione componenti connesse :: In un grafo non orientato effettuiamo una visita ricorsiva, segnandoci quali nodi sono stati raggiunti.
+       Quando essa termina, controlliamo se vi sono nodi non raggiunti: in questo caso essi fanno parte di una componente connessa diversa da quella attuale e possiamo riiniziare da loro.
+       Complessità: tempo $O(n + m)$ e spazio $O(n)$.
+
+       In un grafo orientato vogliamo trovare la decomposizione in DAG indentificando con una relazione di equivalenza i vertici nella stessa componente fortemente connessa.
+       Sia $P$ il cammino parziale prodotto da una visita DFS a partire da un vertice stabilito e sia $u$ l'ultimo vertice di $P$ e $(u, v)$ il prossimo arco analizzato dalla visita:
+       se $v$ è in $P$, sia $P_v$ la parte di cammino che va da $v$ ad $u$, che contraiamo assieme all'arco $u \rar v$ in un macro vertice il cui rappresentante è $v$ e continuiamo la visita.
+       Se $v$ non è in $P$, aggiungiamo $v$ a $P$ e proseguiamo la visita analizzando gli archi uscenti da $v$.
+       
+       Nel caso in cui $u$ non abbia archi uscenti eliminiamo il macro-vertice di $u$ dal grafo e diamo in output la componente fortemente connessa e proseguiamo l'algoritmo con la visita del prossimo nodo seguendo l'ordine della visita in profondità.
+       Alla fine della computazione il grafo contratto corrisponderà al DAG di cui sopra.
+       Complessità: tempo $O(n + m)$.
+  - Cammino minimo su un grafo non pesato :: Tra due nodi $u$ e $v$ si può trovare con una BFS.
+  - Cammino minimo su un grafo con pesi positivi :: Algoritmodi Dijkstra.
+       Il problema chiede di determinare il cammino minimo e la distanza da un singolo nodo sorgente a tutti gli altri.
+       Può essere risolto con un algoritmo di visita del grafo che usa una coda con priorità per determinare l'ordine di visita dei nodi.
+       
+       Gli elementi nella coda sono coppie $(v \in V, p \in \bbR^+)$ ordinate rispetto ai pesi.
+       Ad ogni istante il peso $p$ associato al nodo $v$ nella coda con priorità indica la lunghezza del cammino più corto trovato finora nel grafo e viene aggiornato quando se ne trova uno più breve.
+       Ad un certo passo l'algoritmo estrae dalla coda il nodo $v$ con peso minimo (che rappresenta la distanza $\delta(s, v)$) ed esamina tutti gli archi uscenti da $v$.
+       Se per qualcuno di questi ha senso percorrerlo per diminuire la distanza dal nodo a cui si arriva, viene cambiata la distanza del nodo in questione e $v$ diventa predecessore nel cammino minimo.
+       Per la correttezza vedere pg. 254.
+       
+       Complessità: $O(m \log n)$ oppure anche $O(n^2 + m)$ (comodo nel caso in cui il grafo sia denso).
+  - Cammino minimo con pesi anche negativi :: Supponiamo comunque che non esistano cicli con peso complessivo negativo.
+       Il metodo più diffuso per la ricerca /single source/ è l'algoritmo di Bellman-Ford: dopo l'inizializzazione come in Dijkstra, l'algoritmo opera per $n = \abs V$ iterazioni la scansione di tutti gli archi del grafo: per ogni arco $(u, v)$ si esamina se percorrere questo arco migliorerebbe la distanza nota per $v$, data quella attualmente nota per $u$.
+       Nel qual caso le informazioni vengono aggiornate per rappresentare questa nuova situazione.
+       
+       Nel caso all sources possiamo fare di meglio rispetto ad eseguirlo $n$ volte: usiamo la rappresentazione dei grafi pesati tramite la matrice di adiacenza e dei pesi ed utilizziamo la programmazione dinamica:
+       il sottoproblema è, data una coppia di nodi $u$ e $v$ e per ogni $k$, la lunghezza del cammino minimo $\pi_k(u, v)$ che va da $u$ a $v$ passando solo per i primi $k$ nodi del grafo (eccetto per $u$ e $v$ stessi).
+       Per $k = n$ si ha la soluzione al problema. Come sempre la ricorsione è data dallo spezzare il caso in cui il nodo $k$-esimo appaia o non appaia nel cammino minimo $\pi_k$.
+       L'algoritmo risultante viene detto di Floyd-Warshall: complessità temporale $O(n^3)$ e di memoria $O(n^2)$, notando che è possibile ignorare l'indice $k-1$ poiché $\delta_{k-1}(u, k-1) = \delta_k(u, k-1)$ e $\delta_{k-1}(k-1, v) = \delta_k(k-1, v)$.
+  - Minimum spanning tree :: Tra gli alberi che coprono tutti i nodi del grafo, quello con minima somma dei pesi degli archi.
+       
+       Supponiamo il caso in cui i pesi degli archi siano positivi.
+       Dato un grafo, un taglio (cut) su $G$ è un sottoinsieme $C$ di archi la cui rimozione disconnette il grafo.
+
+       *Teorema*: Dato un grafo pesato $G$ con pesi distinti e un suo MST $= (V, E')$ si ha che per ogni arco $e \in E$:
+       (Condizione taglio): $e \in E'$ se e solo se esiste un taglio in $G$ che comprende $e$, per il quale $e$ è l'arco di peso minimo.
+       (Condizione ciclo): $e \notin E'$ se e solo se esiste un ciclo in $G$ che comprende $e$, per il quale $e$ è l'arco di peso massimo.
+
+       Diamo nel seguito i due algoritmi classici: Kruskal e Jarnik-Prim. Essi sono due varianti di un medesimo approccio goloso: si inizializza $E'$ ad un insieme vuoto, e si aggiungono poi archi a tale insieme finché il grafo $T = (V, E')$ resta non connesso.
+       Un arco viene aggiunto ad $E'$ se è quello più leggero uscente da una qualche componente connessa di $T$, ovvero se è l'arco più leggero che collega un nodo della componente ad un nodo non appartenente ad essa.
+       Per la condizione di taglio, un arco è incluso nel MST se è più leggero di ogni altro taglio che separa la componente dal resto del grafo.
+       
+       Ad ogni passo, gli archi in $E'$ formano un sottoinsieme del MST. Visto che l'algoritmo termina quando tutti gli archi sono stati esaminati, ne deriva che per ogni taglio esiste almeno un arco che è stato inserito in $E'$ e quindi $T$ è connesso.
+       Inoltre, essendo $T$ connesso ed aciclico per costruzione, ne deriva che alla fine dell'algoritmo esso è un MST e contiene $n-1$ archi.
+  - Kruskal :: Opera considerando gli archi l'uno dopo l'altro, in ordine crescente di peso.
+	       Considerando l'arco $(u, v)$ si hanno due possibilità: se i nodi sono già collegati in $G$ l'arco $(u, v)$ chiude un ciclo quindi è l'arco più pesante nel ciclo e non appartiene al MST.
+	       Se invece i due nodi non sono già collegati, $(u, v)$ è il primo arco considerato tra quelli del taglio, quindi è il più leggero e di conseguenza fa parte dell'MST.
+
+	       L'algoritmo unisce man mano coppie di componenti disgiunte, mantenendo al tempo stesso traccia del minimo albero di ricoprimento della componente risultante.
+	       Complessità: $O(m \log n)$ per grafi connessi.
+  - Jarnik-Prim :: Opera in modo più centralizzato, partendo da un qualunque nodo $s$ e facendo crescere un MST a partire da tale nodo, aggiungendo nodi ed archi man mano.
+		   Se $T$ è la porzione di MST attualmente costruita, l'algoritmo sceglie l'arco $(u, v)$ di peso minimo nel taglio tra $T$ e $V \setminus T$, aggiungendo $v$ a $T$ e $(u, v)$ ad $E'$, fino a coprirer tutti i nodi del grafo.
+		   Ogni arco aggiunto è pertanto quello di minimo peso in un certo taglio, quindi deve appartenere al MST.
+
+		   Come realizzare efficientemente la selezione dell'arco di peso minimo tra $T$ e $V \setminus T$? Usiamo una coda di priorità nella quale manteniamo tutti i nodi in $V \setminus T$ e come peso di ogni nodo il peso dell'arco più leggero che collega $v$ ad un qualche nodo in $T$.
+		   Complessità: $O(n \log n + m)$ meglio di Kruskal.
+  - Partizionamento in cluster :: Dividere dati regolarmente a seconda delle loro caratteristiche (per esempio un insieme di dati immerso in uno spazio euclideo).
+       Si può usare il minimum spanning tree come base per il partizionamento in cluster: infatti, ogni arco dell'albero è l'arco di peso inferiore tra quelli in grado di collegare le due porzioni di albero ottenute dalla rimozione dell'arco stesso.
+       In termini di data mining, rimuovere un arco dà luogo ad una separazione tra due cluster dove la distanza tra due qualunque punti non può essere inferiore al peso dell'arco rimosso: scegliendo quindi di rimuovere gli archi più lunghi presenti nel MST, iniziamo a separare i cluster più distanti tra loro.
+* NP-Completezza ed approssimazione
+  - Definizione di P, NP, NP-completo e di riduzione polinomiale.
+  - Riduzione di 2-SAT a componenti fortemente connesse in un grafo :: Due vertici per ogni variabile, due archi per ogni clausola e la formula $l \vee p$ viene tradotta come $\bar l \rar p$ e $\bar p \rar l$ ed i corrispondenti due archi modellano il fatto che se uno dei due letterali non è soddisfatto allora lo è l'altro.
+       Teorema: la formula è soddisfacibile se e solo se $v_i^{pos}$ e $v_i^{neg}$ appartengono a due componenti fortemente connesse distinte del grafo per ogni $i$.
+       Complessità: 2-SAT può essere risolto in tempo lineare.
+  - Minimo insieme convesso :: Dati $n$ punti nel piano dire quali di essi sono i vertici del minimo insieme convesso che li racchiude tutti.
+       In generale ha complessità $\Omega(n \log n)$ poiché il problema dell'ordinamento di $n$ interi si può ridurre ad esso: $a \rar (a, a^2)$ che giacciono su una parabola, quindi il minimo insieme convesso consiste nella lista dei punti ordinata in base alle loro ascisse, ed è quindi un ordinamento dei naturali, che sappiamo non essere possibile in $o(n \log n)$.
+  - Trasformazione polinomiale :: Un problema decisionale è polinominalmente trasformabile in un'altro se esiste un algoritmo *polinomiale* $T$ tale che, per ogni sequenza binaria $x$, $x$ risolve il primo problema se e solo se $T(x)$ risolve il secondo problema.
+  - NP-Completezza :: Un problema decisionale è NP-completo se appartiene ad NP ed ogni altro problema in NP è polinomialmente trasformabile in questo.
+  - Cook-Levin :: SAT è NP-completo.
+		  È ovviamente in NP, con dimostrazione data dalla stringa delle assegnazioni vincenti.
+		  Viceversa, dato un problema in NP, esiste un algoritmo polinomiale $V$ ed un polinomio $p$ tali che ECCETERA ECCETERA ($y$ è la dimostrazione per $x$).
+		  L'idea è, per ogni $x$, di costruire in tempo polinomiale una formula booleana $\phi_x$, le cui variabili libere sono $p(\abs x)$ variabili $y_0, y_1, \ldots$ dove intuitivamente la variabile $y_i$ corrisponde al valore del bit in posizione $i$ all'interno della sequenza $y$.
+		  La formula simula il comportamento di $V$ con $x$ ed $y$ in ingresso ed è soddisfacibile se e solo se tale computazione termina in modo affermativo.
+  - Problema di ottimizzazione :: Ad ogni istanza del problema associamo un insieme di soluzioni possibili ed a ciascuna soluzione associamo una misura (che può essere un costo oppure un profitto): il problema consiste nel trovare, data un'istanza, una soluzione ottima.
+       Ad ogni problema di ottimizzazione corrisponde un problema di decisione: data un'istanza del problema ed un valore $k$, decidere se la misura della soluzione ottima è inferiore a $k$ oppure superiore a $k$.
+       Nella maggior parte dei problemi, se il problema decisionale corrispondente è risolvibile in tempo polinomiale, lo è anche il problema di ottimizzazione originario.
+  - Generazione esaustiva e backtrack :: Nelle applicazioni si può dover trovare soluzioni esatte a problemi NP-completi, magari con dimensioni di input molto contenute.
+       *Generazione esaustiva*: si provano tutte le possibili soluzioni una alla volta.
+       *Backtrack*: Partire da una soluzione parziale e si cerca di completarla con una scelta; se non si riesce più ad andare avanti (perché non si soddisfano dei vincoli), si torna indietro, scartando parte della soluzione costruita, fino a giungere in uno stato dal quale si può procedere con altre scelte praticabili.
+** Alcuni problemi NP-completi
+  - 3-SAT (riduzione da SAT) :: Si usa la sostituzione locale dove ogni clausola viene sostituita con un insieme di clausole in modo da preservarne la semantica originaria.
+  - Minimo ricoprimento tramite vertici (riduzione da 3-SAT) :: Dato un grafo ed un intero $k$ esiste un sottoinsieme di al più $k$ vertici tale che ogni arco del grafo è incidente ad esso?
+       Tale problema ammette dimostrazioni brevi e verificabili in tempo polinomiale: sono i sottoinsiemi di cardinalità al più $k$.
+       
+       Mostriamo che 3-SAT si può ridurre ad esso attraverso la tecnica della progettazione di componenti. Definaimo per ogni variabile una componente (gadget) del grafo il cui scopo è quello di modellare l'assegnazione di verità alla variabile e, per ogni clausola, una componente il cui scopo è quello di modellare la soddisfacibilità della clausola.
+       I due insiemi di componenti sono poi collegati tra loro per garantire che l'assegnazione alle variabili soddisfi tutte le clausole.
+
+       Per ogni variabile il grafo include due vertici, $v_i^{vero}$ e $v_i^{falso}$ collegati tra loro con un arco.
+       Ogni ricoprimento di $G$ deve includere almeno uno dei due vertici $v_i$, quello corrispondente al valore di verità assegnato.
+       Inoltre per ogni clausola includiamo una cricca di tre vertici: ogni ricoprimento di $G$ deve includere almeno due vertici nella cricca di tre: $k$ sarà scelto in modo tale che ne includa esattamente due, cosìcche quello non selezionato corrisponda ad un letterale certamente soddisfatto nella clausola corrispondente.
+       Le componenti di verità e quelle di soddisfacibilità sono collegate tra di loro aggiungendo un arco tra i vertici contenuti nelle prime componenti con i corrispondenti vertici contenuti nelle seconde componenti.
+  - Massimo insieme indipendente :: Dato un grafo ed un intero $k$, esiste un sottoinsieme dei vertici indipendente di cardinalità almeno $k$? (ovvero per ogni arco $(u, v)$ si abbia $u \notin V'$ oppure $v \notin V'$).
+       Usiamo la tecnica della similitudine: un insieme indipendente se e solo se il suo complemento è un ricoprimento.
+  - Minimo insieme di campionamento :: Dato un insieme $C$ di sottoinsiemi di $A$ e dato $k$, esiste un sottoinsieme $A'$ di $A$ di cardinalità al più $k$ che sia un campionamento di $C$, ovvero che intersechi ogni insieme di $C$?
+       Possiamo restringere questo problema a quello del minimo ricoprimento di vertici, limitandoci a considerare istanze in cui ciascun elemento di $C$ contiene esattamente due elementi di $A$: intuitivamente, $A$ corrisponde all'insieme dei vertici del grafo e $C$ all'insieme degli archi.
+** Tipi primitivi di problema
+   Delineati nel libro "Algorithm Design" (Kleinberg, Tardos):
+   - Problemi di sottoinsiemi massimali :: Dato un insieme di oggetti, cerchiamo un suo sottinsieme di cardinalità massima che soddisfi determinati requisiti (es: massimo insieme indipendente).
+   - Problemi di sottoinsiemi minimali :: Dato un insieme di oggetti, cerchiamo un sottoinsieme di cardinalità minima che soddisfi determinati requisiti (es: minimo insieme di campionamento).
+   - Problemi di partizionamento :: Dato un insieme di oggetti, cerchiamo una sua partizione nel minor numero possibile di sottinsiemi disgiunti che soddisfino determinati requisiti (es: colorazione di grafi).
+   - Problemi di ordinamento :: Dato un insieme di oggetti, cerchiamo un suo ordinamento che soddisfi determinati requisiti (es: circuito hamiltoniano / commesso viaggiatore).
+   - Problemi numerici :: Dato un insieme di numeri interi, cerchiamo un suo sottoinsieme che soddisfi determinati requisiti (es: problema della partizione o della bisaccia).
+   - Problemi di soddisfacimento di vincoli :: Dato un sistema di vincoli espressi, generalmente, mediante formule booleane o equazioni lineari su uno specifico insieme di variabili, cerchiamo un'assegnazione che soddisfi il sistema.
+** Algoritmi di approssimazione
+   - Algoritmo di $r$-approssimazione :: Dato un probema di ottimizzazione (ad ogni soluzione è associata una misura e vogliamo trovare quella di misura ottimale) possiamo accontentarci di progettare algoritmi che producano soluzioni peggiori ma non troppo.
+	$A$ è un algoritmo di $r$-approssimazione per il problema se, per ogni istanza $x$ del problema, $A(x)$ è una soluzione di $x$ la cui misura è al più $r$ volte quella di una soluzione ottima (nel caso di minimo) oppure almeno $\frac1r$-esimo di quella ottima, dove $r > 1$.
+   - $2$-approssimazione per minimo ricoprimento tramite vertici :: Esaminiamo uno dopo l'altro tutti gli archi del grafo: ogni volta che ne troviamo uno i cui due estremi non sono stati selezionati, li includiamo entrambi.
+   - Commesso viaggiatore :: Dato un insieme di città e di distanze per andare da una all'altra, ci si chiede quale sia il modo più breve per visitare tutte le città una ed una sola volta, tornando alla città di partenza.
+	La versione decisionale chiede se esista un tour di peso non superiore a $k$; tale problema è NP-completo (per riduzione da ciclo hamiltoniano).
+
+	Dato un grafo $G = (V, E)$ lo completiamo ed assegniamo peso $1$ agli archi esistenti e peso $2$ altrimenti.
+	Scegliendo $k = \abs V$, se esiste un ciclo hamiltoniano in $G$ allora esiste nel grafo completo un tour di costo $k$ e viceversa.
+   - Commesso viaggiatore non ha approssimazioni :: Usando la tecnica del *gap* mostriamo che se le avesse, allora il circuito hamiltoniano sarebbe risolvibile in tempo polinomiale.
+	Prendiamo la trasformazione di prima ed assegniamo però peso $1 + s \abs V$ (con $s > r -1$) agli archi non presenti nel grafo.
+	In questo modo il nuovo grafo ammette un tour del commesso viaggiatore di costo pari a $\abs V$ se e solo se $G$ include un circuito hamiltoniano: tale tour deve necessariamente usare archi di peso pari a $1$.
+	Sia $T$ il tour del commesso viaggiatore restituito da un algoritmo di $r$-approssimazione e mostriamo che può essere usato per decidere se ammette un ciclo hamiltoniano:
+	se il costo di $T$ è uguale a $\abs V$, allora $G$ ammette un ciclo hamiltoniano; altrimenti il costo di $T$ è almeno pari a $(1 + s) \abs V > r \abs V$ per cui il tour ottimo non può avere costo pari a $\abs V$, altrimenti violeremmo l'$r$-approssimazione: non esiste quindi un ciclo hamiltoniano nel grafo.
+   - Commesso viaggiatore metrico :: Restringiamo il problema al caso in cui la distanza tra le città soddisfi la disuguaglianza triangolare: in questo caso esso ammette un algoritmo di $2$-approssimazione.
+	La versione decisionale rimane NP-completa in quanto la trasformazione per il caso generale soddisfa la disuguaglianza traingolare.
+
+	Mostriamo però che ha un algoritmo di $2$-approssimazione: l'idea è che la somma dei pesi degli archi di un minimo albero coprente costituisce un limite inferiore al costo di un tour ottimo: cancellando un arco di un qualsiasi tour, otteniamo un albero ricoprente e la somma dei pesi deve essere non inferiore a quella dei pesi degli archi dell'albero coprente.
+	L'algoritmo costruisce un minimo albero ricoprente e restituisce i nodi nell'ordine di una visita DFS, otteniamo così un tour del grafo supponendo che il vertice in ultima posizione sia connesso a quello in prima posizione.
+
+	Con un opportuno accorgimento si può ottenre un algoritmo di $1.5$-approssimazione e per il piano euclideo esisite una $r$-approssimazione per ogni $r > 1$.
+   - Paradigma della ricerca locale :: A partire da una soluzione iniziale del problema, esplora un insieme di soluzioni "vicine" a quella corrente e si sposta in una soluzione che è migliore di quella corrente, fino a quando non giunge ad una che non ha nessuna soluzione vicina migliore.
+	Non si è solitamente in grado di formulare affermazioni relativamente alle prestazioni di questi algoritmi né in termini di complessità né in termini di qualità della soluzione ottenuta.
+	Tuttavia, questo tipo di strategie euristiche risultano nella pratica estremamente valide.
+   - 2-opt :: dato un tour $T$ del commesso, il suo vicinato è costituito da tutti i tour che possono essere ottenuti cancellando due archi $(x, y)$ e $(u, v)$ di $T$ e sostituendoli con due nuovi archi $(x, u)$ e $(y, v)$ in modo da ottenere un differente tour $T'$.
+		     Se il nuovo tour ha costo minore allora diviene la soluzione corrente, altrimenti l'algoritmo procede con una diversa coppia di archi.
+		     L'algoritmo termina quando giungiamo ad un tour che non può più essere migliorato.
+   - 3-opt :: Opera come 2-opt ma considera come vicinato tutti i tour che possono essere ottenuti scambiando tre archi.
+		     3-opt ha prestazioni migliori di 2-opt per quanto riguarda la qualità della soluzione, ma richiede tempo di calcolo superiore.
+		     Inoltre il miglioramento che si ottiene da 3-opt a 4-opt non sembra giustificare il significativo peggioramento delle prestazioni in termini di tempo di esecuzione.
+* Altro
+  - Rabin fingerprint :: Rolling hash di un messaggio $m_0, \ldots, m_k$ dato da $m_0 + m_1 q^1 + m_2 q^2 + \ldots + m_k q^k$ modulo opportuno.
+  - Problema del segmento di somma massima :: Data una sequenza di interi si cerca il segmento di essi con somma massima.
+       A parità di somma si sceglie il segmento più corto.
+
+       Si può sfruttare la relazione somma(i, j + 1) = somma(i, j) + S[j+1] per impostare un algoritmo di programmazione dinamica in tempo $O(n^2)$.
+       
+       Ma si può fare di meglio: preso il segmento $segm(i, j)$ di somma massima la massimalità della somma implica che: tutti i prefissi nel segmento hanno somma positiva, ovvero $somma(i, k) > 0$ per $i \le k < j$, ed inoltre tutti i prefissi del segmento hanno somma non positiva: $somma(k, i-1) \le 0$ per $1 \le k \le i - 1$.
+       Quindi quando una somma diventa negativa o nulla, si può considerare un nuovo segmento disgiunto da quelli considerati precedentemente.
+       Si ottiene così una soluzione in $O(n)$.
+** Hashing
+   https://www.cs.cmu.edu/~avrim/451f11/lectures/lect1004.pdf
+   http://wpage.unina.it/benerece/ASD/Benerecetti/Modulo-I-2008-2009/
+  - Universal Hashing :: Usiamo la randomizzazione nella costruzione di $h$.
+       Mostreremo che per ogni sequenza di inserimenti e lookup se prendiamo $h$ in questo modo probabilistico, la performance della funzione di hashing sulla sequenza saranno buoni in media.
+       
+       Un algoritmo randomizzato per costruire funzioni di hashing è universale se la probabilità (fatta sulla funzione di hashing risultante) di collisione è quella uniforme.
+
+       *Costruire una famiglia di funzioni universali con le matrici*: supponiamo che le chiavi siano lunghe $u$-bits e gli indici siano lunghi $b$-bits: prendiamo $h$ una matrice 0/1 random di dimensione $b \times u$ e definiamo $h(x) = hx$, dove utilizziamo l'addizione modulo $2$.
+
+       *Un'altro metodo*: Vediamo la chiave come vettore di interi (i caratteri che le costituiscono) nel range di un numero primo.
+       Per selezionare una funzione di hashing scegliamo $k$ numeri random e definiamo $h(x) = r_1 x_1 + \ldots + r_k x_k \mod M$.
+  - Perfect Hashing :: Se fissiamo l'insieme S delle chiavi possiamo ottenere lookup in tempo costante sempre.
+
+       *Metodo 1 in N^2 spazio*: sia $M = N^2$ e prendiamo un $h$ random: se $H$ è universale allora la probabilità di non avere collisioni è almeno un mezzo!
+
+       *Metodo 2 in N spazio*: Usiamo le funzioni di hashing universale in uno schema a $2$ livelli come segue: prima hashiamo in una tabella di taglia $N$ con l'universal hashing.
+       Questo produrrà qualche collisione, ma possiamo fare il rehashing di ciascun posto utilizzando il metodo 1, usando il quadrato della taglia del posto per ottenere zero collisioni.
+       Ciò si può fare perché una funzione di hash al primo livello tale che la somma delle taglie al quadrato sia lineare ha probabilità un mezzo.
+  - Cuckoo hashing :: Usiamo due diverse funzioni di hashing $h$ e $h'$. Quando dobbiamo inserire una chiave nel dizionario, possiamo inserirla sia in $h(k)$ che in $h'(k)$.
+		      Se entrambi gli spazi sono occupati, possiamo calciare via una delle chiavi $y$ presenti che andrà a posizionari nel posto alternativo ad essa riservato, eventualmente calciando via altre chiavi trovate.
+		      Se si supera un certo numero di tali operazioni, bisogna ricostruire l'hash table utilizzando nuove funzioni di hashing (e ciò può essere fatto in-place).
+
+		      Complessità: lookup e cancellazioni in tempo $O(1)$, inserimenti in tempo atteso $O(1)$, finché il fattore di carico è inferiore al 50%.
+		      
+		      Utilizzando una terza funzione di hashing, si può incrementare il fattore di carico critico al 91%.
+  - Colorazione di grafi planari (con 5 colori) :: Per induzione sul numero di vertici: per un Lemma esiste un vertice $v$ di grado al più 5.
+       Per ipotesi induttiva, $G \setminus v$ può essere colorato con 5 colori.
+       Ora, se $\deg v \le 4$, c'è uno dei cinque colori che non è stato usato e possiamo colorare $v$ con quello.
+
+       Altrimenti $\deg v = 5$ e supponiamo che tutti i cinque vicini abbiano un colore diverso: supponiamo che vi sia un percorso di colori alternati (esempio: rossi e verdi) da un vicino $v_1$ ad un altro $v_3$.
+       Assieme a $v$ questo forma un ciclo che ha $v_2$ oppure $v_4$ all'interno e l'altro all'esterno.
+       Supponendo che $v_2$ sia all'interno del ciclo, possiamo cambiare i colori di tutti i vertici dentro al ciclo dal viola al blu e dal blu al viola.
+       Questo è ancora una colorazione giusta di $G$ tranne $v$ ed adesso nessun vicino di $v$ è viola.
+
+       Se non c'è nessun percorso alternato rosso-verde da $v_1$ a $v_3$ allora possiamo cambiare il colore di $v_1$ a verde e cambiare tutti i vicini verdi di $v_1$ a rosso, continuando a cambiare i colori dei vertici da rosso a verde e viceversa finché non ci sono più conflitti.
+       Siccome non c'è un percorso alternato da $v_1$ a $v_3$, il colore di $v_3$ non cambierà, quindi nessun vicino di $v$ sarà colorato di rosso.
+  - 2-approximabili for MAX-SAT :: Abbiamo $n$ variabili booleane ed $m$ clausole, ciascuna con un peso non-negativo $w_j$.
+       Il problema chiede di assegnare dei valori di versità alle variabili booleane che massimizzi il peso totale delle clausole soddisfatte.
+       
+       Assegniamo ogni variabile booleana vero o falso con probabilità $\frac12$, indipendentemente dalle altre.
+       Questo è un algoritmo di $2$-approssimazione per MAX SAT: infatti la probabilità che una certa clausola $C_j$ sia soddisfatta è $1 - (\frac12)^{l_j} \ge \frac12$ dove $l_j$ è il numero di variabili che vi compaiono.
+       
+       Si può ottenere un algoritmo deterministico vedendo quale valore atteso condizionato a $x_1 = True$ oppure $x_1 = False$ è maggiore.
+  - Parameterized min Vertex Cover :: Una ricerca esaustiva può risolvere il problema in tempo $2^k n^{O(1)}$: the idea is to repeatedly choose some vertex and recursively branch, with two cases: place either the current vertex or all its neighbours into the vertex cover.
+       Therefore it is fixed-parameter tractable.
+
+       Moreover, for planar graphs, and generally for graphs excluding some fixed graph as a minor, a vertex cover of size $k$ can be found in time $2^{O(\sqrt k)} n^{O(1)}$.
