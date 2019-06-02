@@ -1,0 +1,222 @@
+#+TITLE: Fatti di Teoria dei Giochi
+#+AUTHOR: Dario Balboni
+#+LATEX_HEADER: \input{latex-abbreviations}
+#+LATEX_HEADER: \usepackage[top=20mm,bottom=20mm,right=16mm,left=16mm]{geometry}
+
+* Definizioni
+  - Gioco strategico non cooperativo :: è una tupla $(N, S, \mu)$ dove
+    * $N = \lrg{1, \ldots, n}$ è un insieme di giocatori
+    * $S_i$ è un insieme di strategie per il giocatore $i$
+    * $\mu_i: S \rar \bbR$ è detta funzione di utilità o payoff del giocatore $i$
+
+    Ogni giocatore mira a massimizzare la sua funzione di utilità $\mu_i$ sul proprio insieme di strategie $S_i$.
+  - Insieme delle risposte ottime :: è definito come $r_i(x_{-i}) = \argmax_{y \in S_i} \mu_i(y, x_{-i})$ che è dunque una funzione $S_{-i} \rar \cP(S_i)$.
+  - Punto di equilibrio :: $x \in S$ è punto di equilibrio se $x_i \in r_i(x_{-i})$ per ogni $i$.
+  - Minimo guadagno :: Definiamo $w_i(x_i) = \inf_{x_{-i} \in S_{-i}} \mu_i(x_i, x_{-i})$ che indica quanto guadagna al minimo il giocatore se sceglie la strategie $x_i$.
+  - Valore di sicurezza :: $v_i = \sup_{x_i \in S_i} w_i(x_i)$, dove il giocatore cerca di usare la strategia che gli garantisce il maggior guadagno minimo.
+  - Strategia di sicurezza :: Se $\bar{x_i} \in \argmax_{x_i \in S_i} w_i(x_i)$.
+  - Giochi sequenziali :: I giocatori decidono le loro strategie in sequenza, possono essere rappresentati come grafo delle mosse quando sono ad informazione perfetta e completa.
+  - Giochi strettamente competitivi :: Un gioco a due giocatori è strettamente competitivo se per ogni coppia di profili di strategie $(x_1, x_2), (x_1', x_2') \in S$:
+       $$\mu_1(x_1, x_2) > \mu_1(x_1', x_2') \sse \mu_2(x_1, x_2) < \mu_2(x_1', x_2')$$
+  - Giochi a somma nulla :: Se vale che $\mu_1(x_1, x_2) = - \mu_2(x_1, x_2)$ per ogni $(x_1, x_2) \in S$.
+       In questo caso il gioco è sempre strettamente competitivo e si definisce $\mu = \mu_1 = - \mu_2$.
+
+       Calcolando due strategie di sicurezza per i giocatori si ha $v_1 \le v_2$ (dove $v_2 = \inf_{x_2} \sup_{x_1} \mu(x_1, x_2)$).
+       Se $v_1 = v_2$ allora $v := v_1 = v_2$ si dice valore del gioco.
+  - Giochi matriciali :: Se abbiamo un gioco a due giocatori con $S_1 = \lrg{1, \ldots, n_1}$ ed $S_2 = \lrg{1, \ldots, n_2}$ finiti, chiamiamo $A = \lrq{\mu(x_i, x_j)}_{i, j}$ la matrice del gioco.
+
+       Un gioco matriciale si dice simmetrico se $A$ è quadrata e antisimmetrica.
+       In tal caso ha un equilibrio di nash se e solo se una riga ha valori tutti positivi o nulli (ed il valore del gioco sarà nullo, nell'intersezione di tale riga con la diagonale).
+  - Strategie Miste :: Sono una distribuzione di probabilità sulle strategie pure di un giocatore, utilizzate per rendere lo spazio delle strategie un convesso compatto.
+  - Strategia dominante :: Una strategia $\bar{s_i} \in S_i$ si dice dominante se $\mu_i(\bar{s_i}, s_{-i}) \ge \mu_i(s_i, s_{-i})$ per ogni $s_i, s_{-i}$.
+       Si dice strettamente dominante se la disuguaglianza vale con il maggiore stretto.
+  - Strategia dominata :: $\bar{s_i} \in S_i$ si dice strettamente dominata se $\exists s_i^* \in S_i$ tale che $\mu_i(\bar{s_i}, s_{-i}) < \mu_i(s_i^*, s_{-i})$ per ogni $s_{-i}$.
+       Si dice debolmente dominata se invece $\exists s_i^* \in S_i$ tale che $\mu_i(\bar{s_i}, s_{-i}) \le \mu_i(s_i^*, s_{-i})$ per ogni $s_{-i}$ ed esiste invece un $s_{-i}^*$ tale che $\mu_i(\bar{s_i}, s_{-i}^*) < \mu_i(s_i^*, s_{-i}^*)$.
+  - Mai Miglior Risposta :: Una strategia $s_i \in S_i$ è una MMR se per ogni $s_{-i}$ si ha $s_i \notin r_i(s_{-i})$.
+       Notiamo che le strategie strettamente dominate sono in particolare MMR.
+  - Gioco Potenziale :: Dato un gioco, una funzione $P: S \rar \bbR$ si dice potenziale esatto se vale
+       $$\mu_i(\bar{s_i}, s_{-i}) - \mu_i(\hat{s_i}, s_{-i}) = P(\bar{s_i}, s_{-i}) - P(\hat{s_i}, s_{-i}) \quad \forall i \quad \forall \hat{s_i}, \bar{s_i} \in S_i \quad \forall s_{-i} \in S_{-i}$$
+
+       Dato un gioco $G$ con $S_i \subseteq \bbR^n$ convessi e chiusi, e con funzioni di utilità $\mu_i \in \cC^1(S)$, allora presa una funzione $P \in \cC^1(S)$ questa è un potenziale esatto per $G$ se e solo se $\nabla_i \mu_i \equiv \nabla_i P \quad \forall i \in N$.
+
+       I massimi del potenziale sono equilibri del gioco, mentre non è vero il viceversa.
+  - Potenziale Ordinale :: Una funzione $P: S \rar \bbR$ per un gioco $G$ è un poteziale ordinale se vale
+       $$\mu_i(\bar{s_i}, s_{-i}) - \mu_i(\hat{s_i}, s_{-i}) > 0 \sse P(\bar{s_i}, s_{-i}) - P(\hat{s_i}, s_{-i}) > 0$$
+* Giochi non cooperativi
+** Fatti di base
+   - Equilibri di un gioco a somma nulla :: Gli equilibri di un gioco a somma nulla sono coppie di strategie di minimax.
+	Inotre, se il gioco ha un valore, allora vale il viceversa.
+   - Teorema di Minimax :: Dato un gioco a due giocatori a somma nulla, supponiamo che $S_1, S_2$ siano convessi e compatti, $\mu: S \rar \bbR$ continua e concava nella prima variabile e convessa nella seconda.
+	Allora vale che $\max_{x_1} \min_{x_2} \mu(x_1, x_2) = \min_{x_2} \max_{x_1} \mu(x_1, x_2)$.
+   - Equilibri di un gioco finito a somma nulla :: Ogni estensione alle strategie miste ammette un equilibrio per il teorema del minimax.
+   - Proprietà di estensione alle strategie miste :: Se una strategia era equilibrio nel gioco finito, allora lo è anche nel gioco esteso alle strategie miste.
+	Inoltre, una strategia mista è un equilibrio se e solo se per ogni giocatore $i$ e per ogni strategia pura $s_i \in S_i$ .... Vedere Lemma 6 del Barbarino.
+   - Nikaido-Isoda :: Se abbiamo $S_i$ convesso compatto, $\mu_i$ SCS nella prima variabile e SCI nella seconda (vettoriale) e $r_i(s_{-i})$ convesso per ogni $s_{-i} \in S_{-i}$ allora il gioco ammette un equilibrio di Nash.
+   - Lemma di restrizione :: Dato $G' = (N, \lrg{T_i}_i, \mu)$ la restrizione di $G = (N, \lrg{S_i}_i, \mu)$ ottenuta eliminando una sola volta le strategie strettamente dominate. Allora vale che:
+     * Se $s^* \in S$ è un equilibrio per $G$, allora $s^* \in T = \prod_i T_i$ ed è un equilibrio per $G'$
+     * Se $G$ è finito ed $s^* \in T$ è un equilibrio per $G'$, allora $s^*$ è pure un equilibrio per $G$
+
+     Al posto di $G$ finito si può richiedere gli $S_i$ compatti e le $\mu_i$ SCS, ed il secondo punto non cambia.
+     Ancora, se eliminiamo le strategie /debolmente dominate/ invece delle strettamente dominate, il secondo punto vale ancora, mentre il primo no.
+
+     Quindi:
+     * Eliminando strettamente dominate $\rar$ Il gioco finale contiene gli stessi equilibri del gioco iniziale
+     * Eliminando debolmente dominate $\rar$ Possiamo perdere equilibri, ma quelli del gioco finale sono anche equilibri del gioco iniziale
+
+     Eliminando le MMR entrambi i punti si preservano.
+** Algoritmi risolutivi
+*** Eliminazione Dominate
+    Ovviamente un giocatore non giocherà mai una strategia dominata, quindi possiamo provare ad eliminarle:
+    1. Poniamo $S_i^0 = S_i$ per ogni giocatore $i$ e poniamo $k = 0$
+    2. Definiamo il $k$-esimo gioco $G^k = (N, \lrg{S_i^k}_{i \in \bbN}, \mu)$
+    3. Aggiorniamo gli $S_i^k$ eliminando le strategie dominate ad ogni passo:
+       $$S_i^{k+1} = \lrg{x \in S_i^k \mid x \text{ non è dominata in } S_i^k}$$
+    4. Dato $S^{k+1} = \prod_{i \in \bbn} S_i^{k+1}$, se $\abs{S^{k+1}} \le 1$ allora terminiamo
+    5. $k = k+1$ e torniamo al passo (2).
+
+    Non abbiamo specificato se volgiamo togliere le strategie debolmente o strettamente dominate, e vorremmo sapere alla fine se ci rimangono equilibri di Nash e quanti ce ne restano.
+    Possiamo notare che se gli $S_i$ sono non vuoti allora ad ogni $k$ anche gli $S_i^k$ non possono essere vuoti, poiché due strategie non possono essere dominate l'una dall'altra.
+    Inoltre si conclude per il lemma di restrizione.
+*** Migliori Risposte Successive
+    1. Iniziamo da un profilo $s^0 \in S$ casuale e poniamo $k = 0$
+    2. Se $s^k \in r(s^k)$ ci fermiamo (altrimenti potremmo ciclare tra equilibri)
+    3. Scegliamo un $s^{k+1} \in r(s^k)$
+    4. Se $s^{k+1} = s^k$ ci fermiamo
+    5. Poniamo $k = k + 1$ e torniamo al passo (2)
+
+    Se $r$ è una contrazione, allora questo algoritmo converge.
+*** Migliori Risposte Successive Asincrono
+    1. Iniziamo da un profilo $s^0 \in S$ casuale e poniamo $k = 0$
+    2. Ordinatamente rispetto ad $i = 1, \ldots, n$ scegliamo $s_i^{k+1} \in r_i(s_1^{k+1}, \ldots, s_{i-1}^{k+1}, s_{i+1}^k, \ldots, s_n^k)$.
+       Se $s_i^k \in r_i(s_1^{k+1}, \ldots, s_{i-1}^{k+1}, s_{i+1}^k, \ldots, s_n^k)$, allora poniamo $s_i^{k+1} = s_i^k$ (per aumentare ad ogni ciclo la funzione utilità).
+    3. Se $s^{k+1} = s^k$ ci possiamo fermare
+    4. Poniamo $k = k + 1$ e torniamo al passo (2)$
+
+    Se $G$ è un gioco finito con potenziale ordinale o esatto, allora l'algoritmo MRS asincrono individua un equilibrio in un numero finito di mosse.
+** Esempi di giochi
+   - Dilemma del prigioniero
+   - Battaglia dei sessi
+   - Caccia al cervo (esempio di gioco di coordinamento)
+   - Falco e Colomba (esempio di chicken game)
+   - Morra Cinese
+* Giochi Concavi
+** Definizioni
+   - Contrazione :: È una funzione $f$ per cui vale $\norm{f(x) - f(y)} \le \rho \norm{x - y}$ con $\rho < 1$.
+		    Sappiamo che $f$ ammette sempre un unico punto fisso se $f: X \rar X$ con $X$ compatto.
+   - Stretta concavità :: Una funzione $f \in \cC^1$ si dice strettamente concava se e solo se
+	$$(\nabla f(x) - \nabla f(y))^T (y - x) > 0 \quad \forall x \neq y \in \bbR^n$$
+	
+     * Dato $X \subseteq \bbR^n$ convesso ed $f$ strettamente concava si ha $\abs{\argmax\lrg{f(x) \mid x \in X}} \le 1$.
+   - Forte concavità :: Una funzione $f: \bbR^n \rar \bbR$ si dice fortemente concava di modulo $\tau > 0$ se
+	$$f(\lambda x + (1 - \lambda) y) \ge \lambda f(x) + (1 - \lambda) f(y) + \frac\tau2 \lambda (1 - \lambda) \norm{x - y}^2 \quad \forall \lambda \in \lrq{0, 1} \quad \forall x, y \in \bbR^n$$
+
+     * Dato $X \subseteq \bbR^n$ convesso chiuso ed $f$ fortemente concava di modulo $\tau > 0$, allora $\abs{\argmax\lrg{f(x) \mid x \in X}} = 1$.
+     * Una funzione $f \in \cC^1$ è fortemente concava di modulo $\tau$ se e solo se vale $\lrt{\nabla f(x) - \nabla f(y)}^T \lrt(y - x) \ge \tau \norm{x - y}^n \quad \forall x, y \in \bbR^n$.
+     * Una funzione $f$ è fortemente concava di modulo $\tau$ se e solo se $f + \frac\tau2 \norm{\cdot}^2$ è concava.
+     * Una funzione $g$ è fortemente concava di modulo $\tau$ se e solo se $g(y) \le g(x) + \nabla g(x)^T (y - x) - \frac\tau2 \norm{y - x}^2$.
+   - Gioco Strettamente Concavo in Diagonale :: Un gioco $G$ con $\mu_i \in \cC^1$ si dice strettamente concavo in diagonale se
+	$$\sum_{i=1}^n \lrt{\nabla_i \mu_i(s_i, s_{-i}) - \nabla_i \mu_i(s_i', s_{-i}')}^T (s_i' - s_i) > 0 \quad \forall s \neq s' \in S$$
+
+	VERIFICARE: Viene sostenuto che questo implica che le $\mu_i$ siano concave nella prima variabile.
+   - Jacobiana del gioco :: $J_F(s)_{ij} = \nabla_j \nabla_i^T \mu_i(s)$ dove $\nabla_i$ è il gradiente colonna rispetto alle coordinate di $S_i$.
+   - Disuguaglianza variazionale :: Detto $F = (- \nabla_i \mu_i)_i$ il gradiente del gioco ci riferiremo al problema $F(x)^T (s - x) \ge 0 \quad \forall s \in S$ come disuguaglianza variazionale o (VI).
+	
+	Dato un gioco $G = (N, S, \mu)$ con $S_i \subseteq \bbR^{m_i}$ convessi e chiusi e $\mu_i \in \cC^1$ allora:
+        - Se $s^*$ è un equilibrio, allora soddisfa (VI)
+        - Se le $\mu_i(\cdot, s_{-i})$ sono concave per ogni $s_{-i} \in S_{-i}$ ed $s^*$ risolve (VI) allora $s^*$ è un equilibrio
+	  
+     Inoltre se $F$ è continua ed $S$ compatto, allora (VI) ammette almeno una soluzione per il teorema di punto fisso di Brouwer.
+   - Equilibri come punti fissi :: Se gli $S_i$ sono convessi chiusi e $\mu_i \in \cC^1$ sono concave nella prima variabili allora
+	$s^*$ è equilibrio se e solo se è punto fisso della mappa $\psi(s) = P_S(s - t F(s))$.
+
+   - Disuguaglianza di Ky-Fan :: Definiamo la funzione aggregata di Nikaido-Isoda: $f: S \times S \rar \bbR$ come $f(s, v) = \sum_i \mu_i(s_i, s_{-i}) - \mu_i(v_i, s_{-i})$ che rappresenta la somma delle perdite se passo da $s$ a $v$.
+	La disuguaglianza di Ky-Fan è $f(x, v) \ge 0 \quad \forall v \in S$.
+
+	Sono equivalenti:
+        - $\bar s$ è un equilibrio
+        - $f(\bar s, v) \ge 0 \quad \forall v \in S$
+        - $\bar s \in \argmin_{v \in S} f(\bar s, v)$
+   - Gap o Funzione di Merito :: Viene detta $V(s) = \inf_{v \in S} f(s, v)$ che ci dice quanto al massimo possiamo andare a perdere cambiando strategia (e può anche valere $-\infty$).
+
+        $\bar s$ è un equilibrio se e solo se $V(\bar s) = 0$. In questo caso $\bar s$ è un massimo di $V(s)$.
+   - Soluzione alla disuguaglianza di Ky-Fan :: La disuguaglianza di Ky-Fan ammette almeno una soluzione se:
+	- $S$ è compatto e convesso
+	- $f$ è continua
+        - $f(s, \cdot)$ è (quasi) convessa per ogni $s \in S$
+** Algoritmi
+*** Proiezione
+    Lavoriamo sotto ipotesi di chiusura e convessità degli $S_i$ e concavità delle $\mu_i$ nella prima variabile.
+    1. Fissiamo $t > 0$, $s^0 \in S$, $k = 0$
+    2. Generiamo $s^{k+1} = P_S(s^k - tF(s^k))$
+    3. Se $s^{k+1} = s^k$ ci fermiamo
+    4. Poniamo $k = k + 1$ e torniamo a (2)
+
+    Inoltre si hanno i risultati:
+
+    - Teorema di convergenza :: Supponiamo che $F$ sia $L$-lipschitz su $S$ e fortemente monotona di modulo $\tau$ su $S$.
+	 Se $t < \frac{2\tau}{L^2}$ allora gli $s^k$ generati dall'algoritmo di proiezione convergono all'unico equilibrio del gioco.
+
+	 Inoltre il gradiente proiettato applicato ad una $F$ $\tau$-fortemente monotona e con $\nabla F$ Lipschitz di modulo $L < 2 / t$ converge ad un massimo globale di $F$.
+*** Extragradiente
+    1. Fissiamo $t > 0$, $s^0 \in S$, $k = 0$
+    2. $\hat s^k = P_S (s^k - t F(s^k))$
+    3. Se $\hat s^k = s^k$ fermiamo l'algoritmo
+    4. $s^{k+1} = P_S(s^k - t F(\hat s^k))$
+    5. Poniamo $k = k + 1$ e torniamo allo step (2)
+
+    Il teorema di convergenza richiede che:
+    - $S$ sia chiuso e convesso
+    - (VI) ammetta una soluzione $\bar s \in S$
+    - $F$ sia lipschitziana di modulo $L$ su $S$
+    - $F$ sia monotona su $S$, ovvero valga $\forall s, s' \in S$ che $\lrt{F(s) - F(s')}^T (s - s') \ge 0$
+    - $0 < t < 1 / L$
+    Allora le $s^k$ generate dall'algoritmo dell'extragradiente convergono ad una delle soluzioni di (VI)
+*** Extragradiente con Iperpiano
+    1. Fissiamo $t > 0$, $s^0 \in S$, $k = 0$
+    2. $\hat s^k = P_S(s^k - tF(s^k))$
+    3. Se $\hat s^k = s^k$ fermiamo l'algoritmo
+    4. $s^{k+1} = P_S(P_{H_k}(s^k))$
+    5. Poniamo $k = k + 1$ e torniamo allo step (2)
+
+    Nello step (4) è sottointesa la scelta di una successione $\theta^k$ per generare gli iperpiani dalla formula $H_k = \lrg{s \in \bbR^n \mid F(z^k)^T(s - z^k) = 0}$ dove $z^k = \theta^k \hat s^k + (1 - \theta^k) s^k$ con $\theta^k \in \lrt{0, 1}$.
+
+    Le ipotesi di convergenza in questo caso sono:
+    - $S$ sia chiuso e convesso
+    - (VI) ammetta una soluzione in $S$
+    - $F$ sia continua e monotona
+    - $t > 0$
+    In questo caso le $s^k$ generate dall'extragradiente con iperpiano convergono ad una soluzione di (VI)
+*** Rilassamento
+    1. Prendiamo $s^0 \in S$, $k = 0$ ed una sequenza $\lrg{t_k}_k \subseteq \lrq{0, 1}$
+    2. $z^k = \argmin_{v \in S} f(s^k, v)4
+    3. Se $z^k = s^k$ fermiamo l'algoritmo
+    4. $s^{k+1} = (1 - t_k) s^k + t_k z^k$
+    5. Poniamo $k = k + 1$ e torniamo allo step (2)
+
+    Vale il seguente teorema per quanto riguarda le ipotesi di convergenza: se supponiamo che
+    - $S$ è compatto e convesso
+    - $f$ è continua
+    - $f(s, \cdot)$ fortemente convessa di modulo $\alpha > 0$ per ogni $s \in S$
+    - $f(\cdot, v)$ è concava per ogni $v \in S$
+    - $t_k \rar 0$ converge a zero
+    - $\sum_{i=1}^\infty t_k = \infty$ diverge
+    allora esiste un punto di accumulazione della sequenza $s^k$ che risolve Ky-Fan.
+*** Ascesa per V
+    Nelle ipotesi in cui per ogni $s \in S$ esiste un unico punto di minimo di $\argmin_{v \in S} f(s, v)$, chiamato $z(s)$, allora sotto le ipotesi del teorema del rilassamento (aggiungendo che $f \in \cC^1$) si ottiene che $z(s) - s$ è sempre la direzione di crescita stretta per $V$ fino ad arrivare alla soluzione per la quale si ha $z(s) = s$.
+    
+    1. Prendiamo $s^0 \in S$, $k = 0$
+    2. $z^k = \argmin_{v \in S} f(s^k, v)$
+    3. Se $z^k = s^k$ fermiamo l'algoritmo
+    4. $s^{k+1} = s^k + t_k (z^k - s_k)$
+    5. Poniamo $k = k + 1$ e torniamo allo step (2)
+
+    La differenza con l'algoritmo di rilassamento è la scelta di $t_k = \beta^p$ con $\beta \in \lrt{0, 1}$ e $p$ il più piccolo intero positivo che soddisfi
+    $$V(s^k + \beta^p (z^k - s^k)) \ge V(s^k) + \frac\alpha2 \eta \beta^p \norm{z^k - s^k}^2$$
+
+    Supponiamo che:
+    - $S$ è compatto
+    - $f \in \cC^1$
+    - $f(s, \cdot)$ è fortemente convessa di modulo $\alpha > 0$ per ogni $s \in S$
+    - $f(\cdot, v)$ è concava per ogni $v \in S$
+    Allora *ogni* punto di accumulazione della successione $s^k$ generata dall'algoritmo di ascesa di $V$ risolvono Ky-Fan.
+
