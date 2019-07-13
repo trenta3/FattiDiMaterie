@@ -42,6 +42,18 @@
        I massimi del potenziale sono equilibri del gioco, mentre non è vero il viceversa.
   - Potenziale Ordinale :: Una funzione $P: S \rar \bbR$ per un gioco $G$ è un poteziale ordinale se vale
        $$\mu_i(\bar{s_i}, s_{-i}) - \mu_i(\hat{s_i}, s_{-i}) > 0 \sse P(\bar{s_i}, s_{-i}) - P(\hat{s_i}, s_{-i}) > 0$$
+  - Gioco Leader-Multifollower :: Un gioco Leader-Multifollower è composto da:
+       * Un leader che decide la prima mossa $s_1 \in S_1$
+       * $n - 1$ follower che partecipano contemporaneamente ad un gioco parametrico in $s_1$
+	 $$G(s_1) = \lrg{\lrg{2, \ldots, n}, \lrg{S_i}_{i > 1}, \lrg{\mu_i(s_1, \cdot)}_{i > 1}}$$
+       * Indichiamo con $EN(s_1)$ gli equilibri del gioco $G(s_1)$.
+  - Giochi Cooperativi :: Un gioco cooperativo è dato da una funzione che associa ad ogni sottoinsieme di $N$ una utilità $v: \cP(N) \rar \bbR$ dove per convenzione $v(\emptyset) = 0$.
+       Si suppone che le utilità delle coalizioni siano maggiori della somma delle utilità dei singoli, altrimenti non ci sarebbe guadagno a cooperare.
+
+       Un gioco cooperativo inoltre viene detto *semplice* se la funzione utilità ha valori in $\lrg{0, 1}$.
+
+       Notiamo che si può trasformare un gioco non cooperativo in uno cooperativo (non equivalente) con gli stessi giocatori, dove $v(T)$ è il guadagno minimo che avrebbero i giocatori in $T$ a collaborare contro i restanti $N \setminus T$.
+  - Giochi cooperativi 
 * Giochi non cooperativi
 ** Fatti di base
    - Equilibri di un gioco a somma nulla :: Gli equilibri di un gioco a somma nulla sono coppie di strategie di minimax.
@@ -218,5 +230,131 @@
     - $f \in \cC^1$
     - $f(s, \cdot)$ è fortemente convessa di modulo $\alpha > 0$ per ogni $s \in S$
     - $f(\cdot, v)$ è concava per ogni $v \in S$
-    Allora *ogni* punto di accumulazione della successione $s^k$ generata dall'algoritmo di ascesa di $V$ risolvono Ky-Fan.
+    Allora *ogni* punto di accumulazione della successione $s^k$ generata dall'algoritmo di ascesa di $V$ risolve Ky-Fan.
 
+    
+* Casi di Duopolio
+** Duopolio di Cournot
+   - Il bene è Omogeneo, ovvero le due produzioni sono indistinguibili
+   - La competizione viene fatta sulla quantità prodotta
+   - Il prezzo è fissato per entrambi dal Mercato ed è uguale
+
+   Sia $x_i \in \bbR^+$ la produzione dell'azienda $i$ e $c_i: \bbR_+ \rar \bbR_+$ la funzione che stabilisce il costo di produzione $c_i(x_i)$.
+   La funzione di domanda inversa è $p: \bbR_+ \rar \bbR_+$ che indica il massimo prezzo per unità che consente di vendere *tutta* la produzione $z$, e quindi è il prezzo ideale a cui vendere.
+   
+   I profitti saranno:
+   #+BEGIN_eqn
+   $\mu_1(x_1, x_2) = x_1 p(x_1 + x_2) - c_1(x_1)$ \\
+   $\mu_2(x_1, x_2) = x_2 p(x_1 + x_2) - c_2(x_2)$ \\
+   #+END_eqn
+
+   In questa situazione le aziende vogliono determinare la propria produzione $x_i$ senza sapere quella del rivale.
+   Supponiamo che:
+   - I costi di produzione siano lineari ed identici $c_i(x) = cx$
+   - La funzione $p$ decresca linearmente con la produzione $p(z) = \max\lrg{0, T - \alpha z}$
+
+   Allora l'equilibrio di Nash è per $x_1 = x_2 = \frac{T - c}3$ e quindi il ricavo di ciascuna è $\frac{(T - c)^2}9$.
+   Se invece entrambe si fossero messe d'accordo potevano ottenere di meglio, producendo ciascuna $\frac{T - c}4$ e quindi ricavando $\frac{(T - c)^2}8$.
+
+   Dal punto di vista del consumatore quindi il duopolio è conveniente.
+   La differenza tra il profitto nel Monopolio ed il profitto nell'equilibrio si chiama /prezzo dell'anarchia/.
+** Duopolio di Bertrand
+   - Il bene *non* è omogeneo
+   - Le quantità vendute sono determinate dal prezzo
+   - La competizione viene fatta sul prezzo
+
+   Supponiamo ancora il costo di produzione unitario costante $c$ ed uguale per le due aziende..
+   Il prezzo sarà $p_i$ e la produzione $x_i$ dipende dai prezzi $x_i = q_i(p_1, p_2)$.
+   Il guadagno sarà quindi
+   #+BEGIN_eqn
+   $\mu_i(p_1, p_2) = q_i(p_1, p_2) (p_i - c)$ \\
+   #+END_eqn
+   
+   Nel caso di *beni omogenei* si suppone che $q_1(p_1, p_2)$ valga $Q - p_1$ se $p_1 < p_2$, $\frac{Q - p_1}2$ se $p_1 = p_2$ e $0$ altrimenti, dove $Q > c$.
+   Facendo un'analisi come prima si ricava che il caso di equilibrio si ha per $p_1 = p_2 = c$ ma in questo caso nessuna delle due aziende guadagnerebbe.
+
+   Nel caso di *beni non omogenei*, invece, le due funzioni $q_i$ sono differenti:
+   #+BEGIN_eqn
+   $q_1(p_1, p_2) = \max\lrg{0, Q - p_1 + qp_2}$ \\
+   $q_2(p_1, p_2) = \max\lrg{0, Q + p_1 - qp_2}$ \\
+   #+END_eqn
+   con $Q > c$ e $q > 0$.
+   Le funzioni di miglior risposta saranno:
+   #+BEGIN_eqn
+   $r_1(p_2) = \frac{Q + qp_2 + c}2$ \\
+   $r_2(p_1) = \frac{Q + qp_1 + c}2$ \\
+   #+END_eqn
+
+   Se $q < 2$ si ottiene l'equilibrio per $p_1 = p_2 = \frac{Q + c}{2 - q}$.
+   Se invece $q \ge 2$ le due rette non si incontrano, ovvero i prezzi possono essere aumentati a piacimento da entrambe le aziende, e non esiste uno stato di equilibrio.
+** Duopolio di Stackelberg
+   Riprendiamo il setup del duopolio di Cournot ma aggiungiamo l'ipotesi di *sequenzialità*, ovvero le due aziende non scelgono la strategia contemporaneamente, ma agiscono una dopo l'altra.
+   La prima azienda sa che se sceglie la strategia $s_1$, la seconda sceglierà sicuramente $r_2(s_1)$ che è $r_2(s_1) = \max\lrg{0, \frac{T - c - s_1}2}$.
+
+   La prima azienda pertanto punterà a massimizzare $\mu_1(s_1, r_2(s_1))$.
+   Le strategie scelte saranno pertanto $\bar s_1 = \frac{T - c}2$ e $\bar s_2 = r_2(\bar s_1) = \frac{T - c}4$.
+* Nash Bargaining
+  Dato un gioco, mettiamo che i giocatori possano decidere se mettersi d'accordo o meno, e se non si mettono d'accordo ottengono un utilità $u^* \in \bbR^n$ fissata.
+  Un *problema di negoziazione* quindi è dato dalla coppia $(\cU, u^*)$ dove $\cU \subseteq \bbR^n$ e $u^* \in \bbR^n$.
+  Trasformiamo $\cU$ nel suo inviluppo convesso attraverso l'utilizzo di strategie miste.
+
+  Si dicono *assiomi di Nash* le proprietà seguenti:
+  - $\cU \subseteq \bbR^n$ convesso e compatto
+  - $\exists u \in \cU$ tale che $u > u^*$ componente per componente
+  Chiamiamo $\cB$ l'insieme delle coppie $(\cU, u^*)$ che rispettano gli assiomi di Nash.
+
+  Sotto questi assiomi ha senso cercare di mettersi d'accordo perché c'è una strategie in cui tutti guadagnano rispetto ad $u^*$.
+  Nash si è chiesto se esista una funzione $\psi: \cB \rar \bbR^n$ che indichi la migliore utilità per la coppia $(\cU, u^*) \in \cB$, che vogliamo rispetti le seguenti proprietà:
+  - Ammissibilità: $\psi(\cU, u^*) \in \cU$
+  - Razionalità: $\psi(\cU, u^*) \ge u^*$
+  - Ottimalità: Se $u \in \cU$ e $u \ge \psi(\cU, u^*)$ allora $u = \psi(\cU, u^*)$
+  - Se $\cU_1 \subseteq \cU$ è un sottoinsieme per cui $(\cU_1, u^*) \in \cB$ allora $\psi(\cU, u^*) \in \cU_1 \implies \psi(\cU, u^*) = \psi(\cU_1, u^*)$
+  - Invarianza traslazionale: Siano $\alpha_i > 0$ e $\beta_i$ relai. Allora detti $\hat u_i^* = \alpha_i u_i^* + \beta_i$ e detto $\hat\cU = \lrg{(\alpha_i u_i + \beta_i)_i \mid u \in \cU}$ si ha che $\psi(\hat \cU, \hat u^*)_i = \alpha_i \psi(\cU, u^*)_i + \beta_i$.
+  - Simmetria: se esistono due indici $i$, $j$ su cui $\cU$ è simmetrico e $u^*_i = u^*_j$ allora $\psi(\cU, u^*)_i = \psi(\cU, u^*)_j$.
+
+  *Teorema*: Esiste un'unica funzinone di negoziazione $\psi$ che soddisfi le condizioni di sopra. In particolare $\psi(\cU, u^*)$ è l'unica soluzione di
+  $$\max \lrg{\prod_{k = 1}^n (x_k - u_k^*) \mid x \in \cU, x \ge u^*}$$
+  Prima si mostra che il massimo è unico (l'esistenza è gratis dal fatto che $\cU$ sia compatto) e poi si mostra che tale punto rispetta tutti gli assiomi.
+
+* Giochi cooperativi
+  - Superadditivo :: Se vale $\forall T_1 \cap T_2 = \emptyset \quad v(T_1) + v(T_2) \le v(T_1 \cup T_2)$
+		     Tale definizione si espande alle unioni di un numero finito di $T_i$ disgiunti, pertanto l'utilità delle coalizioni è maggiore della somma delle utilità dei singoli.
+  - Monotono :: Se vale $\forall T_1, T_2 \quad T_1 \subseteq T_2 \implies v(T_1) \le v(T_2)$
+		Se la funzione $v$ è a valori non-negativi, allora un gioco superadditivo è monotono.
+  - Giochi Strategicamente Equivalenti :: Due giochi cooperativi $(N, u)$ e $(N, v)$ vengono detti strategicamente equivalenti se esistono $a \in \bbR^+$ e $b \in \bbR^n$ per cui $\forall T \subseteq N$ si ha $u(T) = av(T) + b(T)$ dove $b(T) = \sum_{i \in T} b_i$.
+       Questa è una relazione di equivalenza.
+
+       La superadditività è invariante per equivalenza, mentre la monotonia no.
+  - Normalizzazione di un gioco :: La relazione di equivalenza strategica ha tre classi:
+       Un gioco $(N, v)$ si dice $0$ -- $\gamma$ Normalizzato se $v(i) = 0$ per ogni $i \in N$ e $v(N) = \gamma$, dove $\gamma = 0, 1, -1$.
+       
+       Dato un gioco $(N, v)$ esso è equivalente a:
+    - Un gioco $0$ -- $1$ normalizzato se e solo se $\sum_{i \in N} v(i) < v(N)$
+    - Un gioco $0$ -- $0$ normalizzato se e solo se $\sum_{i \in N} v(i) = v(N)$
+    - Un gioco $0$ -- $-1$ normalizzato se e solo se $\sum_{i \in N} v(i) > v(N)$
+  - Vettore Socialmente Razionale :: Data una partizione $\cB$ di $N$, $x \in \bbR^n$ si dice socialmente razionale se $x(S) = v(S) \quad \forall S \in \cB$
+
+       La razionalità collettiva dice che tutto il guadagno della coalizione $S$ viene distribuito tra i membri.
+  - Individualmente Razionale :: Se $\forall i \in N \quad x_i \ge v(i)$
+       
+       La razionalità individuale dice che ad ogni giocatore conviene coalizzarsi piuttosto che restare da solo.
+  - Imputazione :: Relativa al gioco $G = (N, v)$ rispetto alla partizione $\cB$ è un vettore $x \in \bbR^n$ che rispetti la razionalità collettiva ed individuale.
+  - Dominazione di imputazioni :: Un'imputazione $x$ domina $y$ tramite la coalizione $S \subseteq N$ se $\forall i \in S \quad x_i > y_i$ e se $x(S) \le v(S)$.
+
+       Un'imputazione $x$ è *non dominata* se non esiste un'imputazione $y$ ed una coalizione $S \subseteq N$ tali che $y$ domini $x$ tramite $S$.
+  - Nucleo :: Relativo al gioco $G = (N, v)$ è un sottoinsieme delle imputazioni:
+	      $$C(N, v) = \lrg{x \in \bbR^n \mid \forall S \subseteq N \quad x(S) \ge v(S) \wedge x(N) = v(N)}$$
+
+	      Il nucleo è sempre un poliedro limitato, quindi è convesso e compatto e contenuto nell'iperpiano $x(N) = v(N)$.
+	      Inoltre se $(N, v)$ e $(N, av + b)$ sono equivalenti strategicamente, si ha che $a C(N, v) + b = C(N, av+b)$.
+	      
+	      Per un lemma, se $x \in C(N, v)$ è nel nucleo, allora $x$ è non dominata.
+	      Inoltre, se $(N, v)$ è superadditivo, allora $C(N, v) = \lrg{x \in \bbR^n \mid x \text{ non è dominato}}$.
+  - Bondareva-Shapley :: Il nucleo di $(N, v)$ è non vuoto se e solo se $\min_{x \in \bbR^n} \lrg{ x(N) \mid x(S) \ge v(S) \quad \forall S \subseteq N} \le v(N)$.
+  - Gioco Bilanciato :: Dato un gioco $(N, v)$ sono equivalenti:
+                   1. Il nucleo è non vuoto
+		   2. Il valore di (P) è $\le v(N)$
+                   3. Il valore di (D) è $\le v(N)$
+		   4. $\sum_{S \subsetneq N} y_S v(s) \le v(N)$ per ogni $y$ nell'insieme bilanciato dei pesi.
+                   In questo caso si dice che il gioco è bilanciato.
+   - Gioco Ridotto di Mashler :: TODO
